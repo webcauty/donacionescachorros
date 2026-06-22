@@ -3,20 +3,6 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-    <!-- ===== METADATOS ===== -->
-    <meta name="google-site-verification" content="google-site-verification=xxxxxxxxxxxxxxxx" />
-    <meta name="facebook-domain-verification" content="facebook-domain-verification=xxxxxxxxxxxxx" />
-    <meta property="og:title" content="🐾 Ayuda a los Peluditos - Créditos Solidarios" />
-    <meta property="og:description" content="Compra créditos y asígnalos a perros y gatos callejeros para mejorar sus condiciones." />
-    <meta property="og:image" content="https://tu-sitio.com/imagen-og.jpg" />
-    <meta property="og:url" content="https://tu-sitio.com" />
-    <meta property="og:type" content="website" />
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="🐾 Ayuda a los Peluditos - Créditos Solidarios" />
-    <meta name="twitter:description" content="Compra créditos y asígnalos a perros y gatos callejeros." />
-    <meta name="twitter:image" content="https://tu-sitio.com/imagen-twitter.jpg" />
-
     <title>🐾 Ayuda a los Peluditos - Créditos Solidarios</title>
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet" />
 
@@ -67,7 +53,6 @@
             text-align: center;
             margin: 10px 0 20px;
             max-width: 800px;
-            position: relative;
             width: 100%;
         }
 
@@ -100,7 +85,7 @@
             50% { transform: translateY(-10px); }
         }
 
-        /* ===== SECCIÓN DE AUTENTICACIÓN ===== */
+        /* ===== LOGIN ===== */
         #authSection {
             display: flex;
             flex-direction: column;
@@ -154,9 +139,10 @@
             color: #fff;
         }
 
-        .auth-buttons .btn-register {
-            background: linear-gradient(135deg, #f9d976, #f39c12);
-            color: #0b0e14;
+        .auth-buttons .btn-test {
+            background: rgba(255,255,255,0.1);
+            color: #fff;
+            flex: 0.5;
         }
 
         .auth-buttons button:hover {
@@ -185,440 +171,46 @@
             background: rgba(255,255,255,0.12);
         }
 
-        /* ===== SALDO Y CRÉDITOS ===== */
-        .saldo-container {
-            display: none;
-            flex-wrap: wrap;
-            align-items: center;
-            justify-content: center;
-            gap: 16px 30px;
-            background: rgba(255,255,255,0.04);
-            backdrop-filter: blur(6px);
-            border: 1px solid rgba(255,255,255,0.06);
-            border-radius: 60px;
-            padding: 12px 28px;
-            margin: 6px 0 20px;
-        }
-
-        .saldo-item {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 1.1rem;
-        }
-
-        .saldo-item .num {
-            font-weight: 700;
-            font-size: 1.6rem;
-            color: #f9d976;
-        }
-
-        .btn-comprar-creditos {
-            background: linear-gradient(135deg, #2ecc71, #27ae60);
-            border: none;
-            padding: 8px 24px;
-            border-radius: 40px;
-            font-weight: 700;
-            color: #fff;
-            cursor: pointer;
-            font-family: 'Quicksand', sans-serif;
-            font-size: 1rem;
-            transition: transform 0.15s, box-shadow 0.15s;
-            box-shadow: 0 4px 15px rgba(46, 204, 113, 0.3);
-        }
-
-        .btn-comprar-creditos:hover {
-            transform: scale(1.05);
-            box-shadow: 0 6px 25px rgba(46, 204, 113, 0.5);
-        }
-
-        /* ===== MENÚ HAMBURGUESA ===== */
-        .menu-toggle {
+        /* ===== BOTÓN FLOTANTE DE SALDO ===== */
+        .floating-btn {
             position: fixed;
-            top: 24px;
-            right: 24px;
+            bottom: 30px;
+            right: 30px;
             z-index: 1000;
-            background: rgba(0, 0, 0, 0.6);
-            backdrop-filter: blur(8px);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            border-radius: 50%;
-            width: 52px;
-            height: 52px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            gap: 5px;
-            cursor: pointer;
-            transition: all 0.25s;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.4);
-        }
-
-        .menu-toggle:hover {
-            background: rgba(243, 156, 18, 0.2);
-            border-color: #f39c12;
-            transform: scale(1.05);
-        }
-
-        .menu-toggle span {
-            display: block;
-            width: 26px;
-            height: 3px;
-            background: #fff;
-            border-radius: 4px;
-            transition: all 0.3s;
-        }
-
-        .menu-toggle.active span:nth-child(1) {
-            transform: translateY(8px) rotate(45deg);
-        }
-
-        .menu-toggle.active span:nth-child(2) {
-            opacity: 0;
-            transform: scaleX(0);
-        }
-
-        .menu-toggle.active span:nth-child(3) {
-            transform: translateY(-8px) rotate(-45deg);
-        }
-
-        .menu-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.6);
-            z-index: 998;
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.4s;
-        }
-
-        .menu-overlay.active {
-            opacity: 1;
-            pointer-events: all;
-        }
-
-        .menu-panel {
-            position: fixed;
-            top: 0;
-            right: -100%;
-            width: 340px;
-            max-width: 85%;
-            height: 100%;
-            background: rgba(15, 18, 26, 0.95);
-            backdrop-filter: blur(16px);
-            z-index: 999;
-            padding: 30px 24px;
-            overflow-y: auto;
-            transition: right 0.4s cubic-bezier(0.22, 1, 0.36, 1);
-            border-left: 1px solid rgba(255, 255, 255, 0.06);
-            box-shadow: -10px 0 40px rgba(0,0,0,0.5);
-        }
-
-        .menu-panel.open {
-            right: 0;
-        }
-
-        .menu-panel::-webkit-scrollbar {
-            width: 4px;
-        }
-        .menu-panel::-webkit-scrollbar-track {
-            background: transparent;
-        }
-        .menu-panel::-webkit-scrollbar-thumb {
-            background: #f39c12;
-            border-radius: 10px;
-        }
-
-        .menu-panel .menu-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 30px;
-            padding-bottom: 16px;
-            border-bottom: 1px solid rgba(255,255,255,0.06);
-        }
-
-        .menu-panel .menu-header h2 {
-            font-size: 1.4rem;
-            color: #f9d976;
-        }
-
-        .menu-panel .menu-header .close-btn {
-            background: none;
+            background: linear-gradient(135deg, #f9d976, #f39c12);
+            color: #0b0e14;
             border: none;
-            color: #aaa;
-            font-size: 1.8rem;
-            cursor: pointer;
-            padding: 0 8px;
-            transition: color 0.2s;
-        }
-
-        .menu-panel .menu-header .close-btn:hover {
-            color: #fff;
-        }
-
-        .menu-panel .menu-item {
-            display: block;
-            color: #ddd;
-            text-decoration: none;
-            padding: 14px 16px;
-            border-radius: 12px;
-            font-weight: 600;
-            font-size: 1.05rem;
-            transition: all 0.2s;
-            border-left: 3px solid transparent;
-            margin-bottom: 6px;
-            cursor: pointer;
-        }
-
-        .menu-panel .menu-item:hover {
-            background: rgba(243, 156, 18, 0.1);
-            border-left-color: #f39c12;
-            color: #fff;
-        }
-
-        .menu-panel .menu-item .icon {
-            margin-right: 14px;
-            font-size: 1.2rem;
-        }
-
-        .menu-panel .menu-divider {
-            height: 1px;
-            background: rgba(255,255,255,0.06);
-            margin: 16px 0;
-        }
-
-        .menu-panel .sub-text {
-            color: #888;
-            font-size: 0.85rem;
-            padding: 4px 16px 14px;
-            line-height: 1.6;
-        }
-
-        .menu-panel .ubicacion-box {
-            background: rgba(255,255,255,0.04);
-            border-radius: 16px;
-            padding: 16px;
-            margin: 8px 0 16px;
-            border: 1px solid rgba(255,255,255,0.06);
-        }
-
-        .menu-panel .ubicacion-box p {
-            color: #ccc;
-            font-size: 0.95rem;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .menu-panel .ubicacion-box a {
-            color: #6dd5ed;
-            text-decoration: none;
-            font-weight: 600;
-        }
-
-        .menu-panel .ubicacion-box a:hover {
-            text-decoration: underline;
-        }
-
-        .menu-panel .ubicacion-box .map-link {
-            display: inline-block;
-            margin-top: 8px;
-            background: rgba(109, 213, 237, 0.15);
-            padding: 6px 16px;
-            border-radius: 30px;
-            font-size: 0.85rem;
-            color: #6dd5ed;
-            transition: background 0.2s;
-        }
-
-        .menu-panel .ubicacion-box .map-link:hover {
-            background: rgba(109, 213, 237, 0.25);
-        }
-
-        /* ===== BOTÓN DONAR GENERAL ===== */
-        .donar-section {
-            display: none;
-            flex-direction: column;
-            align-items: center;
-            gap: 10px;
-            margin: 10px 0 30px;
-        }
-
-        .btn-nequi {
-            background: linear-gradient(135deg, #6dd5ed, #2193b0);
-            border: none;
-            padding: 16px 48px;
             border-radius: 60px;
-            font-size: 1.5rem;
+            padding: 14px 24px;
             font-weight: 700;
-            color: #fff;
+            font-size: 1.2rem;
+            box-shadow: 0 8px 30px rgba(243, 156, 18, 0.4);
             cursor: pointer;
-            box-shadow: 0 8px 30px rgba(33, 147, 176, 0.5);
-            transition: transform 0.2s, box-shadow 0.2s;
-            display: inline-flex;
-            align-items: center;
-            gap: 12px;
-            letter-spacing: 0.5px;
-            font-family: 'Quicksand', sans-serif;
-        }
-
-        .btn-nequi:hover {
-            transform: scale(1.05);
-            box-shadow: 0 12px 40px rgba(33, 147, 176, 0.7);
-        }
-
-        .btn-nequi:active {
-            transform: scale(0.97);
-        }
-
-        .copy-feedback {
-            font-size: 1rem;
-            color: #a8e6cf;
-            background: rgba(0,0,0,0.4);
-            padding: 6px 18px;
-            border-radius: 30px;
-            opacity: 0;
-            transition: opacity 0.3s;
-            pointer-events: none;
-        }
-
-        .copy-feedback.show {
-            opacity: 1;
-        }
-
-        /* ===== SECCIÓN DONANTES ===== */
-        .donantes-section {
             display: none;
-            width: 100%;
-            max-width: 1100px;
-            margin: 10px auto 30px;
-            background: rgba(255, 255, 255, 0.04);
-            backdrop-filter: blur(6px);
-            border-radius: 32px;
-            padding: 20px 20px 24px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.4);
-            border: 1px solid rgba(255,255,255,0.06);
-        }
-
-        .donantes-section h2 {
-            font-size: 2rem;
-            font-weight: 600;
-            margin-bottom: 12px;
-            text-align: center;
-            color: #f7f7f7;
-            letter-spacing: 0.5px;
-        }
-
-        .donantes-section h2 small {
-            font-size: 1rem;
-            font-weight: 400;
-            color: #bbb;
-            display: block;
-            margin-top: 4px;
-        }
-
-        .tabla-wrapper {
-            max-height: 400px;
-            overflow-y: auto;
-            border-radius: 16px;
-            background: rgba(0,0,0,0.15);
-        }
-
-        .tabla-wrapper::-webkit-scrollbar {
-            width: 6px;
-        }
-        .tabla-wrapper::-webkit-scrollbar-track {
-            background: rgba(0,0,0,0.2);
-            border-radius: 10px;
-        }
-        .tabla-wrapper::-webkit-scrollbar-thumb {
-            background: #f39c12;
-            border-radius: 10px;
-        }
-
-        .tabla-donantes {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 0.95rem;
-        }
-
-        .tabla-donantes thead tr {
-            background: rgba(255, 255, 255, 0.06);
-            position: sticky;
-            top: 0;
-            z-index: 5;
-            backdrop-filter: blur(4px);
-        }
-
-        .tabla-donantes th {
-            padding: 14px 12px;
-            text-align: left;
-            font-weight: 600;
-            color: #ddd;
-            border-bottom: 2px solid rgba(255,255,255,0.08);
-        }
-
-        .tabla-donantes td {
-            padding: 14px 12px;
-            border-bottom: 1px solid rgba(255,255,255,0.04);
-            color: #eee;
-        }
-
-        .tabla-donantes tbody tr {
-            transition: background 0.15s;
-        }
-
-        .tabla-donantes tbody tr:hover {
-            background: rgba(255, 255, 255, 0.05);
-        }
-
-        .badge-monto {
-            background: rgba(46, 204, 113, 0.2);
-            padding: 4px 14px;
-            border-radius: 30px;
-            font-weight: 600;
-            color: #a8e6cf;
-            display: inline-block;
-        }
-
-        .btn-cargar-mas {
-            background: rgba(255,255,255,0.06);
-            border: 1px solid rgba(255,255,255,0.12);
-            color: #ddd;
-            padding: 10px 28px;
-            border-radius: 40px;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: all 0.2s;
-            margin-top: 16px;
+            align-items: center;
+            gap: 10px;
+            transition: transform 0.2s;
             font-family: 'Quicksand', sans-serif;
-            font-weight: 600;
-            backdrop-filter: blur(4px);
         }
 
-        .btn-cargar-mas:hover {
-            background: rgba(255,255,255,0.12);
-            color: #fff;
-            transform: scale(1.02);
+        .floating-btn:hover {
+            transform: scale(1.05);
         }
 
-        .btn-cargar-mas:disabled {
-            opacity: 0.4;
-            cursor: not-allowed;
-            transform: none;
+        .floating-btn .badge {
+            background: rgba(0,0,0,0.15);
+            border-radius: 30px;
+            padding: 2px 12px;
+            font-size: 1rem;
         }
 
-        /* ===== CATÁLOGO DE ANIMALES ===== */
+        /* ===== SECCIONES ===== */
         .catalogo-section {
             display: none;
             width: 100%;
             max-width: 1200px;
             margin: 10px auto 30px;
-            background: rgba(255, 255, 255, 0.04);
+            background: rgba(255,255,255,0.04);
             backdrop-filter: blur(6px);
             border-radius: 32px;
             padding: 24px 20px 30px;
@@ -865,6 +457,8 @@
             border: 1px solid rgba(255,255,255,0.08);
             box-shadow: 0 30px 80px rgba(0,0,0,0.6);
             animation: modalFade 0.3s ease;
+            max-height: 90vh;
+            overflow-y: auto;
         }
 
         @keyframes modalFade {
@@ -980,6 +574,128 @@
             to { transform: rotate(360deg); }
         }
 
+        /* ===== DONANTES (simulados) ===== */
+        .donantes-section {
+            display: none;
+            width: 100%;
+            max-width: 1100px;
+            margin: 10px auto 30px;
+            background: rgba(255,255,255,0.04);
+            backdrop-filter: blur(6px);
+            border-radius: 32px;
+            padding: 20px 20px 24px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+            border: 1px solid rgba(255,255,255,0.06);
+        }
+
+        .donantes-section h2 {
+            font-size: 2rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+            text-align: center;
+            color: #f7f7f7;
+            letter-spacing: 0.5px;
+        }
+
+        .donantes-section h2 small {
+            font-size: 1rem;
+            font-weight: 400;
+            color: #bbb;
+            display: block;
+            margin-top: 4px;
+        }
+
+        .tabla-wrapper {
+            max-height: 400px;
+            overflow-y: auto;
+            border-radius: 16px;
+            background: rgba(0,0,0,0.15);
+        }
+
+        .tabla-wrapper::-webkit-scrollbar {
+            width: 6px;
+        }
+        .tabla-wrapper::-webkit-scrollbar-track {
+            background: rgba(0,0,0,0.2);
+            border-radius: 10px;
+        }
+        .tabla-wrapper::-webkit-scrollbar-thumb {
+            background: #f39c12;
+            border-radius: 10px;
+        }
+
+        .tabla-donantes {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.95rem;
+        }
+
+        .tabla-donantes thead tr {
+            background: rgba(255,255,255,0.06);
+            position: sticky;
+            top: 0;
+            z-index: 5;
+            backdrop-filter: blur(4px);
+        }
+
+        .tabla-donantes th {
+            padding: 14px 12px;
+            text-align: left;
+            font-weight: 600;
+            color: #ddd;
+            border-bottom: 2px solid rgba(255,255,255,0.08);
+        }
+
+        .tabla-donantes td {
+            padding: 14px 12px;
+            border-bottom: 1px solid rgba(255,255,255,0.04);
+            color: #eee;
+        }
+
+        .tabla-donantes tbody tr {
+            transition: background 0.15s;
+        }
+
+        .tabla-donantes tbody tr:hover {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .badge-monto {
+            background: rgba(46, 204, 113, 0.2);
+            padding: 4px 14px;
+            border-radius: 30px;
+            font-weight: 600;
+            color: #a8e6cf;
+            display: inline-block;
+        }
+
+        .btn-cargar-mas {
+            background: rgba(255,255,255,0.06);
+            border: 1px solid rgba(255,255,255,0.12);
+            color: #ddd;
+            padding: 10px 28px;
+            border-radius: 40px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            margin-top: 16px;
+            font-family: 'Quicksand', sans-serif;
+            font-weight: 600;
+            backdrop-filter: blur(4px);
+        }
+
+        .btn-cargar-mas:hover {
+            background: rgba(255,255,255,0.12);
+            color: #fff;
+            transform: scale(1.02);
+        }
+
+        .btn-cargar-mas:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+            transform: none;
+        }
+
         /* ===== FOOTER ===== */
         .footer-note {
             margin-top: 10px;
@@ -996,25 +712,31 @@
         /* ===== RESPONSIVE ===== */
         @media (max-width: 700px) {
             .header h1 { font-size: 2.4rem; }
-            .btn-nequi { padding: 14px 28px; font-size: 1.2rem; }
-            .tabla-donantes { font-size: 0.8rem; }
-            .tabla-donantes th, .tabla-donantes td { padding: 10px 8px; }
-            .donantes-section { padding: 16px 12px; }
             .grid-animales { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); }
             .catalogo-section { padding: 16px 12px; }
-            .menu-panel { width: 300px; }
-            .menu-toggle { top: 16px; right: 16px; width: 44px; height: 44px; }
-            .menu-toggle span { width: 22px; height: 2.5px; }
-            .saldo-container { padding: 10px 18px; gap: 10px; }
             .modal-box { padding: 24px 20px; }
             #authSection { padding: 20px; }
+            .floating-btn { bottom: 20px; right: 20px; padding: 12px 18px; font-size: 1rem; }
+            .auth-buttons { flex-wrap: wrap; }
         }
         @media (max-width: 500px) {
             .header h1 { font-size: 1.8rem; }
-            .btn-nequi { padding: 12px 20px; font-size: 1rem; }
-            .tabla-donantes { font-size: 0.7rem; }
             .grid-animales { grid-template-columns: 1fr 1fr; }
-            .menu-panel { width: 280px; padding: 20px 16px; }
+        }
+
+        /* ===== DIAGNÓSTICO ===== */
+        #diagnostico {
+            margin-top: 10px;
+            font-size: 0.85rem;
+            color: #f39c12;
+            background: rgba(243, 156, 18, 0.1);
+            padding: 8px 16px;
+            border-radius: 16px;
+            border: 1px solid rgba(243, 156, 18, 0.2);
+            display: none;
+            max-width: 100%;
+            word-break: break-all;
+            text-align: center;
         }
     </style>
 </head>
@@ -1023,55 +745,11 @@
     <!-- ===== ESCENA 3D ===== -->
     <div id="three-container"></div>
 
-    <!-- ===== MENÚ HAMBURGUESA ===== -->
-    <div class="menu-toggle" id="menuToggle" aria-label="Abrir menú">
-        <span></span>
-        <span></span>
-        <span></span>
-    </div>
-    <div class="menu-overlay" id="menuOverlay"></div>
-    <nav class="menu-panel" id="menuPanel">
-        <div class="menu-header">
-            <h2>🐾 Menú</h2>
-            <button class="close-btn" id="closeMenuBtn" aria-label="Cerrar menú">✕</button>
-        </div>
-        <a href="#" class="menu-item" data-section="inicio"><span class="icon">🏠</span> Inicio</a>
-        <div class="menu-divider"></div>
-        <a href="#" class="menu-item" data-section="privacidad"><span class="icon">🔒</span> Política de Privacidad</a>
-        <div id="privacidad" class="sub-text" style="display:none;">
-            <strong>Política de Privacidad</strong><br>
-            En <strong>Ayuda a los Peluditos</strong> valoramos tu privacidad. Recopilamos únicamente los datos necesarios para gestionar donaciones. Tus datos personales nunca serán compartidos sin tu consentimiento.
-        </div>
-        <a href="#" class="menu-item" data-section="terminos"><span class="icon">📜</span> Términos y Condiciones</a>
-        <div id="terminos" class="sub-text" style="display:none;">
-            <strong>Términos y Condiciones</strong><br>
-            Las donaciones son voluntarias y no reembolsables. Los créditos comprados se asignan directamente a los animales seleccionados. Cada crédito equivale a $1.000 COP.
-        </div>
-        <a href="#" class="menu-item" data-section="cookies"><span class="icon">🍪</span> Política de Cookies</a>
-        <div id="cookies" class="sub-text" style="display:none;">
-            <strong>Política de Cookies</strong><br>
-            Usamos cookies esenciales para el funcionamiento del sitio. No usamos cookies de rastreo sin tu consentimiento.
-        </div>
-        <div class="menu-divider"></div>
-        <a href="#" class="menu-item" data-section="ubicacion"><span class="icon">📍</span> Nuestra Ubicación</a>
-        <div id="ubicacion" class="sub-text" style="display:none;">
-            <div class="ubicacion-box">
-                <p>📍 <strong>Bucaramanga, Santander - Colombia</strong></p>
-                <p style="font-size:0.9rem; color:#aaa; margin-top:4px;">Cra. 27 #45-12, Barrio Cabecera<br>Bucaramanga, Santander</p>
-                <a href="https://maps.google.com/?q=Cra.+27+%2345-12+Bucaramanga+Santander+Colombia" target="_blank" rel="noopener noreferrer" class="map-link">🗺️ Ver en Google Maps</a>
-                <p style="font-size:0.8rem; color:#777; margin-top:10px;">📞 +57 313 823 7540 (Atención: 9am - 6pm)</p>
-            </div>
-        </div>
-        <a href="#" class="menu-item" data-section="contacto"><span class="icon">✉️</span> Contacto</a>
-        <div id="contacto" class="sub-text" style="display:none;">
-            <strong>Contáctanos</strong><br>
-            📧 ayuda@peluditos.org<br>
-            📞 +57 313 823 7540<br>
-            💬 WhatsApp: +57 313 823 7540
-        </div>
-        <div class="menu-divider"></div>
-        <div style="padding: 8px 16px; color: #555; font-size: 0.75rem;">© 2025 Ayuda a los Peluditos<br>Hecho con 💛 para los callejeros</div>
-    </nav>
+    <!-- ===== BOTÓN FLOTANTE DE SALDO ===== -->
+    <button class="floating-btn" id="floatingBtn" title="Ver saldo">
+        🪙 <span id="floatingSaldo">0</span>
+        <span class="badge">créditos</span>
+    </button>
 
     <!-- ===== OVERLAY SPA ===== -->
     <div class="app-overlay" id="appOverlay">
@@ -1086,23 +764,12 @@
         <div id="authSection">
             <input type="email" id="authEmail" placeholder="Correo electrónico" />
             <div class="auth-buttons">
-                <button class="btn-login" id="btnLogin">Iniciar sesión / Registrar</button>
+                <button class="btn-login" id="btnLogin">Ingresar / Registrarse</button>
+                <button class="btn-test" id="btnTestConexion">🔍 Probar conexión</button>
             </div>
             <div id="authStatus">🔒 Ingresa tu correo para comenzar</div>
             <button id="btnLogout">Cerrar sesión</button>
-        </div>
-
-        <!-- ===== SALDO ===== -->
-        <div class="saldo-container">
-            <div class="saldo-item">🪙 Créditos disponibles: <span class="num" id="saldoUsuario">0</span></div>
-            <button class="btn-comprar-creditos" id="btnComprarCreditos">➕ Comprar créditos</button>
-        </div>
-
-        <!-- ===== DONAR GENERAL ===== -->
-        <div class="donar-section">
-            <button class="btn-nequi" id="btnCopiarNequi"><span>📱</span> Donar por Nequi</button>
-            <div class="copy-feedback" id="copyFeedback">✅ ¡Número copiado!</div>
-            <div style="font-size:0.9rem; color:#aaa;"><span style="background:rgba(255,255,255,0.08); padding:4px 16px; border-radius:30px;">Nequi: <strong style="color:#fff;">313 823 7540</strong></span></div>
+            <div id="diagnostico"></div>
         </div>
 
         <!-- ===== CATÁLOGO ===== -->
@@ -1118,7 +785,7 @@
             </div>
         </section>
 
-        <!-- ===== DONANTES ===== -->
+        <!-- ===== DONANTES (simulados) ===== -->
         <section class="donantes-section" id="donantesSection">
             <h2>🙏 Donantes Solidarios <small>Personas que ya han aportado créditos</small></h2>
             <div class="tabla-wrapper" id="tablaWrapper">
@@ -1134,7 +801,7 @@
         <div class="footer-note">💙 100% de los créditos se destinan a alimentación, veterinaria y refugio.<br> Gracias por ser parte del cambio.</div>
     </div>
 
-    <!-- ===== MODAL ===== -->
+    <!-- ===== MODAL DONAR CRÉDITOS ===== -->
     <div class="modal-overlay" id="modalDonar">
         <div class="modal-box">
             <h3>🪙 Asignar créditos</h3>
@@ -1145,6 +812,32 @@
             <div class="modal-actions">
                 <button class="btn-cancelar" id="modalCancelar">Cancelar</button>
                 <button class="btn-confirmar" id="modalConfirmar">Confirmar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== MODAL COMPRAR CRÉDITOS ===== -->
+    <div class="modal-overlay" id="modalComprar">
+        <div class="modal-box">
+            <h3>🛒 Comprar créditos</h3>
+            <div class="sub">1 crédito = $1.000 COP</div>
+            <label for="cantidadCompra">Cantidad de créditos:</label>
+            <input type="number" id="cantidadCompra" min="1" value="5" />
+            <div style="margin-top:16px; background:rgba(255,255,255,0.04); padding:12px; border-radius:16px;">
+                <p style="color:#ddd; font-size:0.95rem;">📱 <strong>Paga por Nequi</strong> al número:</p>
+                <p style="font-size:1.4rem; font-weight:700; color:#f9d976;">313 823 7540</p>
+                <p style="font-size:0.85rem; color:#aaa; margin-top:6px;">Luego envía el comprobante de pago a <strong>WhatsApp</strong> para verificar y acreditar tus créditos.</p>
+            </div>
+            <div style="margin-top:16px; display:flex; gap:12px; flex-wrap:wrap; justify-content:center;">
+                <button class="btn-confirmar" id="btnEnviarComprobante" style="background:linear-gradient(135deg,#25D366,#128C7E); color:#fff; border:none; padding:10px 24px; border-radius:40px; font-weight:700; cursor:pointer; font-family:'Quicksand',sans-serif;">
+                    📤 Enviar comprobante por WhatsApp
+                </button>
+                <button class="btn-cancelar" id="btnCerrarComprar" style="background:rgba(255,255,255,0.06); color:#ccc; border:none; padding:10px 24px; border-radius:40px; font-weight:700; cursor:pointer; font-family:'Quicksand',sans-serif;">
+                    Cerrar
+                </button>
+            </div>
+            <div class="saldo-info" style="margin-top:12px; font-size:0.85rem; color:#888;">
+                * Los créditos se acreditarán tras la verificación manual del pago.
             </div>
         </div>
     </div>
@@ -1165,75 +858,89 @@
     <!-- ================================================================ -->
     <script type="module">
         // ================================================================
-        //  1.  CONFIGURACIÓN DE GOOGLE SHEETS API
+        //  1.  CONFIGURACIÓN - ¡TU URL DE WEB APP!
         // ================================================================
-
-        // ================================================================
-        //  ¡URL DE TU WEB APP DE GOOGLE APPS SCRIPT!
-        //  Reemplázala con la URL que obtuviste al publicar.
-        // ================================================================
-        const API_URL = 'https://script.google.com/macros/s/AKfycbzZj38PhNTn0Dgq6MO7pDLO4ltFbOkbP5rZEibpwGnwRd2Mse798o2vgKWxTjwLq8xF/exec';
+        const API_URL = 'https://script.google.com/macros/s/AKfycbzj12AN7q_icMZzFagHihhmn9VuyW7IU5bGe5kcejiZ3Feg2-6NEqcVgkM953VcMwSa/exec';
 
         // ================================================================
         //  2.  ESTADO GLOBAL
         // ================================================================
         let usuarioEmail = '';
         let saldoActual = 0;
-        let animalSeleccionado = null; // { id, nombre }
+        let animalSeleccionado = null;
         let todosAnimales = [];
-        let procesando = false; // evitar doble clic
+        let procesando = false;
+        let intervalPolling = null;
 
         // Elementos DOM
-        const saldoSpan = document.getElementById('saldoUsuario');
-        const modalSaldoActual = document.getElementById('modalSaldoActual');
+        const floatingBtn = document.getElementById('floatingBtn');
+        const floatingSaldo = document.getElementById('floatingSaldo');
+        const modalDonar = document.getElementById('modalDonar');
+        const modalComprar = document.getElementById('modalComprar');
         const modalAnimalNombre = document.getElementById('modalAnimalNombre');
         const inputCantidad = document.getElementById('cantidadCreditos');
-        const modalDonar = document.getElementById('modalDonar');
+        const modalSaldoActual = document.getElementById('modalSaldoActual');
+        const btnConfirmar = document.getElementById('modalConfirmar');
         const grid = document.getElementById('gridAnimales');
         const mensajeInicial = document.getElementById('mensajeInicial');
-        const btnConfirmar = document.getElementById('modalConfirmar');
+        const authStatus = document.getElementById('authStatus');
+        const diagnostico = document.getElementById('diagnostico');
 
         // ================================================================
-        //  3.  FUNCIONES DE GOOGLE SHEETS (fetch)
+        //  3.  FUNCIONES DE API CON DIAGNÓSTICO DETALLADO
         // ================================================================
 
-        // Obtener saldo del usuario
-        async function obtenerSaldo(email) {
-            try {
-                const url = `${API_URL}?action=getSaldo&email=${encodeURIComponent(email)}`;
-                const resp = await fetch(url);
-                if (!resp.ok) throw new Error('Error en la respuesta del servidor');
-                const data = await resp.json();
-                return data.saldo || 0;
-            } catch (e) {
-                console.error('Error al obtener saldo:', e);
-                return 0;
-            }
+        function mostrarDiagnostico(mensaje, esError = true) {
+            diagnostico.style.display = 'block';
+            diagnostico.textContent = mensaje;
+            diagnostico.style.color = esError ? '#e74c3c' : '#2ecc71';
+            diagnostico.style.borderColor = esError ? '#e74c3c' : '#2ecc71';
+            diagnostico.style.background = esError ? 'rgba(231, 76, 60, 0.1)' : 'rgba(46, 204, 113, 0.1)';
         }
 
-        // Actualizar saldo (cantidad positiva = comprar, negativa = gastar)
-        async function actualizarSaldo(email, cantidad) {
+        async function apiCall(action, data = {}) {
             try {
                 const resp = await fetch(API_URL, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ action: 'actualizarSaldo', email, cantidad })
+                    body: JSON.stringify({ action, ...data })
                 });
-                if (!resp.ok) throw new Error('Error en la respuesta del servidor');
-                const data = await resp.json();
-                return data.saldo || 0;
+                if (!resp.ok) throw new Error(`HTTP ${resp.status}: ${resp.statusText}`);
+                return await resp.json();
             } catch (e) {
-                console.error('Error al actualizar saldo:', e);
-                throw e;
+                console.error(`Error en ${action}:`, e);
+                throw new Error(`Error de conexión: ${e.message}. Verifica la URL y que la Web App esté publicada.`);
             }
         }
 
-        // Obtener créditos de un animal
+        async function obtenerSaldo(email) {
+            try {
+                const url = `${API_URL}?action=getSaldo&email=${encodeURIComponent(email)}`;
+                const resp = await fetch(url);
+                if (!resp.ok) throw new Error(`HTTP ${resp.status}: ${resp.statusText}`);
+                const data = await resp.json();
+                return data.saldo || 0;
+            } catch (e) {
+                console.error('Error al obtener saldo:', e);
+                throw new Error(`No se pudo obtener el saldo: ${e.message}`);
+            }
+        }
+
+        async function registrarUsuario(email) {
+            const result = await apiCall('registrarUsuario', { email });
+            return result.saldo || 0;
+        }
+
+        async function asignarCreditos(email, animalId, cantidad) {
+            const result = await apiCall('asignarCreditos', { email, animalId, cantidad });
+            return result;
+        }
+
         async function obtenerCreditosAnimal(animalId) {
             try {
                 const url = `${API_URL}?action=getCreditosAnimal&animalId=${encodeURIComponent(animalId)}`;
                 const resp = await fetch(url);
-                if (!resp.ok) throw new Error('Error en la respuesta del servidor');
+                if (!resp.ok) throw new Error(`HTTP ${resp.status}: ${resp.statusText}`);
                 const data = await resp.json();
                 return data.creditos || 0;
             } catch (e) {
@@ -1242,31 +949,45 @@
             }
         }
 
-        // Asignar créditos a un animal (con validación en servidor)
-        async function asignarCreditos(email, animalId, cantidad) {
+        async function obtenerTodosLosAnimales() {
             try {
-                const resp = await fetch(API_URL, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ action: 'asignarCreditos', email, animalId, cantidad })
-                });
-                if (!resp.ok) throw new Error('Error de conexión con el servidor');
+                const url = `${API_URL}?action=getAllAnimales`;
+                const resp = await fetch(url);
+                if (!resp.ok) throw new Error(`HTTP ${resp.status}: ${resp.statusText}`);
                 const data = await resp.json();
-                return data; // { success, saldoRestante, error }
+                return data.animales || [];
             } catch (e) {
-                console.error('Error al asignar créditos:', e);
-                return { success: false, error: 'Error de conexión: ' + e.message };
+                console.error('Error al obtener animales:', e);
+                return [];
             }
         }
 
         // ================================================================
-        //  4.  AUTENTICACIÓN (email simple)
+        //  4.  BOTÓN DE PRUEBA DE CONEXIÓN
+        // ================================================================
+
+        document.getElementById('btnTestConexion').addEventListener('click', async () => {
+            mostrarDiagnostico('🔄 Probando conexión...', false);
+            try {
+                const url = `${API_URL}?action=getSaldo&email=test@test.com`;
+                const resp = await fetch(url);
+                if (!resp.ok) throw new Error(`HTTP ${resp.status}: ${resp.statusText}`);
+                const data = await resp.json();
+                mostrarDiagnostico(`✅ Conexión exitosa. Respuesta: ${JSON.stringify(data)}`, false);
+                console.log('✅ Conexión exitosa:', data);
+            } catch (e) {
+                mostrarDiagnostico(`❌ Error: ${e.message}. Revisa la URL y la configuración de la Web App.`, true);
+                console.error('❌ Error en prueba de conexión:', e);
+            }
+        });
+
+        // ================================================================
+        //  5.  AUTENTICACIÓN
         // ================================================================
 
         const authEmail = document.getElementById('authEmail');
         const btnLogin = document.getElementById('btnLogin');
         const btnLogout = document.getElementById('btnLogout');
-        const authStatus = document.getElementById('authStatus');
 
         async function loginUsuario(email) {
             if (!email || !email.includes('@')) {
@@ -1277,20 +998,17 @@
             localStorage.setItem('peluditos_email', email);
 
             try {
-                saldoActual = await obtenerSaldo(email);
-                saldoSpan.textContent = saldoActual;
-                modalSaldoActual.textContent = saldoActual;
-
-                document.getElementById('authSection').style.display = 'none';
-                document.querySelector('.saldo-container').style.display = 'flex';
-                document.querySelector('.donar-section').style.display = 'flex';
-                document.getElementById('catalogoSection').style.display = 'block';
-                document.getElementById('donantesSection').style.display = 'block';
-                btnLogout.style.display = 'inline-block';
-                authStatus.textContent = `✅ Conectado como ${email}`;
-
-                await actualizarCreditosAnimales();
+                mostrarDiagnostico('🔄 Conectando al servidor...', false);
+                // Registrar usuario (si no existe, lo crea)
+                const saldo = await registrarUsuario(email);
+                saldoActual = saldo;
+                actualizarUIUsuario(true);
+                await cargarAnimales();
+                iniciarPolling();
+                mostrarDiagnostico('✅ Conectado correctamente.', false);
+                setTimeout(() => { diagnostico.style.display = 'none'; }, 3000);
             } catch (e) {
+                mostrarDiagnostico(`❌ Error: ${e.message}`, true);
                 alert('Error al iniciar sesión: ' + e.message);
             }
         }
@@ -1298,22 +1016,40 @@
         function logoutUsuario() {
             usuarioEmail = '';
             localStorage.removeItem('peluditos_email');
-            document.getElementById('authSection').style.display = 'flex';
-            document.querySelector('.saldo-container').style.display = 'none';
-            document.querySelector('.donar-section').style.display = 'none';
-            document.getElementById('catalogoSection').style.display = 'none';
-            document.getElementById('donantesSection').style.display = 'none';
-            btnLogout.style.display = 'none';
-            authStatus.textContent = '🔒 Ingresa tu correo para comenzar';
-            saldoSpan.textContent = '0';
-            modalDonar.classList.remove('active');
-            procesando = false;
-            btnConfirmar.disabled = false;
-            btnConfirmar.textContent = 'Confirmar';
+            if (intervalPolling) clearInterval(intervalPolling);
+            actualizarUIUsuario(false);
+            diagnostico.style.display = 'none';
         }
 
-        btnLogin.addEventListener('click', async () => {
-            await loginUsuario(authEmail.value.trim());
+        function actualizarUIUsuario(loggeado) {
+            if (loggeado) {
+                document.getElementById('authSection').style.display = 'none';
+                document.getElementById('catalogoSection').style.display = 'block';
+                document.getElementById('donantesSection').style.display = 'block';
+                floatingBtn.style.display = 'flex';
+                btnLogout.style.display = 'inline-block';
+                authStatus.textContent = `✅ Conectado como ${usuarioEmail}`;
+                actualizarSaldoUI(saldoActual);
+            } else {
+                document.getElementById('authSection').style.display = 'flex';
+                document.getElementById('catalogoSection').style.display = 'none';
+                document.getElementById('donantesSection').style.display = 'none';
+                floatingBtn.style.display = 'none';
+                btnLogout.style.display = 'none';
+                authStatus.textContent = '🔒 Ingresa tu correo para comenzar';
+                saldoActual = 0;
+                actualizarSaldoUI(0);
+            }
+        }
+
+        function actualizarSaldoUI(saldo) {
+            saldoActual = saldo;
+            floatingSaldo.textContent = saldo;
+            modalSaldoActual.textContent = saldo;
+        }
+
+        btnLogin.addEventListener('click', () => {
+            loginUsuario(authEmail.value.trim());
         });
 
         btnLogout.addEventListener('click', logoutUsuario);
@@ -1326,34 +1062,54 @@
         }
 
         // ================================================================
-        //  5.  COMPRA DE CRÉDITOS (simulación)
+        //  6.  POLLING PARA ACTUALIZAR SALDO DESDE LA HOJA
         // ================================================================
 
-        document.getElementById('btnComprarCreditos').addEventListener('click', async () => {
-            if (!usuarioEmail) {
-                alert('Primero inicia sesión.');
-                return;
-            }
-            const cantidad = prompt('¿Cuántos créditos deseas comprar? (1 crédito = $1.000 COP)', '5');
-            if (cantidad && parseInt(cantidad) > 0) {
-                const num = parseInt(cantidad);
-                const confirmar = confirm(`Vas a comprar ${num} créditos por $${num * 1000} COP.\n¿Confirmas?`);
-                if (confirmar) {
-                    try {
-                        const nuevoSaldo = await actualizarSaldo(usuarioEmail, num);
+        function iniciarPolling() {
+            if (intervalPolling) clearInterval(intervalPolling);
+            intervalPolling = setInterval(async () => {
+                if (!usuarioEmail) return;
+                try {
+                    const nuevoSaldo = await obtenerSaldo(usuarioEmail);
+                    if (nuevoSaldo !== saldoActual) {
                         saldoActual = nuevoSaldo;
-                        saldoSpan.textContent = nuevoSaldo;
-                        modalSaldoActual.textContent = nuevoSaldo;
-                        alert(`✅ Has comprado ${num} créditos. Nuevo saldo: ${nuevoSaldo}`);
-                    } catch (e) {
-                        alert('❌ Error al comprar créditos: ' + e.message);
+                        actualizarSaldoUI(nuevoSaldo);
+                        await actualizarCreditosAnimales();
                     }
+                } catch (e) {
+                    console.warn('Polling error:', e);
                 }
-            }
+            }, 15000);
+        }
+
+        // ================================================================
+        //  7.  COMPRA DE CRÉDITOS
+        // ================================================================
+
+        floatingBtn.addEventListener('click', () => {
+            if (!usuarioEmail) return;
+            modalComprar.classList.add('active');
+        });
+
+        document.getElementById('btnCerrarComprar').addEventListener('click', () => {
+            modalComprar.classList.remove('active');
+        });
+
+        modalComprar.addEventListener('click', (e) => {
+            if (e.target === modalComprar) modalComprar.classList.remove('active');
+        });
+
+        document.getElementById('btnEnviarComprobante').addEventListener('click', () => {
+            const cantidad = parseInt(document.getElementById('cantidadCompra').value) || 1;
+            const mensaje = `Hola, acabo de realizar el pago de ${cantidad} créditos por Nequi (3138237540) para mi correo: ${usuarioEmail}. Adjunto el comprobante.`;
+            const url = `https://api.whatsapp.com/send?phone=573138237540&text=${encodeURIComponent(mensaje)}`;
+            window.open(url, '_blank');
+            modalComprar.classList.remove('active');
+            alert('✅ Gracias por tu compra. Envía el comprobante y en breve acreditaremos tus créditos.');
         });
 
         // ================================================================
-        //  6.  MODAL PARA ASIGNAR CRÉDITOS (con bloqueo de doble clic)
+        //  8.  MODAL DONAR CRÉDITOS
         // ================================================================
 
         window.abrirModalDonar = function(animalId, animalNombre) {
@@ -1388,7 +1144,6 @@
         });
 
         document.getElementById('modalConfirmar').addEventListener('click', async () => {
-            // Evitar ejecución simultánea
             if (procesando) return;
             if (!usuarioEmail) {
                 alert('Debes iniciar sesión.');
@@ -1405,7 +1160,6 @@
                 return;
             }
 
-            // Bloquear botón y mostrar "Procesando..."
             procesando = true;
             btnConfirmar.disabled = true;
             btnConfirmar.innerHTML = '<span class="spinner"></span> Procesando...';
@@ -1414,12 +1168,9 @@
                 const result = await asignarCreditos(usuarioEmail, animalSeleccionado.id, cantidad);
 
                 if (result.success) {
-                    // Actualizar saldo local
                     saldoActual = result.saldoRestante;
-                    saldoSpan.textContent = saldoActual;
-                    modalSaldoActual.textContent = saldoActual;
+                    actualizarSaldoUI(saldoActual);
 
-                    // Actualizar créditos del animal en la UI
                     const span = document.querySelector(`[data-animal-id="${animalSeleccionado.id}"] .num-creditos`);
                     if (span) {
                         const actual = parseInt(span.textContent) || 0;
@@ -1429,13 +1180,11 @@
                     modalDonar.classList.remove('active');
                     alert(`✅ ¡Has asignado ${cantidad} créditos a ${animalSeleccionado.nombre}!`);
                 } else {
-                    // Error devuelto por el servidor (ej: saldo insuficiente)
                     alert('❌ ' + (result.error || 'Error al asignar créditos. Intenta de nuevo.'));
                 }
             } catch (e) {
                 alert('❌ Error de conexión: ' + e.message);
             } finally {
-                // Restaurar botón
                 procesando = false;
                 btnConfirmar.disabled = false;
                 btnConfirmar.textContent = 'Confirmar';
@@ -1443,26 +1192,9 @@
         });
 
         // ================================================================
-        //  7.  ACTUALIZAR CRÉDITOS DE ANIMALES VISIBLES
+        //  9.  CATÁLOGO DE ANIMALES
         // ================================================================
 
-        async function actualizarCreditosAnimales() {
-            const cards = document.querySelectorAll('.tarjeta-animal');
-            for (const card of cards) {
-                const id = card.dataset.animalId;
-                if (id) {
-                    const creditos = await obtenerCreditosAnimal(id);
-                    const span = card.querySelector('.num-creditos');
-                    if (span) span.textContent = creditos;
-                }
-            }
-        }
-
-        // ================================================================
-        //  8.  CATÁLOGO DE ANIMALES (criollos, situación de calle)
-        // ================================================================
-
-        // ---- URLs de imágenes (reemplaza con las tuyas) ----
         const urlsPerros = [
             'https://picsum.photos/seed/perro-0/300/300',
             'https://picsum.photos/seed/perro-1/300/300',
@@ -1549,7 +1281,6 @@
             "Vive en un callejón, con frío y humedad. Un refugio seco es su mayor necesidad."
         ];
 
-        // Generar perros
         const perros = [];
         for (let i = 0; i < 30; i++) {
             const edad = Math.floor(1 + Math.random() * 8);
@@ -1568,7 +1299,6 @@
             });
         }
 
-        // Generar gatos
         const gatos = [];
         for (let i = 0; i < 12; i++) {
             const edad = Math.floor(1 + Math.random() * 10);
@@ -1589,16 +1319,42 @@
 
         todosAnimales = [...perros, ...gatos];
 
-        // Renderizar animales
+        async function cargarAnimales() {
+            const animalesDesdeHoja = await obtenerTodosLosAnimales();
+            const mapaCreditos = {};
+            animalesDesdeHoja.forEach(a => {
+                mapaCreditos[a.id] = a.creditos;
+            });
+            todosAnimales.forEach(a => {
+                if (mapaCreditos[a.id] !== undefined) {
+                    a.creditos = mapaCreditos[a.id];
+                } else {
+                    a.creditos = 0;
+                }
+            });
+            renderAnimales('todos');
+        }
+
+        async function actualizarCreditosAnimales() {
+            const animalesDesdeHoja = await obtenerTodosLosAnimales();
+            const mapaCreditos = {};
+            animalesDesdeHoja.forEach(a => {
+                mapaCreditos[a.id] = a.creditos;
+            });
+            const cards = document.querySelectorAll('.tarjeta-animal');
+            for (const card of cards) {
+                const id = card.dataset.animalId;
+                if (id && mapaCreditos[id] !== undefined) {
+                    const span = card.querySelector('.num-creditos');
+                    if (span) span.textContent = mapaCreditos[id];
+                }
+            }
+        }
+
         function renderAnimales(filtro = 'todos') {
             mensajeInicial.style.display = 'none';
-
-            const filtrados = filtro === 'todos'
-                ? todosAnimales
-                : todosAnimales.filter(a => a.tipo === filtro);
-
+            const filtrados = filtro === 'todos' ? todosAnimales : todosAnimales.filter(a => a.tipo === filtro);
             grid.innerHTML = '';
-
             if (filtrados.length === 0) {
                 const noHay = document.createElement('div');
                 noHay.className = 'mensaje-inicial';
@@ -1606,16 +1362,14 @@
                 grid.appendChild(noHay);
                 return;
             }
-
             filtrados.forEach((animal) => {
                 const card = document.createElement('div');
                 card.className = 'tarjeta-animal';
                 card.dataset.animalId = animal.id;
-
                 const tipoLabel = animal.tipo === 'perro' ? '🐕 Perro' : '🐈 Gato';
                 const claseTipo = animal.tipo === 'perro' ? 'tipo-perro' : 'tipo-gato';
                 const edadTexto = animal.edad === 1 ? '1 año' : `${animal.edad} años`;
-
+                const creditos = animal.creditos || 0;
                 card.innerHTML = `
                     <img src="${animal.imagen}" alt="${animal.nombre}" loading="lazy" />
                     <div class="tarjeta-info">
@@ -1631,7 +1385,7 @@
                         </div>
                         <div class="descripcion">${animal.descripcion}</div>
                         <div class="creditos-acumulados">
-                            🪙 Créditos acumulados: <span class="num-creditos">0</span>
+                            🪙 Créditos acumulados: <span class="num-creditos">${creditos}</span>
                         </div>
                         <button class="btn-donar-creditos" onclick="abrirModalDonar('${animal.id}', '${animal.nombre}')">
                             Donar créditos 🥫
@@ -1640,13 +1394,8 @@
                 `;
                 grid.appendChild(card);
             });
-
-            if (usuarioEmail) {
-                actualizarCreditosAnimales();
-            }
         }
 
-        // Filtros
         const filtrosBtns = document.querySelectorAll('#filtrosAnimales button');
         filtrosBtns.forEach(btn => {
             btn.addEventListener('click', () => {
@@ -1657,10 +1406,8 @@
             });
         });
 
-        renderAnimales('todos');
-
         // ================================================================
-        //  9.  DONANTES (datos simulados)
+        //  10. DONANTES SIMULADOS
         // ================================================================
 
         const nombresDonantes = [
@@ -1714,7 +1461,6 @@
             return flagMap[pais] || '🌍';
         }
 
-        // Paginación
         const tbody = document.getElementById('cuerpoDonantes');
         const btnCargar = document.getElementById('btnCargarMas');
         let visibleCount = 20;
@@ -1733,7 +1479,6 @@
                     minimumFractionDigits: 0,
                     maximumFractionDigits: 0,
                 }).format(d.valor);
-
                 tr.innerHTML = `
                     <td>${index + 1}</td>
                     <td><strong>${d.nombre}</strong></td>
@@ -1742,7 +1487,6 @@
                 `;
                 tbody.appendChild(tr);
             });
-
             if (visibleCount >= totalDonantes) {
                 btnCargar.disabled = true;
                 btnCargar.textContent = '✅ Todos los donantes mostrados';
@@ -1763,32 +1507,7 @@
         renderDonantes();
 
         // ================================================================
-        //  10. COPIAR NEQUI
-        // ================================================================
-
-        const btnCopiar = document.getElementById('btnCopiarNequi');
-        const feedback = document.getElementById('copyFeedback');
-        const nequiNumber = '3138237540';
-
-        btnCopiar.addEventListener('click', async () => {
-            try {
-                await navigator.clipboard.writeText(nequiNumber);
-                feedback.classList.add('show');
-                setTimeout(() => feedback.classList.remove('show'), 2500);
-            } catch {
-                const input = document.createElement('input');
-                input.value = nequiNumber;
-                document.body.appendChild(input);
-                input.select();
-                document.execCommand('copy');
-                document.body.removeChild(input);
-                feedback.classList.add('show');
-                setTimeout(() => feedback.classList.remove('show'), 2500);
-            }
-        });
-
-        // ================================================================
-        //  11. ESCENA 3D (Three.js)
+        //  11. ESCENA 3D (Three.js) - Decorativa
         // ================================================================
 
         import * as THREE from 'three';
@@ -1865,9 +1584,7 @@
 
         for (let i = 0; i < 65; i++) {
             const isDog = Math.random() > 0.5;
-            const color = isDog
-                ? colorsDog[Math.floor(Math.random() * colorsDog.length)]
-                : colorsCat[Math.floor(Math.random() * colorsCat.length)];
+            const color = isDog ? colorsDog[Math.floor(Math.random() * colorsDog.length)] : colorsCat[Math.floor(Math.random() * colorsCat.length)];
             const size = 0.2 + Math.random() * 0.4;
             let paw = isDog ? createDogPaw(color, size) : createCatPaw(color, size);
             const radius = 2.5 + Math.random() * 4.0;
@@ -1909,17 +1626,14 @@
         function animate() {
             const delta = clock.getDelta();
             const elapsed = performance.now() / 1000;
-
             items.forEach(item => {
                 item.mesh.rotation.y += item.rotSpeed * delta * 30;
                 item.mesh.rotation.x += item.rotSpeed * delta * 15 * 0.5;
                 const floatOffset = Math.sin(elapsed * item.floatSpeed * 2 + item.phase) * 0.15;
                 item.mesh.position.y = item.baseY + floatOffset;
             });
-
             stars.rotation.y += delta * 0.008;
             stars.rotation.x += delta * 0.004;
-
             renderer.render(scene, camera);
             requestAnimationFrame(animate);
         }
@@ -1933,65 +1647,10 @@
             renderer.setSize(w, h);
         });
 
-        // ================================================================
-        //  12. MENÚ HAMBURGUESA
-        // ================================================================
-
-        const menuToggle = document.getElementById('menuToggle');
-        const menuPanel = document.getElementById('menuPanel');
-        const menuOverlay = document.getElementById('menuOverlay');
-        const closeMenuBtn = document.getElementById('closeMenuBtn');
-
-        function openMenu() {
-            menuPanel.classList.add('open');
-            menuOverlay.classList.add('active');
-            menuToggle.classList.add('active');
-            document.body.style.overflow = 'hidden';
-        }
-
-        function closeMenu() {
-            menuPanel.classList.remove('open');
-            menuOverlay.classList.remove('active');
-            menuToggle.classList.remove('active');
-            document.body.style.overflow = '';
-        }
-
-        menuToggle.addEventListener('click', () => {
-            if (menuPanel.classList.contains('open')) closeMenu();
-            else openMenu();
-        });
-        menuOverlay.addEventListener('click', closeMenu);
-        closeMenuBtn.addEventListener('click', closeMenu);
-
-        document.querySelectorAll('.menu-item').forEach(item => {
-            item.addEventListener('click', (e) => {
-                const section = item.dataset.section;
-                if (section === 'inicio' || section === 'ubicacion' || section === 'contacto') {
-                    closeMenu();
-                    if (section === 'inicio') window.scrollTo({ top: 0, behavior: 'smooth' });
-                    return;
-                }
-                const subText = document.getElementById(section);
-                if (subText) {
-                    e.preventDefault();
-                    document.querySelectorAll('.sub-text').forEach(el => el.style.display = 'none');
-                    subText.style.display = subText.style.display === 'block' ? 'none' : 'block';
-                }
-            });
-        });
-
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') closeMenu();
-        });
-
-        // ================================================================
-        //  13. DOCUMENTACIÓN EN CONSOLA
-        // ================================================================
-
-        console.log('🐾 Ayuda a los Peluditos - Sistema de créditos con Google Sheets');
-        console.log('📌 URL de la Web App: ' + API_URL);
-        console.log('📌 Los datos se guardan en tu hoja de cálculo y persisten entre dispositivos.');
-        console.log('📌 1 crédito = $1.000 COP. ¡Gracias por ayudar a los peluditos!');
+        console.log('🐾 Sistema de créditos con diagnóstico activo.');
+        console.log('📌 URL de la API:', API_URL);
+        console.log('📌 Si falla la conexión, haz clic en "Probar conexión" para ver el error detallado.');
+        console.log('📌 ¡Gracias por ayudar a los peluditos!');
     </script>
 </body>
 </html>
