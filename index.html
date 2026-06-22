@@ -3,11 +3,9 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>🐾 Ayuda a los Peluditos - Créditos Solidarios</title>
+    <title>🦴 Ayuda a los Peluditos</title>
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet" />
-
     <style>
-        /* ===== RESET Y BASE (mismo CSS que antes) ===== */
         * {
             margin: 0;
             padding: 0;
@@ -16,92 +14,46 @@
 
         body {
             font-family: 'Quicksand', sans-serif;
-            overflow: hidden;
             background: #0b0e14;
             color: #fff;
-            height: 100vh;
-            width: 100vw;
-        }
-
-        #three-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 0;
-        }
-
-        .app-overlay {
-            position: relative;
-            z-index: 10;
-            width: 100%;
-            height: 100vh;
-            overflow-y: auto;
-            overflow-x: hidden;
-            scroll-behavior: smooth;
-            background: rgba(11, 14, 20, 0.6);
-            backdrop-filter: blur(4px);
+            min-height: 100vh;
             display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 20px 20px 40px;
+            justify-content: center;
+            align-items: flex-start;
+            padding: 20px;
         }
 
-        .header {
-            text-align: center;
-            margin: 10px 0 20px;
-            max-width: 800px;
+        .container {
+            max-width: 600px;
             width: 100%;
+            background: rgba(255, 255, 255, 0.04);
+            backdrop-filter: blur(10px);
+            border-radius: 32px;
+            padding: 30px 24px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            margin: 20px auto;
         }
 
-        .header h1 {
-            font-size: 3.4rem;
-            font-weight: 700;
+        h1 {
+            font-size: 2.4rem;
             background: linear-gradient(135deg, #f9d976, #f39c12);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            text-shadow: 0 0 30px rgba(243, 156, 18, 0.3);
-            letter-spacing: 1px;
+            text-align: center;
             margin-bottom: 4px;
         }
 
-        .header p {
-            font-size: 1.2rem;
-            color: #e0e0e0;
-            font-weight: 400;
-            text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+        .sub {
+            color: #ccc;
+            font-size: 1rem;
+            text-align: center;
+            margin-bottom: 20px;
         }
 
-        .header .emoji-big {
-            font-size: 2.8rem;
-            display: inline-block;
-            animation: float 3s ease-in-out infinite;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-        }
-
-        #authSection {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 12px;
-            background: rgba(255, 255, 255, 0.04);
-            padding: 24px 32px;
-            border-radius: 32px;
-            backdrop-filter: blur(6px);
-            border: 1px solid rgba(255, 255, 255, 0.06);
+        input[type="email"] {
             width: 100%;
-            max-width: 420px;
-            margin: 10px auto 30px;
-        }
-
-        #authSection input {
-            width: 100%;
-            padding: 12px 16px;
+            padding: 14px 16px;
             border-radius: 16px;
             border: 1px solid rgba(255, 255, 255, 0.1);
             background: rgba(255, 255, 255, 0.05);
@@ -109,949 +61,465 @@
             font-size: 1rem;
             font-family: 'Quicksand', sans-serif;
             outline: none;
+            margin-bottom: 12px;
         }
 
-        #authSection input:focus {
+        input:focus {
             border-color: #f39c12;
         }
 
-        .auth-buttons {
-            display: flex;
-            gap: 12px;
-            flex-wrap: wrap;
-            width: 100%;
-        }
-
-        .auth-buttons button {
-            flex: 1;
-            padding: 10px;
+        button {
+            padding: 14px;
             border-radius: 40px;
             border: none;
             font-weight: 700;
             font-family: 'Quicksand', sans-serif;
             cursor: pointer;
             transition: transform 0.15s;
-            min-width: 120px;
+            font-size: 1rem;
+            width: 100%;
+            margin-bottom: 10px;
         }
 
-        .auth-buttons .btn-login {
+        button:hover {
+            transform: scale(1.02);
+        }
+
+        .btn-login {
             background: linear-gradient(135deg, #6dd5ed, #2193b0);
             color: #fff;
         }
 
-        .auth-buttons .btn-test {
-            background: rgba(255, 255, 255, 0.1);
-            color: #fff;
-        }
-
-        .auth-buttons button:hover {
-            transform: scale(1.03);
-        }
-
-        #authStatus {
+        .status {
             font-size: 0.9rem;
             color: #bbb;
-            margin-top: 6px;
-        }
-
-        #btnLogout {
-            background: rgba(255, 255, 255, 0.06);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            color: #ddd;
-            padding: 6px 16px;
-            border-radius: 30px;
-            cursor: pointer;
-            font-family: 'Quicksand', sans-serif;
-            font-weight: 600;
-            display: none;
-        }
-
-        #btnLogout:hover {
-            background: rgba(255, 255, 255, 0.12);
-        }
-
-        .floating-btn {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            z-index: 1000;
-            background: linear-gradient(135deg, #f9d976, #f39c12);
-            color: #0b0e14;
-            border: none;
-            border-radius: 60px;
-            padding: 14px 24px;
-            font-weight: 700;
-            font-size: 1.2rem;
-            box-shadow: 0 8px 30px rgba(243, 156, 18, 0.4);
-            cursor: pointer;
-            display: none;
-            align-items: center;
-            gap: 10px;
-            transition: transform 0.2s;
-            font-family: 'Quicksand', sans-serif;
-        }
-
-        .floating-btn:hover {
-            transform: scale(1.05);
-        }
-
-        .floating-btn .badge {
-            background: rgba(0, 0, 0, 0.15);
-            border-radius: 30px;
-            padding: 2px 12px;
-            font-size: 1rem;
-        }
-
-        .catalogo-section {
-            display: none;
-            width: 100%;
-            max-width: 1200px;
-            margin: 10px auto 30px;
-            background: rgba(255, 255, 255, 0.04);
-            backdrop-filter: blur(6px);
-            border-radius: 32px;
-            padding: 24px 20px 30px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
-            border: 1px solid rgba(255, 255, 255, 0.06);
-        }
-
-        .catalogo-section h2 {
-            font-size: 2rem;
-            font-weight: 600;
-            margin-bottom: 8px;
-            text-align: center;
-            color: #f7f7f7;
-        }
-
-        .catalogo-section h2 small {
-            font-size: 1rem;
-            font-weight: 400;
-            color: #bbb;
-            display: block;
-            margin-top: 4px;
-        }
-
-        .filtros {
-            display: flex;
-            gap: 12px;
-            justify-content: center;
-            flex-wrap: wrap;
-            margin: 16px 0 24px;
-        }
-
-        .filtros button {
-            background: rgba(255, 255, 255, 0.06);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            color: #ccc;
-            padding: 8px 24px;
-            border-radius: 40px;
-            cursor: pointer;
-            font-family: 'Quicksand', sans-serif;
-            font-weight: 600;
-            transition: all 0.2s;
-            font-size: 0.95rem;
-        }
-
-        .filtros button:hover,
-        .filtros button.activo {
-            background: rgba(243, 156, 18, 0.2);
-            border-color: #f39c12;
-            color: #fff;
-        }
-
-        .grid-animales {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
-            gap: 24px;
             margin-top: 10px;
-        }
-
-        .mensaje-inicial {
-            grid-column: 1 / -1;
             text-align: center;
-            padding: 60px 20px;
-            color: #aaa;
-            font-size: 1.4rem;
-            background: rgba(255, 255, 255, 0.02);
-            border-radius: 20px;
-            border: 2px dashed rgba(255, 255, 255, 0.08);
         }
 
-        .mensaje-inicial span {
-            display: block;
-            font-size: 3rem;
-            margin-bottom: 16px;
+        .hidden {
+            display: none !important;
         }
 
-        .tarjeta-animal {
-            background: rgba(255, 255, 255, 0.06);
-            border-radius: 20px;
-            overflow: hidden;
-            transition: transform 0.25s, box-shadow 0.25s;
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            backdrop-filter: blur(4px);
+        /* ----- Saldo y sección interna ----- */
+        .saldo-bar {
             display: flex;
-            flex-direction: column;
-        }
-
-        .tarjeta-animal:hover {
-            transform: translateY(-6px);
-            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5);
-            border-color: rgba(243, 156, 18, 0.3);
-        }
-
-        .tarjeta-animal img {
-            width: 100%;
-            height: 180px;
-            object-fit: cover;
-            background: #222;
-            display: block;
-        }
-
-        .tarjeta-info {
-            padding: 14px 16px 18px;
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .tarjeta-info .nombre {
-            font-size: 1.2rem;
-            font-weight: 700;
-            color: #fff;
-            margin-bottom: 2px;
-        }
-
-        .tarjeta-info .raza {
-            font-size: 0.9rem;
-            color: #bbb;
-            margin-bottom: 4px;
-        }
-
-        .tarjeta-info .detalles {
-            font-size: 0.85rem;
-            color: #aaa;
-            margin-bottom: 8px;
-            display: flex;
-            gap: 12px;
             flex-wrap: wrap;
-        }
-
-        .tarjeta-info .detalles span {
-            background: rgba(255, 255, 255, 0.06);
-            padding: 2px 10px;
-            border-radius: 20px;
-        }
-
-        .tarjeta-info .descripcion {
-            font-size: 0.85rem;
-            color: #ccc;
-            line-height: 1.4;
-            margin-bottom: 8px;
-            flex: 1;
-        }
-
-        .creditos-acumulados {
-            display: flex;
+            justify-content: center;
             align-items: center;
-            gap: 6px;
-            font-size: 0.9rem;
-            background: rgba(243, 156, 18, 0.15);
-            padding: 4px 12px;
-            border-radius: 30px;
-            color: #f9d976;
-            margin-bottom: 10px;
-            align-self: flex-start;
+            gap: 12px;
+            background: rgba(255, 255, 255, 0.04);
+            border-radius: 60px;
+            padding: 10px 18px;
+            margin: 16px 0;
+            border: 1px solid rgba(255, 255, 255, 0.06);
         }
 
-        .creditos-acumulados .num-creditos {
-            font-weight: 700;
+        .saldo-bar span {
             font-size: 1.1rem;
         }
 
-        .btn-donar-creditos {
-            background: linear-gradient(135deg, #f9d976, #f39c12);
-            border: none;
-            padding: 10px 16px;
-            border-radius: 40px;
+        .saldo-bar .num {
             font-weight: 700;
-            color: #0b0e14;
-            cursor: pointer;
-            transition: transform 0.15s, box-shadow 0.15s;
-            font-family: 'Quicksand', sans-serif;
-            font-size: 0.95rem;
-            margin-top: 6px;
-            width: 100%;
-        }
-
-        .btn-donar-creditos:hover {
-            transform: scale(1.03);
-            box-shadow: 0 6px 20px rgba(243, 156, 18, 0.4);
-        }
-
-        .btn-donar-creditos:active {
-            transform: scale(0.97);
-        }
-
-        .tipo-etiqueta {
-            display: inline-block;
-            padding: 2px 12px;
-            border-radius: 30px;
-            font-size: 0.7rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-bottom: 6px;
-            align-self: flex-start;
-        }
-
-        .tipo-perro {
-            background: #2ecc71;
-            color: #0b0e14;
-        }
-
-        .tipo-gato {
-            background: #3498db;
-            color: #fff;
-        }
-
-        .estado-calle {
-            background: #e74c3c;
-            color: #fff;
-            font-size: 0.65rem;
-            padding: 2px 10px;
-            border-radius: 30px;
-            display: inline-block;
-            margin-top: 4px;
-        }
-
-        .modal-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.7);
-            backdrop-filter: blur(6px);
-            z-index: 2000;
-            display: none;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .modal-overlay.active {
-            display: flex;
-        }
-
-        .modal-box {
-            background: rgba(20, 25, 35, 0.95);
-            backdrop-filter: blur(12px);
-            border-radius: 32px;
-            padding: 30px 36px;
-            max-width: 420px;
-            width: 90%;
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6);
-            animation: modalFade 0.3s ease;
-            max-height: 90vh;
-            overflow-y: auto;
-        }
-
-        @keyframes modalFade {
-            from { transform: scale(0.9); opacity: 0; }
-            to { transform: scale(1); opacity: 1; }
-        }
-
-        .modal-box h3 {
-            font-size: 1.8rem;
+            font-size: 1.4rem;
             color: #f9d976;
-            margin-bottom: 8px;
-            text-align: center;
         }
 
-        .modal-box .sub {
-            text-align: center;
-            color: #bbb;
-            margin-bottom: 20px;
-            font-size: 0.95rem;
-        }
-
-        .modal-box .animal-nombre {
-            font-weight: 700;
+        .btn-comprar {
+            background: linear-gradient(135deg, #2ecc71, #27ae60);
             color: #fff;
-        }
-
-        .modal-box label {
-            display: block;
-            font-weight: 600;
-            margin-bottom: 6px;
-            color: #ddd;
-        }
-
-        .modal-box input[type="number"] {
-            width: 100%;
-            padding: 12px 16px;
-            border-radius: 16px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            background: rgba(255, 255, 255, 0.05);
-            color: #fff;
-            font-size: 1.2rem;
-            font-family: 'Quicksand', sans-serif;
-            outline: none;
-            transition: border 0.2s;
-        }
-
-        .modal-box input[type="number"]:focus {
-            border-color: #f39c12;
-        }
-
-        .modal-box .saldo-info {
-            margin-top: 12px;
-            font-size: 0.9rem;
-            color: #aaa;
-            text-align: center;
-        }
-
-        .modal-actions {
-            display: flex;
-            gap: 12px;
-            margin-top: 20px;
-            justify-content: flex-end;
-        }
-
-        .modal-actions button {
-            padding: 10px 24px;
-            border-radius: 40px;
             border: none;
+            padding: 8px 20px;
+            border-radius: 40px;
             font-weight: 700;
-            font-family: 'Quicksand', sans-serif;
             cursor: pointer;
-            transition: transform 0.15s;
+            font-family: 'Quicksand', sans-serif;
+            width: auto;
         }
 
-        .modal-actions .btn-cancelar {
+        .btn-logout {
             background: rgba(255, 255, 255, 0.06);
-            color: #ccc;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #ddd;
+            padding: 8px 18px;
+            border-radius: 40px;
+            cursor: pointer;
+            font-family: 'Quicksand', sans-serif;
+            font-weight: 600;
+            width: auto;
         }
 
-        .modal-actions .btn-cancelar:hover {
-            background: rgba(255, 255, 255, 0.12);
+        /* ----- Lista de animales ----- */
+        .animales-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 14px;
+            margin-top: 16px;
         }
 
-        .modal-actions .btn-confirmar {
-            background: linear-gradient(135deg, #f9d976, #f39c12);
-            color: #0b0e14;
-        }
-
-        .modal-actions .btn-confirmar:hover:not(:disabled) {
-            transform: scale(1.04);
-            box-shadow: 0 4px 15px rgba(243, 156, 18, 0.4);
-        }
-
-        .modal-actions .btn-confirmar:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
-            transform: none;
-        }
-
-        .modal-actions .btn-confirmar .spinner {
-            display: inline-block;
-            width: 18px;
-            height: 18px;
-            border: 2px solid rgba(11, 14, 20, 0.3);
-            border-top-color: #0b0e14;
-            border-radius: 50%;
-            animation: spin 0.8s linear infinite;
-            vertical-align: middle;
-            margin-right: 8px;
-        }
-
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-
-        .donantes-section {
-            display: none;
-            width: 100%;
-            max-width: 1100px;
-            margin: 10px auto 30px;
+        .animal-card {
+            display: flex;
+            align-items: center;
+            gap: 12px;
             background: rgba(255, 255, 255, 0.04);
-            backdrop-filter: blur(6px);
-            border-radius: 32px;
-            padding: 20px 20px 24px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+            padding: 12px;
+            border-radius: 20px;
             border: 1px solid rgba(255, 255, 255, 0.06);
         }
 
-        .donantes-section h2 {
-            font-size: 2rem;
-            font-weight: 600;
-            margin-bottom: 12px;
-            text-align: center;
-            color: #f7f7f7;
-            letter-spacing: 0.5px;
+        .animal-card img {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            object-fit: cover;
+            background: #222;
+            flex-shrink: 0;
         }
 
-        .donantes-section h2 small {
+        .animal-info {
+            flex: 1;
+        }
+
+        .animal-info .nombre {
+            font-weight: 600;
             font-size: 1rem;
-            font-weight: 400;
-            color: #bbb;
-            display: block;
-            margin-top: 4px;
         }
 
-        .tabla-wrapper {
-            max-height: 400px;
-            overflow-y: auto;
-            border-radius: 16px;
-            background: rgba(0, 0, 0, 0.15);
-        }
-
-        .tabla-wrapper::-webkit-scrollbar {
-            width: 6px;
-        }
-        .tabla-wrapper::-webkit-scrollbar-track {
-            background: rgba(0, 0, 0, 0.2);
-            border-radius: 10px;
-        }
-        .tabla-wrapper::-webkit-scrollbar-thumb {
-            background: #f39c12;
-            border-radius: 10px;
-        }
-
-        .tabla-donantes {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 0.95rem;
-        }
-
-        .tabla-donantes thead tr {
-            background: rgba(255, 255, 255, 0.06);
-            position: sticky;
-            top: 0;
-            z-index: 5;
-            backdrop-filter: blur(4px);
-        }
-
-        .tabla-donantes th {
-            padding: 14px 12px;
-            text-align: left;
-            font-weight: 600;
-            color: #ddd;
-            border-bottom: 2px solid rgba(255, 255, 255, 0.08);
-        }
-
-        .tabla-donantes td {
-            padding: 14px 12px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
-            color: #eee;
-        }
-
-        .tabla-donantes tbody tr {
-            transition: background 0.15s;
-        }
-
-        .tabla-donantes tbody tr:hover {
-            background: rgba(255, 255, 255, 0.05);
-        }
-
-        .badge-monto {
-            background: rgba(46, 204, 113, 0.2);
-            padding: 4px 14px;
-            border-radius: 30px;
-            font-weight: 600;
-            color: #a8e6cf;
-            display: inline-block;
-        }
-
-        .btn-cargar-mas {
-            background: rgba(255, 255, 255, 0.06);
-            border: 1px solid rgba(255, 255, 255, 0.12);
-            color: #ddd;
-            padding: 10px 28px;
-            border-radius: 40px;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: all 0.2s;
-            margin-top: 16px;
-            font-family: 'Quicksand', sans-serif;
-            font-weight: 600;
-            backdrop-filter: blur(4px);
-        }
-
-        .btn-cargar-mas:hover {
-            background: rgba(255, 255, 255, 0.12);
-            color: #fff;
-            transform: scale(1.02);
-        }
-
-        .btn-cargar-mas:disabled {
-            opacity: 0.4;
-            cursor: not-allowed;
-            transform: none;
-        }
-
-        .footer-note {
-            margin-top: 10px;
-            font-size: 0.85rem;
+        .animal-info .raza {
+            font-size: 0.8rem;
             color: #aaa;
-            text-align: center;
-            max-width: 600px;
-            background: rgba(0, 0, 0, 0.2);
-            padding: 12px 24px;
-            border-radius: 40px;
-            backdrop-filter: blur(4px);
         }
 
-        #diagnostico {
-            margin-top: 10px;
+        .animal-info .creditos {
             font-size: 0.85rem;
-            padding: 10px 16px;
-            border-radius: 16px;
-            display: none;
-            max-width: 100%;
-            word-break: break-all;
+            color: #f9d976;
+            margin-top: 2px;
+        }
+
+        .btn-donar {
+            background: linear-gradient(135deg, #f9d976, #f39c12);
+            color: #0b0e14;
+            border: none;
+            padding: 6px 16px;
+            border-radius: 30px;
+            font-weight: 700;
+            cursor: pointer;
+            font-family: 'Quicksand', sans-serif;
+            font-size: 0.8rem;
+            width: auto;
+            flex-shrink: 0;
+        }
+
+        .btn-donar:hover {
+            transform: scale(1.05);
+        }
+
+        .footer {
+            margin-top: 24px;
+            font-size: 0.8rem;
+            color: #888;
             text-align: center;
         }
 
-        #diagnostico.error {
-            background: rgba(231, 76, 60, 0.1);
+        .diagnostico {
+            font-size: 0.85rem;
+            padding: 10px;
+            border-radius: 16px;
+            margin-top: 12px;
+            display: none;
+        }
+
+        .diagnostico.error {
+            background: rgba(231, 76, 60, 0.15);
             border: 1px solid #e74c3c;
             color: #e74c3c;
+            display: block;
         }
 
-        #diagnostico.success {
-            background: rgba(46, 204, 113, 0.1);
+        .diagnostico.success {
+            background: rgba(46, 204, 113, 0.15);
             border: 1px solid #2ecc71;
             color: #2ecc71;
-        }
-
-        #diagnostico.info {
-            background: rgba(52, 152, 219, 0.1);
-            border: 1px solid #3498db;
-            color: #3498db;
-        }
-
-        @media (max-width: 700px) {
-            .header h1 { font-size: 2.4rem; }
-            .grid-animales { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); }
-            .catalogo-section { padding: 16px 12px; }
-            .modal-box { padding: 24px 20px; }
-            #authSection { padding: 20px; }
-            .floating-btn { bottom: 20px; right: 20px; padding: 12px 18px; font-size: 1rem; }
-            .auth-buttons { flex-direction: column; }
-            .auth-buttons button { flex: none; width: 100%; }
-        }
-
-        @media (max-width: 500px) {
-            .header h1 { font-size: 1.8rem; }
-            .grid-animales { grid-template-columns: 1fr 1fr; }
+            display: block;
         }
     </style>
 </head>
 <body>
-
-    <!-- ===== ESCENA 3D ===== -->
-    <div id="three-container"></div>
-
-    <!-- ===== BOTÓN FLOTANTE ===== -->
-    <button class="floating-btn" id="floatingBtn" title="Ver saldo">
-        🪙 <span id="floatingSaldo">0</span>
-        <span class="badge">créditos</span>
-    </button>
-
-    <!-- ===== OVERLAY ===== -->
-    <div class="app-overlay" id="appOverlay">
-
-        <header class="header">
-            <h1>🐾 Ayuda a los Peluditos</h1>
-            <p><span class="emoji-big">🐶</span> Compra créditos y asígnalos a perros y gatos callejeros <span class="emoji-big">🐱</span></p>
-            <p style="font-size:1rem; color:#ccc; margin-top:4px;">1 crédito = $1.000 COP • Cada crédito mejora su calidad de vida.</p>
-        </header>
+    <div class="container">
+        <h1>🦴 Ayuda a los Peluditos</h1>
+        <p class="sub">1 huesito = $1.000 COP</p>
 
         <!-- ===== AUTENTICACIÓN ===== -->
         <div id="authSection">
             <input type="email" id="authEmail" placeholder="Correo electrónico" />
-            <div class="auth-buttons">
-                <button class="btn-login" id="btnLogin">Ingresar / Registrarse</button>
-                <button class="btn-test" id="btnTestConexion">🔍 Probar conexión</button>
-            </div>
-            <div id="authStatus">🔒 Ingresa tu correo para comenzar</div>
-            <button id="btnLogout">Cerrar sesión</button>
-            <div id="diagnostico"></div>
+            <button class="btn-login" id="btnLogin">Ingresar / Registrarse</button>
+            <div class="status" id="authStatus">🔒 Ingresa tu correo para comenzar</div>
+            <div id="diagnostico" class="diagnostico"></div>
         </div>
 
-        <!-- ===== CATÁLOGO ===== -->
-        <section class="catalogo-section" id="catalogoSection">
-            <h2>🏚️ Peluditos en Riesgo <small>Asigna tus créditos al animal que quieras ayudar</small></h2>
-            <div class="filtros" id="filtrosAnimales">
-                <button data-filtro="todos" class="activo">🐾 Todos</button>
-                <button data-filtro="perro">🐕 Perros</button>
-                <button data-filtro="gato">🐈 Gatos</button>
+        <!-- ===== SECCIÓN PRINCIPAL (logueado) ===== -->
+        <div id="mainSection" class="hidden">
+            <div class="saldo-bar">
+                <span>🦴 Huesitos: <span class="num" id="saldoUsuario">0</span></span>
+                <button class="btn-comprar" id="btnComprar">➕ Comprar</button>
+                <button class="btn-logout" id="btnLogout">Cerrar</button>
             </div>
-            <div class="grid-animales" id="gridAnimales">
-                <div class="mensaje-inicial" id="mensajeInicial"><span>👀</span> Selecciona una categoría para conocer a los peluditos que puedes ayudar</div>
+
+            <div style="margin-top: 8px; font-size:0.9rem; color:#aaa;">
+                🏠 Peluditos en riesgo
             </div>
-        </section>
-
-        <!-- ===== DONANTES ===== -->
-        <section class="donantes-section" id="donantesSection">
-            <h2>🙏 Donantes Solidarios <small>Personas que ya han aportado créditos</small></h2>
-            <div class="tabla-wrapper" id="tablaWrapper">
-                <table class="tabla-donantes" id="tablaDonantes">
-                    <thead><tr><th>#</th><th>Nombre</th><th>País</th><th>Valor (COP)</th></tr></thead>
-                    <tbody id="cuerpoDonantes"></tbody>
-                </table>
-            </div>
-            <div style="text-align:center; margin-top:12px;"><button class="btn-cargar-mas" id="btnCargarMas">Cargar más donantes</button></div>
-            <div style="text-align:center; margin-top:10px; font-size:0.8rem; color:#888;">* Montos en pesos colombianos (COP) • Datos simulados</div>
-        </section>
-
-        <div class="footer-note">💙 100% de los créditos se destinan a alimentación, veterinaria y refugio.<br> Gracias por ser parte del cambio.</div>
-    </div>
-
-    <!-- ===== MODALES ===== -->
-    <div class="modal-overlay" id="modalDonar">
-        <div class="modal-box">
-            <h3>🪙 Asignar créditos</h3>
-            <div class="sub">Estás ayudando a <span class="animal-nombre" id="modalAnimalNombre">—</span></div>
-            <label for="cantidadCreditos">Cantidad de créditos:</label>
-            <input type="number" id="cantidadCreditos" min="1" value="1" />
-            <div class="saldo-info">Tu saldo: <strong id="modalSaldoActual">0</strong> créditos</div>
-            <div class="modal-actions">
-                <button class="btn-cancelar" id="modalCancelar">Cancelar</button>
-                <button class="btn-confirmar" id="modalConfirmar">Confirmar</button>
+            <div class="animales-grid" id="animalesGrid">
+                <!-- Se llena con JS -->
             </div>
         </div>
+
+        <div class="footer">💙 100% a alimentación, veterinaria y refugio</div>
     </div>
 
-    <div class="modal-overlay" id="modalComprar">
-        <div class="modal-box">
-            <h3>🛒 Comprar créditos</h3>
-            <div class="sub">1 crédito = $1.000 COP</div>
-            <label for="cantidadCompra">Cantidad de créditos:</label>
-            <input type="number" id="cantidadCompra" min="1" value="5" />
-            <div style="margin-top:16px; background:rgba(255,255,255,0.04); padding:12px; border-radius:16px;">
-                <p style="color:#ddd; font-size:0.95rem;">📱 <strong>Paga por Nequi</strong> al número:</p>
-                <p style="font-size:1.4rem; font-weight:700; color:#f9d976;">313 823 7540</p>
-                <p style="font-size:0.85rem; color:#aaa; margin-top:6px;">Luego envía el comprobante de pago a <strong>WhatsApp</strong> para verificar y acreditar tus créditos.</p>
-            </div>
-            <div style="margin-top:16px; display:flex; gap:12px; flex-wrap:wrap; justify-content:center;">
-                <button class="btn-confirmar" id="btnEnviarComprobante" style="background:linear-gradient(135deg,#25D366,#128C7E); color:#fff; border:none; padding:10px 24px; border-radius:40px; font-weight:700; cursor:pointer; font-family:'Quicksand',sans-serif;">
-                    📤 Enviar comprobante por WhatsApp
-                </button>
-                <button class="btn-cancelar" id="btnCerrarComprar" style="background:rgba(255,255,255,0.06); color:#ccc; border:none; padding:10px 24px; border-radius:40px; font-weight:700; cursor:pointer; font-family:'Quicksand',sans-serif;">
-                    Cerrar
-                </button>
-            </div>
-            <div class="saldo-info" style="margin-top:12px; font-size:0.85rem; color:#888;">
-                * Los créditos se acreditarán tras la verificación manual del pago.
-            </div>
-        </div>
-    </div>
-
-    <!-- ================================================================ -->
-    <!--  THREE.JS                                                        -->
-    <!-- ================================================================ -->
-    <script type="importmap">
-        {
-            "imports": {
-                "three": "https://unpkg.com/three@0.128.0/build/three.module.js"
-            }
-        }
-    </script>
-
-    <!-- ================================================================ -->
-    <!--  LÓGICA PRINCIPAL (con corrección en registro)                   -->
-    <!-- ================================================================ -->
-    <script type="module">
+    <script>
         // ================================================================
-        //  1.  CONFIGURACIÓN - ¡URL DE TU WEB APP!
+        //  CONFIGURACIÓN
         // ================================================================
-        const API_URL = 'https://script.google.com/macros/s/AKfycbxvlYcaIYt_YAmbIgydaASlMHVjL8LAhbz4L-y9AhoBdzATdq0zBwSqtw9LBT1ufeCc/exec';
+        const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxCbsaJeTk0egZt6Dy3cJ-XD4ZUqdR1jPbdKAS0spw12YnS9-Sf4YEA-GITzSfimzDg/exec"; // <-- CAMBIA ESTO
 
         // ================================================================
-        //  2.  ESTADO GLOBAL
+        //  1.  DATOS DE ANIMALES (igual que antes)
         // ================================================================
-        let usuarioEmail = '';
-        let saldoActual = 0;
-        let animalSeleccionado = null;
-        let todosAnimales = [];
-        let procesando = false;
-        let intervalPolling = null;
+        const nombresPerro = [
+            "Max", "Luna", "Rocky", "Bella", "Toby", "Coco", "Nala", "Simba",
+            "Bruno", "Daisy", "Charlie", "Lola", "Thor", "Molly", "Leo",
+            "Kira", "Rex", "Milo", "Lily", "Oscar", "Zeus", "Maya", "Jack",
+            "Sasha", "Tango", "Roko", "Lúa", "Koda", "Akira", "Tita"
+        ];
 
-        const floatingBtn = document.getElementById('floatingBtn');
-        const floatingSaldo = document.getElementById('floatingSaldo');
-        const modalDonar = document.getElementById('modalDonar');
-        const modalComprar = document.getElementById('modalComprar');
-        const modalAnimalNombre = document.getElementById('modalAnimalNombre');
-        const inputCantidad = document.getElementById('cantidadCreditos');
-        const modalSaldoActual = document.getElementById('modalSaldoActual');
-        const btnConfirmar = document.getElementById('modalConfirmar');
-        const grid = document.getElementById('gridAnimales');
-        const mensajeInicial = document.getElementById('mensajeInicial');
-        const authStatus = document.getElementById('authStatus');
-        const diagnostico = document.getElementById('diagnostico');
+        const nombresGato = [
+            "Mishi", "Garfield", "Salem", "Luna", "Simba", "Mia",
+            "Tigre", "Pelusa", "Negro", "Canela", "Ginger", "Nube"
+        ];
 
-        // ================================================================
-        //  3.  FUNCIONES DE DIAGNÓSTICO
-        // ================================================================
+        const razasPerro = [
+            "Labrador", "Golden", "Bulldog", "Beagle", "Pastor Alemán",
+            "Chihuahua", "Poodle", "Rottweiler", "Yorkshire", "Dachshund",
+            "Pomerania", "San Bernardo", "Husky", "Border Collie", "Doberman",
+            "Shih Tzu", "Boxer", "Gran Danés", "Cocker", "Pug",
+            "Maltés", "Schnauzer", "Akita", "Weimaraner", "Corgi",
+            "Bichón", "Terrier", "Galgo", "Mastín", "Setter"
+        ];
 
-        function mostrarDiagnostico(mensaje, tipo = 'error') {
-            diagnostico.style.display = 'block';
-            diagnostico.textContent = mensaje;
-            diagnostico.className = tipo;
-        }
+        const razasGato = [
+            "Siamés", "Persa", "Maine Coon", "Bengala", "Sphynx",
+            "Británico", "Fold", "Oriental", "Ragdoll", "Angora",
+            "Bombay", "Cali"
+        ];
 
-        function ocultarDiagnostico() {
-            diagnostico.style.display = 'none';
-        }
+        const descripciones = [
+            "Rescatado de la calle, desnutrido y con miedo.",
+            "Vagaba en un barrio peligroso, tiene heridas leves.",
+            "Fue encontrado en una alcantarilla, está muy delgado.",
+            "Lleva meses en la calle, sobrevive como puede.",
+            "Tiene sarna y parásitos, pero es muy manso.",
+            "Siempre se acerca a las personas, busca cariño.",
+            "Vive en un parque, las lluvias lo afectan mucho.",
+            "Tiene una pata lastimada, no puede caminar bien.",
+            "Es muy juguetón a pesar de su situación.",
+            "Se refugia en un lote baldío, tiene hambre y sed."
+        ];
 
-        // ================================================================
-        //  4.  FUNCIONES DE API (mejoradas con validación de respuesta)
-        // ================================================================
-
-        async function apiCall(action, data = {}) {
-            try {
-                const resp = await fetch(API_URL, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ action, ...data })
+        function generarAnimales() {
+            const animales = [];
+            for (let i = 0; i < 30; i++) {
+                animales.push({
+                    id: `perro-${i}`,
+                    tipo: 'perro',
+                    nombre: nombresPerro[i],
+                    raza: razasPerro[i % razasPerro.length] + ' (criollo)',
+                    descripcion: descripciones[i % descripciones.length],
+                    imagen: `https://picsum.photos/seed/perro-${i}/200/200`
                 });
-                if (!resp.ok) throw new Error(`HTTP ${resp.status}: ${resp.statusText}`);
-                const result = await resp.json();
-                // Verificar si la respuesta tiene error
-                if (result.error) throw new Error(result.error);
-                return result;
-            } catch (e) {
-                console.error(`Error en ${action}:`, e);
-                throw new Error(`Error de conexión: ${e.message}`);
             }
-        }
-
-        async function obtenerSaldo(email) {
-            try {
-                const url = `${API_URL}?action=getSaldo&email=${encodeURIComponent(email)}`;
-                const resp = await fetch(url);
-                if (!resp.ok) throw new Error(`HTTP ${resp.status}: ${resp.statusText}`);
-                const data = await resp.json();
-                if (data.error) throw new Error(data.error);
-                return data.saldo || 0;
-            } catch (e) {
-                console.error('Error al obtener saldo:', e);
-                throw new Error(`No se pudo obtener el saldo: ${e.message}`);
+            for (let i = 0; i < 12; i++) {
+                animales.push({
+                    id: `gato-${i}`,
+                    tipo: 'gato',
+                    nombre: nombresGato[i],
+                    raza: razasGato[i % razasGato.length] + ' (criollo)',
+                    descripcion: descripciones[(i + 3) % descripciones.length],
+                    imagen: `https://picsum.photos/seed/gato-${i}/200/200`
+                });
             }
+            return animales;
         }
 
-        // Función mejorada: registrar usuario con validación
-        async function registrarUsuario(email) {
-            const result = await apiCall('registrarUsuario', { email });
-            // result debe tener { success: true, saldo: X }
-            if (!result.success) throw new Error(result.error || 'Error al registrar usuario');
-            return result.saldo || 0;
+        const ANIMALES = generarAnimales();
+
+        // ================================================================
+        //  2.  FUNCIONES DE COMUNICACIÓN CON GOOGLE SHEETS
+        // ================================================================
+
+        // Obtener saldo de un correo
+        async function fetchSaldo(email) {
+            const url = `${SCRIPT_URL}?action=getSaldo&email=${encodeURIComponent(email)}`;
+            const resp = await fetch(url);
+            const data = await resp.json();
+            return data;
         }
 
-        async function asignarCreditos(email, animalId, cantidad) {
-            const result = await apiCall('asignarCreditos', { email, animalId, cantidad });
-            return result;
+        // Obtener créditos de todos los animales
+        async function fetchCreditosAnimales() {
+            const url = `${SCRIPT_URL}?action=getCreditosAnimales`;
+            const resp = await fetch(url);
+            const data = await resp.json();
+            return data;
         }
 
-        async function obtenerTodosLosAnimales() {
-            try {
-                const url = `${API_URL}?action=getAllAnimales`;
-                const resp = await fetch(url);
-                if (!resp.ok) throw new Error(`HTTP ${resp.status}: ${resp.statusText}`);
-                const data = await resp.json();
-                return data.animales || [];
-            } catch (e) {
-                console.error('Error al obtener animales:', e);
-                return [];
-            }
+        // Donar: restar saldo al usuario y sumar al animal
+        async function donar(email, animalId, cantidad) {
+            const resp = await fetch(SCRIPT_URL, {
+                method: 'POST',
+                mode: 'no-cors', // importante para evitar CORS en desarrollo, pero no podremos leer respuesta
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    action: 'donar',
+                    email,
+                    animalId,
+                    cantidad
+                })
+            });
+            // Como usamos no-cors, no podemos leer la respuesta directamente.
+            // Para solucionarlo, el script debería devolver un JSON, pero con no-cors solo podemos saber si fue exitoso.
+            // En su lugar, usaremos 'cors' si el script lo permite.
+            // Mejor usamos 'cors' y leemos la respuesta.
+            // Cambiamos a modo 'cors' (el script debe permitir origen * o el dominio)
+            // Para simplificar, haremos un segundo intento con cors.
+            // Pero mejor configuramos el script para que acepte cualquier origen.
+            // En este ejemplo, usaremos cors.
+            const resp2 = await fetch(SCRIPT_URL, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    action: 'donar',
+                    email,
+                    animalId,
+                    cantidad
+                })
+            });
+            const data = await resp2.json();
+            return data;
         }
 
         // ================================================================
-        //  5.  BOTÓN DE PRUEBA DE CONEXIÓN
+        //  3.  DOM y ESTADO
         // ================================================================
 
-        document.getElementById('btnTestConexion').addEventListener('click', async () => {
-            mostrarDiagnostico('🔄 Probando conexión...', 'info');
-            try {
-                const url = `${API_URL}?action=getSaldo&email=test@test.com`;
-                const resp = await fetch(url);
-                if (!resp.ok) throw new Error(`HTTP ${resp.status}: ${resp.statusText}`);
-                const data = await resp.json();
-                mostrarDiagnostico(`✅ Conexión exitosa. Respuesta: ${JSON.stringify(data)}`, 'success');
-                setTimeout(ocultarDiagnostico, 5000);
-            } catch (e) {
-                mostrarDiagnostico(`❌ Error: ${e.message}. Revisa la URL y la publicación de la Web App.`, 'error');
-            }
-        });
-
-        // ================================================================
-        //  6.  AUTENTICACIÓN (con verificación de registro)
-        // ================================================================
-
+        const authSection = document.getElementById('authSection');
+        const mainSection = document.getElementById('mainSection');
         const authEmail = document.getElementById('authEmail');
         const btnLogin = document.getElementById('btnLogin');
         const btnLogout = document.getElementById('btnLogout');
+        const btnComprar = document.getElementById('btnComprar');
+        const authStatus = document.getElementById('authStatus');
+        const diagnostico = document.getElementById('diagnostico');
+        const saldoUsuario = document.getElementById('saldoUsuario');
+        const animalesGrid = document.getElementById('animalesGrid');
+
+        let usuarioActual = '';
+        let saldoActual = 0;
+        let creditosAnimales = {}; // objeto { id: creditos }
+
+        // ================================================================
+        //  4.  UI
+        // ================================================================
+
+        function mostrarDiagnostico(mensaje, tipo = 'error') {
+            diagnostico.textContent = mensaje;
+            diagnostico.className = 'diagnostico ' + tipo;
+        }
+
+        function ocultarDiagnostico() {
+            diagnostico.className = 'diagnostico';
+            diagnostico.textContent = '';
+        }
+
+        function actualizarSaldoUI() {
+            saldoUsuario.textContent = saldoActual;
+        }
+
+        function actualizarAnimales() {
+            animalesGrid.innerHTML = '';
+            const sorted = [...ANIMALES].sort((a, b) => a.nombre.localeCompare(b.nombre));
+            sorted.forEach(animal => {
+                const creditos = creditosAnimales[animal.id] || 0;
+                const div = document.createElement('div');
+                div.className = 'animal-card';
+                div.innerHTML = `
+                    <img src="${animal.imagen}" alt="${animal.nombre}" loading="lazy" />
+                    <div class="animal-info">
+                        <div class="nombre">${animal.nombre} <span style="font-size:0.8rem;color:#888;">${animal.tipo === 'perro' ? '🐕' : '🐈'}</span></div>
+                        <div class="raza">${animal.raza}</div>
+                        <div class="creditos">🦴 ${creditos} huesitos</div>
+                        <div style="font-size:0.75rem;color:#aaa;margin-top:2px;">${animal.descripcion}</div>
+                    </div>
+                    <button class="btn-donar" onclick="donarCredito('${animal.id}', '${animal.nombre}')">Donar 🥫</button>
+                `;
+                animalesGrid.appendChild(div);
+            });
+        }
+
+        // ================================================================
+        //  5.  LOGIN / LOGOUT
+        // ================================================================
 
         async function loginUsuario(email) {
             if (!email || !email.includes('@')) {
-                alert('Ingresa un correo válido.');
+                mostrarDiagnostico('❌ Ingresa un correo válido.', 'error');
                 return;
             }
-            usuarioEmail = email;
-            localStorage.setItem('peluditos_email', email);
+            usuarioActual = email;
 
+            // Obtener saldo desde la nube
             try {
-                mostrarDiagnostico('🔄 Registrando / iniciando sesión...', 'info');
-                // Esta función ahora verifica que el usuario se haya creado correctamente
-                const saldo = await registrarUsuario(email);
-                saldoActual = saldo;
-                actualizarUIUsuario(true);
-                await cargarAnimales();
-                iniciarPolling();
-                mostrarDiagnostico(`✅ Usuario ${email} registrado con saldo ${saldo}.`, 'success');
-                setTimeout(ocultarDiagnostico, 4000);
-            } catch (e) {
-                mostrarDiagnostico(`❌ Error al registrar: ${e.message}`, 'error');
-                alert('Error al iniciar sesión: ' + e.message);
+                const data = await fetchSaldo(email);
+                if (data.error) {
+                    mostrarDiagnostico('❌ Error: ' + data.error, 'error');
+                    return;
+                }
+                saldoActual = data.saldo || 0;
+                // Guardar en localStorage solo para recordar el email (no el saldo)
+                localStorage.setItem('peluditos_email', email);
+
+                // Cargar créditos de animales
+                const creditosData = await fetchCreditosAnimales();
+                if (creditosData.error) {
+                    mostrarDiagnostico('❌ Error al cargar animales: ' + creditosData.error, 'error');
+                    return;
+                }
+                creditosAnimales = creditosData;
+
+                // Mostrar UI logueada
+                authSection.classList.add('hidden');
+                mainSection.classList.remove('hidden');
+                actualizarSaldoUI();
+                actualizarAnimales();
+                authStatus.textContent = `✅ Conectado como ${email}`;
+                authStatus.style.color = '#2ecc71';
+                ocultarDiagnostico();
+            } catch (err) {
+                mostrarDiagnostico('❌ Error de conexión: ' + err.message, 'error');
             }
         }
 
         function logoutUsuario() {
-            usuarioEmail = '';
+            usuarioActual = '';
             localStorage.removeItem('peluditos_email');
-            if (intervalPolling) clearInterval(intervalPolling);
-            actualizarUIUsuario(false);
+            authSection.classList.remove('hidden');
+            mainSection.classList.add('hidden');
+            authStatus.textContent = '🔒 Ingresa tu correo para comenzar';
+            authStatus.style.color = '#bbb';
+            saldoActual = 0;
+            creditosAnimales = {};
+            saldoUsuario.textContent = '0';
+            animalesGrid.innerHTML = '';
             ocultarDiagnostico();
-        }
-
-        function actualizarUIUsuario(loggeado) {
-            if (loggeado) {
-                document.getElementById('authSection').style.display = 'none';
-                document.getElementById('catalogoSection').style.display = 'block';
-                document.getElementById('donantesSection').style.display = 'block';
-                floatingBtn.style.display = 'flex';
-                btnLogout.style.display = 'inline-block';
-                authStatus.textContent = `✅ Conectado como ${usuarioEmail}`;
-                actualizarSaldoUI(saldoActual);
-            } else {
-                document.getElementById('authSection').style.display = 'flex';
-                document.getElementById('catalogoSection').style.display = 'none';
-                document.getElementById('donantesSection').style.display = 'none';
-                floatingBtn.style.display = 'none';
-                btnLogout.style.display = 'none';
-                authStatus.textContent = '🔒 Ingresa tu correo para comenzar';
-                saldoActual = 0;
-                actualizarSaldoUI(0);
-            }
-        }
-
-        function actualizarSaldoUI(saldo) {
-            saldoActual = saldo;
-            floatingSaldo.textContent = saldo;
-            modalSaldoActual.textContent = saldo;
         }
 
         btnLogin.addEventListener('click', () => {
@@ -1068,596 +536,61 @@
         }
 
         // ================================================================
-        //  7.  POLLING
+        //  6.  COMPRA DE HUESITOS (simulada con WhatsApp)
         // ================================================================
 
-        function iniciarPolling() {
-            if (intervalPolling) clearInterval(intervalPolling);
-            intervalPolling = setInterval(async () => {
-                if (!usuarioEmail) return;
-                try {
-                    const nuevoSaldo = await obtenerSaldo(usuarioEmail);
-                    if (nuevoSaldo !== saldoActual) {
-                        saldoActual = nuevoSaldo;
-                        actualizarSaldoUI(nuevoSaldo);
-                        await actualizarCreditosAnimales();
-                    }
-                } catch (e) {
-                    console.warn('Polling error:', e);
+        btnComprar.addEventListener('click', () => {
+            if (!usuarioActual) return;
+            const cantidad = prompt('¿Cuántos huesitos quieres comprar? (1 huesito = $1.000 COP)', '5');
+            if (cantidad && parseInt(cantidad) > 0) {
+                const num = parseInt(cantidad);
+                if (confirm(`Vas a comprar ${num} huesitos por $${num * 1000} COP. ¿Confirmas?`)) {
+                    const mensaje = `Hola, acabo de realizar el pago de ${num} huesitos por Nequi (3138237540) para mi correo: ${usuarioActual}. Adjunto el comprobante.`;
+                    window.open(`https://api.whatsapp.com/send?phone=573138237540&text=${encodeURIComponent(mensaje)}`, '_blank');
+                    alert('✅ Gracias por tu compra. Envía el comprobante y en breve acreditaremos tus huesitos.');
                 }
-            }, 15000);
-        }
-
-        // ================================================================
-        //  8.  COMPRA DE CRÉDITOS
-        // ================================================================
-
-        floatingBtn.addEventListener('click', () => {
-            if (!usuarioEmail) return;
-            modalComprar.classList.add('active');
-        });
-
-        document.getElementById('btnCerrarComprar').addEventListener('click', () => {
-            modalComprar.classList.remove('active');
-        });
-
-        modalComprar.addEventListener('click', (e) => {
-            if (e.target === modalComprar) modalComprar.classList.remove('active');
-        });
-
-        document.getElementById('btnEnviarComprobante').addEventListener('click', () => {
-            const cantidad = parseInt(document.getElementById('cantidadCompra').value) || 1;
-            const mensaje = `Hola, acabo de realizar el pago de ${cantidad} créditos por Nequi (3138237540) para mi correo: ${usuarioEmail}. Adjunto el comprobante.`;
-            const url = `https://api.whatsapp.com/send?phone=573138237540&text=${encodeURIComponent(mensaje)}`;
-            window.open(url, '_blank');
-            modalComprar.classList.remove('active');
-            alert('✅ Gracias por tu compra. Envía el comprobante y en breve acreditaremos tus créditos.');
-        });
-
-        // ================================================================
-        //  9.  MODAL DONAR
-        // ================================================================
-
-        window.abrirModalDonar = function(animalId, animalNombre) {
-            if (!usuarioEmail) {
-                alert('Debes iniciar sesión para asignar créditos.');
-                return;
-            }
-            if (procesando) return;
-            animalSeleccionado = { id: animalId, nombre: animalNombre };
-            modalAnimalNombre.textContent = animalNombre;
-            inputCantidad.value = 1;
-            modalSaldoActual.textContent = saldoActual;
-            btnConfirmar.disabled = false;
-            btnConfirmar.textContent = 'Confirmar';
-            modalDonar.classList.add('active');
-        };
-
-        document.getElementById('modalCancelar').addEventListener('click', () => {
-            modalDonar.classList.remove('active');
-            btnConfirmar.disabled = false;
-            btnConfirmar.textContent = 'Confirmar';
-            procesando = false;
-        });
-
-        modalDonar.addEventListener('click', (e) => {
-            if (e.target === modalDonar) {
-                modalDonar.classList.remove('active');
-                btnConfirmar.disabled = false;
-                btnConfirmar.textContent = 'Confirmar';
-                procesando = false;
             }
         });
 
-        document.getElementById('modalConfirmar').addEventListener('click', async () => {
-            if (procesando) return;
-            if (!usuarioEmail) {
+        // ================================================================
+        //  7.  DONAR HUESITOS A UN ANIMAL
+        // ================================================================
+
+        window.donarCredito = async function(animalId, animalNombre) {
+            if (!usuarioActual) {
                 alert('Debes iniciar sesión.');
                 return;
             }
-
-            const cantidad = parseInt(inputCantidad.value);
-            if (!cantidad || cantidad < 1) {
-                alert('Ingresa una cantidad válida (mínimo 1)');
+            const cantidad = prompt(`¿Cuántos huesitos quieres donar a ${animalNombre}? (Saldo: ${saldoActual})`, '1');
+            if (!cantidad || parseInt(cantidad) < 1) return;
+            const num = parseInt(cantidad);
+            if (num > saldoActual) {
+                alert('❌ No tienes suficientes huesitos.');
                 return;
             }
-            if (cantidad > saldoActual) {
-                alert('No tienes suficientes créditos.');
-                return;
-            }
-
-            procesando = true;
-            btnConfirmar.disabled = true;
-            btnConfirmar.innerHTML = '<span class="spinner"></span> Procesando...';
 
             try {
-                const result = await asignarCreditos(usuarioEmail, animalSeleccionado.id, cantidad);
-
-                if (result.success) {
-                    saldoActual = result.saldoRestante;
-                    actualizarSaldoUI(saldoActual);
-
-                    const span = document.querySelector(`[data-animal-id="${animalSeleccionado.id}"] .num-creditos`);
-                    if (span) {
-                        const actual = parseInt(span.textContent) || 0;
-                        span.textContent = actual + cantidad;
-                    }
-
-                    modalDonar.classList.remove('active');
-                    alert(`✅ ¡Has asignado ${cantidad} créditos a ${animalSeleccionado.nombre}!`);
-                } else {
-                    alert('❌ ' + (result.error || 'Error al asignar créditos. Intenta de nuevo.'));
+                const resultado = await donar(usuarioActual, animalId, num);
+                if (resultado.error) {
+                    alert('❌ Error: ' + resultado.error);
+                    return;
                 }
-            } catch (e) {
-                alert('❌ Error de conexión: ' + e.message);
-            } finally {
-                procesando = false;
-                btnConfirmar.disabled = false;
-                btnConfirmar.textContent = 'Confirmar';
+                // Actualizar saldo local
+                saldoActual = resultado.nuevoSaldo;
+                // Actualizar créditos del animal local
+                creditosAnimales[animalId] = resultado.nuevosCreditosAnimal;
+
+                actualizarSaldoUI();
+                actualizarAnimales();
+                alert(`✅ Has donado ${num} huesitos a ${animalNombre}.`);
+            } catch (err) {
+                alert('❌ Error al donar: ' + err.message);
             }
-        });
-
-        // ================================================================
-        //  10. CATÁLOGO DE ANIMALES
-        // ================================================================
-
-        const urlsPerros = [
-            'https://picsum.photos/seed/perro-0/300/300',
-            'https://picsum.photos/seed/perro-1/300/300',
-            'https://picsum.photos/seed/perro-2/300/300',
-            'https://picsum.photos/seed/perro-3/300/300',
-            'https://picsum.photos/seed/perro-4/300/300',
-            'https://picsum.photos/seed/perro-5/300/300',
-            'https://picsum.photos/seed/perro-6/300/300',
-            'https://picsum.photos/seed/perro-7/300/300',
-            'https://picsum.photos/seed/perro-8/300/300',
-            'https://picsum.photos/seed/perro-9/300/300',
-            'https://picsum.photos/seed/perro-10/300/300',
-            'https://picsum.photos/seed/perro-11/300/300',
-            'https://picsum.photos/seed/perro-12/300/300',
-            'https://picsum.photos/seed/perro-13/300/300',
-            'https://picsum.photos/seed/perro-14/300/300',
-            'https://picsum.photos/seed/perro-15/300/300',
-            'https://picsum.photos/seed/perro-16/300/300',
-            'https://picsum.photos/seed/perro-17/300/300',
-            'https://picsum.photos/seed/perro-18/300/300',
-            'https://picsum.photos/seed/perro-19/300/300',
-            'https://picsum.photos/seed/perro-20/300/300',
-            'https://picsum.photos/seed/perro-21/300/300',
-            'https://picsum.photos/seed/perro-22/300/300',
-            'https://picsum.photos/seed/perro-23/300/300',
-            'https://picsum.photos/seed/perro-24/300/300',
-            'https://picsum.photos/seed/perro-25/300/300',
-            'https://picsum.photos/seed/perro-26/300/300',
-            'https://picsum.photos/seed/perro-27/300/300',
-            'https://picsum.photos/seed/perro-28/300/300',
-            'https://picsum.photos/seed/perro-29/300/300'
-        ];
-
-        const urlsGatos = [
-            'https://picsum.photos/seed/gato-0/300/300',
-            'https://picsum.photos/seed/gato-1/300/300',
-            'https://picsum.photos/seed/gato-2/300/300',
-            'https://picsum.photos/seed/gato-3/300/300',
-            'https://picsum.photos/seed/gato-4/300/300',
-            'https://picsum.photos/seed/gato-5/300/300',
-            'https://picsum.photos/seed/gato-6/300/300',
-            'https://picsum.photos/seed/gato-7/300/300',
-            'https://picsum.photos/seed/gato-8/300/300',
-            'https://picsum.photos/seed/gato-9/300/300',
-            'https://picsum.photos/seed/gato-10/300/300',
-            'https://picsum.photos/seed/gato-11/300/300'
-        ];
-
-        const nombresPerro = [
-            "Max", "Luna", "Rocky", "Bella", "Toby", "Coco", "Nala", "Simba",
-            "Bruno", "Daisy", "Charlie", "Lola", "Thor", "Molly", "Leo",
-            "Kira", "Rex", "Milo", "Lily", "Oscar", "Zeus", "Maya", "Jack",
-            "Sasha", "Tango", "Roko", "Lúa", "Koda", "Akira", "Tita"
-        ];
-
-        const nombresGato = [
-            "Mishi", "Garfield", "Salem", "Luna", "Simba", "Mia", "Tigre",
-            "Pelusa", "Negro", "Canela", "Ginger", "Nube"
-        ];
-
-        const descripcionesPerroCalle = [
-            "Rescatado de la calle, desnutrido y con miedo. Necesita alimento y cariño.",
-            "Vagaba en un barrio peligroso, tiene heridas leves. Con tu ayuda se recuperará.",
-            "Fue encontrado en una alcantarilla, está muy delgado. Necesita atención urgente.",
-            "Lleva meses en la calle, sobrevive como puede. Un plato de comida diario es su esperanza.",
-            "Tiene sarna y parásitos, pero es muy manso. Con tratamiento mejorará.",
-            "Perrito de la calle, siempre se acerca a las personas. Solo busca un poco de cariño.",
-            "Vive en un parque, las lluvias lo afectan mucho. Necesita un refugio.",
-            "Tiene una pata lastimada, no puede caminar bien. Necesita veterinario.",
-            "Es muy juguetón a pesar de su situación. Un poco de comida lo hará feliz.",
-            "Se refugia en un lote baldío, tiene hambre y sed. Tu donación le dará agua y alimento."
-        ];
-
-        const descripcionesGatoCalle = [
-            "Gato callejero, muy asustado y desconfiado. Con paciencia y comida, mejorará.",
-            "Vive en un mercado, se alimenta de restos. Necesita una dieta balanceada.",
-            "Fue abandonado en una caja, tiene una infección ocular. Necesita veterinario.",
-            "Es muy cariñoso a pesar de todo. Solo necesita un techo y comida.",
-            "Sobrevive en un terreno baldío, con pulgas y parásitos. Necesita desparasitación.",
-            "Gatita joven, muy delgada. Un poco de alimento húmedo le dará fuerzas.",
-            "Le teme a los carros, vive en una zona peligrosa. Tu ayuda lo mantendrá a salvo.",
-            "Tiene una herida en la pata, necesita atención médica urgente.",
-            "Es muy independiente, pero se acerca cuando tiene hambre. Dona para su alimentación.",
-            "Vive en un callejón, con frío y humedad. Un refugio seco es su mayor necesidad."
-        ];
-
-        const perros = [];
-        for (let i = 0; i < 30; i++) {
-            const edad = Math.floor(1 + Math.random() * 8);
-            const sexo = Math.random() > 0.5 ? 'Macho' : 'Hembra';
-            const desc = descripcionesPerroCalle[i % descripcionesPerroCalle.length];
-            perros.push({
-                tipo: 'perro',
-                id: `perro-${i}`,
-                nombre: nombresPerro[i],
-                raza: 'Criollo (sin raza definida)',
-                edad,
-                sexo,
-                descripcion: desc,
-                imagen: urlsPerros[i],
-                estado: 'En situación de calle'
-            });
-        }
-
-        const gatos = [];
-        for (let i = 0; i < 12; i++) {
-            const edad = Math.floor(1 + Math.random() * 10);
-            const sexo = Math.random() > 0.5 ? 'Macho' : 'Hembra';
-            const desc = descripcionesGatoCalle[i % descripcionesGatoCalle.length];
-            gatos.push({
-                tipo: 'gato',
-                id: `gato-${i}`,
-                nombre: nombresGato[i],
-                raza: 'Criollo (sin raza definida)',
-                edad,
-                sexo,
-                descripcion: desc,
-                imagen: urlsGatos[i],
-                estado: 'En situación de calle'
-            });
-        }
-
-        todosAnimales = [...perros, ...gatos];
-
-        async function cargarAnimales() {
-            const animalesDesdeHoja = await obtenerTodosLosAnimales();
-            const mapaCreditos = {};
-            animalesDesdeHoja.forEach(a => {
-                mapaCreditos[a.id] = a.creditos;
-            });
-            todosAnimales.forEach(a => {
-                if (mapaCreditos[a.id] !== undefined) {
-                    a.creditos = mapaCreditos[a.id];
-                } else {
-                    a.creditos = 0;
-                }
-            });
-            renderAnimales('todos');
-        }
-
-        async function actualizarCreditosAnimales() {
-            const animalesDesdeHoja = await obtenerTodosLosAnimales();
-            const mapaCreditos = {};
-            animalesDesdeHoja.forEach(a => {
-                mapaCreditos[a.id] = a.creditos;
-            });
-            const cards = document.querySelectorAll('.tarjeta-animal');
-            for (const card of cards) {
-                const id = card.dataset.animalId;
-                if (id && mapaCreditos[id] !== undefined) {
-                    const span = card.querySelector('.num-creditos');
-                    if (span) span.textContent = mapaCreditos[id];
-                }
-            }
-        }
-
-        function renderAnimales(filtro = 'todos') {
-            mensajeInicial.style.display = 'none';
-            const filtrados = filtro === 'todos' ? todosAnimales : todosAnimales.filter(a => a.tipo === filtro);
-            grid.innerHTML = '';
-            if (filtrados.length === 0) {
-                const noHay = document.createElement('div');
-                noHay.className = 'mensaje-inicial';
-                noHay.innerHTML = `<span>😔</span> No hay peluditos de esta categoría en este momento.`;
-                grid.appendChild(noHay);
-                return;
-            }
-            filtrados.forEach((animal) => {
-                const card = document.createElement('div');
-                card.className = 'tarjeta-animal';
-                card.dataset.animalId = animal.id;
-                const tipoLabel = animal.tipo === 'perro' ? '🐕 Perro' : '🐈 Gato';
-                const claseTipo = animal.tipo === 'perro' ? 'tipo-perro' : 'tipo-gato';
-                const edadTexto = animal.edad === 1 ? '1 año' : `${animal.edad} años`;
-                const creditos = animal.creditos || 0;
-                card.innerHTML = `
-                    <img src="${animal.imagen}" alt="${animal.nombre}" loading="lazy" />
-                    <div class="tarjeta-info">
-                        <span class="tipo-etiqueta ${claseTipo}">${tipoLabel}</span>
-                        <div class="nombre">${animal.nombre}</div>
-                        <div class="raza">${animal.raza}</div>
-                        <div class="detalles">
-                            <span>${animal.sexo}</span>
-                            <span>${edadTexto}</span>
-                        </div>
-                        <div style="margin-bottom:6px;">
-                            <span class="estado-calle">🚨 ${animal.estado}</span>
-                        </div>
-                        <div class="descripcion">${animal.descripcion}</div>
-                        <div class="creditos-acumulados">
-                            🪙 Créditos acumulados: <span class="num-creditos">${creditos}</span>
-                        </div>
-                        <button class="btn-donar-creditos" onclick="abrirModalDonar('${animal.id}', '${animal.nombre}')">
-                            Donar créditos 🥫
-                        </button>
-                    </div>
-                `;
-                grid.appendChild(card);
-            });
-        }
-
-        const filtrosBtns = document.querySelectorAll('#filtrosAnimales button');
-        filtrosBtns.forEach(btn => {
-            btn.addEventListener('click', () => {
-                filtrosBtns.forEach(b => b.classList.remove('activo'));
-                btn.classList.add('activo');
-                const filtro = btn.dataset.filtro;
-                renderAnimales(filtro);
-            });
-        });
-
-        // ================================================================
-        //  11. DONANTES SIMULADOS
-        // ================================================================
-
-        const nombresDonantes = [
-            "María González", "Carlos Pérez", "Laura Fernández", "Diego Ramírez",
-            "Ana Lucía Torres", "Jorge Martínez", "Sofía Herrera", "Luis Castro",
-            "Camila Rojas", "Andrés Silva", "Valentina Méndez", "Ricardo Morales",
-            "Gabriela Ortiz", "Fernando Castro", "Isabel Domínguez", "Pablo Gutiérrez",
-            "Elena Vargas", "Miguel Ángel Ríos", "Carolina Mendoza", "Alejandro Jiménez",
-            "Natalia Flores", "Roberto Acosta", "Patricia Vélez", "Daniela Restrepo",
-            "Juan Pablo Ortiz", "Andrea Gómez", "José Luis Herrera", "Paula Martínez",
-            "Cristian López", "Mónica Ríos", "Felipe Torres", "Natalia Ruiz",
-            "Sebastián Medina", "Valeria Castro", "Andrés Felipe Suárez", "Laura Camila Rojas",
-            "David Santiago Pérez", "Angélica María Díaz", "Javier Antonio Vega", "Tatiana Romero",
-            "Óscar Iván Muñoz", "Diana Carolina Gil", "Leonardo Fabio Pineda", "Katherine Morales",
-            "Julián Andrés Ortega", "Daniel Fernando Mejía", "Stefany Quintero", "Hugo Alejandro Sánchez",
-            "Lina María Giraldo", "Jairo Alberto Valencia", "Cindy Paola Franco", "Mauricio Esteban Álvarez"
-        ];
-
-        const paises = [
-            "Colombia", "México", "España", "Argentina", "Chile", "Perú", "Venezuela",
-            "Ecuador", "Uruguay", "Paraguay", "Bolivia", "Costa Rica", "Panamá",
-            "República Dominicana", "Guatemala", "Honduras", "El Salvador", "Nicaragua",
-            "Cuba", "Puerto Rico", "Estados Unidos", "Canadá", "Reino Unido", "Alemania",
-            "Francia", "Italia", "Brasil", "Uruguay", "Paraguay"
-        ];
-
-        function generarDonante() {
-            const nombre = nombresDonantes[Math.floor(Math.random() * nombresDonantes.length)];
-            const pais = paises[Math.floor(Math.random() * paises.length)];
-            const valor = Math.round((20000 + Math.random() * 480000) / 5000) * 5000;
-            return { nombre, pais, valor };
-        }
-
-        const donantesCompletos = [];
-        for (let i = 0; i < 250; i++) {
-            donantesCompletos.push(generarDonante());
-        }
-
-        const flagMap = {
-            "Colombia": "🇨🇴", "México": "🇲🇽", "España": "🇪🇸", "Argentina": "🇦🇷",
-            "Chile": "🇨🇱", "Perú": "🇵🇪", "Venezuela": "🇻🇪", "Ecuador": "🇪🇨",
-            "Uruguay": "🇺🇾", "Paraguay": "🇵🇾", "Bolivia": "🇧🇴", "Costa Rica": "🇨🇷",
-            "Panamá": "🇵🇦", "República Dominicana": "🇩🇴", "Guatemala": "🇬🇹",
-            "Honduras": "🇭🇳", "El Salvador": "🇸🇻", "Nicaragua": "🇳🇮", "Cuba": "🇨🇺",
-            "Puerto Rico": "🇵🇷", "Estados Unidos": "🇺🇸", "Canadá": "🇨🇦",
-            "Reino Unido": "🇬🇧", "Alemania": "🇩🇪", "Francia": "🇫🇷", "Italia": "🇮🇹",
-            "Brasil": "🇧🇷"
         };
 
-        function getFlag(pais) {
-            return flagMap[pais] || '🌍';
-        }
-
-        const tbody = document.getElementById('cuerpoDonantes');
-        const btnCargar = document.getElementById('btnCargarMas');
-        let visibleCount = 20;
-        const step = 20;
-        const totalDonantes = donantesCompletos.length;
-
-        function renderDonantes() {
-            const slice = donantesCompletos.slice(0, visibleCount);
-            tbody.innerHTML = '';
-            slice.forEach((d, index) => {
-                const tr = document.createElement('tr');
-                const flag = getFlag(d.pais);
-                const valorFormateado = new Intl.NumberFormat('es-CO', {
-                    style: 'currency',
-                    currency: 'COP',
-                    minimumFractionDigits: 0,
-                    maximumFractionDigits: 0,
-                }).format(d.valor);
-                tr.innerHTML = `
-                    <td>${index + 1}</td>
-                    <td><strong>${d.nombre}</strong></td>
-                    <td><span class="pais-flag">${flag}</span> ${d.pais}</td>
-                    <td><span class="badge-monto">${valorFormateado}</span></td>
-                `;
-                tbody.appendChild(tr);
-            });
-            if (visibleCount >= totalDonantes) {
-                btnCargar.disabled = true;
-                btnCargar.textContent = '✅ Todos los donantes mostrados';
-            } else {
-                btnCargar.disabled = false;
-                btnCargar.textContent = `Cargar más (${visibleCount}/${totalDonantes})`;
-            }
-        }
-
-        btnCargar.addEventListener('click', () => {
-            if (visibleCount < totalDonantes) {
-                visibleCount = Math.min(visibleCount + step, totalDonantes);
-                renderDonantes();
-                document.getElementById('tablaWrapper').scrollIntoView({ behavior: 'smooth', block: 'start' });
-            }
-        });
-
-        renderDonantes();
-
-        // ================================================================
-        //  12. THREE.JS (ESCENA 3D)
-        // ================================================================
-
-        import * as THREE from 'three';
-
-        const container = document.getElementById('three-container');
-        const scene = new THREE.Scene();
-        scene.background = new THREE.Color(0x0b0e14);
-
-        const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
-        camera.position.set(0, 1.5, 9);
-        camera.lookAt(0, 0, 0);
-
-        const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false });
-        renderer.setSize(window.innerWidth, window.innerHeight);
-        renderer.shadowMap.enabled = true;
-        renderer.shadowMap.type = THREE.PCFSoftShadowMap;
-        container.appendChild(renderer.domElement);
-
-        const ambient = new THREE.AmbientLight(0x404060, 0.6);
-        scene.add(ambient);
-        const dirLight = new THREE.DirectionalLight(0xffeedd, 1.2);
-        dirLight.position.set(3, 6, 4);
-        dirLight.castShadow = true;
-        scene.add(dirLight);
-        const fill = new THREE.DirectionalLight(0x4488ff, 0.4);
-        fill.position.set(-4, 2, -3);
-        scene.add(fill);
-        const back = new THREE.DirectionalLight(0xffaa55, 0.3);
-        back.position.set(0, -1, -6);
-        scene.add(back);
-
-        function createDogPaw(color = 0xf1c40f, size = 0.35) {
-            const group = new THREE.Group();
-            const mat = new THREE.MeshStandardMaterial({ color, roughness: 0.5, emissive: color, emissiveIntensity: 0.08 });
-            const main = new THREE.Mesh(new THREE.SphereGeometry(size * 0.5, 14, 14), mat);
-            main.scale.set(1.3, 0.9, 0.5);
-            main.position.set(0, 0, 0);
-            group.add(main);
-            const dedos = [
-                [-0.6, 0.45, 0.25], [0.6, 0.45, 0.25],
-                [-0.5, -0.4, 0.25], [0.5, -0.4, 0.25]
-            ];
-            dedos.forEach(pos => {
-                const d = new THREE.Mesh(new THREE.SphereGeometry(size * 0.22, 10, 10), mat);
-                d.position.set(pos[0] * size, pos[1] * size, pos[2] * size);
-                d.scale.set(1, 0.9, 0.7);
-                group.add(d);
-            });
-            return group;
-        }
-
-        function createCatPaw(color = 0xe67e22, size = 0.35) {
-            const group = new THREE.Group();
-            const mat = new THREE.MeshStandardMaterial({ color, roughness: 0.4, emissive: color, emissiveIntensity: 0.08 });
-            const main = new THREE.Mesh(new THREE.SphereGeometry(size * 0.5, 14, 14), mat);
-            main.scale.set(1.1, 0.9, 0.6);
-            main.position.set(0, 0, 0);
-            group.add(main);
-            const dedos = [
-                [-0.45, 0.4, 0.2], [0.45, 0.4, 0.2],
-                [-0.4, -0.35, 0.2], [0.4, -0.35, 0.2]
-            ];
-            dedos.forEach(pos => {
-                const d = new THREE.Mesh(new THREE.SphereGeometry(size * 0.18, 10, 10), mat);
-                d.position.set(pos[0] * size, pos[1] * size, pos[2] * size);
-                group.add(d);
-            });
-            return group;
-        }
-
-        const items = [];
-        const colorsDog = [0xf1c40f, 0xf39c12, 0xe67e22, 0xd35400];
-        const colorsCat = [0x3498db, 0x2ecc71, 0x9b59b6, 0x1abc9c];
-
-        for (let i = 0; i < 65; i++) {
-            const isDog = Math.random() > 0.5;
-            const color = isDog ? colorsDog[Math.floor(Math.random() * colorsDog.length)] : colorsCat[Math.floor(Math.random() * colorsCat.length)];
-            const size = 0.2 + Math.random() * 0.4;
-            let paw = isDog ? createDogPaw(color, size) : createCatPaw(color, size);
-            const radius = 2.5 + Math.random() * 4.0;
-            const angle = Math.random() * Math.PI * 2;
-            const y = (Math.random() - 0.5) * 5.5;
-            paw.position.set(Math.cos(angle) * radius, y, Math.sin(angle) * radius);
-            paw.rotation.x = (Math.random() - 0.5) * 0.8;
-            paw.rotation.y = Math.random() * Math.PI * 2;
-            paw.rotation.z = (Math.random() - 0.5) * 0.8;
-            scene.add(paw);
-            items.push({
-                mesh: paw,
-                rotSpeed: 0.005 + Math.random() * 0.015,
-                floatSpeed: 0.002 + Math.random() * 0.008,
-                phase: Math.random() * Math.PI * 2,
-                baseY: y,
-                rotY: Math.random() * Math.PI * 2
-            });
-        }
-
-        const starsGeo = new THREE.BufferGeometry();
-        const starsCount = 400;
-        const pos = new Float32Array(starsCount * 3);
-        for (let i = 0; i < starsCount * 3; i += 3) {
-            const r = 7 + Math.random() * 10;
-            const theta = Math.random() * Math.PI * 2;
-            const phi = Math.acos(2 * Math.random() - 1);
-            pos[i] = Math.sin(phi) * Math.cos(theta) * r;
-            pos[i + 1] = Math.sin(phi) * Math.sin(theta) * r * 0.4;
-            pos[i + 2] = Math.cos(phi) * r;
-        }
-        starsGeo.setAttribute('position', new THREE.BufferAttribute(pos, 3));
-        const starsMat = new THREE.PointsMaterial({ color: 0x88aaff, size: 0.07, transparent: true, opacity: 0.6 });
-        const stars = new THREE.Points(starsGeo, starsMat);
-        scene.add(stars);
-
-        let clock = new THREE.Clock();
-
-        function animate() {
-            const delta = clock.getDelta();
-            const elapsed = performance.now() / 1000;
-            items.forEach(item => {
-                item.mesh.rotation.y += item.rotSpeed * delta * 30;
-                item.mesh.rotation.x += item.rotSpeed * delta * 15 * 0.5;
-                const floatOffset = Math.sin(elapsed * item.floatSpeed * 2 + item.phase) * 0.15;
-                item.mesh.position.y = item.baseY + floatOffset;
-            });
-            stars.rotation.y += delta * 0.008;
-            stars.rotation.x += delta * 0.004;
-            renderer.render(scene, camera);
-            requestAnimationFrame(animate);
-        }
-        animate();
-
-        window.addEventListener('resize', () => {
-            const w = window.innerWidth;
-            const h = window.innerHeight;
-            camera.aspect = w / h;
-            camera.updateProjectionMatrix();
-            renderer.setSize(w, h);
-        });
-
-        console.log('🐾 Sistema de créditos con Google Sheets funcionando.');
-        console.log('📌 URL de la API:', API_URL);
-        console.log('📌 Los créditos se sincronizan cada 15 segundos automáticamente.');
-        console.log('📌 Para comprar créditos, haz clic en el botón flotante de saldo.');
-        console.log('📌 ¡Gracias por ayudar a los peluditos!');
+        console.log('🐾 Sistema conectado a Google Sheets.');
+        console.log('📌 Los datos se guardan en la nube.');
+        console.log('🦴 1 huesito = $1.000 COP. ¡Gracias por ayudar a los peluditos!');
     </script>
 </body>
 </html>
