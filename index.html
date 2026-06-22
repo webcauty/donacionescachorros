@@ -7,7 +7,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet" />
 
     <style>
-        /* ===== RESET Y BASE ===== */
+        /* ===== RESET Y BASE (mismo CSS que antes) ===== */
         * {
             margin: 0;
             padding: 0;
@@ -48,7 +48,6 @@
             padding: 20px 20px 40px;
         }
 
-        /* ===== HEADER ===== */
         .header {
             text-align: center;
             margin: 10px 0 20px;
@@ -85,19 +84,18 @@
             50% { transform: translateY(-10px); }
         }
 
-        /* ===== LOGIN ===== */
         #authSection {
             display: flex;
             flex-direction: column;
             align-items: center;
             gap: 12px;
-            background: rgba(255,255,255,0.04);
+            background: rgba(255, 255, 255, 0.04);
             padding: 24px 32px;
             border-radius: 32px;
             backdrop-filter: blur(6px);
-            border: 1px solid rgba(255,255,255,0.06);
+            border: 1px solid rgba(255, 255, 255, 0.06);
             width: 100%;
-            max-width: 380px;
+            max-width: 420px;
             margin: 10px auto 30px;
         }
 
@@ -105,8 +103,8 @@
             width: 100%;
             padding: 12px 16px;
             border-radius: 16px;
-            border: 1px solid rgba(255,255,255,0.1);
-            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.05);
             color: #fff;
             font-size: 1rem;
             font-family: 'Quicksand', sans-serif;
@@ -120,6 +118,7 @@
         .auth-buttons {
             display: flex;
             gap: 12px;
+            flex-wrap: wrap;
             width: 100%;
         }
 
@@ -132,6 +131,7 @@
             font-family: 'Quicksand', sans-serif;
             cursor: pointer;
             transition: transform 0.15s;
+            min-width: 120px;
         }
 
         .auth-buttons .btn-login {
@@ -140,9 +140,8 @@
         }
 
         .auth-buttons .btn-test {
-            background: rgba(255,255,255,0.1);
+            background: rgba(255, 255, 255, 0.1);
             color: #fff;
-            flex: 0.5;
         }
 
         .auth-buttons button:hover {
@@ -156,8 +155,8 @@
         }
 
         #btnLogout {
-            background: rgba(255,255,255,0.06);
-            border: 1px solid rgba(255,255,255,0.1);
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.1);
             color: #ddd;
             padding: 6px 16px;
             border-radius: 30px;
@@ -168,10 +167,9 @@
         }
 
         #btnLogout:hover {
-            background: rgba(255,255,255,0.12);
+            background: rgba(255, 255, 255, 0.12);
         }
 
-        /* ===== BOTÓN FLOTANTE DE SALDO ===== */
         .floating-btn {
             position: fixed;
             bottom: 30px;
@@ -198,24 +196,23 @@
         }
 
         .floating-btn .badge {
-            background: rgba(0,0,0,0.15);
+            background: rgba(0, 0, 0, 0.15);
             border-radius: 30px;
             padding: 2px 12px;
             font-size: 1rem;
         }
 
-        /* ===== SECCIONES ===== */
         .catalogo-section {
             display: none;
             width: 100%;
             max-width: 1200px;
             margin: 10px auto 30px;
-            background: rgba(255,255,255,0.04);
+            background: rgba(255, 255, 255, 0.04);
             backdrop-filter: blur(6px);
             border-radius: 32px;
             padding: 24px 20px 30px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.4);
-            border: 1px solid rgba(255,255,255,0.06);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.06);
         }
 
         .catalogo-section h2 {
@@ -243,8 +240,8 @@
         }
 
         .filtros button {
-            background: rgba(255,255,255,0.06);
-            border: 1px solid rgba(255,255,255,0.1);
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.1);
             color: #ccc;
             padding: 8px 24px;
             border-radius: 40px;
@@ -275,9 +272,9 @@
             padding: 60px 20px;
             color: #aaa;
             font-size: 1.4rem;
-            background: rgba(255,255,255,0.02);
+            background: rgba(255, 255, 255, 0.02);
             border-radius: 20px;
-            border: 2px dashed rgba(255,255,255,0.08);
+            border: 2px dashed rgba(255, 255, 255, 0.08);
         }
 
         .mensaje-inicial span {
@@ -287,11 +284,11 @@
         }
 
         .tarjeta-animal {
-            background: rgba(255,255,255,0.06);
+            background: rgba(255, 255, 255, 0.06);
             border-radius: 20px;
             overflow: hidden;
             transition: transform 0.25s, box-shadow 0.25s;
-            border: 1px solid rgba(255,255,255,0.06);
+            border: 1px solid rgba(255, 255, 255, 0.06);
             backdrop-filter: blur(4px);
             display: flex;
             flex-direction: column;
@@ -299,7 +296,7 @@
 
         .tarjeta-animal:hover {
             transform: translateY(-6px);
-            box-shadow: 0 16px 40px rgba(0,0,0,0.5);
+            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5);
             border-color: rgba(243, 156, 18, 0.3);
         }
 
@@ -341,7 +338,7 @@
         }
 
         .tarjeta-info .detalles span {
-            background: rgba(255,255,255,0.06);
+            background: rgba(255, 255, 255, 0.06);
             padding: 2px 10px;
             border-radius: 20px;
         }
@@ -428,7 +425,6 @@
             margin-top: 4px;
         }
 
-        /* ===== MODAL ===== */
         .modal-overlay {
             position: fixed;
             top: 0;
@@ -454,8 +450,8 @@
             padding: 30px 36px;
             max-width: 420px;
             width: 90%;
-            border: 1px solid rgba(255,255,255,0.08);
-            box-shadow: 0 30px 80px rgba(0,0,0,0.6);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6);
             animation: modalFade 0.3s ease;
             max-height: 90vh;
             overflow-y: auto;
@@ -496,8 +492,8 @@
             width: 100%;
             padding: 12px 16px;
             border-radius: 16px;
-            border: 1px solid rgba(255,255,255,0.1);
-            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.05);
             color: #fff;
             font-size: 1.2rem;
             font-family: 'Quicksand', sans-serif;
@@ -534,12 +530,12 @@
         }
 
         .modal-actions .btn-cancelar {
-            background: rgba(255,255,255,0.06);
+            background: rgba(255, 255, 255, 0.06);
             color: #ccc;
         }
 
         .modal-actions .btn-cancelar:hover {
-            background: rgba(255,255,255,0.12);
+            background: rgba(255, 255, 255, 0.12);
         }
 
         .modal-actions .btn-confirmar {
@@ -574,18 +570,17 @@
             to { transform: rotate(360deg); }
         }
 
-        /* ===== DONANTES (simulados) ===== */
         .donantes-section {
             display: none;
             width: 100%;
             max-width: 1100px;
             margin: 10px auto 30px;
-            background: rgba(255,255,255,0.04);
+            background: rgba(255, 255, 255, 0.04);
             backdrop-filter: blur(6px);
             border-radius: 32px;
             padding: 20px 20px 24px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.4);
-            border: 1px solid rgba(255,255,255,0.06);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.06);
         }
 
         .donantes-section h2 {
@@ -609,14 +604,14 @@
             max-height: 400px;
             overflow-y: auto;
             border-radius: 16px;
-            background: rgba(0,0,0,0.15);
+            background: rgba(0, 0, 0, 0.15);
         }
 
         .tabla-wrapper::-webkit-scrollbar {
             width: 6px;
         }
         .tabla-wrapper::-webkit-scrollbar-track {
-            background: rgba(0,0,0,0.2);
+            background: rgba(0, 0, 0, 0.2);
             border-radius: 10px;
         }
         .tabla-wrapper::-webkit-scrollbar-thumb {
@@ -631,7 +626,7 @@
         }
 
         .tabla-donantes thead tr {
-            background: rgba(255,255,255,0.06);
+            background: rgba(255, 255, 255, 0.06);
             position: sticky;
             top: 0;
             z-index: 5;
@@ -643,12 +638,12 @@
             text-align: left;
             font-weight: 600;
             color: #ddd;
-            border-bottom: 2px solid rgba(255,255,255,0.08);
+            border-bottom: 2px solid rgba(255, 255, 255, 0.08);
         }
 
         .tabla-donantes td {
             padding: 14px 12px;
-            border-bottom: 1px solid rgba(255,255,255,0.04);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
             color: #eee;
         }
 
@@ -670,8 +665,8 @@
         }
 
         .btn-cargar-mas {
-            background: rgba(255,255,255,0.06);
-            border: 1px solid rgba(255,255,255,0.12);
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.12);
             color: #ddd;
             padding: 10px 28px;
             border-radius: 40px;
@@ -685,7 +680,7 @@
         }
 
         .btn-cargar-mas:hover {
-            background: rgba(255,255,255,0.12);
+            background: rgba(255, 255, 255, 0.12);
             color: #fff;
             transform: scale(1.02);
         }
@@ -696,20 +691,47 @@
             transform: none;
         }
 
-        /* ===== FOOTER ===== */
         .footer-note {
             margin-top: 10px;
             font-size: 0.85rem;
             color: #aaa;
             text-align: center;
             max-width: 600px;
-            background: rgba(0,0,0,0.2);
+            background: rgba(0, 0, 0, 0.2);
             padding: 12px 24px;
             border-radius: 40px;
             backdrop-filter: blur(4px);
         }
 
-        /* ===== RESPONSIVE ===== */
+        #diagnostico {
+            margin-top: 10px;
+            font-size: 0.85rem;
+            padding: 10px 16px;
+            border-radius: 16px;
+            display: none;
+            max-width: 100%;
+            word-break: break-all;
+            text-align: center;
+        }
+
+        #diagnostico.error {
+            background: rgba(231, 76, 60, 0.1);
+            border: 1px solid #e74c3c;
+            color: #e74c3c;
+        }
+
+        #diagnostico.success {
+            background: rgba(46, 204, 113, 0.1);
+            border: 1px solid #2ecc71;
+            color: #2ecc71;
+        }
+
+        #diagnostico.info {
+            background: rgba(52, 152, 219, 0.1);
+            border: 1px solid #3498db;
+            color: #3498db;
+        }
+
         @media (max-width: 700px) {
             .header h1 { font-size: 2.4rem; }
             .grid-animales { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); }
@@ -717,26 +739,13 @@
             .modal-box { padding: 24px 20px; }
             #authSection { padding: 20px; }
             .floating-btn { bottom: 20px; right: 20px; padding: 12px 18px; font-size: 1rem; }
-            .auth-buttons { flex-wrap: wrap; }
+            .auth-buttons { flex-direction: column; }
+            .auth-buttons button { flex: none; width: 100%; }
         }
+
         @media (max-width: 500px) {
             .header h1 { font-size: 1.8rem; }
             .grid-animales { grid-template-columns: 1fr 1fr; }
-        }
-
-        /* ===== DIAGNÓSTICO ===== */
-        #diagnostico {
-            margin-top: 10px;
-            font-size: 0.85rem;
-            color: #f39c12;
-            background: rgba(243, 156, 18, 0.1);
-            padding: 8px 16px;
-            border-radius: 16px;
-            border: 1px solid rgba(243, 156, 18, 0.2);
-            display: none;
-            max-width: 100%;
-            word-break: break-all;
-            text-align: center;
         }
     </style>
 </head>
@@ -745,13 +754,13 @@
     <!-- ===== ESCENA 3D ===== -->
     <div id="three-container"></div>
 
-    <!-- ===== BOTÓN FLOTANTE DE SALDO ===== -->
+    <!-- ===== BOTÓN FLOTANTE ===== -->
     <button class="floating-btn" id="floatingBtn" title="Ver saldo">
         🪙 <span id="floatingSaldo">0</span>
         <span class="badge">créditos</span>
     </button>
 
-    <!-- ===== OVERLAY SPA ===== -->
+    <!-- ===== OVERLAY ===== -->
     <div class="app-overlay" id="appOverlay">
 
         <header class="header">
@@ -785,7 +794,7 @@
             </div>
         </section>
 
-        <!-- ===== DONANTES (simulados) ===== -->
+        <!-- ===== DONANTES ===== -->
         <section class="donantes-section" id="donantesSection">
             <h2>🙏 Donantes Solidarios <small>Personas que ya han aportado créditos</small></h2>
             <div class="tabla-wrapper" id="tablaWrapper">
@@ -801,7 +810,7 @@
         <div class="footer-note">💙 100% de los créditos se destinan a alimentación, veterinaria y refugio.<br> Gracias por ser parte del cambio.</div>
     </div>
 
-    <!-- ===== MODAL DONAR CRÉDITOS ===== -->
+    <!-- ===== MODALES ===== -->
     <div class="modal-overlay" id="modalDonar">
         <div class="modal-box">
             <h3>🪙 Asignar créditos</h3>
@@ -816,7 +825,6 @@
         </div>
     </div>
 
-    <!-- ===== MODAL COMPRAR CRÉDITOS ===== -->
     <div class="modal-overlay" id="modalComprar">
         <div class="modal-box">
             <h3>🛒 Comprar créditos</h3>
@@ -854,13 +862,13 @@
     </script>
 
     <!-- ================================================================ -->
-    <!--  LÓGICA PRINCIPAL                                                -->
+    <!--  LÓGICA PRINCIPAL (con corrección en registro)                   -->
     <!-- ================================================================ -->
     <script type="module">
         // ================================================================
-        //  1.  CONFIGURACIÓN - ¡TU URL DE WEB APP!
+        //  1.  CONFIGURACIÓN - ¡URL DE TU WEB APP!
         // ================================================================
-        const API_URL = 'https://script.google.com/macros/s/AKfycbzj12AN7q_icMZzFagHihhmn9VuyW7IU5bGe5kcejiZ3Feg2-6NEqcVgkM953VcMwSa/exec';
+        const API_URL = 'https://script.google.com/macros/s/AKfycbxvlYcaIYt_YAmbIgydaASlMHVjL8LAhbz4L-y9AhoBdzATdq0zBwSqtw9LBT1ufeCc/exec';
 
         // ================================================================
         //  2.  ESTADO GLOBAL
@@ -872,7 +880,6 @@
         let procesando = false;
         let intervalPolling = null;
 
-        // Elementos DOM
         const floatingBtn = document.getElementById('floatingBtn');
         const floatingSaldo = document.getElementById('floatingSaldo');
         const modalDonar = document.getElementById('modalDonar');
@@ -887,16 +894,22 @@
         const diagnostico = document.getElementById('diagnostico');
 
         // ================================================================
-        //  3.  FUNCIONES DE API CON DIAGNÓSTICO DETALLADO
+        //  3.  FUNCIONES DE DIAGNÓSTICO
         // ================================================================
 
-        function mostrarDiagnostico(mensaje, esError = true) {
+        function mostrarDiagnostico(mensaje, tipo = 'error') {
             diagnostico.style.display = 'block';
             diagnostico.textContent = mensaje;
-            diagnostico.style.color = esError ? '#e74c3c' : '#2ecc71';
-            diagnostico.style.borderColor = esError ? '#e74c3c' : '#2ecc71';
-            diagnostico.style.background = esError ? 'rgba(231, 76, 60, 0.1)' : 'rgba(46, 204, 113, 0.1)';
+            diagnostico.className = tipo;
         }
+
+        function ocultarDiagnostico() {
+            diagnostico.style.display = 'none';
+        }
+
+        // ================================================================
+        //  4.  FUNCIONES DE API (mejoradas con validación de respuesta)
+        // ================================================================
 
         async function apiCall(action, data = {}) {
             try {
@@ -906,10 +919,13 @@
                     body: JSON.stringify({ action, ...data })
                 });
                 if (!resp.ok) throw new Error(`HTTP ${resp.status}: ${resp.statusText}`);
-                return await resp.json();
+                const result = await resp.json();
+                // Verificar si la respuesta tiene error
+                if (result.error) throw new Error(result.error);
+                return result;
             } catch (e) {
                 console.error(`Error en ${action}:`, e);
-                throw new Error(`Error de conexión: ${e.message}. Verifica la URL y que la Web App esté publicada.`);
+                throw new Error(`Error de conexión: ${e.message}`);
             }
         }
 
@@ -919,6 +935,7 @@
                 const resp = await fetch(url);
                 if (!resp.ok) throw new Error(`HTTP ${resp.status}: ${resp.statusText}`);
                 const data = await resp.json();
+                if (data.error) throw new Error(data.error);
                 return data.saldo || 0;
             } catch (e) {
                 console.error('Error al obtener saldo:', e);
@@ -926,27 +943,17 @@
             }
         }
 
+        // Función mejorada: registrar usuario con validación
         async function registrarUsuario(email) {
             const result = await apiCall('registrarUsuario', { email });
+            // result debe tener { success: true, saldo: X }
+            if (!result.success) throw new Error(result.error || 'Error al registrar usuario');
             return result.saldo || 0;
         }
 
         async function asignarCreditos(email, animalId, cantidad) {
             const result = await apiCall('asignarCreditos', { email, animalId, cantidad });
             return result;
-        }
-
-        async function obtenerCreditosAnimal(animalId) {
-            try {
-                const url = `${API_URL}?action=getCreditosAnimal&animalId=${encodeURIComponent(animalId)}`;
-                const resp = await fetch(url);
-                if (!resp.ok) throw new Error(`HTTP ${resp.status}: ${resp.statusText}`);
-                const data = await resp.json();
-                return data.creditos || 0;
-            } catch (e) {
-                console.error('Error al obtener créditos del animal:', e);
-                return 0;
-            }
         }
 
         async function obtenerTodosLosAnimales() {
@@ -963,26 +970,25 @@
         }
 
         // ================================================================
-        //  4.  BOTÓN DE PRUEBA DE CONEXIÓN
+        //  5.  BOTÓN DE PRUEBA DE CONEXIÓN
         // ================================================================
 
         document.getElementById('btnTestConexion').addEventListener('click', async () => {
-            mostrarDiagnostico('🔄 Probando conexión...', false);
+            mostrarDiagnostico('🔄 Probando conexión...', 'info');
             try {
                 const url = `${API_URL}?action=getSaldo&email=test@test.com`;
                 const resp = await fetch(url);
                 if (!resp.ok) throw new Error(`HTTP ${resp.status}: ${resp.statusText}`);
                 const data = await resp.json();
-                mostrarDiagnostico(`✅ Conexión exitosa. Respuesta: ${JSON.stringify(data)}`, false);
-                console.log('✅ Conexión exitosa:', data);
+                mostrarDiagnostico(`✅ Conexión exitosa. Respuesta: ${JSON.stringify(data)}`, 'success');
+                setTimeout(ocultarDiagnostico, 5000);
             } catch (e) {
-                mostrarDiagnostico(`❌ Error: ${e.message}. Revisa la URL y la configuración de la Web App.`, true);
-                console.error('❌ Error en prueba de conexión:', e);
+                mostrarDiagnostico(`❌ Error: ${e.message}. Revisa la URL y la publicación de la Web App.`, 'error');
             }
         });
 
         // ================================================================
-        //  5.  AUTENTICACIÓN
+        //  6.  AUTENTICACIÓN (con verificación de registro)
         // ================================================================
 
         const authEmail = document.getElementById('authEmail');
@@ -998,17 +1004,17 @@
             localStorage.setItem('peluditos_email', email);
 
             try {
-                mostrarDiagnostico('🔄 Conectando al servidor...', false);
-                // Registrar usuario (si no existe, lo crea)
+                mostrarDiagnostico('🔄 Registrando / iniciando sesión...', 'info');
+                // Esta función ahora verifica que el usuario se haya creado correctamente
                 const saldo = await registrarUsuario(email);
                 saldoActual = saldo;
                 actualizarUIUsuario(true);
                 await cargarAnimales();
                 iniciarPolling();
-                mostrarDiagnostico('✅ Conectado correctamente.', false);
-                setTimeout(() => { diagnostico.style.display = 'none'; }, 3000);
+                mostrarDiagnostico(`✅ Usuario ${email} registrado con saldo ${saldo}.`, 'success');
+                setTimeout(ocultarDiagnostico, 4000);
             } catch (e) {
-                mostrarDiagnostico(`❌ Error: ${e.message}`, true);
+                mostrarDiagnostico(`❌ Error al registrar: ${e.message}`, 'error');
                 alert('Error al iniciar sesión: ' + e.message);
             }
         }
@@ -1018,7 +1024,7 @@
             localStorage.removeItem('peluditos_email');
             if (intervalPolling) clearInterval(intervalPolling);
             actualizarUIUsuario(false);
-            diagnostico.style.display = 'none';
+            ocultarDiagnostico();
         }
 
         function actualizarUIUsuario(loggeado) {
@@ -1062,7 +1068,7 @@
         }
 
         // ================================================================
-        //  6.  POLLING PARA ACTUALIZAR SALDO DESDE LA HOJA
+        //  7.  POLLING
         // ================================================================
 
         function iniciarPolling() {
@@ -1083,7 +1089,7 @@
         }
 
         // ================================================================
-        //  7.  COMPRA DE CRÉDITOS
+        //  8.  COMPRA DE CRÉDITOS
         // ================================================================
 
         floatingBtn.addEventListener('click', () => {
@@ -1109,7 +1115,7 @@
         });
 
         // ================================================================
-        //  8.  MODAL DONAR CRÉDITOS
+        //  9.  MODAL DONAR
         // ================================================================
 
         window.abrirModalDonar = function(animalId, animalNombre) {
@@ -1192,7 +1198,7 @@
         });
 
         // ================================================================
-        //  9.  CATÁLOGO DE ANIMALES
+        //  10. CATÁLOGO DE ANIMALES
         // ================================================================
 
         const urlsPerros = [
@@ -1407,7 +1413,7 @@
         });
 
         // ================================================================
-        //  10. DONANTES SIMULADOS
+        //  11. DONANTES SIMULADOS
         // ================================================================
 
         const nombresDonantes = [
@@ -1507,7 +1513,7 @@
         renderDonantes();
 
         // ================================================================
-        //  11. ESCENA 3D (Three.js) - Decorativa
+        //  12. THREE.JS (ESCENA 3D)
         // ================================================================
 
         import * as THREE from 'three';
@@ -1647,9 +1653,10 @@
             renderer.setSize(w, h);
         });
 
-        console.log('🐾 Sistema de créditos con diagnóstico activo.');
+        console.log('🐾 Sistema de créditos con Google Sheets funcionando.');
         console.log('📌 URL de la API:', API_URL);
-        console.log('📌 Si falla la conexión, haz clic en "Probar conexión" para ver el error detallado.');
+        console.log('📌 Los créditos se sincronizan cada 15 segundos automáticamente.');
+        console.log('📌 Para comprar créditos, haz clic en el botón flotante de saldo.');
         console.log('📌 ¡Gracias por ayudar a los peluditos!');
     </script>
 </body>
