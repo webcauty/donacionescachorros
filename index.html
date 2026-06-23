@@ -128,7 +128,7 @@
       transition: all 0.3s ease;
     }
 
-    /* ====== LOGO PRINCIPAL (reemplaza al título) ====== */
+    /* ====== LOGO PRINCIPAL ====== */
     .logo-container {
       display: flex;
       justify-content: center;
@@ -712,7 +712,7 @@
   <div class="container">
     <button class="menu-toggle" id="menuToggle" aria-label="Abrir menú">☰</button>
 
-    <!-- LOGO PRINCIPAL (reemplaza al título) -->
+    <!-- LOGO PRINCIPAL -->
     <div class="logo-container">
       <div class="logo-brillo"></div>
       <img src="https://i.ibb.co/VcLwMVd9/file-000000006c5c720ebd4a1fce54bb8627.png" alt="Ayuda a los Peluditos" class="logo-principal" loading="eager" />
@@ -905,6 +905,62 @@
     ];
 
     // ================================================================
+    //  🔽 AQUÍ PUEDES ASIGNAR TUS PROPIAS IMÁGENES A CADA ANIMAL
+    //  Los IDs de cada animal son: "perro-0", "perro-1", ... "perro-29"
+    //  y "gato-0", "gato-1", ... "gato-11"
+    //  Si no asignas una imagen, se usará una aleatoria de picsum.photos
+    // ================================================================
+    const IMAGENES_PERSONALIZADAS = {
+
+  "perro-0": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRTm5bQEuZ9huaPuYPHu8iLWrzMB3m2cFterx0Ph7Jy0A&s=10",
+  "perro-1": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRllmUmgVcaO-h798l2nNVtSe2wuCtSl1-73L1uts-QPA&s=10",
+  "perro-2": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmwVHiZTPxQ_VKZZsi55-s_WiNc02xmJjhqsRKuVwQmg&s=10",
+  "perro-3": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQb1bKtWYhN1jExNlEW5KDSgDegLbdIblnXsV581wuNzQ&s=10",
+  "perro-4": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSWQGBHXNE2nObUbi-F7Y7I-vBo0-5Zoan2fVHIs3R7Kw&s=10",
+  "perro-5": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRafgXD1RkJoiAfwDzgY2Vb2BXY219bxrf_sD-DDrOcLw&s=10",
+  "perro-6": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQifeWxRb8suNIxV1jpJTm3g9RDrm26bifXK0PeEr9YXQ&s=10",
+  "perro-7": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSMDZUZOtb7JinSRYJb5rZqrHd7by0HTxAog_PLp5evyA&s=10",
+  "perro-8": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ3khuMhMZZ0QGLtHg7yRAJISCAmjjXBZt-iBNXnVNEBA&s=10",
+  "perro-9": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR9iMSevi-xdLodhBbfro0bYsSY04xQxL1-OyiP0fFNqg&s=10",
+  "perro-10": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSfV3AixelZQd1XvAxla_3ub4GjNGRWsB7y-1ARNYdzRw&s=10",
+  "perro-11": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlPTwmGIufKUIs9VI8ggta0u0ZRHzu722tQWRROs960Q&s=10",
+  "perro-12": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcReAVl9fuox-M4ZrXgnncCue8sYGwCY1ALkRHWdmthIAQ&s=10",
+  "perro-13": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSqYQYYZPKc3rmwGEKgGyvNJoG3aJ8sDEj3bgRmb1_hYA&s=10",
+  "perro-14": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR5H6WvHdhjUVsQEx8Y13Ka1krSgPPP3CKPAA8CcQFnrg&s=10",
+  "perro-15": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT0t25pNH71fbsc_xVRtN-Q5p8_DrYdl4tikZWEz8FPlw&s=10",
+  "perro-16": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSNnlojtPwuVJm6j2f-fHvwf0G486WaJACMd2PU05oGQQ&s=10",
+  "perro-17": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQDZC2zWiMmyiGH63l6-IT_nR4SwjXblIuamXsIvjsbmA&s=10",
+  "perro-18": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR-r4QZTPqdCzFhDk_sWyeaWi4x3RACKkVmBv8jrEbBbA&s=10",
+  "perro-19": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSaaaQJyV3vv_SnUjCy9nIrujIG0z_kBsqWzDbbUBAZgA&s=10",
+  "perro-20": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-2gYH9-9pJ_Ab_KUtbXr0keor_YpUzpKEQSjFRjE4KA&s=10",
+  "perro-21": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSpnzwu11gXBGCoYEeJoIhxLWH_O0838HC2GCWTxDK10A&s=10",
+  "perro-22": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSPeJHWLun-y-k1e63rYQewIThEf9t--F2_zOz9A6oCsQ&s=10",
+  "perro-23": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRR7ZT8wD9m3nf6y3XNjBHxaUh5gpgMQcSZHFTU2MDBOw&s=10",
+  "perro-24": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQAoto4LIZLu5DE6_haaIDTJA026e8emyVCxRTSXMnNHw&s=10",
+  "perro-25": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRNwnbW2XbzXSvLz2lSjNPVcuUBED2xuarIP4ZJAFwWBw&s=10",
+  "perro-26": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSqossPWGvaMgKHg5j3YaGUSdiPJF-LpLSAZeJehTCz1g&s=10",
+  "perro-27": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRaut2h6Ty8Js4SWwbW7bmWbfzArH8O5KE8oFqHgWWQrg&s=10",
+  "perro-28": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTbVHyfddYngN3NMhjGMkV2bEPaO6eeqnkvFu43E47spw&s=10",
+  "perro-29": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTmUT-OT_nA085DKdzMOdszVPcriLRNeEe0nxSWYre3-A&s=10",
+  "perro-30": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8kahEvrsT5U37Pse8fijKk5vxZn_9ea_9e__d6_Pleg&s=10",
+
+  "gato-0": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQy69W8GBGScmhNS_gq2zTw1Km9Yvb0ISAGMUArnhhPmA&s=10",
+  "gato-1": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSJps6eI6AXqv_sS8OfIU8vBoBz_AbnwyYBMDfkKTa62Q&s=10",
+  "gato-2": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcThJy3aRJmPJm5H4pv8kZiUjQnyOu1tJhJjGscpcNftLA&s=10",
+  "gato-3": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSc5s9u8kq9kCfrX-p5FhUrw6v_pCe4_RYyOhfcEQZQYg&s=10",
+  "gato-4": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSmyI3BUVIpxPdaUHHN0Q5A3jOCPCNYQW9fmxNmCpCJCg&s=10",
+  "gato-5": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ7Hc6LzrG11y7Vn6OxH1kiLbPAqu9ljfHzQuFyYn9N_w&s=10",
+  "gato-6": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSx3QceZ2dBsvJ8_uf7AJUfP49pB3SDM-rhSVjh3gC46g&s=10",
+  "gato-7": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQlAfaGmLhFws0OSZ93w0Wfnm2in5Bk5ngfDHDDayoHzT4mBFOxUUaQkRmO&s=10",
+  "gato-8": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSifvXbePTUpPfZlyQvezgjkOqksk6JPLFkMiutHUy7Aw&s",
+  "gato-9": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQXRgAlI0EQtpTndCJ1mLdzu0ANG_0WnzGZuD6BmbqiFw&s=10",
+  "gato-10": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRG9Rltx1C-QwCEUOtAkliFZk2s_CItC8c0sYPeP3iKIw&s",
+  "gato-11": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSZXyvtlP8YoQmIFGu9Pnr5krkHtYoexUfVM4TuxPkp7A&s=10",
+  "gato-12": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRNMFvypu40KjlJwkUDmNARx146SaKo8rclvLP24r78zg&s=10"
+
+    };
+
+    // ================================================================
     //  GENERAR HUELLAS EN EL FONDO
     // ================================================================
     function generarHuellas() {
@@ -926,15 +982,42 @@
     generarHuellas();
 
     // ================================================================
-    //  DATOS DE ANIMALES
+    //  DATOS DE ANIMALES (con posibilidad de imágenes personalizadas)
     // ================================================================
     const nombresPerro = ["Max","Luna","Rocky","Bella","Toby","Coco","Nala","Simba","Bruno","Daisy","Charlie","Lola","Thor","Molly","Leo","Kira","Rex","Milo","Lily","Oscar","Zeus","Maya","Jack","Sasha","Tango","Roko","Lúa","Koda","Akira","Tita"];
     const nombresGato = ["Mishi","Garfield","Salem","Luna","Simba","Mia","Tigre","Pelusa","Negro","Canela","Ginger","Nube"];
     const descripciones = ["Rescatado de la calle, desnutrido y con miedo.","Vagaba en un barrio peligroso, tiene heridas leves.","Fue encontrado en una alcantarilla, está muy delgado.","Lleva meses en la calle, sobrevive como puede.","Tiene sarna y parásitos, pero es muy manso.","Siempre se acerca a las personas, busca cariño.","Vive en un parque, las lluvias lo afectan mucho.","Tiene una pata lastimada, no puede caminar bien.","Es muy juguetón a pesar de su situación.","Se refugia en un lote baldío, tiene hambre y sed."];
+
     function generarAnimales() {
       const animales = [];
-      for (let i=0; i<30; i++) animales.push({ id:`perro-${i}`, tipo:'perro', nombre:nombresPerro[i], raza:'Criollo', descripcion:descripciones[i%descripciones.length], imagen:`https://picsum.photos/seed/perro-${i}/400/400`, meta:META_DONACION });
-      for (let i=0; i<12; i++) animales.push({ id:`gato-${i}`, tipo:'gato', nombre:nombresGato[i], raza:'Criollo', descripcion:descripciones[(i+3)%descripciones.length], imagen:`https://picsum.photos/seed/gato-${i}/400/400`, meta:META_DONACION });
+      // Perros
+      for (let i=0; i<30; i++) {
+        const id = `perro-${i}`;
+        const imagen = IMAGENES_PERSONALIZADAS[id] || `https://picsum.photos/seed/${id}/400/400`;
+        animales.push({
+          id,
+          tipo: 'perro',
+          nombre: nombresPerro[i],
+          raza: 'Criollo',
+          descripcion: descripciones[i % descripciones.length],
+          imagen,
+          meta: META_DONACION
+        });
+      }
+      // Gatos
+      for (let i=0; i<12; i++) {
+        const id = `gato-${i}`;
+        const imagen = IMAGENES_PERSONALIZADAS[id] || `https://picsum.photos/seed/${id}/400/400`;
+        animales.push({
+          id,
+          tipo: 'gato',
+          nombre: nombresGato[i],
+          raza: 'Criollo',
+          descripcion: descripciones[(i+3) % descripciones.length],
+          imagen,
+          meta: META_DONACION
+        });
+      }
       return animales;
     }
     const ANIMALES = generarAnimales();
@@ -1128,11 +1211,9 @@
       }
     });
 
-    // ====== BOTÓN REFRESH CON ALERTA BONITA Y ANIMADA ======
+    // ====== BOTÓN REFRESH ======
     btnRefresh.addEventListener('click', async () => {
       if (!usuarioActual) return;
-
-      // Mostrar loader mientras se consulta
       Swal.fire({
         title: '🔄 Consultando saldo...',
         html: '<div class="spinner" style="width:40px;height:40px;border:4px solid rgba(249,217,118,0.2);border-top-color:#f9d976;border-radius:50%;animation:spin 0.7s linear infinite;margin:0 auto;"></div>',
@@ -1148,13 +1229,10 @@
           document.head.appendChild(style);
         }
       });
-
       try {
         const nuevoSaldo = await getSaldo(usuarioActual);
         saldoActual = nuevoSaldo;
         actualizarSaldoUI();
-
-        // Alerta mejorada con diseño atractivo
         Swal.fire({
           icon: 'success',
           title: '✨ ¡Saldo actualizado!',
@@ -1179,12 +1257,8 @@
           color: '#fff',
           timer: 3000,
           timerProgressBar: true,
-          showClass: {
-            popup: 'animate__animated animate__fadeInUp animate__faster'
-          },
-          hideClass: {
-            popup: 'animate__animated animate__fadeOutDown animate__faster'
-          },
+          showClass: { popup: 'animate__animated animate__fadeInUp animate__faster' },
+          hideClass: { popup: 'animate__animated animate__fadeOutDown animate__faster' },
           didOpen: () => {
             const style = document.createElement('style');
             style.textContent = `
@@ -1198,8 +1272,6 @@
               }
             `;
             document.head.appendChild(style);
-
-            // Lluvia de emojis al abrir
             for (let i = 0; i < 12; i++) {
               setTimeout(() => {
                 const emojis = ['🦴', '✨', '🐾', '💛', '🎉'];
@@ -1234,9 +1306,7 @@
           confirmButtonColor: '#e74c3c',
           background: '#1a1f2a',
           color: '#fff',
-          showClass: {
-            popup: 'animate__animated animate__shakeX'
-          }
+          showClass: { popup: 'animate__animated animate__shakeX' }
         });
       }
     });
@@ -1417,7 +1487,7 @@
       }, 1500);
     }
 
-    console.log('🐾 Todo integrado: logo, alertas animadas y sincronización con Google Sheets.');
+    console.log('🐾 Todo integrado: imágenes personalizables, alertas animadas y sincronización con Google Sheets.');
   </script>
 </body>
 </html>
