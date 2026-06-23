@@ -4,6 +4,11 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>🦴 Ayuda a los Peluditos</title>
+  
+  <!-- Favicon personalizado (huella) -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐾</text></svg>" />
+  <link rel="icon" type="image/png" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAARzQklUCAgICHwIZAAAAAlwSFlzAAAOxAAADsQBlSsOGwAAAAZJREFUWMPt1zEKwkAQBeBJ3iW3SLAWsRIRCy8QK1tbO4sUqVKlTpVCSaUKW1tbO1tbWwsLg5CFBGZ309uZ/T9jGJhliBDYsAgOguA5AkLjSJ+97W//2uvmOI0KoaP9pTFVfzy4QYRFVgQET4gA7IRAQIQL5rCejgGEP/UXQgLC+HsCBEAQr2P4VwQEgAAAwJ9IgE1IgA0gILwJYvMEiAAQ0t9nTGLH7yQ6/0jENYgEAA2IAAD8LwSWkwDrCkS0zUESUACgAAAEwe6DQwAAAAAAAAAAwN98AmxMhA0AAAAASUVORK5CYII=" />
+  
   <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet" />
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11">
   </script>
@@ -1249,7 +1254,7 @@
     }
 
     // ================================================================
-    //  ALERTA DE COMPARTIR
+    //  ALERTA DE COMPARTIR MEJORADA (sin favicon externo)
     // ================================================================
     function mostrarAlertaCompartir() {
       const url = window.location.href;
@@ -1262,6 +1267,7 @@
         title: '🐾 ¡Ayúdanos a llegar más lejos!',
         html: `
           <div style="text-align:center; padding:4px 0;">
+            <div style="font-size:4rem; margin-bottom:8px;">🐾</div>
             <p style="font-size:1.1rem; margin-bottom:16px; color:#ddd;">
               Comparte esta causa con tus amigos y familiares. <br>
               <span style="color:#f9d976;">¡Juntos podemos hacer la diferencia! 💛</span>
@@ -1293,6 +1299,7 @@
             </p>
           </div>
         `,
+        icon: null,
         showConfirmButton: true,
         confirmButtonText: '✅ Listo',
         confirmButtonColor: '#f9d976',
@@ -1357,33 +1364,6 @@
       'https://script.google.com/macros/s/AKfycbw-f8hVfnQzr68AVQxOvVZCuG6ClgdgSWxtAWoLO6EVihBCMAJ4X5sIV9F5qql1jVC6/exec';
     const NEQUI_NUM = "3138237540";
     const META_DONACION = 100;
-
-    // ================================================================
-    //  GENERAR FECHAS RECIENTES
-    // ================================================================
-    function generarFechaReciente(diasAtras = 0) {
-      const fecha = new Date();
-      fecha.setDate(fecha.getDate() - diasAtras);
-      return fecha.toLocaleDateString('es-ES', { day: '2-digit', month: 'short', year: 'numeric' });
-    }
-
-    // ================================================================
-    //  DONADORES FICTICIOS ESTÁTICOS (con fechas actuales)
-    // ================================================================
-    function generarDonadoresFicticios() {
-      const nombres = [
-        { nombre: 'María Pérez', animal: 'Max', cantidad: 5 },
-        { nombre: 'Carlos Gómez', animal: 'Luna', cantidad: 3 },
-        { nombre: 'Ana Rodríguez', animal: 'Rocky', cantidad: 10 },
-        { nombre: 'Luis Fernández', animal: 'Bella', cantidad: 2 },
-        { nombre: 'Sofía Martínez', animal: 'Toby', cantidad: 8 },
-        { nombre: 'David López', animal: 'Coco', cantidad: 4 },
-      ];
-      return nombres.map((item, index) => ({
-        ...item,
-        fecha: generarFechaReciente(index + 1) // 1,2,3... días atrás
-      }));
-    }
 
     // ================================================================
     //  DONADORES FICTICIOS DINÁMICOS (nombres)
@@ -1452,7 +1432,7 @@
           id: `perro-${i}`,
           tipo: 'perro',
           nombre: nombresPerro[i],
-          raza: 'Criollo', // Perro sin raza definida
+          raza: 'Criollo',
           descripcion: descripciones[i % descripciones.length],
           imagen: `https://picsum.photos/seed/perro-${i}/400/400`,
           meta: META_DONACION
@@ -1463,7 +1443,7 @@
           id: `gato-${i}`,
           tipo: 'gato',
           nombre: nombresGato[i],
-          raza: 'Criollo', // Gato sin raza definida
+          raza: 'Criollo',
           descripcion: descripciones[(i + 3) % descripciones.length],
           imagen: `https://picsum.photos/seed/gato-${i}/400/400`,
           meta: META_DONACION
@@ -1472,7 +1452,6 @@
       return animales;
     }
     const ANIMALES = generarAnimales();
-    const DONADORES_FICTICIOS = generarDonadoresFicticios();
 
     // ================================================================
     //  UI Y ESTADO
@@ -1504,6 +1483,7 @@
     let saldoActual = 0;
     let creditosAnimales = {};
     let categoriaActiva = 'perros';
+    // Almacenamos SOLO las donaciones ficticias generadas (sin donaciones reales)
     let donacionesCache = [];
     let intervaloFicticio = null;
 
@@ -1523,7 +1503,7 @@
     }
 
     // ================================================================
-    //  COMUNICACIÓN CON LA API (Google Sheets)
+    //  COMUNICACIÓN CON LA API (Google Sheets) - SOLO PARA LOGIN Y SALDO
     // ================================================================
     async function callApi(params) {
       const url = new URL(API_URL);
@@ -1545,12 +1525,12 @@
       return data.saldo;
     }
 
-    async function getCreditosTodos() {
-      const data = await callApi({ action: 'getCreditos' });
-      return data.creditos;
-    }
+    // Ya no necesitamos getCreditosTodos ni getDonaciones, porque empezamos de cero
+    // Los créditos de animales los manejamos localmente y se acumulan con donaciones ficticias
 
     async function realizarDonacion(email, nombre, animalId, nombreAnimal, cantidad) {
+      // Esta función se mantiene para donaciones reales, pero como hemos reiniciado,
+      // podríamos no usarla, pero la dejamos por si se necesita en el futuro.
       const data = await callApi({
         action: 'addDonacion',
         email,
@@ -1560,11 +1540,6 @@
         cantidad
       });
       return data;
-    }
-
-    async function getDonaciones() {
-      const data = await callApi({ action: 'getDonaciones' });
-      return data.donaciones;
     }
 
     // ================================================================
@@ -1579,18 +1554,20 @@
       try {
         await registrarUsuario(email, nombre);
         const saldo = await getSaldo(email);
-        const creditos = await getCreditosTodos();
-
+        // Inicializamos todo en cero: no cargamos donaciones reales
+        // Tampoco cargamos créditos de animales, empezamos desde cero
         usuarioActual = email;
         nombreActual = nombre;
         saldoActual = saldo;
-        creditosAnimales = creditos || {};
+        creditosAnimales = {}; // Comenzamos sin créditos en animales
+        donacionesCache = []; // Lista de donaciones vacía
+        window.donacionesFicticiasDinamicas = []; // Reiniciamos las dinámicas
 
         authSection.classList.add('hidden');
         mainSection.classList.remove('hidden');
         actualizarSaldoUI();
         setCategoria('perros');
-        await renderDonaciones();
+        await renderDonaciones(); // Renderiza la lista vacía
         authStatus.textContent = `✅ Conectado como ${nombre} (${email})`;
         authStatus.style.color = '#2ecc71';
         ocultarDiagnostico();
@@ -1628,6 +1605,7 @@
       saldoUsuario.textContent = '0';
       animalesGrid.innerHTML = '';
       donacionesCache = [];
+      window.donacionesFicticiasDinamicas = [];
       actualizarEstadisticas();
       ocultarDiagnostico();
     }
@@ -1650,7 +1628,7 @@
     if (nombreGuardado) authNombre.value = nombreGuardado;
 
     // ================================================================
-    //  COMPRA MANUAL
+    //  COMPRA MANUAL (sigue igual)
     // ================================================================
     async function comprarHuesitos() {
       if (!usuarioActual) {
@@ -1781,7 +1759,7 @@
     });
 
     // ================================================================
-    //  ACTUALIZAR SALDO
+    //  ACTUALIZAR SALDO (sin recargar donaciones)
     // ================================================================
     btnRefresh.addEventListener('click', async () => {
       if (!usuarioActual) return;
@@ -1789,10 +1767,7 @@
         const nuevoSaldo = await getSaldo(usuarioActual);
         saldoActual = nuevoSaldo;
         actualizarSaldoUI();
-        const creditos = await getCreditosTodos();
-        creditosAnimales = creditos || {};
-        actualizarAnimales();
-        await renderDonaciones();
+        // No recargamos donaciones ni créditos de animales, los dejamos como están
         Swal.fire({
           icon: 'success',
           title: '🔄 ¡Saldo actualizado!',
@@ -1869,6 +1844,7 @@
       }
 
       try {
+        // Realizar la donación en Google Sheets
         const result = await realizarDonacion(
           usuarioActual,
           nombreActual,
@@ -1876,12 +1852,31 @@
           animalNombre,
           num
         );
+        // Actualizar saldo local
         saldoActual = result.saldo;
-        creditosAnimales[animalId] = result.creditos;
+        // Actualizar créditos del animal localmente (sumamos)
+        if (!creditosAnimales[animalId]) creditosAnimales[animalId] = 0;
+        creditosAnimales[animalId] += num;
 
         actualizarSaldoUI();
         actualizarAnimales();
-        await renderDonaciones();
+        // No renderizamos donaciones de Google Sheets, mantenemos solo las ficticias
+        // Pero podemos agregar esta donación a la lista local como "real"
+        const ahora = new Date();
+        const fecha = ahora.toLocaleDateString('es-ES', { day: '2-digit', month: 'short', year: 'numeric' });
+        const donacionReal = {
+          nombre: nombreActual,
+          nombreAnimal: animalNombre,
+          cantidad: num,
+          fecha: fecha,
+          email: usuarioActual,
+          esFicticio: false
+        };
+        // Insertar al inicio de la lista
+        donacionesCache.unshift(donacionReal);
+        // Limitar a 50 elementos
+        if (donacionesCache.length > 50) donacionesCache.length = 50;
+        renderDonaciones();
 
         // Mostrar notificación toast
         mostrarNotificacion(
@@ -1972,15 +1967,10 @@
         esFicticio: true
       };
 
-      // Agregar a la lista de donaciones ficticias (para mostrar)
-      if (!window.donacionesFicticiasDinamicas) {
-        window.donacionesFicticiasDinamicas = [];
-      }
-      window.donacionesFicticiasDinamicas.unshift(donacion);
-      // Limitar a 30 para no saturar
-      if (window.donacionesFicticiasDinamicas.length > 30) {
-        window.donacionesFicticiasDinamicas.length = 30;
-      }
+      // Agregar a la lista local de donaciones (al inicio)
+      donacionesCache.unshift(donacion);
+      // Limitar a 50 elementos
+      if (donacionesCache.length > 50) donacionesCache.length = 50;
 
       // Mostrar notificación toast
       mostrarNotificacion(
@@ -2006,21 +1996,10 @@
     }
 
     // ================================================================
-    //  ESTADÍSTICAS (incluyendo todos los ficticios)
+    //  ESTADÍSTICAS (solo con las donaciones locales)
     // ================================================================
     function actualizarEstadisticas() {
-      const donacionesReales = donacionesCache;
-      const donacionesFicticiasEstaticas = DONADORES_FICTICIOS.map(f => ({
-        nombre: f.nombre,
-        nombreAnimal: f.animal,
-        cantidad: f.cantidad,
-        fecha: f.fecha,
-        email: f.nombre.toLowerCase().replace(/ /g, '') + '@ejemplo.com',
-        esFicticio: true
-      }));
-      const donacionesFicticiasDinamicas = window.donacionesFicticiasDinamicas || [];
-
-      const todas = [...donacionesReales, ...donacionesFicticiasEstaticas, ...donacionesFicticiasDinamicas];
+      const todas = donacionesCache; // Solo usamos las donaciones locales (ficticias + reales que hayamos agregado)
 
       const totalDonaciones = todas.length;
       const totalHuesitos = todas.reduce((sum, d) => sum + (d.cantidad || 0), 0);
@@ -2050,57 +2029,32 @@
     }
 
     // ================================================================
-    //  RENDERIZAR DONACIONES (con todos los ficticios)
+    //  RENDERIZAR DONACIONES (solo con la lista local)
     // ================================================================
     async function renderDonaciones() {
-      try {
-        const donacionesReales = await getDonaciones();
-        donacionesCache = donacionesReales;
+      // No llamamos a la API, solo usamos donacionesCache
+      const todas = donacionesCache;
+      // Mostrar las más recientes primero (ya están en orden)
+      const mostrar = todas.slice(0, 50);
 
-        const donacionesFicticiasEstaticas = DONADORES_FICTICIOS.map(f => ({
-          nombre: f.nombre,
-          nombreAnimal: f.animal,
-          cantidad: f.cantidad,
-          fecha: f.fecha,
-          email: f.nombre.toLowerCase().replace(/ /g, '') + '@ejemplo.com',
-          esFicticio: true
-        }));
-
-        const donacionesFicticiasDinamicas = window.donacionesFicticiasDinamicas || [];
-
-        const todas = [...donacionesReales, ...donacionesFicticiasEstaticas, ...donacionesFicticiasDinamicas];
-        // Mezclar y limitar a 50
-        const mezcladas = [];
-        const maxLen = Math.max(donacionesReales.length, donacionesFicticiasEstaticas.length, donacionesFicticiasDinamicas.length);
-        for (let i = 0; i < maxLen && mezcladas.length < 50; i++) {
-          if (i < donacionesReales.length) mezcladas.push(donacionesReales[i]);
-          if (i < donacionesFicticiasEstaticas.length) mezcladas.push(donacionesFicticiasEstaticas[i]);
-          if (i < donacionesFicticiasDinamicas.length) mezcladas.push(donacionesFicticiasDinamicas[i]);
-        }
-
-        donacionesScroll.innerHTML = mezcladas.map(item => {
-          let fechaFormateada = item.fecha || '';
-          if (fechaFormateada && fechaFormateada.includes('T')) {
-            const parts = fechaFormateada.split('T')[0].split('-');
-            if (parts.length === 3) {
-              fechaFormateada = `${parts[2]}/${parts[1]}/${parts[0]}`;
-            }
+      donacionesScroll.innerHTML = mostrar.map(item => {
+        let fechaFormateada = item.fecha || '';
+        if (fechaFormateada && fechaFormateada.includes('T')) {
+          const parts = fechaFormateada.split('T')[0].split('-');
+          if (parts.length === 3) {
+            fechaFormateada = `${parts[2]}/${parts[1]}/${parts[0]}`;
           }
-          const esFicticio = item.esFicticio || false;
-          const icono = esFicticio ? '✨' : '❤️';
-          return `
-            <div class="donacion-item" style="${esFicticio ? 'opacity:0.8;' : ''}">
-              <span>${icono} ${item.nombre || item.email} donó ${item.cantidad} 🦴 a ${item.nombreAnimal}</span>
-              <span class="fecha">${fechaFormateada}</span>
-            </div>
-          `;
-        }).join('');
+        }
+        // TODOS los emojis son ❤️ (sin distinción)
+        return `
+          <div class="donacion-item">
+            <span>❤️ ${item.nombre || item.email} donó ${item.cantidad} 🦴 a ${item.nombreAnimal}</span>
+            <span class="fecha">${fechaFormateada}</span>
+          </div>
+        `;
+      }).join('');
 
-        actualizarEstadisticas();
-      } catch (error) {
-        console.error('Error al cargar donaciones:', error);
-        donacionesScroll.innerHTML = '<div style="color:#888;">No se pudieron cargar las donaciones.</div>';
-      }
+      actualizarEstadisticas();
     }
 
     // ================================================================
@@ -2195,9 +2149,8 @@
     console.log('🐾 Sistema conectado a Google Sheets. URL:', API_URL);
     console.log(`🎯 Meta de donación por animal: ${META_DONACION} huesitos`);
     console.log('🔄 Donadores ficticios dinámicos cada 30 segundos (5-10 huesitos por animal).');
-    console.log('✨ Donadores ficticios estáticos con fechas actuales.');
-    console.log('🔔 Notificaciones toast activas para donaciones reales y ficticias.');
-    console.log('🐶 Todos los animales son criollos (sin raza definida).');
+    console.log('❤️ Todos los emojis en el listado son corazones.');
+    console.log('📊 Lista de donaciones y contadores comienzan desde cero al iniciar sesión.');
   </script>
 </body>
 </html>
