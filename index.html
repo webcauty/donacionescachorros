@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes" />
-  <title>🦴 Ayuda a los Peluditos</title>
+  <title>🐾 Ayuda a los Peluditos</title>
 
-  <!-- Favicon personalizado (huella) -->
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐾</text></svg>" />
-  <link rel="icon" type="image/png" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAARzQklUCAgICHwIZAAAAAlwSFlzAAAOxAAADsQBlSsOGwAAAAZJREFUWMPt1zEKwkAQBeBJ3iW3SLAWsRIRCy8QK1tbO4sUqVKlTpVCSaUKW1tbO1tbWwsLg5CFBGZ309uZ/T9jGJhliBDYsAgOguA5AkLjSJ+97W//2uvmOI0KoaP9pTFVfzy4QYRFVgQET4gA7IRAQIQL5rCejgGEP/UXQgLC+HsCBEAQr2P4VwQEgAAAwJ9IgE1IgA0gILwJYvMEiAAQ0t9nTGLH7yQ6/0jENYgEAA2IAAD8LwSWkwDrCkS0zUESUACgAAAEwe6DQwAAAAAAAAAAwN98AmxMhA0AAAAASUVORK5CYII=" />
+  <!-- Favicon personalizado (logo de la app) -->
+  <link rel="icon" type="image/png" href="https://i.ibb.co/VcLwMVd9/file-000000006c5c720ebd4a1fce54bb8627.png" />
+  <link rel="shortcut icon" type="image/png" href="https://i.ibb.co/VcLwMVd9/file-000000006c5c720ebd4a1fce54bb8627.png" />
 
   <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet" />
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11">
@@ -36,8 +36,8 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background: rgba(11, 14, 20, 0.88);
-      backdrop-filter: blur(8px);
+      background: rgba(11, 14, 20, 0.92);
+      backdrop-filter: blur(12px);
       display: none;
       justify-content: center;
       align-items: center;
@@ -58,6 +58,17 @@
     }
     @keyframes spin {
       to { transform: rotate(360deg); }
+    }
+    .loader-logo {
+      width: 90px;
+      height: auto;
+      border-radius: 24px;
+      animation: pulseLogoLoader 1.8s ease-in-out infinite;
+      filter: drop-shadow(0 0 12px rgba(249, 217, 118, 0.3));
+    }
+    @keyframes pulseLogoLoader {
+      0%, 100% { transform: scale(1); opacity: 0.9; }
+      50% { transform: scale(1.08); opacity: 1; }
     }
     .loader-text {
       font-size: 1.3rem;
@@ -117,15 +128,50 @@
       transition: all 0.3s ease;
     }
 
-    h1 {
-      font-size: 2.4rem;
-      background: linear-gradient(135deg, #f9d976, #f39c12);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      text-align: center;
-      margin-bottom: 2px;
-      letter-spacing: -0.5px;
+    /* ====== LOGO PRINCIPAL (reemplaza al título) ====== */
+    .logo-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 8px;
+      position: relative;
     }
+    .logo-principal {
+      width: 220px;
+      max-width: 80%;
+      height: auto;
+      border-radius: 28px;
+      animation: logoEntrada 0.9s cubic-bezier(0.34, 1.56, 0.64, 1) forwards,
+                 logoFlotar 4s ease-in-out infinite;
+      filter: drop-shadow(0 8px 24px rgba(249, 217, 118, 0.25));
+      transition: all 0.3s ease;
+    }
+    .logo-principal:hover {
+      filter: drop-shadow(0 12px 32px rgba(249, 217, 118, 0.45));
+      transform: translateY(-3px);
+    }
+    @keyframes logoEntrada {
+      0% { opacity: 0; transform: scale(0.7) rotate(-2deg); }
+      100% { opacity: 1; transform: scale(1) rotate(0deg); }
+    }
+    @keyframes logoFlotar {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-6px); }
+    }
+    .logo-brillo {
+      position: absolute;
+      width: 120px;
+      height: 120px;
+      background: radial-gradient(circle, rgba(249,217,118,0.12) 0%, transparent 70%);
+      border-radius: 50%;
+      pointer-events: none;
+      animation: brilloPulso 3s ease-in-out infinite;
+    }
+    @keyframes brilloPulso {
+      0%, 100% { opacity: 0.3; transform: scale(0.9); }
+      50% { opacity: 0.7; transform: scale(1.2); }
+    }
+
     .sub {
       color: #aaa;
       text-align: center;
@@ -190,6 +236,14 @@
     @keyframes slideMenu {
       0% { opacity: 0; transform: translateY(50px) scale(0.92); }
       100% { opacity: 1; transform: translateY(0) scale(1); }
+    }
+    .menu-panel .menu-logo {
+      width: 70px;
+      height: auto;
+      border-radius: 16px;
+      margin-right: 8px;
+      vertical-align: middle;
+      filter: drop-shadow(0 2px 8px rgba(249,217,118,0.2));
     }
     .menu-panel h2 {
       color: #f9d976;
@@ -613,7 +667,7 @@
     @media (max-width: 600px) {
       body { padding: 12px; }
       .container { padding: 18px 14px; border-radius: 28px; }
-      h1 { font-size: 1.8rem; }
+      .logo-principal { width: 160px; }
       .animales-grid { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 12px; }
       .saldo-bar { flex-direction: column; align-items: stretch; gap: 10px; }
       .btn-group { justify-content: center; }
@@ -646,6 +700,7 @@
 
   <!-- ====== LOADER OVERLAY ====== -->
   <div id="loaderOverlay">
+    <img src="https://i.ibb.co/VcLwMVd9/file-000000006c5c720ebd4a1fce54bb8627.png" alt="Peluditos Logo" class="loader-logo" loading="eager" />
     <div class="loader-spinner"></div>
     <div class="loader-text">🐾 Cargando...</div>
   </div>
@@ -656,7 +711,12 @@
   <!-- ====== CONTENEDOR PRINCIPAL ====== -->
   <div class="container">
     <button class="menu-toggle" id="menuToggle" aria-label="Abrir menú">☰</button>
-    <h1>🦴 Ayuda a los Peluditos</h1>
+
+    <!-- LOGO PRINCIPAL (reemplaza al título) -->
+    <div class="logo-container">
+      <div class="logo-brillo"></div>
+      <img src="https://i.ibb.co/VcLwMVd9/file-000000006c5c720ebd4a1fce54bb8627.png" alt="Ayuda a los Peluditos" class="logo-principal" loading="eager" />
+    </div>
     <p class="sub">1 huesito = $1.000 COP</p>
 
     <div id="authSection">
@@ -740,12 +800,15 @@
   <!-- ====== MENÚ OVERLAY ====== -->
   <div class="menu-overlay" id="menuOverlay">
     <div class="menu-panel">
-      <h2><span>🐾</span> Peluditos</h2>
+      <h2>
+        <img src="https://i.ibb.co/VcLwMVd9/file-000000006c5c720ebd4a1fce54bb8627.png" alt="Logo" class="menu-logo" loading="lazy" />
+        <span>🐾</span> Peluditos
+      </h2>
       <ul>
         <li onclick="mostrarInfo('🔐 Política de privacidad', 'Tus datos solo se usan para gestionar donaciones. No compartimos tu información con terceros.')"><span class="icon">🔐</span><span class="text">Política de privacidad</span><span class="arrow">›</span></li>
         <li onclick="mostrarInfo('📋 Términos y condiciones', 'Al donar aceptas que los fondos se usen exclusivamente para el cuidado, alimentación y atención veterinaria de los animales del refugio.')"><span class="icon">📋</span><span class="text">Términos y condiciones</span><span class="arrow">›</span></li>
-        <li onclick="mostrarInfo('📞 Contacto', '📧 refugio@peluditos.org<br>📱 WhatsApp: 3138237540<br>🕒 Disponibles de lunes a domingo, 8am - 8pm')"><span class="icon">📞</span><span class="text">Contacto</span><span class="arrow">›</span></li>
-        <li onclick="mostrarInfo('🔄 Acerca de', 'Esta aplicación usa Google Sheets como base de datos en la nube. Todas las donaciones quedan registradas de forma transparente.')"><span class="icon">🔄</span><span class="text">Acerca de</span><span class="arrow">›</span></li>
+        <li onclick="mostrarInfo('📞 Contacto', '📧 refugiopeluditos@mbox.re<br>📱 WhatsApp: 3138237540<br>🕒 Disponibles de lunes a domingo, 8am - 8pm')"><span class="icon">📞</span><span class="text">Contacto</span><span class="arrow">›</span></li>
+        <li onclick="mostrarInfo('🔄 Acerca de', 'Todas las donaciones quedan registradas de forma transparente.')"><span class="icon">🔄</span><span class="text">Acerca de</span><span class="arrow">›</span></li>
         <li onclick="mostrarInfo('🌟 Nuestra misión', 'Cada huesito donado se traduce en comida, vacunas, medicinas y mucho amor para estos peluditos que han sido rescatados y necesitan una segunda oportunidad.')"><span class="icon">🌟</span><span class="text">Nuestra misión</span><span class="arrow">›</span></li>
       </ul>
       <button class="close-menu" id="closeMenu">✕ Cerrar</button>
@@ -800,7 +863,7 @@
     // ================================================================
     function compartirNativo() {
       const url = window.location.href;
-      const titulo = '🦴 Ayuda a los Peluditos';
+      const titulo = '🐾 Ayuda a los Peluditos';
       const texto = '🐶 ¡Ayuda a los peluditos! 🐱 Cada huesito donado se convierte en comida, vacunas y amor para perros y gatos rescatados. ¡Únete a esta causa! 🦴';
       if (navigator.share) {
         navigator.share({ title: titulo, text: texto, url: url })
@@ -961,7 +1024,7 @@
     }
 
     // ================================================================
-    //  LOGIN / LOGOUT (AHORA SINCRONIZA CON LA NUBE)
+    //  LOGIN / LOGOUT (SINCRONIZA CON LA NUBE)
     // ================================================================
     async function loginUsuario(email, nombre) {
       if (!email || !nombre || !email.includes('@')) {
@@ -976,24 +1039,11 @@
         // Intentar obtener datos globales de la nube
         let donacionesNube = [];
         let creditosNube = {};
-        try {
-          donacionesNube = await getDonacionesGlobales();
-        } catch (e) {
-          console.warn('No se pudieron obtener donaciones globales, usando datos locales.');
-        }
-        try {
-          creditosNube = await getCreditosGlobales();
-        } catch (e) {
-          console.warn('No se pudieron obtener créditos globales, usando datos locales.');
-        }
+        try { donacionesNube = await getDonacionesGlobales(); } catch (e) { console.warn('No se pudieron obtener donaciones globales, usando datos locales.'); }
+        try { creditosNube = await getCreditosGlobales(); } catch (e) { console.warn('No se pudieron obtener créditos globales, usando datos locales.'); }
 
-        // Si se obtuvieron datos de la nube, reemplazamos los locales para sincronizar
-        if (donacionesNube.length > 0) {
-          donacionesCache = donacionesNube;
-        }
-        if (Object.keys(creditosNube).length > 0) {
-          creditosAnimales = creditosNube;
-        }
+        if (donacionesNube.length > 0) donacionesCache = donacionesNube;
+        if (Object.keys(creditosNube).length > 0) creditosAnimales = creditosNube;
 
         usuarioActual = email;
         nombreActual = nombre;
@@ -1031,7 +1081,6 @@
       authStatus.textContent = '🔒 Ingresa tu nombre y correo';
       authStatus.style.color = '#bbb';
       saldoActual = 0;
-      // No limpiamos creditosAnimales ni donacionesCache
       saldoUsuario.textContent = '0';
       animalesGrid.innerHTML = '';
       ocultarDiagnostico();
@@ -1044,14 +1093,11 @@
     btnLogout.addEventListener('click', logoutUsuario);
     btnCompartirLogin.addEventListener('click', compartirNativo);
 
-    // ================================================================
-    //  RESTAURAR CAMPOS DE SESIÓN
-    // ================================================================
     if (localStorage.getItem('peluditos_email')) authEmail.value = localStorage.getItem('peluditos_email');
     if (localStorage.getItem('peluditos_nombre')) authNombre.value = localStorage.getItem('peluditos_nombre');
 
     // ================================================================
-    //  COMPRA Y NÚMERO NEQUI (sin cambios)
+    //  COMPRA Y NÚMERO NEQUI
     // ================================================================
     async function comprarHuesitos() {
       if (!usuarioActual) { Swal.fire({ icon:'warning', title:'¡Un momentito!', text:'Para comprar huesitos, primero inicia sesión 💛', confirmButtonColor:'#6dd5ed', background:'#1a1f2a', color:'#fff' }); return; }
@@ -1095,7 +1141,7 @@
     });
 
     // ================================================================
-    //  DONAR CRÉDITOS (REAL, SINCRONIZADO CON LA NUBE)
+    //  DONAR CRÉDITOS (REAL)
     // ================================================================
     async function donarCredito(animalId, animalNombre) {
       if (!usuarioActual) {
@@ -1132,7 +1178,6 @@
         Swal.fire({
           icon:'success', title:'🎉 ¡Donación exitosa!', html:`<div>Donaste <strong>${num}</strong> 🦴 a <strong>${animalNombre}</strong></div><p style="color:#f9d976;">Saldo restante: ${saldoActual} 🦴</p>`, confirmButtonColor:'#f9d976', background:'#1a1f2a', color:'#fff', timer:4000
         });
-        // confeti emoji
         for (let i=0; i<20; i++) {
           setTimeout(() => {
             const emoji = ['🎉','🎊','💛','🐾','🦴','✨'][Math.floor(Math.random()*6)];
@@ -1152,7 +1197,7 @@
     window.donarCredito = donarCredito;
 
     // ================================================================
-    //  DONADORES FICTICIOS (LOCALES, NO AFECTAN LA NUBE)
+    //  DONADORES FICTICIOS
     // ================================================================
     function generarDonacionFicticia() {
       const animal = ANIMALES[Math.floor(Math.random() * ANIMALES.length)];
@@ -1271,7 +1316,7 @@
       }, 1500);
     }
 
-    console.log('🐾 Datos sincronizados con Google Sheets. Listado de donadores visible desde cualquier dispositivo.');
+    console.log('🐾 Logo integrado correctamente. Datos sincronizados con Google Sheets.');
   </script>
 </body>
 </html>
