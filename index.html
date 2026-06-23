@@ -5,84 +5,847 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>🦴 Ayuda a los Peluditos</title>
   <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11">
+  </script>
   <style>
-    /* ====== ESTILOS ====== */
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: 'Quicksand', sans-serif; background: #0b0e14; color: #fff; min-height: 100vh; padding: 16px; }
-    .container { max-width: 820px; margin: 0 auto; background: rgba(255,255,255,0.04); backdrop-filter: blur(8px); border-radius: 32px; padding: 24px 20px 20px; border: 1px solid rgba(255,255,255,0.06); box-shadow: 0 25px 60px rgba(0,0,0,0.6); position: relative; }
-    h1 { font-size: 2.2rem; background: linear-gradient(135deg, #f9d976, #f39c12); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-align: center; margin-bottom: 2px; }
-    .sub { color: #aaa; text-align: center; margin-bottom: 18px; font-size: 0.9rem; }
-    .menu-toggle { position: absolute; top: 18px; left: 18px; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.12); color: #fff; font-size: 1.8rem; padding: 4px 12px 6px; border-radius: 30px; cursor: pointer; line-height: 1.2; transition: 0.2s; z-index: 10; }
-    .menu-toggle:hover { background: rgba(255,255,255,0.15); transform: scale(1.02); }
-    .menu-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); backdrop-filter: blur(4px); display: none; justify-content: center; align-items: center; z-index: 999; }
-    .menu-overlay.active { display: flex; }
-    .menu-panel { background: #1a1f2a; padding: 32px 28px; border-radius: 32px; max-width: 360px; width: 90%; border: 1px solid rgba(255,255,255,0.08); box-shadow: 0 30px 80px rgba(0,0,0,0.8); animation: fadeSlide 0.25s ease-out; }
-    @keyframes fadeSlide { 0% { opacity: 0; transform: translateY(-20px) scale(0.96); } 100% { opacity: 1; transform: translateY(0) scale(1); } }
-    .menu-panel h2 { color: #f9d976; font-size: 1.6rem; margin-bottom: 20px; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 12px; }
-    .menu-panel ul { list-style: none; padding: 0; }
-    .menu-panel li { padding: 14px 0; border-bottom: 1px solid rgba(255,255,255,0.04); font-weight: 600; color: #ddd; cursor: pointer; transition: 0.2s; }
-    .menu-panel li:hover { color: #f9d976; padding-left: 8px; }
-    .menu-panel .close-menu { margin-top: 24px; background: #e74c3c; border: none; color: #fff; padding: 12px; border-radius: 40px; font-weight: 700; cursor: pointer; width: 100%; font-family: 'Quicksand', sans-serif; transition: 0.2s; }
-    .menu-panel .close-menu:hover { opacity: 0.9; transform: scale(1.02); }
-    input[type="text"], input[type="email"] { width: 100%; padding: 14px 18px; border-radius: 30px; border: 1px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.05); color: #fff; font-size: 1rem; font-family: 'Quicksand', sans-serif; outline: none; margin-bottom: 12px; transition: 0.2s; }
-    input:focus { border-color: #f39c12; background: rgba(255,255,255,0.08); }
-    .btn-login { background: linear-gradient(135deg, #6dd5ed, #2193b0); color: #fff; border: none; padding: 14px; border-radius: 40px; font-weight: 700; font-size: 1rem; width: 100%; cursor: pointer; transition: 0.2s; }
-    .btn-login:hover { transform: scale(1.02); opacity: 0.95; }
-    .status { font-size: 0.9rem; color: #bbb; margin-top: 12px; text-align: center; }
-    .hidden { display: none !important; }
-    .saldo-bar { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 8px 12px; background: rgba(255,255,255,0.04); border-radius: 60px; padding: 8px 16px; margin: 16px 0 20px; border: 1px solid rgba(255,255,255,0.06); }
-    .saldo-label { font-size: 1rem; display: flex; align-items: center; gap: 4px; background: rgba(249,217,118,0.12); padding: 2px 14px 2px 8px; border-radius: 40px; border: 1px solid rgba(249,217,118,0.2); }
-    .huesito-icon { font-size: 1.8rem; line-height: 1; }
-    .saldo-label .num { font-weight: 700; font-size: 1.6rem; color: #f9d976; margin-left: 2px; }
-    .saldo-extra { font-size: 0.7rem; color: #888; margin-left: 6px; }
-    .btn-group { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
-    .btn-comprar { background: linear-gradient(135deg, #2ecc71, #27ae60); color: #fff; border: none; padding: 7px 18px; border-radius: 40px; font-weight: 700; cursor: pointer; font-family: 'Quicksand', sans-serif; font-size: 0.85rem; transition: 0.2s; }
-    .btn-comprar:hover { transform: scale(1.04); opacity: 0.95; }
-    .btn-nequi { background: #25D366; color: #fff; border: none; padding: 7px 16px; border-radius: 40px; font-weight: 700; cursor: pointer; font-family: 'Quicksand', sans-serif; font-size: 0.85rem; transition: 0.2s; display: inline-flex; align-items: center; gap: 6px; }
-    .btn-nequi:hover { transform: scale(1.04); opacity: 0.95; }
-    .btn-copy { background: rgba(255,255,255,0.08); color: #ddd; border: 1px solid rgba(255,255,255,0.15); padding: 7px 16px; border-radius: 40px; cursor: pointer; font-family: 'Quicksand', sans-serif; font-size: 0.85rem; transition: 0.2s; display: inline-flex; align-items: center; gap: 6px; }
-    .btn-copy:hover { background: rgba(255,255,255,0.15); }
-    .btn-refresh { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); color: #ccc; padding: 7px 16px; border-radius: 40px; cursor: pointer; font-family: 'Quicksand', sans-serif; font-weight: 600; font-size: 0.85rem; transition: 0.2s; }
-    .btn-refresh:hover { background: rgba(255,255,255,0.12); }
-    .btn-logout { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); color: #ccc; padding: 7px 16px; border-radius: 40px; cursor: pointer; font-family: 'Quicksand', sans-serif; font-weight: 600; font-size: 0.85rem; transition: 0.2s; }
-    .btn-logout:hover { background: rgba(255,255,255,0.12); }
-    .categoria-selector { display: flex; gap: 10px; margin: 12px 0 16px; flex-wrap: wrap; justify-content: center; }
-    .categoria-btn { background: rgba(255,255,255,0.06); border: 2px solid transparent; padding: 8px 24px; border-radius: 40px; font-family: 'Quicksand', sans-serif; font-weight: 700; font-size: 1rem; color: #aaa; cursor: pointer; transition: 0.2s; }
-    .categoria-btn:hover { background: rgba(255,255,255,0.1); }
-    .categoria-btn.active { background: rgba(249,217,118,0.15); border-color: #f9d976; color: #f9d976; }
-    .animales-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 6px; }
-    .animal-card { background: rgba(255,255,255,0.04); padding: 12px 10px 10px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.06); display: flex; flex-direction: column; align-items: center; text-align: center; transition: 0.2s; cursor: default; }
-    .animal-card:hover { background: rgba(255,255,255,0.07); transform: translateY(-2px); }
-    .animal-card img { width: 100%; aspect-ratio: 1/1; object-fit: cover; border-radius: 16px; background: #222; margin-bottom: 6px; cursor: pointer; transition: 0.2s; }
-    .animal-card img:hover { opacity: 0.9; }
-    .animal-info .nombre { font-weight: 600; font-size: 0.95rem; }
-    .animal-info .raza { font-size: 0.7rem; color: #aaa; }
-    .animal-info .creditos { font-size: 0.85rem; color: #f9d976; margin: 4px 0; display: inline-flex; align-items: center; gap: 4px; background: rgba(249,217,118,0.1); padding: 2px 12px 2px 6px; border-radius: 40px; border: 1px solid rgba(249,217,118,0.2); }
-    .creditos .huesito { font-size: 1.2rem; }
-    .btn-donar { background: linear-gradient(135deg, #f9d976, #f39c12); color: #0b0e14; border: none; padding: 5px 16px; border-radius: 30px; font-weight: 700; cursor: pointer; font-family: 'Quicksand', sans-serif; font-size: 0.8rem; width: auto; margin-top: 4px; transition: 0.2s; }
-    .btn-donar:disabled { opacity: 0.5; cursor: not-allowed; }
-    .btn-donar:hover:not(:disabled) { transform: scale(1.05); }
-    .modal-img { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); display: none; justify-content: center; align-items: center; z-index: 1000; cursor: pointer; }
-    .modal-img.active { display: flex; }
-    .modal-img img { max-width: 90%; max-height: 90%; border-radius: 20px; box-shadow: 0 30px 80px rgba(0,0,0,0.9); }
-    .donaciones-section { margin-top: 28px; background: rgba(255,255,255,0.03); border-radius: 20px; padding: 14px 14px 8px; border: 1px solid rgba(255,255,255,0.05); }
-    .donaciones-section h3 { color: #f9d976; font-size: 1rem; margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
-    .donaciones-scroll { max-height: 140px; overflow-y: auto; padding-right: 4px; }
-    .donaciones-scroll::-webkit-scrollbar { width: 4px; }
-    .donaciones-scroll::-webkit-scrollbar-track { background: rgba(255,255,255,0.05); border-radius: 10px; }
-    .donaciones-scroll::-webkit-scrollbar-thumb { background: #f9d976; border-radius: 10px; }
-    .donacion-item { display: flex; justify-content: space-between; padding: 6px 0; border-bottom: 1px solid rgba(255,255,255,0.04); font-size: 0.85rem; color: #ccc; }
-    .donacion-item .fecha { color: #888; font-size: 0.7rem; }
-    .diagnostico { font-size: 0.85rem; padding: 10px; border-radius: 16px; margin-top: 12px; display: none; }
-    .diagnostico.error { background: rgba(231,76,60,0.15); border: 1px solid #e74c3c; color: #e74c3c; display: block; }
-    .diagnostico.success { background: rgba(46,204,113,0.15); border: 1px solid #2ecc71; color: #2ecc71; display: block; }
-    .footer { margin-top: 24px; font-size: 0.75rem; color: #666; text-align: center; border-top: 1px solid rgba(255,255,255,0.04); padding-top: 16px; }
-    @media (max-width: 540px) { .animales-grid { grid-template-columns: 1fr 1fr; gap: 10px; } .container { padding: 16px 12px; } .saldo-bar { flex-direction: column; align-items: stretch; gap: 8px; } .btn-group { justify-content: center; } .menu-toggle { top: 12px; left: 12px; font-size: 1.5rem; padding: 2px 10px; } }
-    @media (max-width: 400px) { .animales-grid { grid-template-columns: 1fr 1fr; } }
-    @media (max-width: 360px) { .animales-grid { grid-template-columns: 1fr 1fr; gap: 8px; } }
+    /* ====== RESET Y BASE ====== */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Quicksand', sans-serif;
+      background: #0b0e14;
+      color: #fff;
+      min-height: 100vh;
+      padding: 16px;
+      overflow-x: hidden;
+    }
+
+    /* ====== LOADER OVERLAY ====== */
+    #loaderOverlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(11, 14, 20, 0.85);
+      backdrop-filter: blur(6px);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      flex-direction: column;
+      gap: 20px;
+    }
+    #loaderOverlay.active {
+      display: flex;
+    }
+    .loader-spinner {
+      width: 60px;
+      height: 60px;
+      border: 5px solid rgba(249, 217, 118, 0.15);
+      border-top-color: #f9d976;
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+    .loader-text {
+      font-size: 1.2rem;
+      color: #f9d976;
+      font-weight: 600;
+      letter-spacing: 1px;
+      animation: pulseText 1.2s ease-in-out infinite;
+    }
+    @keyframes pulseText {
+      0%,
+      100% {
+        opacity: 1;
+      }
+      50% {
+        opacity: 0.4;
+      }
+    }
+
+    /* ====== FONDO CON HUELLAS 3D ====== */
+    .paw-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+    .paw {
+      position: absolute;
+      font-size: 3rem;
+      opacity: 0.08;
+      animation: floatPaw 20s infinite alternate ease-in-out;
+      transform-style: preserve-3d;
+      will-change: transform;
+    }
+    .paw:nth-child(odd) {
+      animation-duration: 25s;
+      animation-delay: -5s;
+    }
+    .paw:nth-child(3n) {
+      animation-duration: 30s;
+      animation-delay: -10s;
+    }
+    .paw:nth-child(5n) {
+      animation-duration: 18s;
+      animation-delay: -3s;
+    }
+    .paw:nth-child(7n) {
+      font-size: 4.5rem;
+      opacity: 0.05;
+    }
+
+    @keyframes floatPaw {
+      0% {
+        transform: translate3d(0, 0, 0) rotate(0deg) scale(0.8);
+        opacity: 0.05;
+      }
+      25% {
+        transform: translate3d(30px, -40px, 20px) rotate(15deg) scale(1.1);
+        opacity: 0.12;
+      }
+      50% {
+        transform: translate3d(-20px, -80px, -10px) rotate(-10deg) scale(0.9);
+        opacity: 0.07;
+      }
+      75% {
+        transform: translate3d(40px, 20px, 30px) rotate(20deg) scale(1.2);
+        opacity: 0.15;
+      }
+      100% {
+        transform: translate3d(-30px, -50px, -20px) rotate(-15deg) scale(1);
+        opacity: 0.06;
+      }
+    }
+
+    /* ====== CONTENEDOR PRINCIPAL ====== */
+    .container {
+      position: relative;
+      z-index: 1;
+      max-width: 820px;
+      margin: 0 auto;
+      background: rgba(255, 255, 255, 0.04);
+      backdrop-filter: blur(8px);
+      border-radius: 32px;
+      padding: 24px 20px 20px;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6);
+    }
+
+    h1 {
+      font-size: 2.2rem;
+      background: linear-gradient(135deg, #f9d976, #f39c12);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-align: center;
+      margin-bottom: 2px;
+    }
+    .sub {
+      color: #aaa;
+      text-align: center;
+      margin-bottom: 18px;
+      font-size: 0.9rem;
+    }
+
+    /* ====== MENÚ HAMBURGUESA ====== */
+    .menu-toggle {
+      position: absolute;
+      top: 18px;
+      left: 18px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      color: #fff;
+      font-size: 1.8rem;
+      padding: 4px 12px 6px;
+      border-radius: 30px;
+      cursor: pointer;
+      line-height: 1.2;
+      transition: 0.2s;
+      z-index: 10;
+    }
+    .menu-toggle:hover {
+      background: rgba(255, 255, 255, 0.15);
+      transform: scale(1.02);
+    }
+
+    /* ====== MENÚ OVERLAY MEJORADO ====== */
+    .menu-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.75);
+      backdrop-filter: blur(8px);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 999;
+      animation: fadeInOverlay 0.3s ease-out;
+    }
+    .menu-overlay.active {
+      display: flex;
+    }
+    @keyframes fadeInOverlay {
+      0% {
+        opacity: 0;
+        transform: scale(0.96);
+      }
+      100% {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    .menu-panel {
+      background: linear-gradient(145deg, #1a1f2a, #252b3a);
+      padding: 36px 28px 28px;
+      border-radius: 40px;
+      max-width: 400px;
+      width: 92%;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.9);
+      animation: slideMenu 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    @keyframes slideMenu {
+      0% {
+        opacity: 0;
+        transform: translateY(40px) scale(0.9);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    .menu-panel h2 {
+      color: #f9d976;
+      font-size: 1.8rem;
+      margin-bottom: 24px;
+      border-bottom: 2px solid rgba(249, 217, 118, 0.15);
+      padding-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .menu-panel h2 span {
+      font-size: 2rem;
+    }
+
+    .menu-panel ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .menu-panel li {
+      padding: 16px 18px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      font-weight: 600;
+      color: #ddd;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      border-radius: 12px;
+      margin-bottom: 4px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      font-size: 1.05rem;
+    }
+    .menu-panel li:hover {
+      background: rgba(249, 217, 118, 0.08);
+      color: #f9d976;
+      padding-left: 24px;
+      transform: translateX(4px);
+      border-bottom-color: transparent;
+      box-shadow: 0 2px 12px rgba(249, 217, 118, 0.05);
+    }
+    .menu-panel li .icon {
+      font-size: 1.6rem;
+      line-height: 1;
+      width: 36px;
+      text-align: center;
+      flex-shrink: 0;
+    }
+    .menu-panel li .text {
+      flex: 1;
+    }
+    .menu-panel li .arrow {
+      opacity: 0.3;
+      font-size: 1.2rem;
+      transition: 0.2s;
+    }
+    .menu-panel li:hover .arrow {
+      opacity: 1;
+      transform: translateX(4px);
+    }
+
+    .menu-panel .close-menu {
+      margin-top: 28px;
+      background: linear-gradient(135deg, #e74c3c, #c0392b);
+      border: none;
+      color: #fff;
+      padding: 14px;
+      border-radius: 50px;
+      font-weight: 700;
+      font-size: 1rem;
+      cursor: pointer;
+      width: 100%;
+      font-family: 'Quicksand', sans-serif;
+      transition: 0.25s ease;
+      letter-spacing: 0.5px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+    .menu-panel .close-menu:hover {
+      transform: scale(1.03);
+      box-shadow: 0 4px 20px rgba(231, 76, 60, 0.4);
+    }
+
+    /* ====== INPUTS Y BOTONES ====== */
+    input[type="text"],
+    input[type="email"] {
+      width: 100%;
+      padding: 14px 18px;
+      border-radius: 30px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      background: rgba(255, 255, 255, 0.05);
+      color: #fff;
+      font-size: 1rem;
+      font-family: 'Quicksand', sans-serif;
+      outline: none;
+      margin-bottom: 12px;
+      transition: 0.2s;
+    }
+    input:focus {
+      border-color: #f39c12;
+      background: rgba(255, 255, 255, 0.08);
+    }
+    .btn-login {
+      background: linear-gradient(135deg, #6dd5ed, #2193b0);
+      color: #fff;
+      border: none;
+      padding: 14px;
+      border-radius: 40px;
+      font-weight: 700;
+      font-size: 1rem;
+      width: 100%;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+    .btn-login:hover {
+      transform: scale(1.02);
+      opacity: 0.95;
+    }
+    .status {
+      font-size: 0.9rem;
+      color: #bbb;
+      margin-top: 12px;
+      text-align: center;
+    }
+    .hidden {
+      display: none !important;
+    }
+
+    /* ====== BARRA DE SALDO ====== */
+    .saldo-bar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 8px 12px;
+      background: rgba(255, 255, 255, 0.04);
+      border-radius: 60px;
+      padding: 8px 16px;
+      margin: 16px 0 20px;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+    }
+    .saldo-label {
+      font-size: 0.95rem;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      background: rgba(249, 217, 118, 0.12);
+      padding: 2px 14px 2px 8px;
+      border-radius: 40px;
+      border: 1px solid rgba(249, 217, 118, 0.2);
+    }
+    .huesito-icon {
+      font-size: 1.8rem;
+      line-height: 1;
+    }
+    .saldo-label .num {
+      font-weight: 700;
+      font-size: 1.6rem;
+      color: #f9d976;
+      margin-left: 2px;
+    }
+    .saldo-extra {
+      font-size: 0.7rem;
+      color: #aaa;
+      margin-left: 6px;
+    }
+
+    /* ====== GRUPO DE BOTONES ====== */
+    .btn-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      align-items: center;
+    }
+    .btn-comprar {
+      background: linear-gradient(135deg, #2ecc71, #27ae60);
+      color: #fff;
+      border: none;
+      padding: 7px 18px;
+      border-radius: 40px;
+      font-weight: 700;
+      cursor: pointer;
+      font-family: 'Quicksand', sans-serif;
+      font-size: 0.85rem;
+      transition: 0.2s;
+    }
+    .btn-comprar:hover {
+      transform: scale(1.04);
+      opacity: 0.95;
+    }
+
+    /* ====== BOTÓN NEQUI CON LOGO CSS ====== */
+    .btn-nequi-copy {
+      background: #7B2FBE;
+      color: #fff;
+      border: none;
+      padding: 6px 14px 6px 10px;
+      border-radius: 40px;
+      font-weight: 700;
+      cursor: pointer;
+      font-family: 'Quicksand', sans-serif;
+      font-size: 0.85rem;
+      transition: 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 2px 8px rgba(123, 47, 190, 0.4);
+    }
+    .btn-nequi-copy:hover {
+      transform: scale(1.04);
+      background: #6a28a5;
+      box-shadow: 0 4px 12px rgba(123, 47, 190, 0.6);
+    }
+    .nequi-logo-css {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 26px;
+      height: 26px;
+      background: white;
+      border-radius: 50%;
+      font-weight: 900;
+      font-size: 16px;
+      color: #7B2FBE;
+      animation: pulseLogo 1.5s infinite ease-in-out;
+      flex-shrink: 0;
+    }
+    @keyframes pulseLogo {
+      0% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.12);
+      }
+      100% {
+        transform: scale(1);
+      }
+    }
+    .btn-nequi-copy .label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: rgba(255, 255, 255, 0.9);
+      letter-spacing: 0.3px;
+    }
+    .btn-nequi-copy .num {
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      color: #fff;
+    }
+    .btn-nequi-copy .copy-icon {
+      font-size: 1rem;
+      opacity: 0.8;
+    }
+
+    .btn-refresh {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: #ccc;
+      padding: 7px 16px;
+      border-radius: 40px;
+      cursor: pointer;
+      font-family: 'Quicksand', sans-serif;
+      font-weight: 600;
+      font-size: 0.85rem;
+      transition: 0.2s;
+    }
+    .btn-refresh:hover {
+      background: rgba(255, 255, 255, 0.12);
+    }
+
+    .btn-logout {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: #ccc;
+      padding: 7px 16px;
+      border-radius: 40px;
+      cursor: pointer;
+      font-family: 'Quicksand', sans-serif;
+      font-weight: 600;
+      font-size: 0.85rem;
+      transition: 0.2s;
+    }
+    .btn-logout:hover {
+      background: rgba(255, 255, 255, 0.12);
+    }
+
+    /* ====== CATEGORÍAS ====== */
+    .categoria-selector {
+      display: flex;
+      gap: 10px;
+      margin: 12px 0 16px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .categoria-btn {
+      background: rgba(255, 255, 255, 0.06);
+      border: 2px solid transparent;
+      padding: 8px 24px;
+      border-radius: 40px;
+      font-family: 'Quicksand', sans-serif;
+      font-weight: 700;
+      font-size: 1rem;
+      color: #aaa;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+    .categoria-btn:hover {
+      background: rgba(255, 255, 255, 0.1);
+    }
+    .categoria-btn.active {
+      background: rgba(249, 217, 118, 0.15);
+      border-color: #f9d976;
+      color: #f9d976;
+    }
+
+    /* ====== ANIMALES ====== */
+    .animales-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-top: 6px;
+    }
+    .animal-card {
+      background: rgba(255, 255, 255, 0.04);
+      padding: 12px 10px 10px;
+      border-radius: 20px;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      transition: 0.2s;
+      cursor: default;
+    }
+    .animal-card:hover {
+      background: rgba(255, 255, 255, 0.07);
+      transform: translateY(-2px);
+    }
+    .animal-card img {
+      width: 100%;
+      aspect-ratio: 1/1;
+      object-fit: cover;
+      border-radius: 16px;
+      background: #222;
+      margin-bottom: 6px;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+    .animal-card img:hover {
+      opacity: 0.9;
+    }
+    .animal-info .nombre {
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+    .animal-info .raza {
+      font-size: 0.7rem;
+      color: #aaa;
+    }
+    .animal-info .creditos {
+      font-size: 0.85rem;
+      color: #f9d976;
+      margin: 4px 0;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      background: rgba(249, 217, 118, 0.1);
+      padding: 2px 12px 2px 6px;
+      border-radius: 40px;
+      border: 1px solid rgba(249, 217, 118, 0.2);
+    }
+    .creditos .huesito {
+      font-size: 1.2rem;
+    }
+    .btn-donar {
+      background: linear-gradient(135deg, #f9d976, #f39c12);
+      color: #0b0e14;
+      border: none;
+      padding: 5px 16px;
+      border-radius: 30px;
+      font-weight: 700;
+      cursor: pointer;
+      font-family: 'Quicksand', sans-serif;
+      font-size: 0.8rem;
+      width: auto;
+      margin-top: 4px;
+      transition: 0.2s;
+    }
+    .btn-donar:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+    .btn-donar:hover:not(:disabled) {
+      transform: scale(1.05);
+    }
+
+    /* ====== MODAL IMAGEN ====== */
+    .modal-img {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.9);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+      cursor: pointer;
+    }
+    .modal-img.active {
+      display: flex;
+    }
+    .modal-img img {
+      max-width: 90%;
+      max-height: 90%;
+      border-radius: 20px;
+      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.9);
+    }
+
+    /* ====== DONACIONES ====== */
+    .donaciones-section {
+      margin-top: 28px;
+      background: rgba(255, 255, 255, 0.03);
+      border-radius: 20px;
+      padding: 14px 14px 8px;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+    .donaciones-section h3 {
+      color: #f9d976;
+      font-size: 1rem;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .donaciones-scroll {
+      max-height: 140px;
+      overflow-y: auto;
+      padding-right: 4px;
+    }
+    .donaciones-scroll::-webkit-scrollbar {
+      width: 4px;
+    }
+    .donaciones-scroll::-webkit-scrollbar-track {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 10px;
+    }
+    .donaciones-scroll::-webkit-scrollbar-thumb {
+      background: #f9d976;
+      border-radius: 10px;
+    }
+    .donacion-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 6px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+      font-size: 0.85rem;
+      color: #ccc;
+    }
+    .donacion-item .fecha {
+      color: #888;
+      font-size: 0.7rem;
+    }
+
+    /* ====== DIAGNÓSTICO ====== */
+    .diagnostico {
+      font-size: 0.85rem;
+      padding: 10px;
+      border-radius: 16px;
+      margin-top: 12px;
+      display: none;
+    }
+    .diagnostico.error {
+      background: rgba(231, 76, 60, 0.15);
+      border: 1px solid #e74c3c;
+      color: #e74c3c;
+      display: block;
+    }
+    .diagnostico.success {
+      background: rgba(46, 204, 113, 0.15);
+      border: 1px solid #2ecc71;
+      color: #2ecc71;
+      display: block;
+    }
+
+    .footer {
+      margin-top: 24px;
+      font-size: 0.75rem;
+      color: #666;
+      text-align: center;
+      border-top: 1px solid rgba(255, 255, 255, 0.04);
+      padding-top: 16px;
+    }
+
+    /* ====== BOTÓN FLOTANTE WHATSAPP ====== */
+    .whatsapp-float {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      z-index: 100;
+      width: 60px;
+      height: 60px;
+      background: #25D366;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 20px rgba(37, 211, 102, 0.5);
+      transition: 0.3s;
+      cursor: pointer;
+      animation: pulse 1.8s infinite;
+      text-decoration: none;
+    }
+    .whatsapp-float:hover {
+      transform: scale(1.1);
+      box-shadow: 0 6px 30px rgba(37, 211, 102, 0.7);
+    }
+    .whatsapp-float svg {
+      width: 36px;
+      height: 36px;
+      fill: #fff;
+    }
+    @keyframes pulse {
+      0% {
+        transform: scale(1);
+        box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
+      }
+      50% {
+        transform: scale(1.08);
+        box-shadow: 0 6px 30px rgba(37, 211, 102, 0.7);
+      }
+      100% {
+        transform: scale(1);
+        box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
+      }
+    }
+
+    /* ====== RESPONSIVE ====== */
+    @media (max-width: 540px) {
+      .animales-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+      }
+      .container {
+        padding: 16px 12px;
+      }
+      .saldo-bar {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 8px;
+      }
+      .btn-group {
+        justify-content: center;
+      }
+      .menu-toggle {
+        top: 12px;
+        left: 12px;
+        font-size: 1.5rem;
+        padding: 2px 10px;
+      }
+      .whatsapp-float {
+        width: 50px;
+        height: 50px;
+        bottom: 16px;
+        right: 16px;
+      }
+      .whatsapp-float svg {
+        width: 30px;
+        height: 30px;
+      }
+      .nequi-logo-css {
+        width: 22px;
+        height: 22px;
+        font-size: 13px;
+      }
+      .btn-nequi-copy .label {
+        font-size: 0.65rem;
+      }
+      .menu-panel {
+        padding: 24px 16px 20px;
+        max-width: 95%;
+      }
+      .menu-panel li {
+        font-size: 0.95rem;
+        padding: 14px 12px;
+      }
+    }
+    @media (max-width: 400px) {
+      .animales-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+    @media (max-width: 360px) {
+      .animales-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+      }
+    }
   </style>
 </head>
 <body>
+
+  <!-- ====== LOADER OVERLAY ====== -->
+  <div id="loaderOverlay">
+    <div class="loader-spinner"></div>
+    <div class="loader-text">🐾 Cargando...</div>
+  </div>
+
+  <!-- ====== FONDO DE HUELLAS ====== -->
+  <div class="paw-bg" id="pawBg"></div>
+
+  <!-- ====== CONTENEDOR PRINCIPAL ====== -->
   <div class="container">
     <button class="menu-toggle" id="menuToggle">☰</button>
     <h1>🦴 Ayuda a los Peluditos</h1>
@@ -90,7 +853,7 @@
 
     <div id="authSection">
       <input type="text" id="authNombre" placeholder="Tu nombre" />
-      <input type="email" id="authEmail" placeholder="Correo electrónico" />
+      <input type="email" id="authEmail" placeholder="Correo electrónico" autocapitalize="off" />
       <button class="btn-login" id="btnLogin">Ingresar / Registrarse</button>
       <div class="status" id="authStatus">🔒 Ingresa tu nombre y correo</div>
       <div id="diagnostico" class="diagnostico"></div>
@@ -101,12 +864,16 @@
         <div class="saldo-label">
           <span class="huesito-icon">🦴</span>
           <span class="num" id="saldoUsuario">0</span>
-          <span class="saldo-extra">(recarga manual)</span>
+          <span class="saldo-extra">tus créditos para donar</span>
         </div>
         <div class="btn-group">
           <button class="btn-comprar" id="btnComprar">➕ Comprar</button>
-          <button class="btn-nequi" id="btnNequi">📱 Nequi <span style="font-weight:400;font-size:0.8rem;">(3138237540)</span></button>
-          <button class="btn-copy" id="btnCopyNequi">📋 Copiar</button>
+          <button class="btn-nequi-copy" id="btnNequiCopy">
+            <span class="nequi-logo-css">N</span>
+            <span class="label">Cuenta Nequi</span>
+            <span class="num">3138237540</span>
+            <span class="copy-icon">📋</span>
+          </button>
           <button class="btn-refresh" id="btnRefresh">🔄 Actualizar</button>
           <button class="btn-logout" id="btnLogout">Cerrar</button>
         </div>
@@ -129,58 +896,250 @@
     <div class="footer">💙 100% a alimentación, veterinaria y refugio</div>
   </div>
 
-  <!-- Menú overlay -->
+  <!-- ====== BOTÓN FLOTANTE WHATSAPP ====== -->
+  <a href="https://api.whatsapp.com/send?phone=573138237540&text=Hola%2C%20quiero%20donar%20huesitos%20para%20los%20peluditos." target="_blank" class="whatsapp-float" id="whatsappFloat" aria-label="WhatsApp">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+  </a>
+
+  <!-- ====== MENÚ OVERLAY MEJORADO ====== -->
   <div class="menu-overlay" id="menuOverlay">
     <div class="menu-panel">
-      <h2>🐾 Peluditos</h2>
+      <h2><span>🐾</span> Peluditos</h2>
       <ul>
-        <li onclick="alert('📜 Política de privacidad: Tus datos solo se usan para gestionar donaciones.')">🔐 Política de privacidad</li>
-        <li onclick="alert('📋 Términos de uso: Al donar aceptas que los fondos se usen para el cuidado de los animales.')">📋 Términos y condiciones</li>
-        <li onclick="alert('📞 Contáctanos: refugio@peluditos.org o WhatsApp 3138237540')">📞 Contacto</li>
-        <li onclick="alert('🔄 Esta app usa Google Sheets como base de datos.')">🔄 Acerca de</li>
-        <li onclick="alert('🌟 Cada huesito donado se traduce en comida, vacunas y amor para estos peluditos.')">🌟 Nuestra misión</li>
+        <li onclick="mostrarInfo('🔐 Política de privacidad', 'Tus datos solo se usan para gestionar donaciones. No compartimos tu información con terceros.')">
+          <span class="icon">🔐</span>
+          <span class="text">Política de privacidad</span>
+          <span class="arrow">›</span>
+        </li>
+        <li onclick="mostrarInfo('📋 Términos y condiciones', 'Al donar aceptas que los fondos se usen exclusivamente para el cuidado, alimentación y atención veterinaria de los animales del refugio.')">
+          <span class="icon">📋</span>
+          <span class="text">Términos y condiciones</span>
+          <span class="arrow">›</span>
+        </li>
+        <li onclick="mostrarInfo('📞 Contacto', '📧 refugio@peluditos.org<br>📱 WhatsApp: 3138237540<br>🕒 Disponibles de lunes a domingo, 8am - 8pm')">
+          <span class="icon">📞</span>
+          <span class="text">Contacto</span>
+          <span class="arrow">›</span>
+        </li>
+        <li onclick="mostrarInfo('🔄 Acerca de', 'Esta aplicación usa Google Sheets como base de datos en la nube. Todas las donaciones quedan registradas de forma transparente.')">
+          <span class="icon">🔄</span>
+          <span class="text">Acerca de</span>
+          <span class="arrow">›</span>
+        </li>
+        <li onclick="mostrarInfo('🌟 Nuestra misión', 'Cada huesito donado se traduce en comida, vacunas, medicinas y mucho amor para estos peluditos que han sido rescatados y necesitan una segunda oportunidad.')">
+          <span class="icon">🌟</span>
+          <span class="text">Nuestra misión</span>
+          <span class="arrow">›</span>
+        </li>
       </ul>
       <button class="close-menu" id="closeMenu">✕ Cerrar</button>
     </div>
   </div>
 
-  <!-- Modal imagen -->
+  <!-- ====== MODAL IMAGEN ====== -->
   <div class="modal-img" id="modalImg" onclick="this.classList.remove('active')">
     <img id="modalImgSrc" src="" alt="Ampliar" />
   </div>
 
   <script>
     // ================================================================
+    //  FUNCIONES DE UI
+    // ================================================================
+    function mostrarInfo(titulo, contenido) {
+      Swal.fire({
+        title: titulo,
+        html: contenido,
+        icon: 'info',
+        confirmButtonColor: '#f9d976',
+        confirmButtonText: '❤️ Entendido',
+        background: '#1a1f2a',
+        color: '#fff',
+        iconColor: '#f9d976',
+        showClass: {
+          popup: 'animate__animated animate__fadeInUp'
+        },
+        hideClass: {
+          popup: 'animate__animated animate__fadeOutDown'
+        }
+      });
+    }
+
+    // ================================================================
+    //  LOADER
+    // ================================================================
+    const loader = document.getElementById('loaderOverlay');
+
+    function mostrarLoader() {
+      loader.classList.add('active');
+    }
+
+    function ocultarLoader() {
+      loader.classList.remove('active');
+    }
+
+    // ================================================================
+    //  ALERTA DE COMPARTIR (mejorada y siempre visible al inicio)
+    // ================================================================
+    function mostrarAlertaCompartir() {
+      const url = window.location.href;
+      const mensaje = encodeURIComponent(
+        '🐶 ¡Ayuda a los peluditos! 🐱\nCada huesito donado se convierte en comida, vacunas y amor para perros y gatos rescatados. ¡Únete a esta causa! 🦴\n\n' +
+        url
+      );
+
+      Swal.fire({
+        title: '🐾 ¡Ayúdanos a llegar más lejos!',
+        html: `
+          <div style="text-align:center; padding:4px 0;">
+            <p style="font-size:1.1rem; margin-bottom:16px; color:#ddd;">
+              Comparte esta causa con tus amigos y familiares. <br>
+              <span style="color:#f9d976;">¡Juntos podemos hacer la diferencia! 💛</span>
+            </p>
+            <div style="display:flex; flex-wrap:wrap; justify-content:center; gap:12px; margin:12px 0;">
+              <button onclick="window.open('https://api.whatsapp.com/send?text=${mensaje}', '_blank')" 
+                      style="background:#25D366; border:none; border-radius:50px; padding:12px 20px; color:#fff; font-weight:600; cursor:pointer; display:inline-flex; align-items:center; gap:8px; transition:0.2s; box-shadow:0 2px 8px rgba(37,211,102,0.4);"
+                      onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+                <span style="font-size:1.5rem;">📱</span> WhatsApp
+              </button>
+              <button onclick="window.open('https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}', '_blank')" 
+                      style="background:#1877F2; border:none; border-radius:50px; padding:12px 20px; color:#fff; font-weight:600; cursor:pointer; display:inline-flex; align-items:center; gap:8px; transition:0.2s; box-shadow:0 2px 8px rgba(24,119,242,0.4);"
+                      onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+                <span style="font-size:1.5rem;">👍</span> Facebook
+              </button>
+              <button onclick="window.open('https://twitter.com/intent/tweet?text=${mensaje}', '_blank')" 
+                      style="background:#000; border:none; border-radius:50px; padding:12px 20px; color:#fff; font-weight:600; cursor:pointer; display:inline-flex; align-items:center; gap:8px; transition:0.2s; box-shadow:0 2px 8px rgba(0,0,0,0.4);"
+                      onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+                <span style="font-size:1.5rem;">🐦</span> Twitter
+              </button>
+              <button onclick="copiarEnlace('${url}')" 
+                      style="background:#6c7a89; border:none; border-radius:50px; padding:12px 20px; color:#fff; font-weight:600; cursor:pointer; display:inline-flex; align-items:center; gap:8px; transition:0.2s; box-shadow:0 2px 8px rgba(108,122,137,0.4);"
+                      onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+                <span style="font-size:1.5rem;">🔗</span> Copiar enlace
+              </button>
+            </div>
+            <p style="font-size:0.85rem; color:#888; margin-top:12px;">
+              ¡Gracias por compartir! ❤️
+            </p>
+          </div>
+        `,
+        showConfirmButton: true,
+        confirmButtonText: '✅ Listo',
+        confirmButtonColor: '#f9d976',
+        background: '#1a1f2a',
+        color: '#fff',
+        showClass: {
+          popup: 'animate__animated animate__fadeInUp animate__faster'
+        },
+        hideClass: {
+          popup: 'animate__animated animate__fadeOutDown animate__faster'
+        },
+        width: '520px',
+        padding: '1.5rem'
+      });
+    }
+
+    function copiarEnlace(url) {
+      if (navigator.clipboard) {
+        navigator.clipboard.writeText(url).then(() => {
+          Swal.fire({
+            icon: 'success',
+            title: '📋 ¡Enlace copiado!',
+            timer: 2000,
+            showConfirmButton: false,
+            background: '#1a1f2a',
+            color: '#fff'
+          });
+        }).catch(() => {
+          fallbackCopiar(url);
+        });
+      } else {
+        fallbackCopiar(url);
+      }
+    }
+
+    function fallbackCopiar(texto) {
+      const textArea = document.createElement('textarea');
+      textArea.value = texto;
+      document.body.appendChild(textArea);
+      textArea.select();
+      try {
+        document.execCommand('copy');
+        Swal.fire({
+          icon: 'success',
+          title: '📋 ¡Enlace copiado!',
+          timer: 2000,
+          showConfirmButton: false,
+          background: '#1a1f2a',
+          color: '#fff'
+        });
+      } catch (err) {
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: 'No se pudo copiar el enlace.',
+          confirmButtonColor: '#e74c3c',
+          background: '#1a1f2a',
+          color: '#fff'
+        });
+      }
+      document.body.removeChild(textArea);
+    }
+
+    // ================================================================
     //  CONFIGURACIÓN
     // ================================================================
-    const API_URL = 'https://script.google.com/macros/s/AKfycbw-f8hVfnQzr68AVQxOvVZCuG6ClgdgSWxtAWoLO6EVihBCMAJ4X5sIV9F5qql1jVC6/exec';
+    const API_URL =
+      'https://script.google.com/macros/s/AKfycbw-f8hVfnQzr68AVQxOvVZCuG6ClgdgSWxtAWoLO6EVihBCMAJ4X5sIV9F5qql1jVC6/exec';
     const NEQUI_NUM = "3138237540";
+
+    // ================================================================
+    //  GENERAR HUELLAS EN EL FONDO
+    // ================================================================
+    function generarHuellas() {
+      const bg = document.getElementById('pawBg');
+      const emojis = ['🐾', '🐾', '🐾', '🐾', '🐾', '🐾', '🐾', '🐾', '🐾', '🐾'];
+      const colores = ['#f9d976', '#f39c12', '#6dd5ed', '#e74c3c', '#2ecc71', '#9b59b6', '#e67e22', '#1abc9c'];
+      for (let i = 0; i < 25; i++) {
+        const paw = document.createElement('div');
+        paw.className = 'paw';
+        paw.textContent = emojis[i % emojis.length];
+        paw.style.left = Math.random() * 95 + '%';
+        paw.style.top = Math.random() * 95 + '%';
+        paw.style.fontSize = (2 + Math.random() * 4) + 'rem';
+        paw.style.opacity = 0.03 + Math.random() * 0.12;
+        paw.style.color = colores[Math.floor(Math.random() * colores.length)];
+        paw.style.animationDuration = (15 + Math.random() * 25) + 's';
+        paw.style.animationDelay = (Math.random() * 20) + 's';
+        bg.appendChild(paw);
+      }
+    }
+    generarHuellas();
 
     // ================================================================
     //  DATOS DE ANIMALES (generados localmente)
     // ================================================================
     const nombresPerro = [
-      "Max","Luna","Rocky","Bella","Toby","Coco","Nala","Simba",
-      "Bruno","Daisy","Charlie","Lola","Thor","Molly","Leo",
-      "Kira","Rex","Milo","Lily","Oscar","Zeus","Maya","Jack",
-      "Sasha","Tango","Roko","Lúa","Koda","Akira","Tita"
+      "Max", "Luna", "Rocky", "Bella", "Toby", "Coco", "Nala", "Simba",
+      "Bruno", "Daisy", "Charlie", "Lola", "Thor", "Molly", "Leo",
+      "Kira", "Rex", "Milo", "Lily", "Oscar", "Zeus", "Maya", "Jack",
+      "Sasha", "Tango", "Roko", "Lúa", "Koda", "Akira", "Tita"
     ];
     const nombresGato = [
-      "Mishi","Garfield","Salem","Luna","Simba","Mia",
-      "Tigre","Pelusa","Negro","Canela","Ginger","Nube"
+      "Mishi", "Garfield", "Salem", "Luna", "Simba", "Mia",
+      "Tigre", "Pelusa", "Negro", "Canela", "Ginger", "Nube"
     ];
     const razasPerro = [
-      "Labrador","Golden","Bulldog","Beagle","Pastor Alemán",
-      "Chihuahua","Poodle","Rottweiler","Yorkshire","Dachshund",
-      "Pomerania","San Bernardo","Husky","Border Collie","Doberman",
-      "Shih Tzu","Boxer","Gran Danés","Cocker","Pug",
-      "Maltés","Schnauzer","Akita","Weimaraner","Corgi",
-      "Bichón","Terrier","Galgo","Mastín","Setter"
+      "Labrador", "Golden", "Bulldog", "Beagle", "Pastor Alemán",
+      "Chihuahua", "Poodle", "Rottweiler", "Yorkshire", "Dachshund",
+      "Pomerania", "San Bernardo", "Husky", "Border Collie", "Doberman",
+      "Shih Tzu", "Boxer", "Gran Danés", "Cocker", "Pug",
+      "Maltés", "Schnauzer", "Akita", "Weimaraner", "Corgi",
+      "Bichón", "Terrier", "Galgo", "Mastín", "Setter"
     ];
     const razasGato = [
-      "Siamés","Persa","Maine Coon","Bengala","Sphynx",
-      "Británico","Fold","Oriental","Ragdoll","Angora",
-      "Bombay","Cali"
+      "Siamés", "Persa", "Maine Coon", "Bengala", "Sphynx",
+      "Británico", "Fold", "Oriental", "Ragdoll", "Angora",
+      "Bombay", "Cali"
     ];
     const descripciones = [
       "Rescatado de la calle, desnutrido y con miedo.",
@@ -213,7 +1172,7 @@
           tipo: 'gato',
           nombre: nombresGato[i],
           raza: razasGato[i % razasGato.length] + ' (criollo)',
-          descripcion: descripciones[(i+3) % descripciones.length],
+          descripcion: descripciones[(i + 3) % descripciones.length],
           imagen: `https://picsum.photos/seed/gato-${i}/400/400`
         });
       }
@@ -231,8 +1190,7 @@
     const btnLogin = document.getElementById('btnLogin');
     const btnLogout = document.getElementById('btnLogout');
     const btnComprar = document.getElementById('btnComprar');
-    const btnNequi = document.getElementById('btnNequi');
-    const btnCopyNequi = document.getElementById('btnCopyNequi');
+    const btnNequiCopy = document.getElementById('btnNequiCopy');
     const btnRefresh = document.getElementById('btnRefresh');
     const authStatus = document.getElementById('authStatus');
     const diagnostico = document.getElementById('diagnostico');
@@ -254,10 +1212,12 @@
       diagnostico.textContent = mensaje;
       diagnostico.className = 'diagnostico ' + tipo;
     }
+
     function ocultarDiagnostico() {
       diagnostico.className = 'diagnostico';
       diagnostico.textContent = '';
     }
+
     function actualizarSaldoUI() {
       saldoUsuario.textContent = saldoActual;
     }
@@ -275,7 +1235,6 @@
       return data;
     }
 
-    // ---- Usuarios ----
     async function registrarUsuario(email, nombre) {
       const data = await callApi({ action: 'registrarUsuario', email, nombre });
       return data;
@@ -286,13 +1245,11 @@
       return data.saldo;
     }
 
-    // ---- Créditos ----
     async function getCreditosTodos() {
       const data = await callApi({ action: 'getCreditos' });
-      return data.creditos; // objeto { animalId: creditos }
+      return data.creditos;
     }
 
-    // ---- Donaciones ----
     async function realizarDonacion(email, nombre, animalId, nombreAnimal, cantidad) {
       const data = await callApi({
         action: 'addDonacion',
@@ -302,7 +1259,7 @@
         nombreAnimal,
         cantidad
       });
-      return data; // { ok, saldo, creditos }
+      return data;
     }
 
     async function getDonaciones() {
@@ -311,13 +1268,14 @@
     }
 
     // ================================================================
-    //  LOGIN / LOGOUT
+    //  LOGIN / LOGOUT (con loader)
     // ================================================================
     async function loginUsuario(email, nombre) {
       if (!email || !nombre || !email.includes('@')) {
         mostrarDiagnostico('❌ Ingresa nombre y correo válido.', 'error');
         return;
       }
+      email = email.toLowerCase().trim();
       try {
         await registrarUsuario(email, nombre);
         const saldo = await getSaldo(email);
@@ -339,8 +1297,12 @@
 
         localStorage.setItem('peluditos_email', email);
         localStorage.setItem('peluditos_nombre', nombre);
+
+        // Ya no mostramos la alerta de compartir aquí, porque se muestra al inicio de la página
       } catch (error) {
         mostrarDiagnostico('❌ Error: ' + error.message, 'error');
+      } finally {
+        ocultarLoader();
       }
     }
 
@@ -360,63 +1322,157 @@
       ocultarDiagnostico();
     }
 
+    // ---- Evento del botón login con loader ----
     btnLogin.addEventListener('click', () => {
       const email = authEmail.value.trim();
       const nombre = authNombre.value.trim();
+      mostrarLoader();
       loginUsuario(email, nombre);
     });
 
     btnLogout.addEventListener('click', logoutUsuario);
 
-    // Restaurar sesión
+    // ================================================================
+    //  RESTAURACIÓN DE SESIÓN (SOLO RELLENAR CAMPOS, NO LOGIN AUTO)
+    // ================================================================
     const emailGuardado = localStorage.getItem('peluditos_email');
     const nombreGuardado = localStorage.getItem('peluditos_nombre');
-    if (emailGuardado && nombreGuardado) {
-      authEmail.value = emailGuardado;
-      authNombre.value = nombreGuardado;
-      loginUsuario(emailGuardado, nombreGuardado);
-    }
+    if (emailGuardado) authEmail.value = emailGuardado;
+    if (nombreGuardado) authNombre.value = nombreGuardado;
 
     // ================================================================
-    //  COMPRA MANUAL (NUEVO COMPORTAMIENTO)
+    //  COMPRA MANUAL (con SweetAlert2)
     // ================================================================
     async function comprarHuesitos() {
       if (!usuarioActual) {
-        alert('Debes iniciar sesión.');
+        Swal.fire({
+          icon: 'warning',
+          title: '¡Un momentito!',
+          text: 'Para comprar huesitos, primero inicia sesión 💛',
+          confirmButtonColor: '#6dd5ed',
+          background: '#1a1f2a',
+          color: '#fff',
+          confirmButtonText: 'Entendido'
+        });
         return;
       }
-      const cantidad = prompt('¿Cuántos huesitos quieres comprar? (1 huesito = $1.000 COP)', '5');
+
+      const { value: cantidad } = await Swal.fire({
+        title: '🦴 ¿Cuántos huesitos quieres?',
+        html: `
+          <p style="margin-bottom:8px;">Cada huesito vale <strong>$1.000 COP</strong></p>
+          <p style="font-size:0.9rem;color:#aaa;">Elige la cantidad que deseas comprar</p>
+        `,
+        input: 'number',
+        inputLabel: 'Cantidad de huesitos',
+        inputPlaceholder: 'Ej: 5',
+        inputAttributes: { min: 1, step: 1 },
+        showCancelButton: true,
+        confirmButtonText: '✨ Comprar',
+        cancelButtonText: 'Cancelar',
+        confirmButtonColor: '#2ecc71',
+        cancelButtonColor: '#e74c3c',
+        background: '#1a1f2a',
+        color: '#fff',
+        icon: '🎯',
+        reverseButtons: true
+      });
+
       if (!cantidad || parseInt(cantidad) < 1) return;
       const num = parseInt(cantidad);
       const total = num * 1000;
+      const mensaje =
+        `Hola, quiero comprar ${num} huesitos para mi correo ${usuarioActual}. El total es $${total.toLocaleString()} COP. Adjunto el comprobante de pago por Nequi al número ${NEQUI_NUM}.`;
 
-      // Mostrar instrucciones y abrir WhatsApp
-      const mensaje = `Hola, quiero comprar ${num} huesitos para mi correo ${usuarioActual}. El total es $${total.toLocaleString()} COP. Adjunto el comprobante de pago por Nequi al número ${NEQUI_NUM}.`;
-      const urlWhatsApp = `https://api.whatsapp.com/send?phone=57${NEQUI_NUM}&text=${encodeURIComponent(mensaje)}`;
+      const result = await Swal.fire({
+        title: '💳 ¡Pago seguro por Nequi!',
+        html: `
+          <div style="display:flex;flex-direction:column;align-items:center;gap:12px;padding:8px 0;">
+            <div style="display:flex;align-items:center;gap:10px;background:rgba(123,47,190,0.15);padding:10px 20px;border-radius:50px;border:1px solid rgba(123,47,190,0.3);">
+              <span style="display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;background:white;border-radius:50%;font-weight:900;font-size:20px;color:#7B2FBE;">N</span>
+              <span style="font-weight:700;color:#7B2FBE;font-size:1.1rem;">${NEQUI_NUM}</span>
+            </div>
+            <p style="font-size:1.2rem;font-weight:700;color:#f9d976;">$${total.toLocaleString()} COP</p>
+            <p style="font-size:0.9rem;color:#aaa;">Luego envía el comprobante por WhatsApp<br>y ¡listo! tus huesitos estarán en camino 🚀</p>
+          </div>
+        `,
+        icon: '💜',
+        showCancelButton: true,
+        confirmButtonText: '📱 Enviar comprobante',
+        cancelButtonText: 'Ahora no',
+        confirmButtonColor: '#25D366',
+        cancelButtonColor: '#e74c3c',
+        background: '#1a1f2a',
+        color: '#fff',
+        reverseButtons: true
+      });
 
-      if (confirm(`💳 Debes pagar $${total.toLocaleString()} COP por Nequi al número ${NEQUI_NUM}.\n\nLuego envía el comprobante por WhatsApp.\n\n¿Abrir WhatsApp ahora?`)) {
-        window.open(urlWhatsApp, '_blank');
-        alert('📩 Recuerda enviar el comprobante de pago. Cuando lo verifique, acreditaremos los huesitos en tu cuenta.');
+      if (result.isConfirmed) {
+        window.open(
+          `https://api.whatsapp.com/send?phone=57${NEQUI_NUM}&text=${encodeURIComponent(mensaje)}`, '_blank');
+        await Swal.fire({
+          icon: 'success',
+          title: '🎉 ¡Listo!',
+          text: 'Cuando verifiquemos tu pago, tus huesitos aparecerán en tu cuenta. ¡Gracias por ayudar a los peluditos! 💛',
+          confirmButtonColor: '#2ecc71',
+          background: '#1a1f2a',
+          color: '#fff',
+          confirmButtonText: '❤️ ¡Gracias!',
+          timer: 5000,
+          timerProgressBar: true
+        });
       }
     }
 
     btnComprar.addEventListener('click', comprarHuesitos);
 
-    // Botón Nequi (atajo directo)
-    btnNequi.addEventListener('click', () => {
-      window.open(`https://api.whatsapp.com/send?phone=57${NEQUI_NUM}&text=Hola%2C%20quiero%20donar%20huesitos%20para%20los%20peluditos.`, '_blank');
-    });
-
-    btnCopyNequi.addEventListener('click', () => {
-      navigator.clipboard.writeText(NEQUI_NUM).then(() => {
-        alert('✅ Número de Nequi copiado: ' + NEQUI_NUM);
-      }).catch(() => {
-        alert('📋 Número de Nequi: ' + NEQUI_NUM);
-      });
+    // ================================================================
+    //  COPIAR NÚMERO NEQUI (con SweetAlert2)
+    // ================================================================
+    btnNequiCopy.addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(NEQUI_NUM);
+        Swal.fire({
+          icon: 'success',
+          title: '📋 ¡Número copiado!',
+          html: `
+            <p>Cuenta <strong>Nequi</strong></p>
+            <p style="font-size:1.8rem;font-weight:700;color:#7B2FBE;margin:8px 0;">${NEQUI_NUM}</p>
+            <p style="font-size:0.85rem;color:#aaa;">Ya puedes pegar el número en tu app de Nequi 💜</p>
+          `,
+          confirmButtonColor: '#7B2FBE',
+          background: '#1a1f2a',
+          color: '#fff',
+          confirmButtonText: '✅ Listo',
+          timer: 3000,
+          timerProgressBar: true
+        });
+      } catch {
+        const textArea = document.createElement('textarea');
+        textArea.value = NEQUI_NUM;
+        document.body.appendChild(textArea);
+        textArea.select();
+        document.execCommand('copy');
+        document.body.removeChild(textArea);
+        Swal.fire({
+          icon: 'success',
+          title: '📋 ¡Número copiado!',
+          html: `
+            <p>Cuenta <strong>Nequi</strong></p>
+            <p style="font-size:1.8rem;font-weight:700;color:#7B2FBE;margin:8px 0;">${NEQUI_NUM}</p>
+          `,
+          confirmButtonColor: '#7B2FBE',
+          background: '#1a1f2a',
+          color: '#fff',
+          confirmButtonText: '✅ Listo',
+          timer: 3000,
+          timerProgressBar: true
+        });
+      }
     });
 
     // ================================================================
-    //  ACTUALIZAR SALDO (refrescar desde la hoja)
+    //  ACTUALIZAR SALDO
     // ================================================================
     btnRefresh.addEventListener('click', async () => {
       if (!usuarioActual) return;
@@ -424,31 +1480,82 @@
         const nuevoSaldo = await getSaldo(usuarioActual);
         saldoActual = nuevoSaldo;
         actualizarSaldoUI();
-        // También recargar créditos por si hubo cambios
         const creditos = await getCreditosTodos();
         creditosAnimales = creditos || {};
         actualizarAnimales();
         await renderDonaciones();
-        mostrarDiagnostico('✅ Saldo actualizado correctamente.', 'success');
-        setTimeout(ocultarDiagnostico, 2000);
+        Swal.fire({
+          icon: 'success',
+          title: '🔄 ¡Saldo actualizado!',
+          text: `Ahora tienes ${saldoActual} 🦴 para donar`,
+          confirmButtonColor: '#2ecc71',
+          background: '#1a1f2a',
+          color: '#fff',
+          timer: 2000,
+          timerProgressBar: true,
+          showConfirmButton: false
+        });
       } catch (error) {
-        mostrarDiagnostico('❌ Error al actualizar: ' + error.message, 'error');
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: 'No se pudo actualizar: ' + error.message,
+          confirmButtonColor: '#e74c3c',
+          background: '#1a1f2a',
+          color: '#fff'
+        });
       }
     });
 
     // ================================================================
-    //  DONAR CRÉDITOS (con llamada al backend)
+    //  DONAR CRÉDITOS (con SweetAlert2)
     // ================================================================
     async function donarCredito(animalId, animalNombre) {
       if (!usuarioActual) {
-        alert('Debes iniciar sesión.');
+        Swal.fire({
+          icon: 'warning',
+          title: '¡Un momentito!',
+          text: 'Para donar, primero inicia sesión 💛',
+          confirmButtonColor: '#6dd5ed',
+          background: '#1a1f2a',
+          color: '#fff',
+          confirmButtonText: 'Entendido'
+        });
         return;
       }
-      const cantidad = prompt(`¿Cuántos huesitos quieres donar a ${animalNombre}? (Saldo: ${saldoActual})`, '1');
+
+      const { value: cantidad } = await Swal.fire({
+        title: `🦴 Donar a ${animalNombre}`,
+        html: `
+          <p style="margin-bottom:6px;">Tienes <strong>${saldoActual}</strong> huesitos</p>
+          <p style="font-size:0.9rem;color:#aaa;">¿Cuántos quieres donar?</p>
+        `,
+        input: 'number',
+        inputLabel: 'Cantidad',
+        inputPlaceholder: 'Ej: 2',
+        inputAttributes: { min: 1, max: saldoActual, step: 1 },
+        showCancelButton: true,
+        confirmButtonText: '💛 Donar',
+        cancelButtonText: 'Cancelar',
+        confirmButtonColor: '#f9d976',
+        cancelButtonColor: '#e74c3c',
+        background: '#1a1f2a',
+        color: '#fff',
+        reverseButtons: true
+      });
+
       if (!cantidad || parseInt(cantidad) < 1) return;
       const num = parseInt(cantidad);
       if (num > saldoActual) {
-        alert('❌ No tienes suficientes huesitos.');
+        Swal.fire({
+          icon: 'error',
+          title: '😅 ¡Ups!',
+          text: 'No tienes suficientes huesitos. Compra más y vuelve a intentarlo.',
+          confirmButtonColor: '#e74c3c',
+          background: '#1a1f2a',
+          color: '#fff',
+          confirmButtonText: 'Entendido'
+        });
         return;
       }
 
@@ -467,9 +1574,32 @@
         actualizarAnimales();
         await renderDonaciones();
 
-        alert(`✅ Has donado ${num} huesitos a ${animalNombre}. ¡Gracias!`);
+        Swal.fire({
+          icon: 'success',
+          title: '🎉 ¡Donación exitosa!',
+          html: `
+            <div style="font-size:1.2rem;margin:8px 0;">
+              Donaste <strong>${num}</strong> 🦴 a <strong>${animalNombre}</strong>
+            </div>
+            <p style="color:#f9d976;font-size:1rem;">Saldo restante: ${saldoActual} 🦴</p>
+            <p style="font-size:0.9rem;color:#aaa;margin-top:6px;">¡Gracias por hacer feliz a este peludito! 💛</p>
+          `,
+          confirmButtonColor: '#f9d976',
+          background: '#1a1f2a',
+          color: '#fff',
+          confirmButtonText: '❤️ ¡Gracias!',
+          timer: 4000,
+          timerProgressBar: true
+        });
       } catch (error) {
-        alert('❌ Error al donar: ' + error.message);
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: 'No se pudo donar: ' + error.message,
+          confirmButtonColor: '#e74c3c',
+          background: '#1a1f2a',
+          color: '#fff'
+        });
       }
     }
 
@@ -487,7 +1617,7 @@
       } else {
         filtrados = [...ANIMALES];
       }
-      filtrados.sort((a,b) => a.nombre.localeCompare(b.nombre));
+      filtrados.sort((a, b) => a.nombre.localeCompare(b.nombre));
 
       animalesGrid.innerHTML = '';
       filtrados.forEach(animal => {
@@ -495,17 +1625,17 @@
         const div = document.createElement('div');
         div.className = 'animal-card';
         div.innerHTML = `
-          <img src="${animal.imagen}" alt="${animal.nombre}" loading="lazy" />
-          <div class="animal-info">
-            <div class="nombre">${animal.nombre}</div>
-            <div class="raza">${animal.raza}</div>
-            <div class="creditos">
-              <span class="huesito">🦴</span> ${creditos}
+            <img src="${animal.imagen}" alt="${animal.nombre}" loading="lazy" />
+            <div class="animal-info">
+              <div class="nombre">${animal.nombre}</div>
+              <div class="raza">${animal.raza}</div>
+              <div class="creditos">
+                <span class="huesito">🦴</span> ${creditos}
+              </div>
+              <div style="font-size:0.6rem;color:#aaa;margin:2px 0;">${animal.descripcion}</div>
+              <button class="btn-donar" onclick="window.donarCredito('${animal.id}','${animal.nombre}')">Donar 🥫</button>
             </div>
-            <div style="font-size:0.6rem;color:#aaa;margin:2px 0;">${animal.descripcion}</div>
-            <button class="btn-donar" onclick="window.donarCredito('${animal.id}','${animal.nombre}')">Donar 🥫</button>
-          </div>
-        `;
+          `;
         const img = div.querySelector('img');
         img.addEventListener('click', (e) => {
           e.stopPropagation();
@@ -520,11 +1650,11 @@
       try {
         const donaciones = await getDonaciones();
         donacionesScroll.innerHTML = donaciones.map(item => `
-          <div class="donacion-item">
-            <span>❤️ ${item.nombre || item.email} donó ${item.cantidad} 🦴 a ${item.nombreAnimal}</span>
-            <span class="fecha">${item.fecha}</span>
-          </div>
-        `).join('');
+            <div class="donacion-item">
+              <span>❤️ ${item.nombre || item.email} donó ${item.cantidad} 🦴 a ${item.nombreAnimal}</span>
+              <span class="fecha">${item.fecha}</span>
+            </div>
+          `).join('');
       } catch (error) {
         console.error('Error al cargar donaciones:', error);
         donacionesScroll.innerHTML = '<div style="color:#888;">No se pudieron cargar las donaciones.</div>';
@@ -557,8 +1687,19 @@
       if (e.target === menuOverlay) menuOverlay.classList.remove('active');
     });
 
+    // ================================================================
+    //  MOSTRAR ALERTA DE COMPARTIR AL CARGAR LA PÁGINA (UNA SOLA VEZ)
+    //  AHORA SIN DEMORA (ejecución inmediata)
+    // ================================================================
+    if (!localStorage.getItem('peluditos_share_shown')) {
+      mostrarAlertaCompartir();
+      localStorage.setItem('peluditos_share_shown', 'true');
+    }
+
     console.log('🐾 Sistema conectado a Google Sheets. URL:', API_URL);
     console.log('ℹ️ Las recargas son manuales. El administrador actualiza el saldo en la hoja.');
+    console.log('🔐 El correo se guarda en minúsculas y no hay login automático.');
+    console.log('📢 Alerta de compartir mostrada al inicio (una sola vez).');
   </script>
 </body>
 </html>
