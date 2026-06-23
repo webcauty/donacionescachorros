@@ -807,7 +807,7 @@
       <ul>
         <li onclick="mostrarInfo('🔐 Política de privacidad', 'Tus datos solo se usan para gestionar donaciones. No compartimos tu información con terceros.')"><span class="icon">🔐</span><span class="text">Política de privacidad</span><span class="arrow">›</span></li>
         <li onclick="mostrarInfo('📋 Términos y condiciones', 'Al donar aceptas que los fondos se usen exclusivamente para el cuidado, alimentación y atención veterinaria de los animales del refugio.')"><span class="icon">📋</span><span class="text">Términos y condiciones</span><span class="arrow">›</span></li>
-        <li onclick="mostrarInfo('📞 Contacto', '📧 refugiopeluditos@mbox.re<br>📱 WhatsApp: 3138237540<br>🕒 Disponibles de lunes a domingo, 8am - 8pm')"><span class="icon">📞</span><span class="text">Contacto</span><span class="arrow">›</span></li>
+        <li onclick="mostrarInfo('📞 Contacto', '📧 tudonacion@mbox.re<br>📱 WhatsApp: 3138237540<br>🕒 Disponibles de lunes a domingo, 8am - 8pm')"><span class="icon">📞</span><span class="text">Contacto</span><span class="arrow">›</span></li>
         <li onclick="mostrarInfo('🔄 Acerca de', 'Todas las donaciones quedan registradas de forma transparente.')"><span class="icon">🔄</span><span class="text">Acerca de</span><span class="arrow">›</span></li>
         <li onclick="mostrarInfo('🌟 Nuestra misión', 'Cada huesito donado se traduce en comida, vacunas, medicinas y mucho amor para estos peluditos que han sido rescatados y necesitan una segunda oportunidad.')"><span class="icon">🌟</span><span class="text">Nuestra misión</span><span class="arrow">›</span></li>
       </ul>
@@ -1128,15 +1128,116 @@
       }
     });
 
+    // ====== BOTÓN REFRESH CON ALERTA BONITA Y ANIMADA ======
     btnRefresh.addEventListener('click', async () => {
       if (!usuarioActual) return;
+
+      // Mostrar loader mientras se consulta
+      Swal.fire({
+        title: '🔄 Consultando saldo...',
+        html: '<div class="spinner" style="width:40px;height:40px;border:4px solid rgba(249,217,118,0.2);border-top-color:#f9d976;border-radius:50%;animation:spin 0.7s linear infinite;margin:0 auto;"></div>',
+        allowOutsideClick: false,
+        showConfirmButton: false,
+        background: '#1a1f2a',
+        color: '#fff',
+        timer: 1500,
+        timerProgressBar: true,
+        didOpen: () => {
+          const style = document.createElement('style');
+          style.textContent = '@keyframes spin { to { transform: rotate(360deg); } }';
+          document.head.appendChild(style);
+        }
+      });
+
       try {
         const nuevoSaldo = await getSaldo(usuarioActual);
         saldoActual = nuevoSaldo;
         actualizarSaldoUI();
-        Swal.fire({ icon:'success', title:'🔄 ¡Saldo actualizado!', text:`Tienes ${saldoActual} 🦴`, confirmButtonColor:'#2ecc71', background:'#1a1f2a', color:'#fff', timer:2000, showConfirmButton:false });
+
+        // Alerta mejorada con diseño atractivo
+        Swal.fire({
+          icon: 'success',
+          title: '✨ ¡Saldo actualizado!',
+          html: `
+            <div style="display:flex;flex-direction:column;align-items:center;gap:12px;padding:8px 0;">
+              <div style="font-size:4rem;animation: bounceIcon 1s ease-in-out infinite;">🦴</div>
+              <div style="font-size:2.8rem;font-weight:800;color:#f9d976;text-shadow:0 0 20px rgba(249,217,118,0.4);animation: pulseSaldo 1.5s ease-in-out infinite;">
+                ${saldoActual}
+              </div>
+              <div style="font-size:1.1rem;color:#ddd;background:rgba(249,217,118,0.08);padding:8px 24px;border-radius:40px;border:1px solid rgba(249,217,118,0.15);">
+                🦴 huesitos disponibles para donar
+              </div>
+              <p style="color:#888;font-size:0.9rem;margin-top:6px;">
+                ¡Gracias por seguir ayudando a los peluditos! 💛
+              </p>
+            </div>
+          `,
+          showConfirmButton: true,
+          confirmButtonText: '❤️ ¡Entendido!',
+          confirmButtonColor: '#2ecc71',
+          background: '#1a1f2a',
+          color: '#fff',
+          timer: 3000,
+          timerProgressBar: true,
+          showClass: {
+            popup: 'animate__animated animate__fadeInUp animate__faster'
+          },
+          hideClass: {
+            popup: 'animate__animated animate__fadeOutDown animate__faster'
+          },
+          didOpen: () => {
+            const style = document.createElement('style');
+            style.textContent = `
+              @keyframes pulseSaldo {
+                0%, 100% { transform: scale(1); }
+                50% { transform: scale(1.05); }
+              }
+              @keyframes bounceIcon {
+                0%, 100% { transform: translateY(0); }
+                50% { transform: translateY(-10px); }
+              }
+            `;
+            document.head.appendChild(style);
+
+            // Lluvia de emojis al abrir
+            for (let i = 0; i < 12; i++) {
+              setTimeout(() => {
+                const emojis = ['🦴', '✨', '🐾', '💛', '🎉'];
+                const el = document.createElement('span');
+                el.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+                el.style.position = 'fixed';
+                el.style.left = (10 + Math.random() * 80) + '%';
+                el.style.top = (30 + Math.random() * 40) + '%';
+                el.style.fontSize = (1.5 + Math.random() * 2) + 'rem';
+                el.style.zIndex = '99999';
+                el.style.pointerEvents = 'none';
+                el.style.transition = 'all 1.5s cubic-bezier(0.34, 1.56, 0.64, 1)';
+                el.style.opacity = '1';
+                document.body.appendChild(el);
+                setTimeout(() => {
+                  el.style.top = (80 + Math.random() * 20) + '%';
+                  el.style.opacity = '0';
+                  el.style.transform = `rotate(${Math.random() * 360}deg) scale(0.5)`;
+                }, 50);
+                setTimeout(() => {
+                  document.body.removeChild(el);
+                }, 2000);
+              }, i * 80);
+            }
+          }
+        });
       } catch (error) {
-        Swal.fire({ icon:'error', title:'Error', text:'No se pudo actualizar: '+error.message, confirmButtonColor:'#e74c3c', background:'#1a1f2a', color:'#fff' });
+        Swal.fire({
+          icon: 'error',
+          title: '😿 Error al actualizar',
+          text: 'No se pudo obtener tu saldo: ' + error.message,
+          confirmButtonColor: '#e74c3c',
+          background: '#1a1f2a',
+          color: '#fff',
+          showClass: {
+            popup: 'animate__animated animate__shakeX'
+          }
+        });
       }
     });
 
@@ -1316,7 +1417,7 @@
       }, 1500);
     }
 
-    console.log('🐾 Logo integrado correctamente. Datos sincronizados con Google Sheets.');
+    console.log('🐾 Todo integrado: logo, alertas animadas y sincronización con Google Sheets.');
   </script>
 </body>
 </html>
