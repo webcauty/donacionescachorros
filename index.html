@@ -4,11 +4,11 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>🦴 Ayuda a los Peluditos</title>
-  
+
   <!-- Favicon personalizado (huella) -->
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐾</text></svg>" />
   <link rel="icon" type="image/png" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAARzQklUCAgICHwIZAAAAAlwSFlzAAAOxAAADsQBlSsOGwAAAAZJREFUWMPt1zEKwkAQBeBJ3iW3SLAWsRIRCy8QK1tbO4sUqVKlTpVCSaUKW1tbO1tbWwsLg5CFBGZ309uZ/T9jGJhliBDYsAgOguA5AkLjSJ+97W//2uvmOI0KoaP9pTFVfzy4QYRFVgQET4gA7IRAQIQL5rCejgGEP/UXQgLC+HsCBEAQr2P4VwQEgAAAwJ9IgE1IgA0gILwJYvMEiAAQ0t9nTGLH7yQ6/0jENYgEAA2IAAD8LwSWkwDrCkS0zUESUACgAAAEwe6DQwAAAAAAAAAAwN98AmxMhA0AAAAASUVORK5CYII=" />
-  
+
   <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet" />
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11">
   </script>
@@ -359,6 +359,170 @@
     .btn-login:active {
       transform: scale(0.98);
     }
+
+    /* ====== BOTÓN COMPARTIR EN LOGIN ====== */
+    .separador-o {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin: 16px 0 12px;
+      color: #888;
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    .separador-o::before,
+    .separador-o::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: rgba(255, 255, 255, 0.08);
+    }
+    .btn-compartir-login {
+      width: 100%;
+      padding: 16px 20px;
+      border-radius: 40px;
+      border: none;
+      font-family: 'Quicksand', sans-serif;
+      font-weight: 700;
+      font-size: 1.1rem;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(135deg, #ff6b9d, #c44dff, #6b5ce7);
+      background-size: 200% 200%;
+      animation: gradientShift 4s ease infinite;
+      color: #fff;
+      letter-spacing: 0.5px;
+      box-shadow: 0 6px 24px rgba(196, 77, 255, 0.35), 0 0 0 0 rgba(255, 107, 157, 0.5);
+      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+    .btn-compartir-login:hover {
+      transform: scale(1.04) translateY(-2px);
+      box-shadow: 0 10px 36px rgba(196, 77, 255, 0.5), 0 0 0 8px rgba(255, 107, 157, 0.08);
+      animation: gradientShift 2s ease infinite;
+    }
+    .btn-compartir-login:active {
+      transform: scale(0.97);
+      box-shadow: 0 4px 16px rgba(196, 77, 255, 0.4);
+    }
+    .btn-compartir-login .compartir-icono {
+      font-size: 1.6rem;
+      animation: bounceIcon 1.2s ease-in-out infinite;
+      flex-shrink: 0;
+    }
+    .btn-compartir-login .compartir-texto {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      line-height: 1.2;
+    }
+    .btn-compartir-login .compartir-texto .titulo {
+      font-size: 1.05rem;
+      font-weight: 700;
+    }
+    .btn-compartir-login .compartir-texto .subtitulo {
+      font-size: 0.72rem;
+      font-weight: 400;
+      opacity: 0.85;
+    }
+    .btn-compartir-login .chispas {
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      pointer-events: none;
+    }
+    .btn-compartir-login .chispa {
+      position: absolute;
+      width: 6px;
+      height: 6px;
+      background: #fff;
+      border-radius: 50%;
+      animation: sparkle 2s ease-in-out infinite;
+      opacity: 0;
+    }
+    .btn-compartir-login .chispa:nth-child(1) {
+      top: 20%;
+      left: 10%;
+      animation-delay: 0s;
+    }
+    .btn-compartir-login .chispa:nth-child(2) {
+      top: 60%;
+      left: 80%;
+      animation-delay: 0.6s;
+    }
+    .btn-compartir-login .chispa:nth-child(3) {
+      top: 30%;
+      left: 90%;
+      animation-delay: 1.2s;
+    }
+    .btn-compartir-login .chispa:nth-child(4) {
+      top: 70%;
+      left: 15%;
+      animation-delay: 0.3s;
+    }
+    .btn-compartir-login .chispa:nth-child(5) {
+      top: 50%;
+      left: 50%;
+      animation-delay: 0.9s;
+    }
+
+    @keyframes gradientShift {
+      0% {
+        background-position: 0% 50%;
+      }
+      50% {
+        background-position: 100% 50%;
+      }
+      100% {
+        background-position: 0% 50%;
+      }
+    }
+    @keyframes bounceIcon {
+      0%,
+      100% {
+        transform: translateY(0) scale(1);
+      }
+      25% {
+        transform: translateY(-6px) scale(1.15);
+      }
+      50% {
+        transform: translateY(0) scale(1);
+      }
+      75% {
+        transform: translateY(-3px) scale(1.08);
+      }
+    }
+    @keyframes sparkle {
+      0%,
+      100% {
+        opacity: 0;
+        transform: scale(0) rotate(0deg);
+      }
+      20% {
+        opacity: 0.9;
+      }
+      50% {
+        opacity: 1;
+        transform: scale(1.5) rotate(180deg);
+      }
+      80% {
+        opacity: 0.4;
+      }
+      100% {
+        opacity: 0;
+        transform: scale(0) rotate(360deg);
+      }
+    }
+
     .status {
       font-size: 0.95rem;
       color: #bbb;
@@ -1039,6 +1203,16 @@
         padding: 12px 16px;
         font-size: 0.85rem;
       }
+      .btn-compartir-login {
+        padding: 14px 16px;
+        font-size: 1rem;
+      }
+      .btn-compartir-login .compartir-texto .titulo {
+        font-size: 0.95rem;
+      }
+      .btn-compartir-login .compartir-texto .subtitulo {
+        font-size: 0.68rem;
+      }
     }
     @media (max-width: 400px) {
       .animales-grid {
@@ -1054,6 +1228,18 @@
       .categoria-btn {
         padding: 6px 16px;
         font-size: 0.9rem;
+      }
+      .btn-compartir-login {
+        padding: 12px 14px;
+      }
+      .btn-compartir-login .compartir-icono {
+        font-size: 1.3rem;
+      }
+      .btn-compartir-login .compartir-texto .titulo {
+        font-size: 0.9rem;
+      }
+      .btn-compartir-login .compartir-texto .subtitulo {
+        font-size: 0.65rem;
       }
     }
   </style>
@@ -1079,6 +1265,26 @@
       <input type="text" id="authNombre" placeholder="Tu nombre" aria-label="Nombre" />
       <input type="email" id="authEmail" placeholder="Correo electrónico" autocapitalize="off" aria-label="Correo electrónico" />
       <button class="btn-login" id="btnLogin">Ingresar / Registrarse</button>
+
+      <!-- ====== SEPARADOR "O" ====== -->
+      <div class="separador-o">🐾 o también 🐾</div>
+
+      <!-- ====== BOTÓN COMPARTIR EN LOGIN (LLAMATIVO) ====== -->
+      <button class="btn-compartir-login" id="btnCompartirLogin" aria-label="Compartir esta causa">
+        <span class="compartir-icono">📢</span>
+        <span class="compartir-texto">
+          <span class="titulo">¡Comparte esta causa!</span>
+          <span class="subtitulo">Ayúdanos a llegar más lejos 💛</span>
+        </span>
+        <span class="chispas">
+          <span class="chispa"></span>
+          <span class="chispa"></span>
+          <span class="chispa"></span>
+          <span class="chispa"></span>
+          <span class="chispa"></span>
+        </span>
+      </button>
+
       <div class="status" id="authStatus">🔒 Ingresa tu nombre y correo</div>
       <div id="diagnostico" class="diagnostico"></div>
     </div>
@@ -1232,7 +1438,6 @@
       `;
       toastContainer.appendChild(toast);
 
-      // Auto-eliminar después de 6 segundos
       setTimeout(() => {
         if (toast.parentElement) {
           toast.classList.add('fade-out');
@@ -1242,7 +1447,6 @@
         }
       }, 6000);
 
-      // También cerrar al hacer clic en la toast (excepto en el botón)
       toast.addEventListener('click', (e) => {
         if (e.target.tagName !== 'BUTTON') {
           toast.classList.add('fade-out');
@@ -1465,6 +1669,7 @@
     const btnComprar = document.getElementById('btnComprar');
     const btnNequiCopy = document.getElementById('btnNequiCopy');
     const btnRefresh = document.getElementById('btnRefresh');
+    const btnCompartirLogin = document.getElementById('btnCompartirLogin');
     const authStatus = document.getElementById('authStatus');
     const diagnostico = document.getElementById('diagnostico');
     const saldoUsuario = document.getElementById('saldoUsuario');
@@ -1483,7 +1688,6 @@
     let saldoActual = 0;
     let creditosAnimales = {};
     let categoriaActiva = 'perros';
-    // Almacenamos SOLO las donaciones ficticias generadas (sin donaciones reales)
     let donacionesCache = [];
     let intervaloFicticio = null;
 
@@ -1525,12 +1729,7 @@
       return data.saldo;
     }
 
-    // Ya no necesitamos getCreditosTodos ni getDonaciones, porque empezamos de cero
-    // Los créditos de animales los manejamos localmente y se acumulan con donaciones ficticias
-
     async function realizarDonacion(email, nombre, animalId, nombreAnimal, cantidad) {
-      // Esta función se mantiene para donaciones reales, pero como hemos reiniciado,
-      // podríamos no usarla, pero la dejamos por si se necesita en el futuro.
       const data = await callApi({
         action: 'addDonacion',
         email,
@@ -1554,20 +1753,18 @@
       try {
         await registrarUsuario(email, nombre);
         const saldo = await getSaldo(email);
-        // Inicializamos todo en cero: no cargamos donaciones reales
-        // Tampoco cargamos créditos de animales, empezamos desde cero
         usuarioActual = email;
         nombreActual = nombre;
         saldoActual = saldo;
-        creditosAnimales = {}; // Comenzamos sin créditos en animales
-        donacionesCache = []; // Lista de donaciones vacía
-        window.donacionesFicticiasDinamicas = []; // Reiniciamos las dinámicas
+        creditosAnimales = {};
+        donacionesCache = [];
+        window.donacionesFicticiasDinamicas = [];
 
         authSection.classList.add('hidden');
         mainSection.classList.remove('hidden');
         actualizarSaldoUI();
         setCategoria('perros');
-        await renderDonaciones(); // Renderiza la lista vacía
+        await renderDonaciones();
         authStatus.textContent = `✅ Conectado como ${nombre} (${email})`;
         authStatus.style.color = '#2ecc71';
         ocultarDiagnostico();
@@ -1575,7 +1772,6 @@
         localStorage.setItem('peluditos_email', email);
         localStorage.setItem('peluditos_nombre', nombre);
 
-        // Iniciar donadores ficticios dinámicos (cada 30 segundos)
         iniciarDonadoresFicticios();
 
       } catch (error) {
@@ -1586,7 +1782,6 @@
     }
 
     function logoutUsuario() {
-      // Detener los donadores ficticios
       if (intervaloFicticio) {
         clearInterval(intervaloFicticio);
         intervaloFicticio = null;
@@ -1618,6 +1813,13 @@
     });
 
     btnLogout.addEventListener('click', logoutUsuario);
+
+    // ================================================================
+    //  BOTÓN COMPARTIR EN LOGIN
+    // ================================================================
+    btnCompartirLogin.addEventListener('click', () => {
+      mostrarAlertaCompartir();
+    });
 
     // ================================================================
     //  RESTAURACIÓN DE SESIÓN (SOLO RELLENAR CAMPOS, NO LOGIN AUTO)
@@ -1767,7 +1969,6 @@
         const nuevoSaldo = await getSaldo(usuarioActual);
         saldoActual = nuevoSaldo;
         actualizarSaldoUI();
-        // No recargamos donaciones ni créditos de animales, los dejamos como están
         Swal.fire({
           icon: 'success',
           title: '🔄 ¡Saldo actualizado!',
@@ -1844,7 +2045,6 @@
       }
 
       try {
-        // Realizar la donación en Google Sheets
         const result = await realizarDonacion(
           usuarioActual,
           nombreActual,
@@ -1852,16 +2052,12 @@
           animalNombre,
           num
         );
-        // Actualizar saldo local
         saldoActual = result.saldo;
-        // Actualizar créditos del animal localmente (sumamos)
         if (!creditosAnimales[animalId]) creditosAnimales[animalId] = 0;
         creditosAnimales[animalId] += num;
 
         actualizarSaldoUI();
         actualizarAnimales();
-        // No renderizamos donaciones de Google Sheets, mantenemos solo las ficticias
-        // Pero podemos agregar esta donación a la lista local como "real"
         const ahora = new Date();
         const fecha = ahora.toLocaleDateString('es-ES', { day: '2-digit', month: 'short', year: 'numeric' });
         const donacionReal = {
@@ -1872,19 +2068,15 @@
           email: usuarioActual,
           esFicticio: false
         };
-        // Insertar al inicio de la lista
         donacionesCache.unshift(donacionReal);
-        // Limitar a 50 elementos
         if (donacionesCache.length > 50) donacionesCache.length = 50;
         renderDonaciones();
 
-        // Mostrar notificación toast
         mostrarNotificacion(
           `<strong>${nombreActual || 'Alguien'}</strong> donó ${num} 🦴 a <strong>${animalNombre}</strong>`,
           '❤️'
         );
 
-        // Confeti + mensaje
         Swal.fire({
           icon: 'success',
           title: '🎉 ¡Donación exitosa!',
@@ -1904,7 +2096,6 @@
           timerProgressBar: true,
           showClass: { popup: 'animate__animated animate__tada' }
         });
-        // Confeti emoji
         for (let i = 0; i < 20; i++) {
           setTimeout(() => {
             const emoji = ['🎉', '🎊', '💛', '🐾', '🦴', '✨'][Math.floor(Math.random() * 6)];
@@ -1943,21 +2134,18 @@
     window.donarCredito = donarCredito;
 
     // ================================================================
-    //  DONADORES FICTICIOS DINÁMICOS (cada 30 segundos) CON NOTIFICACIÓN
+    //  DONADORES FICTICIOS DINÁMICOS (cada 57 segundos) CON NOTIFICACIÓN
     // ================================================================
     function generarDonacionFicticia() {
-      // Seleccionar animal aleatorio
       const animal = ANIMALES[Math.floor(Math.random() * ANIMALES.length)];
-      const cantidad = Math.floor(Math.random() * 6) + 5; // entre 5 y 10
+      const cantidad = Math.floor(Math.random() * 6) + 5;
       const nombre = NOMBRES_FICTICIOS[Math.floor(Math.random() * NOMBRES_FICTICIOS.length)];
       const ahora = new Date();
       const fecha = ahora.toLocaleDateString('es-ES', { day: '2-digit', month: 'short', year: 'numeric' });
 
-      // Actualizar créditos del animal
       if (!creditosAnimales[animal.id]) creditosAnimales[animal.id] = 0;
       creditosAnimales[animal.id] += cantidad;
 
-      // Crear el objeto de donación ficticia
       const donacion = {
         nombre: nombre,
         nombreAnimal: animal.nombre,
@@ -1967,18 +2155,14 @@
         esFicticio: true
       };
 
-      // Agregar a la lista local de donaciones (al inicio)
       donacionesCache.unshift(donacion);
-      // Limitar a 50 elementos
       if (donacionesCache.length > 50) donacionesCache.length = 50;
 
-      // Mostrar notificación toast
       mostrarNotificacion(
         `<strong>${nombre}</strong> donó ${cantidad} 🦴 a <strong>${animal.nombre}</strong>`,
         '✨'
       );
 
-      // Actualizar UI
       actualizarAnimales();
       renderDonaciones();
     }
@@ -1987,11 +2171,9 @@
       if (intervaloFicticio) {
         clearInterval(intervaloFicticio);
       }
-      // Generar una donación inmediata para que no haya espera
       setTimeout(() => {
         generarDonacionFicticia();
       }, 2000);
-      // Intervalo de 30 segundos
       intervaloFicticio = setInterval(generarDonacionFicticia, 57000);
     }
 
@@ -1999,7 +2181,7 @@
     //  ESTADÍSTICAS (solo con las donaciones locales)
     // ================================================================
     function actualizarEstadisticas() {
-      const todas = donacionesCache; // Solo usamos las donaciones locales (ficticias + reales que hayamos agregado)
+      const todas = donacionesCache;
 
       const totalDonaciones = todas.length;
       const totalHuesitos = todas.reduce((sum, d) => sum + (d.cantidad || 0), 0);
@@ -2007,7 +2189,6 @@
       totalDonacionesEl.textContent = totalDonaciones;
       totalHuesitosEl.textContent = totalHuesitos;
 
-      // Top donador
       const donadores = {};
       todas.forEach(d => {
         const key = d.nombre || d.email;
@@ -2032,9 +2213,7 @@
     //  RENDERIZAR DONACIONES (solo con la lista local)
     // ================================================================
     async function renderDonaciones() {
-      // No llamamos a la API, solo usamos donacionesCache
       const todas = donacionesCache;
-      // Mostrar las más recientes primero (ya están en orden)
       const mostrar = todas.slice(0, 50);
 
       donacionesScroll.innerHTML = mostrar.map(item => {
@@ -2045,7 +2224,6 @@
             fechaFormateada = `${parts[2]}/${parts[1]}/${parts[0]}`;
           }
         }
-        // TODOS los emojis son ❤️ (sin distinción)
         return `
           <div class="donacion-item">
             <span>❤️ ${item.nombre || item.email} donó ${item.cantidad} 🦴 a ${item.nombreAnimal}</span>
@@ -2148,9 +2326,10 @@
 
     console.log('🐾 Sistema conectado a Google Sheets. URL:', API_URL);
     console.log(`🎯 Meta de donación por animal: ${META_DONACION} huesitos`);
-    console.log('🔄 Donadores ficticios dinámicos cada 30 segundos (5-10 huesitos por animal).');
+    console.log('🔄 Donadores ficticios dinámicos cada 57 segundos (5-10 huesitos por animal).');
     console.log('❤️ Todos los emojis en el listado son corazones.');
     console.log('📊 Lista de donaciones y contadores comienzan desde cero al iniciar sesión.');
+    console.log('📢 Botón de compartir agregado en la pantalla de login.');
   </script>
 </body>
 </html>
