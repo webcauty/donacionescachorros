@@ -978,66 +978,120 @@
     }
 
     // ================================================================
-    //  ALERTA DE COMPARTIR (mejorada y siempre visible al inicio)
+    //  ALERTA DE COMPARTIR (NUEVA VERSIÓN)
+    //  - Diseño bonito y llamativo
+    //  - Sin botones de redes sociales (usa Web Share API o copia de enlace)
+    //  - Se muestra cada 12 horas (control por localStorage)
     // ================================================================
     function mostrarAlertaCompartir() {
       const url = window.location.href;
-      const mensaje = encodeURIComponent(
-        '🐶 ¡Ayuda a los peluditos! 🐱\nCada huesito donado se convierte en comida, vacunas y amor para perros y gatos rescatados. ¡Únete a esta causa! 🦴\n\n' +
-        url
-      );
+      const mensaje = '🐶 ¡Ayuda a los peluditos! 🐱\nCada huesito donado se convierte en comida, vacunas y amor para perros y gatos rescatados. ¡Únete a esta causa! 🦴\n\n' +
+        url;
+
+      // Construir el contenido HTML de la alerta
+      const htmlContent = `
+        <div style="text-align:center; padding:6px 0;">
+          <div style="font-size:3.5rem; line-height:1.2; margin-bottom:6px;">🐾</div>
+          <p style="font-size:1.2rem; font-weight:700; color:#f9d976; margin-bottom:10px;">
+            ¡Haz que más personas conozcan esta causa!
+          </p>
+          <p style="font-size:0.95rem; color:#ddd; margin-bottom:18px; max-width:400px; margin-left:auto; margin-right:auto;">
+            Comparte esta página con tus amigos y familiares. <br>
+            <span style="color:#f9d976;">¡Juntos podemos salvar más vidas! 💛</span>
+          </p>
+          <div style="display:flex; flex-direction:column; gap:12px; align-items:center; margin:10px 0;">
+            <button id="btnCompartirNativo" 
+                    style="background:linear-gradient(135deg, #f9d976, #f39c12); border:none; border-radius:60px; padding:14px 32px; color:#0b0e14; font-weight:700; font-size:1.1rem; cursor:pointer; display:inline-flex; align-items:center; gap:12px; transition:0.2s; box-shadow:0 4px 20px rgba(249,217,118,0.3); width:100%; justify-content:center;">
+              <span style="font-size:1.8rem;">📤</span> Compartir ahora
+            </button>
+            <button id="btnCopiarEnlace" 
+                    style="background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.15); border-radius:60px; padding:12px 24px; color:#ccc; font-weight:600; font-size:0.95rem; cursor:pointer; display:inline-flex; align-items:center; gap:10px; transition:0.2s; width:100%; justify-content:center;">
+              <span style="font-size:1.4rem;">🔗</span> Copiar enlace
+            </button>
+          </div>
+          <p style="font-size:0.8rem; color:#888; margin-top:14px;">
+            🌟 Tu apoyo nos ayuda a seguir adelante
+          </p>
+        </div>
+      `;
 
       Swal.fire({
-        title: '🐾 ¡Ayúdanos a llegar más lejos!',
-        html: `
-          <div style="text-align:center; padding:4px 0;">
-            <p style="font-size:1.1rem; margin-bottom:16px; color:#ddd;">
-              Comparte esta causa con tus amigos y familiares. <br>
-              <span style="color:#f9d976;">¡Juntos podemos hacer la diferencia! 💛</span>
-            </p>
-            <div style="display:flex; flex-wrap:wrap; justify-content:center; gap:12px; margin:12px 0;">
-              <button onclick="window.open('https://api.whatsapp.com/send?text=${mensaje}', '_blank')" 
-                      style="background:#25D366; border:none; border-radius:50px; padding:12px 20px; color:#fff; font-weight:600; cursor:pointer; display:inline-flex; align-items:center; gap:8px; transition:0.2s; box-shadow:0 2px 8px rgba(37,211,102,0.4);"
-                      onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
-                <span style="font-size:1.5rem;">📱</span> WhatsApp
-              </button>
-              <button onclick="window.open('https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}', '_blank')" 
-                      style="background:#1877F2; border:none; border-radius:50px; padding:12px 20px; color:#fff; font-weight:600; cursor:pointer; display:inline-flex; align-items:center; gap:8px; transition:0.2s; box-shadow:0 2px 8px rgba(24,119,242,0.4);"
-                      onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
-                <span style="font-size:1.5rem;">👍</span> Facebook
-              </button>
-              <button onclick="window.open('https://twitter.com/intent/tweet?text=${mensaje}', '_blank')" 
-                      style="background:#000; border:none; border-radius:50px; padding:12px 20px; color:#fff; font-weight:600; cursor:pointer; display:inline-flex; align-items:center; gap:8px; transition:0.2s; box-shadow:0 2px 8px rgba(0,0,0,0.4);"
-                      onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
-                <span style="font-size:1.5rem;">🐦</span> Twitter
-              </button>
-              <button onclick="copiarEnlace('${url}')" 
-                      style="background:#6c7a89; border:none; border-radius:50px; padding:12px 20px; color:#fff; font-weight:600; cursor:pointer; display:inline-flex; align-items:center; gap:8px; transition:0.2s; box-shadow:0 2px 8px rgba(108,122,137,0.4);"
-                      onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
-                <span style="font-size:1.5rem;">🔗</span> Copiar enlace
-              </button>
-            </div>
-            <p style="font-size:0.85rem; color:#888; margin-top:12px;">
-              ¡Gracias por compartir! ❤️
-            </p>
-          </div>
-        `,
-        showConfirmButton: true,
-        confirmButtonText: '✅ Listo',
-        confirmButtonColor: '#f9d976',
+        title: '🐕 ¡Comparte la causa!',
+        html: htmlContent,
+        showConfirmButton: false,
+        showCloseButton: true,
         background: '#1a1f2a',
         color: '#fff',
+        width: '520px',
+        padding: '1.8rem 1.5rem 1.2rem',
         showClass: {
           popup: 'animate__animated animate__fadeInUp animate__faster'
         },
         hideClass: {
           popup: 'animate__animated animate__fadeOutDown animate__faster'
         },
-        width: '520px',
-        padding: '1.5rem'
+        willOpen: () => {
+          // Asignar eventos después de que el DOM de la alerta esté listo
+          setTimeout(() => {
+            const btnNativo = document.getElementById('btnCompartirNativo');
+            const btnCopiar = document.getElementById('btnCopiarEnlace');
+
+            if (btnNativo) {
+              btnNativo.addEventListener('click', () => {
+                compartirNativo(mensaje, url);
+                Swal.close();
+              });
+            }
+            if (btnCopiar) {
+              btnCopiar.addEventListener('click', () => {
+                copiarEnlace(url);
+                Swal.close();
+              });
+            }
+          }, 50);
+        }
       });
     }
 
+    // ----- Función de compartir nativo (Web Share API) -----
+    function compartirNativo(mensaje, url) {
+      if (navigator.share) {
+        navigator.share({
+          title: 'Ayuda a los Peluditos',
+          text: mensaje,
+          url: url
+        }).catch((err) => {
+          if (err.name !== 'AbortError') {
+            // Si falla, ofrecer copiar enlace como respaldo
+            Swal.fire({
+              icon: 'info',
+              title: '📋 No se pudo compartir',
+              text: 'Puedes copiar el enlace manualmente.',
+              confirmButtonColor: '#f9d976',
+              background: '#1a1f2a',
+              color: '#fff',
+              confirmButtonText: 'Copiar enlace'
+            }).then(() => {
+              copiarEnlace(url);
+            });
+          }
+        });
+      } else {
+        // Si no soporta Web Share, copiar enlace directamente
+        copiarEnlace(url);
+        Swal.fire({
+          icon: 'success',
+          title: '📋 Enlace copiado',
+          text: '¡Ahora pégalo donde quieras compartirlo!',
+          timer: 2500,
+          showConfirmButton: false,
+          background: '#1a1f2a',
+          color: '#fff'
+        });
+      }
+    }
+
+    // ----- Función para copiar enlace (con fallback) -----
     function copiarEnlace(url) {
       if (navigator.clipboard) {
         navigator.clipboard.writeText(url).then(() => {
@@ -1083,6 +1137,22 @@
         });
       }
       document.body.removeChild(textArea);
+    }
+
+    // ================================================================
+    //  CONTROL DE FRECUENCIA (cada 12 horas)
+    // ================================================================
+    function deberiaMostrarAlerta() {
+      const ahora = Date.now();
+      const ultima = localStorage.getItem('peluditos_share_last');
+      if (!ultima) return true;
+      const diff = ahora - parseInt(ultima);
+      const doceHoras = 12 * 60 * 60 * 1000; // 43200000 ms
+      return diff >= doceHoras;
+    }
+
+    function registrarAlertaMostrada() {
+      localStorage.setItem('peluditos_share_last', Date.now().toString());
     }
 
     // ================================================================
@@ -1298,7 +1368,6 @@
         localStorage.setItem('peluditos_email', email);
         localStorage.setItem('peluditos_nombre', nombre);
 
-        // Ya no mostramos la alerta de compartir aquí, porque se muestra al inicio de la página
       } catch (error) {
         mostrarDiagnostico('❌ Error: ' + error.message, 'error');
       } finally {
@@ -1688,18 +1757,17 @@
     });
 
     // ================================================================
-    //  MOSTRAR ALERTA DE COMPARTIR AL CARGAR LA PÁGINA (UNA SOLA VEZ)
-    //  AHORA SIN DEMORA (ejecución inmediata)
+    //  MOSTRAR ALERTA DE COMPARTIR (cada 12 horas)
     // ================================================================
-    if (!localStorage.getItem('peluditos_share_shown')) {
+    if (deberiaMostrarAlerta()) {
       mostrarAlertaCompartir();
-      localStorage.setItem('peluditos_share_shown', 'true');
+      registrarAlertaMostrada();
     }
 
     console.log('🐾 Sistema conectado a Google Sheets. URL:', API_URL);
     console.log('ℹ️ Las recargas son manuales. El administrador actualiza el saldo en la hoja.');
     console.log('🔐 El correo se guarda en minúsculas y no hay login automático.');
-    console.log('📢 Alerta de compartir mostrada al inicio (una sola vez).');
+    console.log('📢 Alerta de compartir cada 12 horas (sin botones específicos de redes).');
   </script>
 </body>
 </html>
