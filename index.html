@@ -826,7 +826,6 @@
       cursor: pointer;
       transition: all 0.3s ease;
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-      /* Evitar descarga fácil */
       -webkit-user-drag: none;
       user-drag: none;
       user-select: none;
@@ -1432,7 +1431,7 @@
   <div class="toast-container" id="toastContainer"></div>
 
   <!-- ====== BOTÓN FLOTANTE WHATSAPP ====== -->
-  <a href="https://api.whatsapp.com/send?phone=573138596350&text=Hola%2C%20quiero%20donar%20huesitos%20para%20los%20peluditos." target="_blank" class="whatsapp-float" id="whatsappFloat" aria-label="Contactar por WhatsApp">
+  <a href="https://api.whatsapp.com/send?phone=573019235483&text=Hola%2C%20quiero%20donar%20huesitos%20para%20los%20peluditos." target="_blank" class="whatsapp-float" id="whatsappFloat" aria-label="Contactar por WhatsApp">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
   </a>
 
@@ -1446,7 +1445,7 @@
       <ul>
         <li onclick="mostrarInfo('🔐 Política de privacidad', 'Tus datos solo se usan para gestionar donaciones. No compartimos tu información con terceros.')"><span class="icon">🔐</span><span class="text">Política de privacidad</span><span class="arrow">›</span></li>
         <li onclick="mostrarInfo('📋 Términos y condiciones', 'Al donar aceptas que los fondos se usen exclusivamente para el cuidado, alimentación y atención veterinaria de los animales del refugio.')"><span class="icon">📋</span><span class="text">Términos y condiciones</span><span class="arrow">›</span></li>
-        <li onclick="mostrarInfo('📞 Contacto', '📧 tudonacion@mbox.re<br>📱 WhatsApp: 3138596350<br>🕒 Disponibles de lunes a domingo, 8am - 8pm')"><span class="icon">📞</span><span class="text">Contacto</span><span class="arrow">›</span></li>
+        <li onclick="mostrarInfo('📞 Contacto', '📧 tudonacion@mbox.re<br>📱 WhatsApp: 3019235483<br>🕒 Disponibles de lunes a domingo, 8am - 8pm')"><span class="icon">📞</span><span class="text">Contacto</span><span class="arrow">›</span></li>
         <li onclick="mostrarInfo('🔄 Acerca de', 'Todas las donaciones quedan registradas de forma transparente.')"><span class="icon">🔄</span><span class="text">Acerca de</span><span class="arrow">›</span></li>
         <li onclick="mostrarInfo('🌟 Nuestra misión', 'Cada huesito donado se traduce en comida, vacunas, medicinas y mucho amor para estos peluditos que han sido rescatados y necesitan una segunda oportunidad.')"><span class="icon">🌟</span><span class="text">Nuestra misión</span><span class="arrow">›</span></li>
       </ul>
@@ -1542,11 +1541,10 @@
     }
 
     // ================================================================
-    //  CONFIGURACIÓN - NÚMEROS ACTUALIZADOS
+    //  CONFIGURACIÓN
     // ================================================================
     const API_URL = 'https://script.google.com/macros/s/AKfycbw-f8hVfnQzr68AVQxOvVZCuG6ClgdgSWxtAWoLO6EVihBCMAJ4X5sIV9F5qql1jVC6/exec';
-    const NEQUI_NUM = "3019235483";       // Número de cuenta Nequi
-    const WHATSAPP_NUM = "3138596350";    // Número de WhatsApp para contacto
+    const NEQUI_NUM = "3019235483";
     const META_DONACION = 100;
 
     const NOMBRES_FICTICIOS = [
@@ -1558,56 +1556,57 @@
     ];
 
     // ================================================================
-    //  🔽 IMÁGENES PERSONALIZADAS (opcional)
+    //  🔽 TODAS LAS IMÁGENES DE ANIMALES ACTUALIZADAS
+    //  (31 perros + 13 gatos, en el orden proporcionado)
     // ================================================================
     const IMAGENES_PERSONALIZADAS = {
+      // Perros (perro-0 a perro-30)
+      "perro-0": "https://i.ibb.co/tGf7zxM/images-q-tbn-ANd9-Gc-RTm5b-QEu-Z9hua-Pu-YPHu8i-LWrz-MB3m2c-Fterx0-Ph7-Jy0-A-s-10.jpg",
+      "perro-1": "https://i.ibb.co/Y4F7cXpJ/images-q-tbn-ANd9-Gc-Rllm-Umg-Vca-O-h798l2n-NVt-Se2wu-Ct-Sl1-73-L1uts-QPA-s-10.jpg",
+      "perro-2": "https://i.ibb.co/93hR8xLn/images-q-tbn-ANd9-Gc-Qmw-VHi-ZTPx-Q-VKZZsi55-s-Wi-Nc02xm-Jjhqs-RKu-Vw-Qmg-s-10.jpg",
+      "perro-3": "https://i.ibb.co/nNjvYNbZ/images-q-tbn-ANd9-Gc-Qb1b-Kt-WYh-N1j-Ex-Nl-EW5-KDSg-Deg-Lbd-Ibln-Xs-V581wu-Nz-Q-s-10.jpg",
+      "perro-4": "https://i.ibb.co/3mw568jR/images-q-tbn-ANd9-Gc-SWQGBHXNE2n-Ob-Ubi-F7-Y7-I-v-Bo0-5-Zoan2f-VHIs3-R7-Kw-s-10.jpg",
+      "perro-5": "https://i.ibb.co/mF8fht6Q/images-q-tbn-ANd9-Gc-Rafg-XD1-Rk-Joi-Afw-Dzg-Y2-Vb2-BXY219bxrf-s-D-DDr-Oc-Lw-s-10.jpg",
+      "perro-6": "https://i.ibb.co/FqnQVt95/images-q-tbn-ANd9-Gc-Qife-Wx-Rb8su-NIx-V1jp-JTm3g9-RDrm26bif-XK0-Pe-Er9-YXQ-s-10.jpg",
+      "perro-7": "https://i.ibb.co/pB0qWYzp/images-q-tbn-ANd9-Gc-SMDZUZOtb7-Jin-SRYJb5r-Zqr-Hd7by0-HTx-Aog-PLp5evy-A-s-10.jpg",
+      "perro-8": "https://i.ibb.co/HpDW2HF3/images-q-tbn-ANd9-Gc-Q3khu-Mh-MZZ0-QGLt-Hg7y-RAJISCAmjj-XBZt-i-BNXn-VNEBA-s-10.jpg",
+      "perro-9": "https://i.ibb.co/1GKgScnh/images-q-tbn-ANd9-Gc-R9i-MSevi-xd-Lodh-Bbfro0b-Ys-SY04x-Qx-L1-Oyi-P0f-FNqg-s-10.jpg",
+      "perro-10": "https://i.ibb.co/rRZ6wYZK/images-q-tbn-ANd9-Gc-Sf-V3-Aixel-ZQd1-Xv-Axla-3ub4-Gj-NGRWs-B7y-1-ARNYdz-Rw-s-10.jpg",
+      "perro-11": "https://i.ibb.co/39jRJmcx/images-q-tbn-ANd9-Gc-Sl-PTwm-GIuf-KUIs9-VI8ggta0u0-ZRHzu722t-QWRROs960-Q-s-10.jpg",
+      "perro-12": "https://i.ibb.co/7tYcsqJW/images-q-tbn-ANd9-Gc-Re-AVl9fuox-M4-Zr-Xgnnc-Cue8s-YGw-CY1-ALk-RHWdmth-IAQ-s-10.jpg",
+      "perro-13": "https://i.ibb.co/qLXbcVK9/images-q-tbn-ANd9-Gc-Sq-YQYYZPKc3rmw-GEKg-Gyv-NJo-G3a-J8s-DEj3bg-Rmb1-h-YA-s-10.jpg",
+      "perro-14": "https://i.ibb.co/xqTzVC0Z/images-q-tbn-ANd9-Gc-R5-H6-Wv-Hdhj-UVs-QEx8-Y13-Ka1kr-Sg-PPP3-CKPAA8-Cc-QFnrg-s-10.jpg",
+      "perro-15": "https://i.ibb.co/yngQfx3L/images-q-tbn-ANd9-Gc-T0t25p-NH71fbsc-x-VRt-N-Q5p8-Dr-Ydl4tik-ZWEz8-FPlw-s-10.jpg",
+      "perro-16": "https://i.ibb.co/xqGZ2gSq/images-q-tbn-ANd9-Gc-SNnlojt-Pwu-VJm6j2f-f-Hvwf0-G486-Wa-JACMd2-PU05o-GQQ-s-10.jpg",
+      "perro-17": "https://i.ibb.co/NDPPJTz/images-q-tbn-ANd9-Gc-QDZC2z-Wi-Mmyi-GH63l6-IT-n-R4-Swj-Xbl-Iuam-Xs-Ivjsbm-A-s-10.jpg",
+      "perro-18": "https://i.ibb.co/H5CLsW1/images-q-tbn-ANd9-Gc-R-r4-QZTPqd-Cz-Fh-Dk-s-Wyea-Wi4x3-RACKk-Vm-Bv8jr-Eb-Bb-A-s-10.jpg",
+      "perro-19": "https://i.ibb.co/PZRkQkYd/images-q-tbn-ANd9-Gc-Saaa-QJy-V3vv-Sn-Uj-Cy9n-Iruj-IG0z-k-Bsq-Wz-Dbb-UBAZg-A-s-10.jpg",
+      "perro-20": "https://i.ibb.co/wN9Qw0bt/images-q-tbn-ANd9-Gc-S-2g-YH9-9p-J-Ab-KUtb-Xr0keor-Yp-Uzp-KEQSj-FRj-E4-KA-s-10.jpg",
+      "perro-21": "https://i.ibb.co/LXHx5rnf/images-q-tbn-ANd9-Gc-Spnzwu11g-XBGCo-YEe-Jo-Ihx-LWH-O0838-HC2-GCWTx-DK10-A-s-10.jpg",
+      "perro-22": "https://i.ibb.co/BVcgvTc4/images-q-tbn-ANd9-Gc-SPe-JHWLun-y-k1e63r-YQew-ITh-Ef9t-F2-z-Oz9-A6o-Cs-Q-s-10.jpg",
+      "perro-23": "https://i.ibb.co/G4vtLDnz/images-q-tbn-ANd9-Gc-RR7-ZT8w-D9m3nf6y3-XNj-BHxa-Uh5gpg-MQc-SZHFTU2-MDBOw-s-10.jpg",
+      "perro-24": "https://i.ibb.co/d4431jNd/images-q-tbn-ANd9-Gc-QAoto4-LIZLu5-DE6-haa-IDTJA026e8emy-VCx-RTSXMn-NHw-s-10.jpg",
+      "perro-25": "https://i.ibb.co/xt0dVWZs/images-q-tbn-ANd9-Gc-RNwnb-W2-Xbz-XSv-Lz2l-Sj-NPVcu-UBED2xuar-IP4-ZJAFw-WBw-s-10.jpg",
+      "perro-26": "https://i.ibb.co/GQ5PFgT4/images-q-tbn-ANd9-Gc-Sqoss-PWGva-Mg-KHg5j3-Ya-GUSdi-PJF-Lp-LSAZe-Jeh-TCz1g-s-10.jpg",
+      "perro-27": "https://i.ibb.co/ZpTXBVMf/images-q-tbn-ANd9-Gc-Raut2h6-Ty8-Js4-SWwb-W7bm-Wbfz-Ar-H8-O5-KE8o-Fq-Hg-WWQrg-s-10.jpg",
+      "perro-28": "https://i.ibb.co/sGVNCcb/images-q-tbn-ANd9-Gc-Tb-VHyfdd-Yng-N3-NMhj-GMk-V2b-EPa-O6eeqnkv-Fu43-E47spw-s-10.jpg",
+      "perro-29": "https://i.ibb.co/g1FcPqw/images-q-tbn-ANd9-Gc-Tm-UT-OT-n-A085-DKdz-MOdsz-VPcri-LRNe-Ee0nx-SWYre3-A-s-10.jpg",
+      "perro-30": "https://i.ibb.co/KjQf4HYX/images-q-tbn-ANd9-Gc-Q8kah-Evrs-T5-U37-Pse8fij-Kk5vx-Zn-9ea-9e-d6-Pleg-s-10.jpg",
 
-      "perro-0": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRTm5bQEuZ9huaPuYPHu8iLWrzMB3m2cFterx0Ph7Jy0A&s=10",
-      "perro-1": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRllmUmgVcaO-h798l2nNVtSe2wuCtSl1-73L1uts-QPA&s=10",
-      "perro-2": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmwVHiZTPxQ_VKZZsi55-s_WiNc02xmJjhqsRKuVwQmg&s=10",
-      "perro-3": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQb1bKtWYhN1jExNlEW5KDSgDegLbdIblnXsV581wuNzQ&s=10",
-      "perro-4": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSWQGBHXNE2nObUbi-F7Y7I-vBo0-5Zoan2fVHIs3R7Kw&s=10",
-      "perro-5": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRafgXD1RkJoiAfwDzgY2Vb2BXY219bxrf_sD-DDrOcLw&s=10",
-      "perro-6": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQifeWxRb8suNIxV1jpJTm3g9RDrm26bifXK0PeEr9YXQ&s=10",
-      "perro-7": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSMDZUZOtb7JinSRYJb5rZqrHd7by0HTxAog_PLp5evyA&s=10",
-      "perro-8": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ3khuMhMZZ0QGLtHg7yRAJISCAmjjXBZt-iBNXnVNEBA&s=10",
-      "perro-9": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR9iMSevi-xdLodhBbfro0bYsSY04xQxL1-OyiP0fFNqg&s=10",
-      "perro-10": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSfV3AixelZQd1XvAxla_3ub4GjNGRWsB7y-1ARNYdzRw&s=10",
-      "perro-11": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlPTwmGIufKUIs9VI8ggta0u0ZRHzu722tQWRROs960Q&s=10",
-      "perro-12": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcReAVl9fuox-M4ZrXgnncCue8sYGwCY1ALkRHWdmthIAQ&s=10",
-      "perro-13": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSqYQYYZPKc3rmwGEKgGyvNJoG3aJ8sDEj3bgRmb1_hYA&s=10",
-      "perro-14": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR5H6WvHdhjUVsQEx8Y13Ka1krSgPPP3CKPAA8CcQFnrg&s=10",
-      "perro-15": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT0t25pNH71fbsc_xVRtN-Q5p8_DrYdl4tikZWEz8FPlw&s=10",
-      "perro-16": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSNnlojtPwuVJm6j2f-fHvwf0G486WaJACMd2PU05oGQQ&s=10",
-      "perro-17": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQDZC2zWiMmyiGH63l6-IT_nR4SwjXblIuamXsIvjsbmA&s=10",
-      "perro-18": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR-r4QZTPqdCzFhDk_sWyeaWi4x3RACKkVmBv8jrEbBbA&s=10",
-      "perro-19": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSaaaQJyV3vv_SnUjCy9nIrujIG0z_kBsqWzDbbUBAZgA&s=10",
-      "perro-20": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-2gYH9-9pJ_Ab_KUtbXr0keor_YpUzpKEQSjFRjE4KA&s=10",
-      "perro-21": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSpnzwu11gXBGCoYEeJoIhxLWH_O0838HC2GCWTxDK10A&s=10",
-      "perro-22": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSPeJHWLun-y-k1e63rYQewIThEf9t--F2_zOz9A6oCsQ&s=10",
-      "perro-23": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRR7ZT8wD9m3nf6y3XNjBHxaUh5gpgMQcSZHFTU2MDBOw&s=10",
-      "perro-24": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQAoto4LIZLu5DE6_haaIDTJA026e8emyVCxRTSXMnNHw&s=10",
-      "perro-25": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRNwnbW2XbzXSvLz2lSjNPVcuUBED2xuarIP4ZJAFwWBw&s=10",
-      "perro-26": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSqossPWGvaMgKHg5j3YaGUSdiPJF-LpLSAZeJehTCz1g&s=10",
-      "perro-27": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRaut2h6Ty8Js4SWwbW7bmWbfzArH8O5KE8oFqHgWWQrg&s=10",
-      "perro-28": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTbVHyfddYngN3NMhjGMkV2bEPaO6eeqnkvFu43E47spw&s=10",
-      "perro-29": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTmUT-OT_nA085DKdzMOdszVPcriLRNeEe0nxSWYre3-A&s=10",
-      "perro-30": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8kahEvrsT5U37Pse8fijKk5vxZn_9ea_9e__d6_Pleg&s=10",
-
-      "gato-0": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQy69W8GBGScmhNS_gq2zTw1Km9Yvb0ISAGMUArnhhPmA&s=10",
-      "gato-1": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSJps6eI6AXqv_sS8OfIU8vBoBz_AbnwyYBMDfkKTa62Q&s=10",
-      "gato-2": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcThJy3aRJmPJm5H4pv8kZiUjQnyOu1tJhJjGscpcNftLA&s=10",
-      "gato-3": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSc5s9u8kq9kCfrX-p5FhUrw6v_pCe4_RYyOhfcEQZQYg&s=10",
-      "gato-4": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSmyI3BUVIpxPdaUHHN0Q5A3jOCPCNYQW9fmxNmCpCJCg&s=10",
-      "gato-5": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ7Hc6LzrG11y7Vn6OxH1kiLbPAqu9ljfHzQuFyYn9N_w&s=10",
-      "gato-6": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSx3QceZ2dBsvJ8_uf7AJUfP49pB3SDM-rhSVjh3gC46g&s=10",
-      "gato-7": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQlAfaGmLhFws0OSZ93w0Wfnm2in5Bk5ngfDHDDayoHzT4mBFOxUUaQkRmO&s=10",
-      "gato-8": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSifvXbePTUpPfZlyQvezgjkOqksk6JPLFkMiutHUy7Aw&s",
-      "gato-9": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQXRgAlI0EQtpTndCJ1mLdzu0ANG_0WnzGZuD6BmbqiFw&s=10",
-      "gato-10": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRG9Rltx1C-QwCEUOtAkliFZk2s_CItC8c0sYPeP3iKIw&s",
-      "gato-11": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSZXyvtlP8YoQmIFGu9Pnr5krkHtYoexUfVM4TuxPkp7A&s=10",
-      "gato-12": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRNMFvypu40KjlJwkUDmNARx146SaKo8rclvLP24r78zg&s=10"
-
+      // Gatos (gato-0 a gato-12)
+      "gato-0": "https://i.ibb.co/G3MgmYBj/images-q-tbn-ANd9-Gc-Qy69-W8-GBGScmh-NS-gq2z-Tw1-Km9-Yvb0-ISAGMUArnhh-Pm-A-s-10.jpg",
+      "gato-1": "https://i.ibb.co/Qj77xWvn/images-q-tbn-ANd9-Gc-SJps6e-I6-AXqv-s-S8-Of-IU8v-Bo-Bz-Abnwy-YBMDfk-KTa62-Q-s-10.jpg",
+      "gato-2": "https://i.ibb.co/5gTW8SNh/images-q-tbn-ANd9-Gc-Th-Jy3a-RJm-PJm5-H4pv8k-Zi-Uj-Qny-Ou1t-Jh-Jj-Gscpc-Nft-LA-s-10.jpg",
+      "gato-3": "https://i.ibb.co/9mg3WSqv/images-q-tbn-ANd9-Gc-Sc5s9u8kq9k-Cfr-X-p5-Fh-Urw6v-p-Ce4-RYy-Ohfc-EQZQYg-s-10.jpg",
+      "gato-4": "https://i.ibb.co/4RhqcF4X/images-q-tbn-ANd9-Gc-Smy-I3-BUVIpx-Pda-UHHN0-Q5-A3j-OCPCNYQW9fmx-Nm-Cp-CJCg-s-10.jpg",
+      "gato-5": "https://i.ibb.co/rRKwY7Xs/images-q-tbn-ANd9-Gc-Q7-Hc6-Lzr-G11y7-Vn6-Ox-H1ki-Lb-PAqu9ljf-Hz-Qu-Fy-Yn9-N-w-s-10.jpg",
+      "gato-6": "https://i.ibb.co/KpJ5x8cy/images-q-tbn-ANd9-Gc-Sx3-Qce-Z2d-Bsv-J8-uf7-AJUf-P49p-B3-SDM-rh-SVjh3g-C46g-s-10.jpg",
+      "gato-7": "https://i.ibb.co/vCLdgQNH/images-q-tbn-ANd9-Gc-Ql-Afa-Gm-Lh-Fws0-OSZ93w0-Wfnm2in5-Bk5ngf-DHDDayo-Hz-T4m-BFOx-UUa-Qk-Rm-O-s-10.jpg",
+      "gato-8": "https://i.ibb.co/SwLfwRSN/images-q-tbn-ANd9-Gc-Sifv-Xbe-PTUp-Pf-Zly-Qvezgjk-Oqksk6-JPLFk-Miut-HUy7-Aw-s.jpg",
+      "gato-9": "https://i.ibb.co/8nqKvSVx/images-q-tbn-ANd9-Gc-QXRg-Al-I0-EQtp-Tnd-CJ1m-Ldzu0-ANG-0-Wnz-GZu-D6-Bmbqi-Fw-s-10.jpg",
+      "gato-10": "https://i.ibb.co/ZpbH2wFC/images-q-tbn-ANd9-Gc-RG9-Rltx1-C-Qw-CEUOt-Akli-FZk2s-CIt-C8c0s-YPe-P3i-KIw-s.jpg",
+      "gato-11": "https://i.ibb.co/mrWTkr3q/images-q-tbn-ANd9-Gc-SZXyvtl-P8-Yo-Qm-IFGu9-Pnr5krk-Ht-Yoex-Uf-VM4-Tux-Pkp7-A-s-10.jpg",
+      "gato-12": "https://i.ibb.co/mVDhC0jX/images-q-tbn-ANd9-Gc-RNMFvypu40-Kjl-Jwk-UDm-NARx146-Sa-Ko8rclv-LP24r78zg-s-10.jpg"
     };
 
     // ================================================================
@@ -2203,7 +2202,7 @@
     cambiarModo('register');
 
     // ================================================================
-    //  COMPRA Y NEQUI (USANDO NUEVOS NÚMEROS)
+    //  COMPRA Y NEQUI
     // ================================================================
     async function comprarHuesitos() {
       if (!usuarioActual) {
@@ -2246,9 +2245,8 @@
         reverseButtons: true
       });
       if (result.isConfirmed) {
-        // Usamos WHATSAPP_NUM para el enlace de contacto
         window.open(
-          `https://api.whatsapp.com/send?phone=57${WHATSAPP_NUM}&text=${encodeURIComponent(mensaje)}`, '_blank');
+          `https://api.whatsapp.com/send?phone=57${NEQUI_NUM}&text=${encodeURIComponent(mensaje)}`, '_blank');
         await Swal.fire({ icon: 'success', title: '🎉 ¡Listo!', text: 'Cuando verifiquemos tu pago, tus huesitos aparecerán.',
           confirmButtonColor: '#2ecc71', background: '#1a1f2a', color: '#fff', timer: 5000 });
       }
@@ -2609,7 +2607,7 @@
       }, 1500);
     }
 
-    console.log('🐾 Números actualizados: Nequi 3019235483, WhatsApp 3138596350.');
+    console.log('🐾 Imágenes actualizadas con las URLs proporcionadas.');
   </script>
 </body>
 </html>
