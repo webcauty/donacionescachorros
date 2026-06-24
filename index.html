@@ -826,6 +826,11 @@
       cursor: pointer;
       transition: all 0.3s ease;
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      /* Evitar descarga fácil */
+      -webkit-user-drag: none;
+      user-drag: none;
+      user-select: none;
+      -webkit-user-select: none;
     }
     .animal-card img:hover {
       opacity: 0.92;
@@ -963,6 +968,10 @@
       max-height: 92%;
       border-radius: 24px;
       box-shadow: 0 40px 120px rgba(0, 0, 0, 0.9);
+      -webkit-user-drag: none;
+      user-drag: none;
+      user-select: none;
+      -webkit-user-select: none;
     }
 
     /* ====== DONACIONES ====== */
@@ -1379,7 +1388,7 @@
           <button class="btn-nequi-copy" id="btnNequiCopy" aria-label="Copiar número de Nequi">
             <span class="nequi-logo-css">N</span>
             <span class="label">Cuenta Nequi</span>
-            <span class="num">3138237540</span>
+            <span class="num">3019235483</span>
             <span class="copy-icon">📋</span>
           </button>
           <button class="btn-refresh" id="btnRefresh">🔄 Actualizar</button>
@@ -1423,7 +1432,7 @@
   <div class="toast-container" id="toastContainer"></div>
 
   <!-- ====== BOTÓN FLOTANTE WHATSAPP ====== -->
-  <a href="https://api.whatsapp.com/send?phone=573138237540&text=Hola%2C%20quiero%20donar%20huesitos%20para%20los%20peluditos." target="_blank" class="whatsapp-float" id="whatsappFloat" aria-label="Contactar por WhatsApp">
+  <a href="https://api.whatsapp.com/send?phone=573138596350&text=Hola%2C%20quiero%20donar%20huesitos%20para%20los%20peluditos." target="_blank" class="whatsapp-float" id="whatsappFloat" aria-label="Contactar por WhatsApp">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
   </a>
 
@@ -1437,7 +1446,7 @@
       <ul>
         <li onclick="mostrarInfo('🔐 Política de privacidad', 'Tus datos solo se usan para gestionar donaciones. No compartimos tu información con terceros.')"><span class="icon">🔐</span><span class="text">Política de privacidad</span><span class="arrow">›</span></li>
         <li onclick="mostrarInfo('📋 Términos y condiciones', 'Al donar aceptas que los fondos se usen exclusivamente para el cuidado, alimentación y atención veterinaria de los animales del refugio.')"><span class="icon">📋</span><span class="text">Términos y condiciones</span><span class="arrow">›</span></li>
-        <li onclick="mostrarInfo('📞 Contacto', '📧 tudonacion@mbox.re<br>📱 WhatsApp: 3138237540<br>🕒 Disponibles de lunes a domingo, 8am - 8pm')"><span class="icon">📞</span><span class="text">Contacto</span><span class="arrow">›</span></li>
+        <li onclick="mostrarInfo('📞 Contacto', '📧 tudonacion@mbox.re<br>📱 WhatsApp: 3138596350<br>🕒 Disponibles de lunes a domingo, 8am - 8pm')"><span class="icon">📞</span><span class="text">Contacto</span><span class="arrow">›</span></li>
         <li onclick="mostrarInfo('🔄 Acerca de', 'Todas las donaciones quedan registradas de forma transparente.')"><span class="icon">🔄</span><span class="text">Acerca de</span><span class="arrow">›</span></li>
         <li onclick="mostrarInfo('🌟 Nuestra misión', 'Cada huesito donado se traduce en comida, vacunas, medicinas y mucho amor para estos peluditos que han sido rescatados y necesitan una segunda oportunidad.')"><span class="icon">🌟</span><span class="text">Nuestra misión</span><span class="arrow">›</span></li>
       </ul>
@@ -1533,10 +1542,11 @@
     }
 
     // ================================================================
-    //  CONFIGURACIÓN
+    //  CONFIGURACIÓN - NÚMEROS ACTUALIZADOS
     // ================================================================
     const API_URL = 'https://script.google.com/macros/s/AKfycbw-f8hVfnQzr68AVQxOvVZCuG6ClgdgSWxtAWoLO6EVihBCMAJ4X5sIV9F5qql1jVC6/exec';
-    const NEQUI_NUM = "3138237540";
+    const NEQUI_NUM = "3019235483";       // Número de cuenta Nequi
+    const WHATSAPP_NUM = "3138596350";    // Número de WhatsApp para contacto
     const META_DONACION = 100;
 
     const NOMBRES_FICTICIOS = [
@@ -1673,6 +1683,82 @@
     const ANIMALES = generarAnimales();
 
     // ================================================================
+    //  MARCA DE AGUA CON LOGO
+    // ================================================================
+    const logoMarca = new Image();
+    logoMarca.crossOrigin = "anonymous";
+    logoMarca.src = "https://i.ibb.co/VcLwMVd9/file-000000006c5c720ebd4a1fce54bb8627.png";
+    let logoListo = false;
+    logoMarca.onload = function() {
+      logoListo = true;
+      // Cuando el logo esté listo, refrescar las imágenes que ya estén mostradas
+      actualizarAnimales();
+    };
+    logoMarca.onerror = function() {
+      // Si falla, usar sin marca
+      logoListo = false;
+    };
+
+    // Caché de imágenes con marca
+    const cacheMarca = new Map();
+
+    function aplicarMarcaAgua(imagenUrl, callback) {
+      // Si ya está en caché, devolver
+      if (cacheMarca.has(imagenUrl)) {
+        callback(cacheMarca.get(imagenUrl));
+        return;
+      }
+
+      // Si no hay logo, devolver la original
+      if (!logoListo) {
+        callback(imagenUrl);
+        return;
+      }
+
+      const img = new Image();
+      img.crossOrigin = "anonymous";
+      img.onload = function() {
+        const canvas = document.createElement('canvas');
+        const ctx = canvas.getContext('2d');
+        canvas.width = img.width;
+        canvas.height = img.height;
+
+        // Dibujar imagen original
+        ctx.drawImage(img, 0, 0);
+
+        // Dibujar marca de agua (logo) en varias posiciones
+        const logoSize = Math.min(img.width, img.height) * 0.15; // 15% del tamaño
+        const opacidad = 0.25;
+        ctx.globalAlpha = opacidad;
+
+        // Posiciones: cuatro esquinas y centro
+        const margin = 10;
+        const positions = [
+          { x: margin, y: margin },
+          { x: img.width - logoSize - margin, y: margin },
+          { x: margin, y: img.height - logoSize - margin },
+          { x: img.width - logoSize - margin, y: img.height - logoSize - margin },
+          { x: (img.width - logoSize) / 2, y: (img.height - logoSize) / 2 }
+        ];
+
+        positions.forEach(pos => {
+          ctx.drawImage(logoMarca, pos.x, pos.y, logoSize, logoSize);
+        });
+
+        ctx.globalAlpha = 1.0;
+
+        const dataUrl = canvas.toDataURL('image/jpeg', 0.9);
+        cacheMarca.set(imagenUrl, dataUrl);
+        callback(dataUrl);
+      };
+      img.onerror = function() {
+        // Si falla la carga de la imagen, devolver la original
+        callback(imagenUrl);
+      };
+      img.src = imagenUrl;
+    }
+
+    // ================================================================
     //  UI Y ESTADO
     // ================================================================
     const authSection = document.getElementById('authSection');
@@ -1700,6 +1786,8 @@
     const totalDonacionesEl = document.getElementById('totalDonaciones');
     const totalHuesitosEl = document.getElementById('totalHuesitos');
     const topDonadorEl = document.getElementById('topDonador');
+    const modalImg = document.getElementById('modalImg');
+    const modalImgSrc = document.getElementById('modalImgSrc');
 
     let usuarioActual = '';
     let nombreActual = '';
@@ -2115,7 +2203,7 @@
     cambiarModo('register');
 
     // ================================================================
-    //  COMPRA Y NEQUI
+    //  COMPRA Y NEQUI (USANDO NUEVOS NÚMEROS)
     // ================================================================
     async function comprarHuesitos() {
       if (!usuarioActual) {
@@ -2158,8 +2246,9 @@
         reverseButtons: true
       });
       if (result.isConfirmed) {
+        // Usamos WHATSAPP_NUM para el enlace de contacto
         window.open(
-          `https://api.whatsapp.com/send?phone=57${NEQUI_NUM}&text=${encodeURIComponent(mensaje)}`, '_blank');
+          `https://api.whatsapp.com/send?phone=57${WHATSAPP_NUM}&text=${encodeURIComponent(mensaje)}`, '_blank');
         await Swal.fire({ icon: 'success', title: '🎉 ¡Listo!', text: 'Cuando verifiquemos tu pago, tus huesitos aparecerán.',
           confirmButtonColor: '#2ecc71', background: '#1a1f2a', color: '#fff', timer: 5000 });
       }
@@ -2435,11 +2524,13 @@
       actualizarEstadisticas();
     }
 
+    // Función para actualizar la cuadrícula de animales con marcas de agua
     function actualizarAnimales() {
       let filtrados = categoriaActiva === 'perros' ? ANIMALES.filter(a => a.tipo === 'perro') :
         categoriaActiva === 'gatos' ? ANIMALES.filter(a => a.tipo === 'gato') : [...ANIMALES];
       filtrados.sort((a, b) => a.nombre.localeCompare(b.nombre));
       animalesGrid.innerHTML = '';
+
       filtrados.forEach(animal => {
         const creditos = creditosAnimales[animal.id] || 0;
         const meta = animal.meta || META_DONACION;
@@ -2447,8 +2538,9 @@
         const isComplete = porcentaje >= 100;
         const div = document.createElement('div');
         div.className = 'animal-card';
+        // Contenedor de imagen con marca de agua: usamos un img normal que luego modificaremos con la función
         div.innerHTML = `
-          <img src="${animal.imagen}" alt="${animal.nombre}" loading="lazy" />
+          <img src="" alt="${animal.nombre}" loading="lazy" style="width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:18px;background:#1a1f2a;margin-bottom:8px;cursor:pointer;box-shadow:0 4px 12px rgba(0,0,0,0.2);-webkit-user-drag:none;user-drag:none;user-select:none;-webkit-user-select:none;" />
           <div class="animal-info">
             <div class="nombre">${animal.nombre}</div>
             <div class="raza">${animal.raza}</div>
@@ -2460,11 +2552,28 @@
             <div class="desc">${animal.descripcion}</div>
             <button class="btn-donar" onclick="window.donarCredito('${animal.id}','${animal.nombre}')">Donar 🥫</button>
           </div>`;
-        div.querySelector('img').addEventListener('click', (e) => {
-          e.stopPropagation();
-          document.getElementById('modalImgSrc').src = animal.imagen;
-          document.getElementById('modalImg').classList.add('active');
+
+        const imgElement = div.querySelector('img');
+        // Aplicar marca de agua a la imagen
+        aplicarMarcaAgua(animal.imagen, (dataUrl) => {
+          imgElement.src = dataUrl;
         });
+
+        // Evento click para abrir modal con la misma imagen con marca
+        imgElement.addEventListener('click', (e) => {
+          e.stopPropagation();
+          // Usar la caché o generar de nuevo
+          if (cacheMarca.has(animal.imagen)) {
+            modalImgSrc.src = cacheMarca.get(animal.imagen);
+          } else {
+            // Si no está en caché, generarla y luego mostrarla
+            aplicarMarcaAgua(animal.imagen, (dataUrl) => {
+              modalImgSrc.src = dataUrl;
+            });
+          }
+          modalImg.classList.add('active');
+        });
+
         animalesGrid.appendChild(div);
       });
     }
@@ -2500,7 +2609,7 @@
       }, 1500);
     }
 
-    console.log('🐾 Campos de autenticación con minúsculas automáticas.');
+    console.log('🐾 Números actualizados: Nequi 3019235483, WhatsApp 3138596350.');
   </script>
 </body>
 </html>
