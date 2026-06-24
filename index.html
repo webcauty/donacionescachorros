@@ -861,15 +861,16 @@
       font-size: 1.2rem;
     }
     .animal-info .desc {
-      font-size: 0.6rem;
-      color: #888;
+      font-size: 0.65rem;
+      color: #aaa;
       margin: 4px 0 6px;
-      line-height: 1.3;
-      max-height: 2.6em;
+      line-height: 1.4;
+      max-height: 3.2em;
       overflow: hidden;
       display: -webkit-box;
       -webkit-line-clamp: 2;
       -webkit-box-orient: vertical;
+      font-style: italic;
     }
 
     /* ====== BARRA DE PROGRESO ====== */
@@ -1293,6 +1294,10 @@
         font-size: 0.9rem;
         padding: 12px 8px;
       }
+      .animal-info .desc {
+        font-size: 0.6rem;
+        -webkit-line-clamp: 2;
+      }
     }
     @media (max-width: 400px) {
       .animales-grid {
@@ -1320,6 +1325,9 @@
       }
       .btn-compartir-login .compartir-texto .subtitulo {
         font-size: 0.65rem;
+      }
+      .animal-info .desc {
+        -webkit-line-clamp: 1;
       }
     }
   </style>
@@ -1431,7 +1439,7 @@
   <div class="toast-container" id="toastContainer"></div>
 
   <!-- ====== BOTÓN FLOTANTE WHATSAPP ====== -->
-  <a href="https://api.whatsapp.com/send?phone=573019235483&text=Hola%2C%20quiero%20donar%20huesitos%20para%20los%20peluditos." target="_blank" class="whatsapp-float" id="whatsappFloat" aria-label="Contactar por WhatsApp">
+  <a href="https://api.whatsapp.com/send?phone=573138596350&text=Hola%2C%20quiero%20donar%20huesitos%20para%20los%20peluditos." target="_blank" class="whatsapp-float" id="whatsappFloat" aria-label="Contactar por WhatsApp">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
   </a>
 
@@ -1445,7 +1453,7 @@
       <ul>
         <li onclick="mostrarInfo('🔐 Política de privacidad', 'Tus datos solo se usan para gestionar donaciones. No compartimos tu información con terceros.')"><span class="icon">🔐</span><span class="text">Política de privacidad</span><span class="arrow">›</span></li>
         <li onclick="mostrarInfo('📋 Términos y condiciones', 'Al donar aceptas que los fondos se usen exclusivamente para el cuidado, alimentación y atención veterinaria de los animales del refugio.')"><span class="icon">📋</span><span class="text">Términos y condiciones</span><span class="arrow">›</span></li>
-        <li onclick="mostrarInfo('📞 Contacto', '📧 tudonacion@mbox.re<br>📱 WhatsApp: 3019235483<br>🕒 Disponibles de lunes a domingo, 8am - 8pm')"><span class="icon">📞</span><span class="text">Contacto</span><span class="arrow">›</span></li>
+        <li onclick="mostrarInfo('📞 Contacto', '📧 tudonacion@mbox.re<br>📱 WhatsApp: 3138596350<br>🕒 Disponibles de lunes a domingo, 8am - 8pm')"><span class="icon">📞</span><span class="text">Contacto</span><span class="arrow">›</span></li>
         <li onclick="mostrarInfo('🔄 Acerca de', 'Todas las donaciones quedan registradas de forma transparente.')"><span class="icon">🔄</span><span class="text">Acerca de</span><span class="arrow">›</span></li>
         <li onclick="mostrarInfo('🌟 Nuestra misión', 'Cada huesito donado se traduce en comida, vacunas, medicinas y mucho amor para estos peluditos que han sido rescatados y necesitan una segunda oportunidad.')"><span class="icon">🌟</span><span class="text">Nuestra misión</span><span class="arrow">›</span></li>
       </ul>
@@ -1544,8 +1552,9 @@
     //  CONFIGURACIÓN
     // ================================================================
     const API_URL = 'https://script.google.com/macros/s/AKfycbw-f8hVfnQzr68AVQxOvVZCuG6ClgdgSWxtAWoLO6EVihBCMAJ4X5sIV9F5qql1jVC6/exec';
-    const NEQUI_NUM = "3019235483";
-    const META_DONACION = 500; // 🔥 Meta cambiada a 500 huesitos
+    const NEQUI_NUM = "3019235483"; // Número de Nequi (no se modifica)
+    const META_DONACION = 500;
+    const WHATSAPP_NUM = "3138596350"; // Nuevo número de WhatsApp
 
     const NOMBRES_FICTICIOS = [
       'Jorge Ramírez', 'Claudia Suárez', 'Miguel Torres', 'Patricia Díaz',
@@ -1557,10 +1566,8 @@
 
     // ================================================================
     //  🔽 TODAS LAS IMÁGENES DE ANIMALES ACTUALIZADAS
-    //  (31 perros + 13 gatos, en el orden proporcionado)
     // ================================================================
     const IMAGENES_PERSONALIZADAS = {
-      // Perros (perro-0 a perro-30)
       "perro-0": "https://i.ibb.co/tGf7zxM/images-q-tbn-ANd9-Gc-RTm5b-QEu-Z9hua-Pu-YPHu8i-LWrz-MB3m2c-Fterx0-Ph7-Jy0-A-s-10.jpg",
       "perro-1": "https://i.ibb.co/Y4F7cXpJ/images-q-tbn-ANd9-Gc-Rllm-Umg-Vca-O-h798l2n-NVt-Se2wu-Ct-Sl1-73-L1uts-QPA-s-10.jpg",
       "perro-2": "https://i.ibb.co/93hR8xLn/images-q-tbn-ANd9-Gc-Qmw-VHi-ZTPx-Q-VKZZsi55-s-Wi-Nc02xm-Jjhqs-RKu-Vw-Qmg-s-10.jpg",
@@ -1592,8 +1599,6 @@
       "perro-28": "https://i.ibb.co/sGVNCcb/images-q-tbn-ANd9-Gc-Tb-VHyfdd-Yng-N3-NMhj-GMk-V2b-EPa-O6eeqnkv-Fu43-E47spw-s-10.jpg",
       "perro-29": "https://i.ibb.co/g1FcPqw/images-q-tbn-ANd9-Gc-Tm-UT-OT-n-A085-DKdz-MOdsz-VPcri-LRNe-Ee0nx-SWYre3-A-s-10.jpg",
       "perro-30": "https://i.ibb.co/KjQf4HYX/images-q-tbn-ANd9-Gc-Q8kah-Evrs-T5-U37-Pse8fij-Kk5vx-Zn-9ea-9e-d6-Pleg-s-10.jpg",
-
-      // Gatos (gato-0 a gato-12)
       "gato-0": "https://i.ibb.co/G3MgmYBj/images-q-tbn-ANd9-Gc-Qy69-W8-GBGScmh-NS-gq2z-Tw1-Km9-Yvb0-ISAGMUArnhh-Pm-A-s-10.jpg",
       "gato-1": "https://i.ibb.co/Qj77xWvn/images-q-tbn-ANd9-Gc-SJps6e-I6-AXqv-s-S8-Of-IU8v-Bo-Bz-Abnwy-YBMDfk-KTa62-Q-s-10.jpg",
       "gato-2": "https://i.ibb.co/5gTW8SNh/images-q-tbn-ANd9-Gc-Th-Jy3a-RJm-PJm5-H4pv8k-Zi-Uj-Qny-Ou1t-Jh-Jj-Gscpc-Nft-LA-s-10.jpg",
@@ -1607,6 +1612,56 @@
       "gato-10": "https://i.ibb.co/ZpbH2wFC/images-q-tbn-ANd9-Gc-RG9-Rltx1-C-Qw-CEUOt-Akli-FZk2s-CIt-C8c0s-YPe-P3i-KIw-s.jpg",
       "gato-11": "https://i.ibb.co/mrWTkr3q/images-q-tbn-ANd9-Gc-SZXyvtl-P8-Yo-Qm-IFGu9-Pnr5krk-Ht-Yoex-Uf-VM4-Tux-Pkp7-A-s-10.jpg",
       "gato-12": "https://i.ibb.co/mVDhC0jX/images-q-tbn-ANd9-Gc-RNMFvypu40-Kjl-Jwk-UDm-NARx146-Sa-Ko8rclv-LP24r78zg-s-10.jpg"
+    };
+
+    // ================================================================
+    //  📖 HISTORIAS ÚNICAS Y TRISTES PARA CADA ANIMAL
+    // ================================================================
+    const HISTORIAS = {
+      "perro-0": "Max fue abandonado por su familia cuando se mudaron. Pasó meses buscándolos en el parque donde solían jugar, comiendo de la basura y durmiendo bajo los carros. Ahora espera que alguien le devuelva la esperanza.",
+      "perro-1": "Luna fue encontrada atada a un poste en una noche de lluvia. Su dueño la dejó allí sin comida ni agua. Llevaba una carta que decía 'ya no la quiero'. Desde entonces no confía en los humanos, pero sueña con un hogar de verdad.",
+      "perro-2": "Rocky vivía en una fábrica abandonada junto a sus hermanos. Todos murieron de hambre y frío, excepto él. Sobrevivió comiendo ratas y bebiendo agua de charcos. Cuando lo rescataron, apenas podía mantenerse en pie.",
+      "perro-3": "Bella era la mascota de una familia que la maltrataba. La golpeaban y la dejaban encerrada todo el día. Logró escapar y ahora vive en la calle, con miedo de todo. Aún así, mueve la cola cuando ve a alguien amable.",
+      "perro-4": "Toby fue atropellado y su dueño no lo llevó al veterinario. Lo abandonó en una carretera con una pata fracturada. Logró arrastrarse hasta un pueblo, donde lo encontraron deshidratado y lleno de heridas.",
+      "perro-5": "Coco era el perro de un anciano que falleció. Los familiares lo botaron a la calle. No entiende por qué su dueño no volvió. Todas las noches se sienta en la acera de la casa que fue su hogar, esperando que alguien abra la puerta.",
+      "perro-6": "Nala fue usada para criar cachorros en un criadero clandestino. La tenían en una jaula pequeña y la golpeaban para que pariera más. Cuando la rescataron, estaba desnutrida y con múltiples infecciones. Nunca había sentido el sol en su piel.",
+      "perro-7": "Simba fue abandonado en un basurero junto a su camada. Todos sus hermanos murieron intoxicados. Él sobrevivió milagrosamente, pero desarrolló una enfermedad en la piel que le causa picazón constante. Busca a alguien que lo acaricie sin miedo.",
+      "perro-8": "Bruno era un perro guardián en una ferretería. Lo encadenaban todo el día sin agua ni sombra. Cuando la tienda cerró, lo dejaron amarrado. Pasó dos semanas así hasta que un vecino lo liberó. Tiene cicatrices en el cuello por la cadena.",
+      "perro-9": "Daisy fue encontrada en una zona rural, con una herida de bala en la pata trasera. Probablemente la usaron para prácticas de tiro. A pesar del dolor, es increíblemente cariñosa y busca consuelo en cada persona que ve.",
+      "perro-10": "Charlie vivía en la calle con un grupo de perros callejeros. Siempre era el último en comer y el primero en recibir golpes de otros animales. Es tímido y asustadizo, pero tiene una mirada que pide una oportunidad.",
+      "perro-11": "Lola fue separada de su madre cuando era un cachorro. La vendieron en una caja en la calle. El comprador la abandonó al poco tiempo porque 'ladraba mucho'. Ahora deambula en busca de cariño, sin entender por qué nadie la quiere.",
+      "perro-12": "Thor fue atacado por perros callejeros en un parque. Su dueño lo vio y huyó para no pagar el veterinario. Quedó con heridas profundas y una infección. Cuando lo rescataron, ya no podía mover una de sus patas.",
+      "perro-13": "Molly fue encontrada en una zanja, con una cuerda tan apretada alrededor del cuello que casi le corta la respiración. La usaron para experimentos. Es miedosa pero agradece con lamidas cada muestra de cariño.",
+      "perro-14": "Leo fue abandonado en un centro comercial porque su dueño se iba del país. Esperó dos días sentado en la misma puerta por donde entró. Lo recogió la policía y lo llevaron a un refugio. Todavía busca a su dueño en cada visitante.",
+      "perro-15": "Kira fue rescatada de un pozo donde cayó y no podía salir. Estuvo tres días sin comida ni agua. Cuando la encontraron, estaba al borde de la muerte. Ahora vive en el refugio, pero llora cuando ve oscuridad.",
+      "perro-16": "Rex trabajó como perro de trineo en una zona turística, pero cuando envejeció, lo dejaron morir en una jaula. Un voluntario lo encontró en el último momento. Sus patas están deformadas por el exceso de trabajo.",
+      "perro-17": "Milo fue abandonado en una autopista. Durante meses, corrió detrás de los carros que pasaban, esperando que uno de ellos se detuviera. Nunca lo hicieron. Lo recogieron deshidratado y con quemaduras por el asfalto.",
+      "perro-18": "Lily fue utilizada como perro de pelea en peleas clandestinas. La entrenaban con violencia y la drogaban. Tiene marcas de mordidas en todo el cuerpo. A pesar de todo, es dócil y busca protección.",
+      "perro-19": "Oscar fue abandonado en un refugio con una nota que decía 'es muy rebelde'. En realidad, solo tenía miedo. Estaba deshidratado y sucio. Hoy es uno de los perros más cariñosos del refugio, aunque aún tiembla cuando ve una mano levantada.",
+      "perro-20": "Zeus fue encontrado en un camión de basura, dentro de una bolsa cerrada. Lo tiraron vivo. El conductor lo oyó llorar y lo rescató. Estaba a punto de morir aplastado. Ahora no soporta los ruidos fuertes.",
+      "perro-21": "Maya fue abandonada por su familia después de que su dueño murió. Los hijos no querían tenerla. La dejaron en la calle y ella pasó semanas esperando frente a la casa. Es una perra vieja, con artritis y cansancio en los ojos.",
+      "perro-22": "Jack fue rescatado de una obra en construcción. Lo usaban para cuidar materiales y lo tenían encerrado sin luz ni ventilación. Su piel está dañada por la humedad y el frío. Apenas había visto el sol.",
+      "perro-23": "Sasha fue abandonada en una montaña durante un viaje familiar. La dejaron atada a un árbol. Sobrevivió comiendo raíces y bebiendo agua de lluvia. Un montañista la encontró y la bajó en sus brazos.",
+      "perro-24": "Tango era el perro de una familia que se quedó sin dinero y lo abandonó en la calle. Lo echaron de su casa y él no entendía por qué. Durante semanas se paró en la esquina viendo pasar a su familia sin mirarlo.",
+      "perro-25": "Roko fue utilizado como perro de laboratorio. Lo pinchaban y le daban sustancias para pruebas. Sus ojos tienen una mirada triste y profunda, llena de recuerdos de dolor. Ahora busca caricias que le hagan olvidar.",
+      "perro-26": "Lúa fue abandonada en un cementerio. La gente la veía entre las tumbas y pensaban que era un fantasma. Solo buscaba un lugar donde descansar sin que la echaran. Se alimentaba de las ofrendas que dejaban los visitantes.",
+      "perro-27": "Koda fue atropellado y su dueño no quiso pagar la operación. Lo abandonó en el veterinario. Tiene una cadera fracturada que no sanó bien y cojea al caminar. Pero su espíritu no está quebrado, busca a alguien que lo quiera así.",
+      "perro-28": "Akira fue encontrada en un bosque, con una herida de cuchillo en el costado. La usaron para prácticas de cacería. Sobrevivió milagrosamente. Ahora es desconfiada, pero cuando mira a los ojos, se ve un alma que busca paz.",
+      "perro-29": "Tita fue abandonada porque su dueño se cansó de ella cuando creció. La dejó en una carretera y se fue. Ella lo vio alejarse y no entendió. Hoy, cada vez que un carro se detiene, se acerca esperando que sea él.",
+      "perro-30": "Lucas era el perro de un indigente que falleció en la calle. Desde entonces, se sienta junto a la manta de su dueño todos los días. No se separa de ese lugar, esperando que su amigo despierte. Lo recogieron pero siempre quiere volver.",
+      "gato-0": "Mishi fue abandonada en una caja de cartón en la puerta de un refugio. Estaba con sus hermanos, todos muertos. Ella lloraba sin parar. Cuando la abrieron, tenía los ojos llenos de lágrimas y el cuerpo tembloroso.",
+      "gato-1": "Garfield vivía en una casa donde lo golpeaban. Logró escapar por una ventana, pero se lastimó la pata al caer. Ahora está en el refugio, es arisco pero cuando lo acarician, ronronea con fuerza. No recuerda lo que es sentirse seguro.",
+      "gato-2": "Salem fue abandonado en una estación de gasolina. La gente pasaba y lo ignoraba. Comía de la basura y dormía en los neumáticos. Un día, un camión casi lo atropella y un empleado lo rescató. Ahora tiene miedo de los ruidos fuertes.",
+      "gato-3": "Luna era una gata callejera que tuvo una camada. Dos de sus crías murieron de hambre. Ella las cuidó hasta el final. Ahora está sola, triste y apenas come. Su mirada dice que perdió la esperanza en el mundo.",
+      "gato-4": "Simba fue rescatado de un apartamento abandonado. Lo dejaron encerrado sin comida ni agua durante más de una semana. Cuando lo encontraron, estaba deshidratado y apenas podía moverse. Hoy es un sobreviviente.",
+      "gato-5": "Mia fue utilizada en un criadero ilegal. La obligaban a tener crías constantemente, sin descanso ni cuidados. Cuando ya no pudo parir más, la abandonaron en la calle. Está débil y enferma, pero busca caricias desesperadamente.",
+      "gato-6": "Tigre fue encontrado en un parque, con una herida profunda en la cabeza. Alguien le había lanzado una piedra. Tiene secuelas neurológicas y su cabeza tiembla a veces. Aun así, es un gato dulce y agradecido.",
+      "gato-7": "Pelusa era el gato de una señora mayor que falleció. Los hijos la echaron a la calle. Ahora vive en el refugio, siempre en un rincón, esperando a que alguien se siente a su lado. Extraña a su dueña.",
+      "gato-8": "Negro fue encontrado en un basurero con una bolsa atada al cuello. Lo tiraron vivo para morir aplastado. Un reciclador lo oyó maullar y lo salvó. Le costó volver a confiar en los humanos.",
+      "gato-9": "Canela fue abandonada por su familia cuando se mudaron. La dejaron en la puerta de la vieja casa y se fueron. Ella esperó días bajo la lluvia. Cuando la recogieron, tenía fiebre y neumonía.",
+      "gato-10": "Ginger vivía en una fábrica de alimentos, donde la alimentaban mal y la perseguían. Cuando la fábrica cerró, la dejaron allí. Ahora tiene miedo de los espacios grandes y se esconde en cualquier agujero.",
+      "gato-11": "Nube fue atacada por perros callejeros. Su dueño la abandonó porque 'costaba mucho curarla'. Quedó con una fractura en la columna. No puede saltar bien, pero se arrastra para recibir cariño.",
+      "gato-12": "Lucky fue encontrado dentro de una cajuela de un carro en el desguace. El mecánico lo oyó maullar y lo rescató. Estaba deshidratado y con quemaduras. Su nombre es irónico, porque no ha tenido suerte, pero busca una oportunidad."
     };
 
     // ================================================================
@@ -1642,12 +1697,6 @@
     const nombresGato = ["Mishi", "Garfield", "Salem", "Luna", "Simba", "Mia", "Tigre", "Pelusa", "Negro", "Canela", "Ginger",
       "Nube"
     ];
-    const descripciones = ["Rescatado de la calle, desnutrido y con miedo.", "Vagaba en un barrio peligroso, tiene heridas leves.",
-      "Fue encontrado en una alcantarilla, está muy delgado.", "Lleva meses en la calle, sobrevive como puede.",
-      "Tiene sarna y parásitos, pero es muy manso.", "Siempre se acerca a las personas, busca cariño.",
-      "Vive en un parque, las lluvias lo afectan mucho.", "Tiene una pata lastimada, no puede caminar bien.",
-      "Es muy juguetón a pesar de su situación.", "Se refugia en un lote baldío, tiene hambre y sed."
-    ];
 
     function generarAnimales() {
       const animales = [];
@@ -1659,22 +1708,23 @@
           tipo: 'perro',
           nombre: nombresPerro[i],
           raza: 'Criollo',
-          descripcion: descripciones[i % descripciones.length],
+          historia: HISTORIAS[id] || 'Rescatado de la calle, busca una segunda oportunidad.',
           imagen,
-          meta: META_DONACION // ✅ Usa la nueva meta de 500
+          meta: META_DONACION
         });
       }
-      for (let i = 0; i < 12; i++) {
+      for (let i = 0; i < 13; i++) {
         const id = `gato-${i}`;
         const imagen = IMAGENES_PERSONALIZADAS[id] || `https://picsum.photos/seed/${id}/400/400`;
+        let nombreGato = nombresGato[i] || 'Lucky';
         animales.push({
           id,
           tipo: 'gato',
-          nombre: nombresGato[i],
+          nombre: nombreGato,
           raza: 'Criollo',
-          descripcion: descripciones[(i + 3) % descripciones.length],
+          historia: HISTORIAS[id] || 'Rescatado de la calle, busca un hogar lleno de amor.',
           imagen,
-          meta: META_DONACION // ✅ Usa la nueva meta de 500
+          meta: META_DONACION
         });
       }
       return animales;
@@ -1690,30 +1740,23 @@
     let logoListo = false;
     logoMarca.onload = function() {
       logoListo = true;
-      // Cuando el logo esté listo, refrescar las imágenes que ya estén mostradas
       actualizarAnimales();
     };
     logoMarca.onerror = function() {
-      // Si falla, usar sin marca
       logoListo = false;
     };
 
-    // Caché de imágenes con marca
     const cacheMarca = new Map();
 
     function aplicarMarcaAgua(imagenUrl, callback) {
-      // Si ya está en caché, devolver
       if (cacheMarca.has(imagenUrl)) {
         callback(cacheMarca.get(imagenUrl));
         return;
       }
-
-      // Si no hay logo, devolver la original
       if (!logoListo) {
         callback(imagenUrl);
         return;
       }
-
       const img = new Image();
       img.crossOrigin = "anonymous";
       img.onload = function() {
@@ -1721,16 +1764,10 @@
         const ctx = canvas.getContext('2d');
         canvas.width = img.width;
         canvas.height = img.height;
-
-        // Dibujar imagen original
         ctx.drawImage(img, 0, 0);
-
-        // Dibujar marca de agua (logo) en varias posiciones
-        const logoSize = Math.min(img.width, img.height) * 0.15; // 15% del tamaño
+        const logoSize = Math.min(img.width, img.height) * 0.15;
         const opacidad = 0.25;
         ctx.globalAlpha = opacidad;
-
-        // Posiciones: cuatro esquinas y centro
         const margin = 10;
         const positions = [
           { x: margin, y: margin },
@@ -1739,19 +1776,15 @@
           { x: img.width - logoSize - margin, y: img.height - logoSize - margin },
           { x: (img.width - logoSize) / 2, y: (img.height - logoSize) / 2 }
         ];
-
         positions.forEach(pos => {
           ctx.drawImage(logoMarca, pos.x, pos.y, logoSize, logoSize);
         });
-
         ctx.globalAlpha = 1.0;
-
         const dataUrl = canvas.toDataURL('image/jpeg', 0.9);
         cacheMarca.set(imagenUrl, dataUrl);
         callback(dataUrl);
       };
       img.onerror = function() {
-        // Si falla la carga de la imagen, devolver la original
         callback(imagenUrl);
       };
       img.src = imagenUrl;
@@ -1791,9 +1824,8 @@
     let usuarioActual = '';
     let nombreActual = '';
     let saldoActual = 0;
-    let modoActual = 'register'; // 'register' o 'login'
+    let modoActual = 'register';
 
-    // Datos persistentes
     let creditosAnimales = JSON.parse(localStorage.getItem('peluditos_creditos') || '{}');
     let donacionesCache = JSON.parse(localStorage.getItem('peluditos_donaciones') || '[]');
     let categoriaActiva = 'perros';
@@ -1861,10 +1893,9 @@
     }
 
     // ================================================================
-    //  AUTENTICACIÓN - REGISTRO E INICIO DE SESIÓN
+    //  AUTENTICACIÓN
     // ================================================================
     function normalizarDatos(nombre, email) {
-      // Ya están en minúscula por el input, pero por si acaso
       nombre = nombre.trim().toLowerCase();
       email = email.trim().toLowerCase();
       return { nombre, email };
@@ -1878,17 +1909,14 @@
       return true;
     }
 
-    // Guardar el nombre asociado al email en localStorage
     function guardarNombreLocal(email, nombre) {
       localStorage.setItem(`peluditos_nombre_${email}`, nombre);
     }
 
-    // Obtener el nombre guardado localmente para un email
     function obtenerNombreLocal(email) {
       return localStorage.getItem(`peluditos_nombre_${email}`);
     }
 
-    // Cambiar entre modos
     function cambiarModo(modo) {
       modoActual = modo;
       if (modo === 'register') {
@@ -1911,7 +1939,6 @@
       ocultarDiagnostico();
     }
 
-    // Alerta cálida de registro exitoso
     function mostrarAlertaRegistroExitoso(nombre) {
       Swal.fire({
         title: '🎉 ¡Bienvenido/a!',
@@ -1930,16 +1957,11 @@
         confirmButtonText: '❤️ ¡Entendido!',
         background: '#1a1f2a',
         color: '#fff',
-        showClass: {
-          popup: 'animate__animated animate__fadeInUp animate__faster'
-        },
-        hideClass: {
-          popup: 'animate__animated animate__fadeOutDown animate__faster'
-        },
+        showClass: { popup: 'animate__animated animate__fadeInUp animate__faster' },
+        hideClass: { popup: 'animate__animated animate__fadeOutDown animate__faster' },
         timer: 4000,
         timerProgressBar: true,
         didOpen: () => {
-          // Confeti animado
           const emojis = ['🎉', '🎊', '💛', '🐾', '🦴', '✨', '🌟'];
           for (let i = 0; i < 20; i++) {
             setTimeout(() => {
@@ -1968,7 +1990,6 @@
       });
     }
 
-    // Alerta de error en inicio de sesión
     function mostrarAlertaErrorLogin(tipo) {
       let titulo = '😅 ¡Ups!';
       let mensaje = '';
@@ -1995,54 +2016,38 @@
         confirmButtonText: '🔍 Verificar',
         background: '#1a1f2a',
         color: '#fff',
-        showClass: {
-          popup: 'animate__animated animate__shakeX animate__faster'
-        }
+        showClass: { popup: 'animate__animated animate__shakeX animate__faster' }
       });
     }
 
-    // Iniciar sesión (verifica email y nombre)
     async function iniciarSesion(email, nombre) {
       const datos = normalizarDatos(nombre, email);
       if (!validarCampos(datos.nombre, datos.email)) return;
-
       mostrarLoader();
       try {
-        // Verificar que el email existe
         const saldo = await getSaldo(datos.email);
-
-        // Verificar el nombre guardado localmente
         const nombreGuardado = obtenerNombreLocal(datos.email);
         if (!nombreGuardado) {
-          // Si no hay nombre guardado, significa que este dispositivo no ha registrado ese email
-          // Podríamos pedir que se registre primero o que ingrese el nombre correcto, pero no podemos verificarlo.
-          // Mostramos mensaje y sugerimos registrarse.
           mostrarAlertaErrorLogin('email');
           ocultarLoader();
           return;
         }
-
         if (nombreGuardado !== datos.nombre) {
           mostrarAlertaErrorLogin('nombre');
           ocultarLoader();
           return;
         }
-
-        // Todo bien, obtener datos globales
         let donacionesNube = [];
         let creditosNube = {};
         try { donacionesNube = await getDonacionesGlobales(); } catch (e) { console.warn(
             'No se pudieron obtener donaciones globales, usando datos locales.'); }
         try { creditosNube = await getCreditosGlobales(); } catch (e) { console.warn(
             'No se pudieron obtener créditos globales, usando datos locales.'); }
-
         if (donacionesNube.length > 0) donacionesCache = donacionesNube;
         if (Object.keys(creditosNube).length > 0) creditosAnimales = creditosNube;
-
         usuarioActual = datos.email;
         nombreActual = datos.nombre;
         saldoActual = saldo;
-
         authSection.classList.add('hidden');
         mainSection.classList.remove('hidden');
         actualizarSaldoUI();
@@ -2051,36 +2056,26 @@
         authStatus.textContent = `✅ Conectado como ${datos.nombre} (${datos.email})`;
         authStatus.style.color = '#2ecc71';
         ocultarDiagnostico();
-
         localStorage.setItem('peluditos_email', datos.email);
         localStorage.setItem('peluditos_nombre', datos.nombre);
         guardarEstadoLocal();
-
         iniciarDonadoresFicticios();
-
-        // Mostrar notificación de bienvenida
         mostrarNotificacion(`¡Bienvenido de nuevo, ${datos.nombre}! 🐾`, '👋');
       } catch (error) {
-        // El email no existe
         mostrarAlertaErrorLogin('email');
       } finally {
         ocultarLoader();
       }
     }
 
-    // Registro de nuevo usuario (valida nombre y email duplicados)
     async function registrarNuevoUsuario(email, nombre) {
       const datos = normalizarDatos(nombre, email);
       if (!validarCampos(datos.nombre, datos.email)) return;
-
       mostrarLoader();
       try {
         await registrarUsuario(datos.email, datos.nombre);
-        // Éxito: guardar nombre local, mostrar alerta cálida, limpiar y cambiar a login
         guardarNombreLocal(datos.email, datos.nombre);
         mostrarAlertaRegistroExitoso(datos.nombre);
-
-        // Limpiar campos y cambiar modo a login
         authNombre.value = '';
         authEmail.value = '';
         cambiarModo('login');
@@ -2088,7 +2083,6 @@
         mostrarDiagnostico('✅ Registro exitoso. Inicia sesión.', 'success');
       } catch (error) {
         const msg = error.message.toLowerCase();
-        // Detectar error de email duplicado
         if (msg.includes('email') || msg.includes('correo') || (msg.includes('duplicate') && msg.includes('email'))) {
           Swal.fire({
             title: '📧 Correo ya registrado',
@@ -2100,7 +2094,6 @@
             color: '#fff'
           });
         } else if (msg.includes('nombre') || msg.includes('ya existe')) {
-          // Nombre duplicado: sugerir agregar número
           const nuevoNombre = await sugerirNombreConNumero(datos.nombre, datos.email);
           if (nuevoNombre) {
             try {
@@ -2126,7 +2119,6 @@
       }
     }
 
-    // Sugerir nombre con número
     async function sugerirNombreConNumero(nombreBase, email) {
       const numero = Math.floor(Math.random() * 90) + 10;
       const sugerido = `${nombreBase}${numero}`;
@@ -2150,7 +2142,6 @@
       }
     }
 
-    // Cerrar sesión
     function logoutUsuario() {
       if (intervaloFicticio) { clearInterval(intervaloFicticio);
         intervaloFicticio = null; }
@@ -2158,7 +2149,6 @@
       nombreActual = '';
       localStorage.removeItem('peluditos_email');
       localStorage.removeItem('peluditos_nombre');
-      // No eliminamos los nombres guardados por email para futuras verificaciones
       authSection.classList.remove('hidden');
       mainSection.classList.add('hidden');
       authStatus.textContent = '🔒 Ingresa tu nombre y correo';
@@ -2194,11 +2184,8 @@
     btnLogout.addEventListener('click', logoutUsuario);
     btnCompartirLogin.addEventListener('click', compartirNativo);
 
-    // Cargar datos guardados
     if (localStorage.getItem('peluditos_email')) authEmail.value = localStorage.getItem('peluditos_email');
     if (localStorage.getItem('peluditos_nombre')) authNombre.value = localStorage.getItem('peluditos_nombre');
-
-    // Iniciar en modo registro por defecto
     cambiarModo('register');
 
     // ================================================================
@@ -2245,8 +2232,9 @@
         reverseButtons: true
       });
       if (result.isConfirmed) {
+        // Abre WhatsApp con el número de WhatsApp (no Nequi) para enviar el comprobante
         window.open(
-          `https://api.whatsapp.com/send?phone=57${NEQUI_NUM}&text=${encodeURIComponent(mensaje)}`, '_blank');
+          `https://api.whatsapp.com/send?phone=57${WHATSAPP_NUM}&text=${encodeURIComponent(mensaje)}`, '_blank');
         await Swal.fire({ icon: 'success', title: '🎉 ¡Listo!', text: 'Cuando verifiquemos tu pago, tus huesitos aparecerán.',
           confirmButtonColor: '#2ecc71', background: '#1a1f2a', color: '#fff', timer: 5000 });
       }
@@ -2408,7 +2396,6 @@
         saldoActual = result.saldo;
         if (!creditosAnimales[animalId]) creditosAnimales[animalId] = 0;
         creditosAnimales[animalId] += num;
-
         actualizarSaldoUI();
         actualizarAnimales();
         const ahora = new Date();
@@ -2419,9 +2406,7 @@
         if (donacionesCache.length > 50) donacionesCache.length = 50;
         guardarEstadoLocal();
         renderDonaciones();
-
         mostrarNotificacion(`<strong>${nombreActual}</strong> donó ${num} 🦴 a <strong>${animalNombre}</strong>`, '❤️');
-
         Swal.fire({
           icon: 'success',
           title: '🎉 ¡Donación exitosa!',
@@ -2470,16 +2455,13 @@
       const nombre = NOMBRES_FICTICIOS[Math.floor(Math.random() * NOMBRES_FICTICIOS.length)];
       const ahora = new Date();
       const fecha = ahora.toLocaleDateString('es-ES', { day: '2-digit', month: 'short', year: 'numeric' });
-
       if (!creditosAnimales[animal.id]) creditosAnimales[animal.id] = 0;
       creditosAnimales[animal.id] += cantidad;
-
       const donacion = { nombre, nombreAnimal: animal.nombre, cantidad, fecha, email: nombre.toLowerCase().replace(/ /g, '') +
           '@ficticio.com', esFicticio: true };
       donacionesCache.unshift(donacion);
       if (donacionesCache.length > 50) donacionesCache.length = 50;
       guardarEstadoLocal();
-
       mostrarNotificacion(`<strong>${nombre}</strong> donó ${cantidad} 🦴 a <strong>${animal.nombre}</strong>`, '✨');
       actualizarAnimales();
       renderDonaciones();
@@ -2522,7 +2504,6 @@
       actualizarEstadisticas();
     }
 
-    // Función para actualizar la cuadrícula de animales con marcas de agua
     function actualizarAnimales() {
       let filtrados = categoriaActiva === 'perros' ? ANIMALES.filter(a => a.tipo === 'perro') :
         categoriaActiva === 'gatos' ? ANIMALES.filter(a => a.tipo === 'gato') : [...ANIMALES];
@@ -2536,7 +2517,6 @@
         const isComplete = porcentaje >= 100;
         const div = document.createElement('div');
         div.className = 'animal-card';
-        // Contenedor de imagen con marca de agua: usamos un img normal que luego modificaremos con la función
         div.innerHTML = `
           <img src="" alt="${animal.nombre}" loading="lazy" style="width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:18px;background:#1a1f2a;margin-bottom:8px;cursor:pointer;box-shadow:0 4px 12px rgba(0,0,0,0.2);-webkit-user-drag:none;user-drag:none;user-select:none;-webkit-user-select:none;" />
           <div class="animal-info">
@@ -2547,24 +2527,20 @@
               <div class="progress-bar-bg"><div class="progress-bar-fill ${isComplete?'complete':''}" style="width:${porcentaje}%;"></div></div>
               <div class="progress-label"><span>${porcentaje}%</span><span class="meta-text">${isComplete?'🎉 Meta alcanzada':`${creditos}/${meta}`}</span></div>
             </div>
-            <div class="desc">${animal.descripcion}</div>
+            <div class="desc">${animal.historia}</div>
             <button class="btn-donar" onclick="window.donarCredito('${animal.id}','${animal.nombre}')">Donar 🥫</button>
           </div>`;
 
         const imgElement = div.querySelector('img');
-        // Aplicar marca de agua a la imagen
         aplicarMarcaAgua(animal.imagen, (dataUrl) => {
           imgElement.src = dataUrl;
         });
 
-        // Evento click para abrir modal con la misma imagen con marca
         imgElement.addEventListener('click', (e) => {
           e.stopPropagation();
-          // Usar la caché o generar de nuevo
           if (cacheMarca.has(animal.imagen)) {
             modalImgSrc.src = cacheMarca.get(animal.imagen);
           } else {
-            // Si no está en caché, generarla y luego mostrarla
             aplicarMarcaAgua(animal.imagen, (dataUrl) => {
               modalImgSrc.src = dataUrl;
             });
@@ -2607,7 +2583,7 @@
       }, 1500);
     }
 
-    console.log('🐾 Meta de donación actualizada a 500 huesitos.');
+    console.log('🐾 Número de WhatsApp actualizado a 3138596350.');
   </script>
 </body>
 </html>
