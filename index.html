@@ -1545,7 +1545,7 @@
     // ================================================================
     const API_URL = 'https://script.google.com/macros/s/AKfycbw-f8hVfnQzr68AVQxOvVZCuG6ClgdgSWxtAWoLO6EVihBCMAJ4X5sIV9F5qql1jVC6/exec';
     const NEQUI_NUM = "3019235483";
-    const META_DONACION = 100;
+    const META_DONACION = 500; // 🔥 Meta cambiada a 500 huesitos
 
     const NOMBRES_FICTICIOS = [
       'Jorge Ramírez', 'Claudia Suárez', 'Miguel Torres', 'Patricia Díaz',
@@ -1661,7 +1661,7 @@
           raza: 'Criollo',
           descripcion: descripciones[i % descripciones.length],
           imagen,
-          meta: META_DONACION
+          meta: META_DONACION // ✅ Usa la nueva meta de 500
         });
       }
       for (let i = 0; i < 12; i++) {
@@ -1674,7 +1674,7 @@
           raza: 'Criollo',
           descripcion: descripciones[(i + 3) % descripciones.length],
           imagen,
-          meta: META_DONACION
+          meta: META_DONACION // ✅ Usa la nueva meta de 500
         });
       }
       return animales;
@@ -2607,7 +2607,7 @@
       }, 1500);
     }
 
-    console.log('🐾 Imágenes actualizadas con las URLs proporcionadas.');
+    console.log('🐾 Meta de donación actualizada a 500 huesitos.');
   </script>
 </body>
 </html>
