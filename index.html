@@ -1549,7 +1549,7 @@
     <div class="footer">
       <div>💙 100% a alimentación, veterinaria y refugio</div>
 
-      <!-- CONTADOR DE VISITAS -->
+      <!-- CONTADOR DE VISITAS GLOBAL -->
       <div class="visitas-contador">
         <span class="icono">🐾</span>
         <span class="texto">Visitas</span>
@@ -1673,34 +1673,32 @@
     }
 
     // ================================================================
-    //  CONTADOR DE VISITAS (con animación y persistencia)
+    //  CONTADOR DE VISITAS GLOBAL (con CountAPI - sin respaldo local)
     // ================================================================
-    function inicializarContador() {
+    async function actualizarContador() {
       const contadorEl = document.getElementById('contadorNumero');
-      let visitas = localStorage.getItem('visitas_peluditos');
-      if (visitas) {
-        visitas = parseInt(visitas) + 1;
-      } else {
-        visitas = 1;
-      }
-      localStorage.setItem('visitas_peluditos', visitas.toString());
+      const NAMESPACE = 'peluditos';
+      const KEY = 'visitas';
+      const URL_INCREMENTAR = `https://api.countapi.xyz/hit/${NAMESPACE}/${KEY}`;
 
-      // Número final: usamos 12587 como base + visitas reales (para que se vea llamativo)
-      const base = 12587;
-      const total = base + visitas;
-      const duracion = 1800; // ms
-      const inicio = 0;
-      const paso = 20; // ms
-      const incremento = total / (duracion / paso);
-      let actual = 0;
-      let timer = setInterval(() => {
-        actual += incremento;
-        if (actual >= total) {
-          actual = total;
-          clearInterval(timer);
+      try {
+        // Incrementar el contador en cada carga
+        const resp = await fetch(URL_INCREMENTAR);
+        const data = await resp.json();
+        if (data && data.value !== undefined) {
+          contadorEl.textContent = data.value.toLocaleString();
+        } else {
+          throw new Error('Respuesta inválida de CountAPI');
         }
-        contadorEl.textContent = Math.floor(actual).toLocaleString();
-      }, paso);
+      } catch (error) {
+        console.error('Error con CountAPI:', error);
+        // Si falla, mostrar 0 o un mensaje amigable
+        contadorEl.textContent = '?';
+        // Opcional: reintentar después de un tiempo
+        setTimeout(() => {
+          actualizarContador();
+        }, 5000);
+      }
     }
 
     // ================================================================
@@ -2742,7 +2740,8 @@
     // ================================================================
     //  INICIALIZAR CONTADOR Y TOAST
     // ================================================================
-    inicializarContador();
+    // Iniciar el contador con CountAPI (sin respaldo local)
+    actualizarContador();
 
     if (!localStorage.getItem('peluditos_share_shown')) {
       setTimeout(() => {
@@ -2751,7 +2750,7 @@
       }, 1500);
     }
 
-    console.log('🐾 Contador de visitas animado y cálido agregado.');
+    console.log('🐾 Contador de visitas global con CountAPI - sin respaldo local.');
   </script>
 </body>
 </html>
