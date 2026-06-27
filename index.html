@@ -446,7 +446,6 @@
       margin-bottom: 4px;
     }
 
-    /* Forzamos que el texto se vea en minúscula visualmente también */
     input.lowercase-input {
       text-transform: lowercase;
     }
@@ -1135,18 +1134,16 @@
       font-weight: 600;
       letter-spacing: 0.5px;
     }
-    .visitas-contador .numero {
-      font-size: 1.6rem;
-      font-weight: 800;
-      color: #f9d976;
-      font-variant-numeric: tabular-nums;
-      background: linear-gradient(135deg, #f9d976, #f39c12);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      animation: brilloNumero 3s ease-in-out infinite;
-      min-width: 60px;
-      text-align: center;
+    .visitas-contador .contador-imagen {
+      height: 38px;
+      width: auto;
+      border-radius: 4px;
+      filter: drop-shadow(0 0 6px rgba(249, 217, 118, 0.15));
+      transition: filter 0.3s ease;
+      pointer-events: none;
+    }
+    .visitas-contador:hover .contador-imagen {
+      filter: drop-shadow(0 0 12px rgba(249, 217, 118, 0.3));
     }
     .visitas-contador .corazon {
       font-size: 1.2rem;
@@ -1174,15 +1171,6 @@
       }
       75% {
         transform: scale(1.1);
-      }
-    }
-    @keyframes brilloNumero {
-      0%,
-      100% {
-        filter: drop-shadow(0 0 4px rgba(249, 217, 118, 0.15));
-      }
-      50% {
-        filter: drop-shadow(0 0 12px rgba(249, 217, 118, 0.35));
       }
     }
     @keyframes contadorEntrada {
@@ -1398,15 +1386,14 @@
         padding: 8px 14px;
         gap: 8px;
       }
-      .visitas-contador .numero {
-        font-size: 1.3rem;
-        min-width: 50px;
-      }
-      .visitas-contador .texto {
-        font-size: 0.7rem;
+      .visitas-contador .contador-imagen {
+        height: 28px;
       }
       .visitas-contador .icono {
         font-size: 1.4rem;
+      }
+      .visitas-contador .texto {
+        font-size: 0.7rem;
       }
     }
     @media (max-width: 400px) {
@@ -1439,9 +1426,8 @@
       .animal-info .desc {
         -webkit-line-clamp: 1;
       }
-      .visitas-contador .numero {
-        font-size: 1.1rem;
-        min-width: 40px;
+      .visitas-contador .contador-imagen {
+        height: 24px;
       }
     }
   </style>
@@ -1549,11 +1535,15 @@
     <div class="footer">
       <div>💙 100% a alimentación, veterinaria y refugio</div>
 
-      <!-- CONTADOR DE VISITAS GLOBAL -->
+      <!-- CONTADOR DE VISITAS (con la imagen proporcionada) -->
       <div class="visitas-contador">
         <span class="icono">🐾</span>
         <span class="texto">Visitas</span>
-        <span class="numero" id="contadorNumero">0</span>
+        <img src="https://counter11.optistats.ovh/private/contadorvisitasgratis.php?c=cxq5afnn5l4hwrhwnhd8apguewt62ehd" 
+             alt="Contador de visitas" 
+             class="contador-imagen" 
+             border="0" 
+             loading="lazy" />
         <span class="corazon">❤️</span>
       </div>
     </div>
@@ -1673,38 +1663,9 @@
     }
 
     // ================================================================
-    //  CONTADOR DE VISITAS GLOBAL (con CountAPI - sin respaldo local)
-    // ================================================================
-    async function actualizarContador() {
-      const contadorEl = document.getElementById('contadorNumero');
-      const NAMESPACE = 'peluditos';
-      const KEY = 'visitas';
-      const URL_INCREMENTAR = `https://api.countapi.xyz/hit/${NAMESPACE}/${KEY}`;
-
-      try {
-        // Incrementar el contador en cada carga
-        const resp = await fetch(URL_INCREMENTAR);
-        const data = await resp.json();
-        if (data && data.value !== undefined) {
-          contadorEl.textContent = data.value.toLocaleString();
-        } else {
-          throw new Error('Respuesta inválida de CountAPI');
-        }
-      } catch (error) {
-        console.error('Error con CountAPI:', error);
-        // Si falla, mostrar 0 o un mensaje amigable
-        contadorEl.textContent = '?';
-        // Opcional: reintentar después de un tiempo
-        setTimeout(() => {
-          actualizarContador();
-        }, 5000);
-      }
-    }
-
-    // ================================================================
     //  CONFIGURACIÓN
     // ================================================================
-    const API_URL = 'https://script.google.com/macros/s/AKfycbw-f8hVfnQzr68AVQxOvVZCuG6ClgdgSWxtAWoLO6EVihBCMAJ4X5sIV9F5qql1jVC6/exec';
+    const API_URL = 'https://script.google.com/macros/s/AKfycbzksa6m9i1-5jKvjCM1d1IU7cZjxtCGs8ygBk0hyQcfU1HKLnH8KczmM1qmAey-TgnY/exec';
     const NEQUI_NUM = "3019235483";
     const WHATSAPP_NUM = "3138596350";
     const META_DONACION = 500;
@@ -2235,8 +2196,12 @@
         authEmail.focus();
         mostrarDiagnostico('✅ Registro exitoso. Inicia sesión.', 'success');
       } catch (error) {
+        ocultarLoader();
         const msg = error.message.toLowerCase();
-        if (msg.includes('email') || msg.includes('correo') || (msg.includes('duplicate') && msg.includes('email'))) {
+        console.log('Error capturado:', msg);
+        
+        if (msg.includes('email') || msg.includes('correo')) {
+          // Correo duplicado
           Swal.fire({
             title: '📧 Correo ya registrado',
             html: `<p style="color:#ddd;">El correo <strong>${datos.email}</strong> ya está en uso. Por favor, usa otro o inicia sesión.</p>`,
@@ -2246,9 +2211,11 @@
             background: '#1a1f2a',
             color: '#fff'
           });
-        } else if (msg.includes('nombre') || msg.includes('ya existe')) {
+        } else if (msg.includes('nombre') && msg.includes('existe')) {
+          // Nombre duplicado → sugerir nombre alternativo
           const nuevoNombre = await sugerirNombreConNumero(datos.nombre, datos.email);
           if (nuevoNombre) {
+            mostrarLoader();
             try {
               await registrarUsuario(datos.email, nuevoNombre);
               guardarNombreLocal(datos.email, nuevoNombre);
@@ -2259,12 +2226,14 @@
               authEmail.focus();
               mostrarDiagnostico('✅ Registro exitoso. Inicia sesión.', 'success');
             } catch (err2) {
+              ocultarLoader();
               mostrarDiagnostico('❌ Error al registrar con el nuevo nombre: ' + err2.message, 'error');
             }
           } else {
             mostrarDiagnostico('❌ Registro cancelado. Puedes intentar con otro nombre.', 'error');
           }
         } else {
+          // Otro error
           mostrarDiagnostico('❌ Error al registrar: ' + error.message, 'error');
         }
       } finally {
@@ -2738,11 +2707,8 @@
     menuOverlay.addEventListener('click', (e) => { if (e.target === menuOverlay) menuOverlay.classList.remove('active'); });
 
     // ================================================================
-    //  INICIALIZAR CONTADOR Y TOAST
+    //  TOAST INICIAL
     // ================================================================
-    // Iniciar el contador con CountAPI (sin respaldo local)
-    actualizarContador();
-
     if (!localStorage.getItem('peluditos_share_shown')) {
       setTimeout(() => {
         mostrarNotificacion('🐾 ¡Comparte esta causa y ayuda a más peluditos!', '📢');
@@ -2750,7 +2716,7 @@
       }, 1500);
     }
 
-    console.log('🐾 Contador de visitas global con CountAPI - sin respaldo local.');
+    console.log('🐾 Contador de visitas actualizado con imagen externa.');
   </script>
 </body>
 </html>
