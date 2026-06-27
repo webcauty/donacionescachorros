@@ -1680,7 +1680,7 @@
     // ================================================================
     //  CONFIGURACIÓN
     // ================================================================
-    const API_URL = 'https://script.google.com/macros/s/AKfycbzksa6m9i1-5jKvjCM1d1IU7cZjxtCGs8ygBk0hyQcfU1HKLnH8KczmM1qmAey-TgnY/exec';
+    const API_URL = 'https://script.google.com/macros/s/AKfycbxR0NRFznrBqL95TmFS71LsWa18nUhdMM4njbXwVbDnAaGeyDJHuRf862fNeggDLDtq/exec';
     const NEQUI_NUM = "3019235483";
     const WHATSAPP_NUM = "3138596350";
     const META_DONACION = 500;
@@ -2001,6 +2001,10 @@
     async function registrarUsuario(email, nombre) {
       return await callApi({ action: 'registrarUsuario', email, nombre });
     }
+    
+    async function verificarLogin(email, nombre) {
+      return await callApi({ action: 'verificarLogin', email, nombre });
+    }
 
     async function getSaldo(email) {
       const data = await callApi({ action: 'getSaldo', email });
@@ -2022,7 +2026,7 @@
     }
 
     // ================================================================
-    //  AUTENTICACIÓN
+    //  AUTENTICACIÓN (TODO CONTRA GOOGLE SHEETS, SIN LOCALSTORAGE)
     // ================================================================
     function normalizarDatos(nombre, email) {
       nombre = nombre.trim().toLowerCase();
@@ -2036,14 +2040,6 @@
         return false;
       }
       return true;
-    }
-
-    function guardarNombreLocal(email, nombre) {
-      localStorage.setItem(`peluditos_nombre_${email}`, nombre);
-    }
-
-    function obtenerNombreLocal(email) {
-      return localStorage.getItem(`peluditos_nombre_${email}`);
     }
 
     function cambiarModo(modo) {
@@ -2119,61 +2115,48 @@
       });
     }
 
-    function mostrarAlertaErrorLogin(tipo) {
+    function mostrarAlertaErrorLogin(mensaje) {
       let titulo = '😅 ¡Ups!';
-      let mensaje = '';
-      if (tipo === 'email') {
+      let icono = 'error';
+      
+      if (mensaje.includes('correo no está registrado') || mensaje.includes('Email no encontrado')) {
         titulo = '📧 Correo no registrado';
-        mensaje = 'El correo electrónico que ingresaste no está registrado. ¿Deseas registrarte?';
-      } else if (tipo === 'nombre') {
+        icono = 'question';
+      } else if (mensaje.includes('nombre no coincide') || mensaje.includes('Nombre incorrecto')) {
         titulo = '👤 Nombre incorrecto';
-        mensaje = 'El nombre no coincide con el registrado para este correo. Verifica tus datos.';
-      } else {
-        titulo = '❌ Error de credenciales';
-        mensaje = 'Revisa que el correo y el nombre sean correctos.';
       }
+      
       Swal.fire({
         title: titulo,
-        html: `
-          <div style="display:flex;flex-direction:column;align-items:center;gap:8px;padding:8px 0;">
-            <div style="font-size:3.5rem;animation: pulse 1s infinite;">${tipo === 'email' ? '📧' : '👤'}</div>
-            <p style="color:#ddd;font-size:1rem;">${mensaje}</p>
-          </div>
-        `,
-        icon: 'error',
-        confirmButtonColor: '#e74c3c',
-        confirmButtonText: '🔍 Verificar',
+        html: `<p style="color:#ddd;font-size:1rem;">${mensaje}</p>`,
+        icon: icono,
+        confirmButtonColor: '#f9d976',
+        confirmButtonText: 'Entendido',
         background: '#1a1f2a',
-        color: '#fff',
-        showClass: { popup: 'animate__animated animate__shakeX animate__faster' }
+        color: '#fff'
       });
     }
 
+    // ========== INICIAR SESIÓN (VERIFICA CONTRA GOOGLE SHEETS) ==========
     async function iniciarSesion(email, nombre) {
       const datos = normalizarDatos(nombre, email);
       if (!validarCampos(datos.nombre, datos.email)) return;
       mostrarLoader();
       try {
+        // Verificar credenciales contra Google Sheets
+        const verificacion = await verificarLogin(datos.email, datos.nombre);
+        console.log('Verificación login:', verificacion);
+        
+        // Si la API devuelve ok, las credenciales son correctas
         const saldo = await getSaldo(datos.email);
-        const nombreGuardado = obtenerNombreLocal(datos.email);
-        if (!nombreGuardado) {
-          mostrarAlertaErrorLogin('email');
-          ocultarLoader();
-          return;
-        }
-        if (nombreGuardado !== datos.nombre) {
-          mostrarAlertaErrorLogin('nombre');
-          ocultarLoader();
-          return;
-        }
+        
         let donacionesNube = [];
         let creditosNube = {};
-        try { donacionesNube = await getDonacionesGlobales(); } catch (e) { console.warn(
-            'No se pudieron obtener donaciones globales, usando datos locales.'); }
-        try { creditosNube = await getCreditosGlobales(); } catch (e) { console.warn(
-            'No se pudieron obtener créditos globales, usando datos locales.'); }
+        try { donacionesNube = await getDonacionesGlobales(); } catch (e) { console.warn('Usando datos locales de donaciones.'); }
+        try { creditosNube = await getCreditosGlobales(); } catch (e) { console.warn('Usando datos locales de créditos.'); }
         if (donacionesNube.length > 0) donacionesCache = donacionesNube;
         if (Object.keys(creditosNube).length > 0) creditosAnimales = creditosNube;
+        
         usuarioActual = datos.email;
         nombreActual = datos.nombre;
         saldoActual = saldo;
@@ -2185,25 +2168,24 @@
         authStatus.textContent = `✅ Conectado como ${datos.nombre} (${datos.email})`;
         authStatus.style.color = '#2ecc71';
         ocultarDiagnostico();
-        localStorage.setItem('peluditos_email', datos.email);
-        localStorage.setItem('peluditos_nombre', datos.nombre);
         guardarEstadoLocal();
         iniciarDonadoresFicticios();
         mostrarNotificacion(`¡Bienvenido de nuevo, ${datos.nombre}! 🐾`, '👋');
       } catch (error) {
-        mostrarAlertaErrorLogin('email');
+        console.error('Error en inicio de sesión:', error);
+        mostrarAlertaErrorLogin(error.message);
       } finally {
         ocultarLoader();
       }
     }
 
+    // ========== REGISTRAR NUEVO USUARIO (VERIFICA CONTRA GOOGLE SHEETS) ==========
     async function registrarNuevoUsuario(email, nombre) {
       const datos = normalizarDatos(nombre, email);
       if (!validarCampos(datos.nombre, datos.email)) return;
       mostrarLoader();
       try {
         await registrarUsuario(datos.email, datos.nombre);
-        guardarNombreLocal(datos.email, datos.nombre);
         mostrarAlertaRegistroExitoso(datos.nombre);
         authNombre.value = '';
         authEmail.value = '';
@@ -2226,12 +2208,11 @@
             color: '#fff'
           });
         } else if (msg.includes('nombre') && msg.includes('existe')) {
-          const nuevoNombre = await sugerirNombreConNumero(datos.nombre, datos.email);
+          const nuevoNombre = await sugerirNombreConNumero(datos.nombre);
           if (nuevoNombre) {
             mostrarLoader();
             try {
               await registrarUsuario(datos.email, nuevoNombre);
-              guardarNombreLocal(datos.email, nuevoNombre);
               mostrarAlertaRegistroExitoso(nuevoNombre);
               authNombre.value = '';
               authEmail.value = '';
@@ -2253,7 +2234,7 @@
       }
     }
 
-    async function sugerirNombreConNumero(nombreBase, email) {
+    async function sugerirNombreConNumero(nombreBase) {
       const numero = Math.floor(Math.random() * 90) + 10;
       const sugerido = `${nombreBase}${numero}`;
       const result = await Swal.fire({
@@ -2277,12 +2258,9 @@
     }
 
     function logoutUsuario() {
-      if (intervaloFicticio) { clearInterval(intervaloFicticio);
-        intervaloFicticio = null; }
+      if (intervaloFicticio) { clearInterval(intervaloFicticio); intervaloFicticio = null; }
       usuarioActual = '';
       nombreActual = '';
-      localStorage.removeItem('peluditos_email');
-      localStorage.removeItem('peluditos_nombre');
       authSection.classList.remove('hidden');
       mainSection.classList.add('hidden');
       authStatus.textContent = '🔒 Ingresa tu nombre y correo';
@@ -2310,16 +2288,12 @@
       }
     });
 
-    authNombre.addEventListener('keydown', (e) => { if (e.key === 'Enter') { e.preventDefault();
-        btnAuthAction.click(); } });
-    authEmail.addEventListener('keydown', (e) => { if (e.key === 'Enter') { e.preventDefault();
-        btnAuthAction.click(); } });
+    authNombre.addEventListener('keydown', (e) => { if (e.key === 'Enter') { e.preventDefault(); btnAuthAction.click(); } });
+    authEmail.addEventListener('keydown', (e) => { if (e.key === 'Enter') { e.preventDefault(); btnAuthAction.click(); } });
 
     btnLogout.addEventListener('click', logoutUsuario);
     btnCompartirLogin.addEventListener('click', compartirNativo);
 
-    if (localStorage.getItem('peluditos_email')) authEmail.value = localStorage.getItem('peluditos_email');
-    if (localStorage.getItem('peluditos_nombre')) authNombre.value = localStorage.getItem('peluditos_nombre');
     cambiarModo('register');
 
     // ================================================================
@@ -2728,8 +2702,8 @@
       }, 1500);
     }
 
-    console.log('🐾 Contador de visitas actualizado con imagen externa.');
-    console.log('💜 Cuenta de pago Nequi Colombia configurada correctamente.');
+    console.log('🐾 Sistema funcionando 100% con Google Sheets.');
+    console.log('💜 Cuenta de pago Nequi Colombia configurada.');
   </script>
 </body>
 </html>
