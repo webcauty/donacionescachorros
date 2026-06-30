@@ -30,40 +30,27 @@
             line-height: 1.6;
         }
 
-        /* ====== LOADER OVERLAY ====== */
+        /* ====== LOADER CON BARRA DE PROGRESO (oculto por defecto) ====== */
         #loaderOverlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(11, 14, 20, 0.92);
-            backdrop-filter: blur(12px);
-            display: none;
+            background: rgba(11, 14, 20, 0.94);
+            backdrop-filter: blur(8px);
+            display: flex;
             justify-content: center;
             align-items: center;
             z-index: 9999;
             flex-direction: column;
             gap: 24px;
+            transition: opacity 0.4s ease;
         }
 
-        #loaderOverlay.active {
-            display: flex;
-        }
-
-        .loader-spinner {
-            width: 64px;
-            height: 64px;
-            border: 5px solid rgba(249, 217, 118, 0.15);
-            border-top-color: #f9d976;
-            border-radius: 50%;
-            animation: spin 0.8s linear infinite;
-        }
-
-        @keyframes spin {
-            to {
-                transform: rotate(360deg);
-            }
+        #loaderOverlay.hidden {
+            opacity: 0;
+            pointer-events: none;
         }
 
         .loader-logo {
@@ -87,21 +74,35 @@
         }
 
         .loader-text {
-            font-size: 1.3rem;
+            font-size: 1.2rem;
             color: #f9d976;
             font-weight: 600;
-            letter-spacing: 1.5px;
-            animation: pulseText 1.2s ease-in-out infinite;
+            letter-spacing: 1px;
         }
 
-        @keyframes pulseText {
-            0%,
-            100% {
-                opacity: 1;
-            }
-            50% {
-                opacity: 0.4;
-            }
+        .progress-bar-container {
+            width: 260px;
+            max-width: 80%;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 0 20px rgba(249, 217, 118, 0.05);
+        }
+
+        .progress-bar-fill-loader {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, #f9d976, #f39c12);
+            border-radius: 20px;
+            transition: width 0.25s ease-out;
+        }
+
+        .loader-percent {
+            font-size: 0.9rem;
+            color: #aaa;
+            font-weight: 400;
+            letter-spacing: 0.5px;
         }
 
         /* ====== FONDO CON HUELLAS 3D ====== */
@@ -729,6 +730,7 @@
             box-shadow: 0 4px 20px rgba(46, 204, 113, 0.4);
         }
 
+        /* === ESTILOS NEQUI === */
         .btn-nequi-copy {
             background: #5B2D8E;
             color: #fff;
@@ -767,6 +769,45 @@
             flex-shrink: 0;
         }
 
+        /* === ESTILOS ZELLE === */
+        .btn-zelle-copy {
+            background: #0066CC;
+            color: #fff;
+            border: none;
+            padding: 8px 16px 8px 12px;
+            border-radius: 40px;
+            font-weight: 700;
+            cursor: pointer;
+            font-family: 'Quicksand', sans-serif;
+            font-size: 0.9rem;
+            transition: all 0.25s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 2px 12px rgba(0, 102, 204, 0.35);
+        }
+
+        .btn-zelle-copy:hover {
+            transform: scale(1.05);
+            background: #004b99;
+            box-shadow: 0 4px 20px rgba(0, 102, 204, 0.5);
+        }
+
+        .zelle-logo-css {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 28px;
+            height: 28px;
+            background: white;
+            border-radius: 50%;
+            font-weight: 900;
+            font-size: 17px;
+            color: #0066CC;
+            animation: pulseLogo 1.5s infinite ease-in-out;
+            flex-shrink: 0;
+        }
+
         @keyframes pulseLogo {
             0%,
             100% {
@@ -777,18 +818,26 @@
             }
         }
 
-        .btn-nequi-copy .nequi-info {
+        .btn-nequi-copy .nequi-info,
+        .btn-zelle-copy .zelle-info {
             display: flex;
             flex-direction: column;
             align-items: flex-start;
             line-height: 1.2;
         }
 
-        .btn-nequi-copy .label {
+        .btn-nequi-copy .label,
+        .btn-zelle-copy .label {
             font-size: 0.7rem;
             font-weight: 600;
-            color: #c4a7e8;
             letter-spacing: 0.5px;
+        }
+
+        .btn-nequi-copy .label {
+            color: #c4a7e8;
+        }
+        .btn-zelle-copy .label {
+            color: #99caff;
         }
 
         .btn-nequi-copy .subtitulo-nequi {
@@ -798,13 +847,22 @@
             letter-spacing: 0.5px;
         }
 
-        .btn-nequi-copy .num {
+        .btn-zelle-copy .subtitulo-zelle {
+            font-size: 0.6rem;
+            font-weight: 700;
+            color: rgba(255, 255, 255, 0.7);
+            letter-spacing: 0.5px;
+        }
+
+        .btn-nequi-copy .num,
+        .btn-zelle-copy .num {
             font-weight: 600;
             letter-spacing: 0.5px;
             color: #fff;
         }
 
-        .btn-nequi-copy .copy-icon {
+        .btn-nequi-copy .copy-icon,
+        .btn-zelle-copy .copy-icon {
             font-size: 1rem;
             opacity: 0.8;
         }
@@ -1040,47 +1098,9 @@
             box-shadow: 0 4px 20px rgba(243, 156, 18, 0.35);
         }
 
-        /* ====== MODAL IMAGEN ====== */
+        /* ====== MODAL IMAGEN (ya no se usa) ====== */
         .modal-img {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.92);
             display: none;
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-            cursor: pointer;
-            backdrop-filter: blur(8px);
-        }
-
-        .modal-img.active {
-            display: flex;
-            animation: fadeInImg 0.3s ease-out;
-        }
-
-        @keyframes fadeInImg {
-            0% {
-                opacity: 0;
-                transform: scale(0.95);
-            }
-            100% {
-                opacity: 1;
-                transform: scale(1);
-            }
-        }
-
-        .modal-img img {
-            max-width: 92%;
-            max-height: 92%;
-            border-radius: 24px;
-            box-shadow: 0 40px 120px rgba(0, 0, 0, 0.9);
-            -webkit-user-drag: none;
-            user-drag: none;
-            user-select: none;
-            -webkit-user-select: none;
         }
 
         /* ====== DONACIONES ====== */
@@ -1540,6 +1560,11 @@
             .visitas-contador .texto {
                 font-size: 0.7rem;
             }
+            .btn-nequi-copy,
+            .btn-zelle-copy {
+                width: 100%;
+                justify-content: center;
+            }
         }
 
         @media (max-width: 400px) {
@@ -1547,10 +1572,12 @@
                 grid-template-columns: 1fr 1fr;
                 gap: 10px;
             }
-            .btn-nequi-copy .label {
+            .btn-nequi-copy .label,
+            .btn-zelle-copy .label {
                 font-size: 0.65rem;
             }
-            .btn-nequi-copy .num {
+            .btn-nequi-copy .num,
+            .btn-zelle-copy .num {
                 font-size: 0.8rem;
             }
             .categoria-btn {
@@ -1580,11 +1607,14 @@
 </head>
 <body>
 
-    <!-- ====== LOADER OVERLAY ====== -->
-    <div id="loaderOverlay">
+    <!-- ====== LOADER CON BARRA DE PROGRESO (oculto por defecto) ====== -->
+    <div id="loaderOverlay" class="hidden">
         <img src="https://i.ibb.co/VcLwMVd9/file-000000006c5c720ebd4a1fce54bb8627.png" alt="Peluditos Logo" class="loader-logo" loading="eager" />
-        <div class="loader-spinner"></div>
-        <div class="loader-text">🐾 Cargando...</div>
+        <div class="loader-text">🐾 Procesando...</div>
+        <div class="progress-bar-container">
+            <div class="progress-bar-fill-loader" id="progressFill" style="width:0%;"></div>
+        </div>
+        <div class="loader-percent" id="progressPercent">0%</div>
     </div>
 
     <!-- ====== FONDO DE HUELLAS ====== -->
@@ -1599,7 +1629,7 @@
             <div class="logo-brillo"></div>
             <img src="https://i.ibb.co/VcLwMVd9/file-000000006c5c720ebd4a1fce54bb8627.png" alt="Ayuda a los Peluditos" class="logo-principal" loading="eager" />
         </div>
-        <p class="sub">1 huesito = $1.000 COP</p>
+        <p class="sub" id="priceDisplay">1 huesito = $1.000 COP</p>
 
         <div id="authSection">
             <!-- Pestañas -->
@@ -1634,17 +1664,26 @@
                 <div class="saldo-label">
                     <span class="huesito-icon">🦴</span>
                     <span class="num" id="saldoUsuario">0</span>
-                    <span class="saldo-extra">tus créditos para donar</span>
+                    <span class="saldo-extra" id="saldoExtraLabel">tus créditos para donar</span>
                 </div>
                 <div class="btn-group">
                     <button class="btn-comprar" id="btnComprar">➕ Comprar</button>
                     <button class="btn-nequi-copy" id="btnNequiCopy" aria-label="Copiar número de cuenta Nequi Colombia para pagos">
                         <span class="nequi-logo-css">N</span>
                         <span class="nequi-info">
-                            <span class="label">Cuenta de pago</span>
+                            <span class="label" id="nequiLabel">Cuenta de pago</span>
                             <span class="subtitulo-nequi">Nequi Colombia</span>
                         </span>
                         <span class="num">3107926421</span>
+                        <span class="copy-icon">📋</span>
+                    </button>
+                    <button class="btn-zelle-copy" id="btnZelleCopy" aria-label="Copiar número de cuenta Zelle para pagos">
+                        <span class="zelle-logo-css">Z</span>
+                        <span class="zelle-info">
+                            <span class="label" id="zelleLabel">Cuenta de pago</span>
+                            <span class="subtitulo-zelle">Zelle (USA)</span>
+                        </span>
+                        <span class="num">2408390816</span>
                         <span class="copy-icon">📋</span>
                     </button>
                     <button class="btn-refresh" id="btnRefresh">🔄 Actualizar</button>
@@ -1663,31 +1702,31 @@
             <div class="stats-section" id="statsSection">
                 <div class="stat-card">
                     <div class="stat-number" id="totalDonaciones">0</div>
-                    <div class="stat-label">❤️ Donaciones totales</div>
+                    <div class="stat-label" id="statDonacionesLabel">❤️ Donaciones totales</div>
                 </div>
                 <div class="stat-card">
                     <div class="stat-number" id="totalHuesitos">0</div>
-                    <div class="stat-label">🦴 Huesitos donados</div>
+                    <div class="stat-label" id="statHuesitosLabel">🦴 Huesitos donados</div>
                 </div>
                 <div class="stat-card">
                     <div class="stat-number" id="topDonador">—</div>
-                    <div class="stat-label">🏆 Donador destacado</div>
+                    <div class="stat-label" id="statTopLabel">🏆 Donador destacado</div>
                 </div>
             </div>
 
             <div class="donaciones-section">
-                <h3>❤️ Donaciones recientes <span id="donacionesCount"></span></h3>
+                <h3 id="donacionesTitle">❤️ Donaciones recientes <span id="donacionesCount"></span></h3>
                 <div class="donaciones-scroll" id="donacionesScroll"></div>
             </div>
         </div>
 
         <div class="footer">
-            <div>💙 100% a alimentación, veterinaria y refugio</div>
+            <div id="footerText">💙 100% a alimentación, veterinaria y refugio</div>
 
             <!-- CONTADOR DE VISITAS -->
             <div class="visitas-contador">
                 <span class="icono">🐾</span>
-                <span class="texto">Visitas</span>
+                <span class="texto" id="visitasLabel">Visitas</span>
                 <img src="https://counter11.optistats.ovh/private/contadorvisitasgratis.php?c=cxq5afnn5l4hwrhwnhd8apguewt62ehd" alt="Contador de visitas" class="contador-imagen" border="0" loading="lazy" />
                 <span class="corazon">❤️</span>
             </div>
@@ -1720,7 +1759,7 @@
         </div>
     </div>
 
-    <!-- ====== MODAL IMAGEN ====== -->
+    <!-- ====== MODAL IMAGEN (ya no se usa) ====== -->
     <div class="modal-img" id="modalImg" onclick="this.classList.remove('active')">
         <img id="modalImgSrc" src="" alt="Ampliar imagen" />
     </div>
@@ -1744,12 +1783,6 @@
             });
         }
 
-        const loader = document.getElementById('loaderOverlay');
-
-        function mostrarLoader() { loader.classList.add('active'); }
-
-        function ocultarLoader() { loader.classList.remove('active'); }
-
         const toastContainer = document.getElementById('toastContainer');
 
         function mostrarNotificacion(mensaje, icono = '🎉') {
@@ -1772,8 +1805,41 @@
             });
         }
 
+        // ====== LOADER CON BARRA DE PROGRESO ======
+        const loaderOverlay = document.getElementById('loaderOverlay');
+        const progressFill = document.getElementById('progressFill');
+        const progressPercent = document.getElementById('progressPercent');
+        let loaderInterval = null;
+
+        function mostrarLoaderConBarra() {
+            progressFill.style.width = '0%';
+            progressPercent.textContent = '0%';
+            loaderOverlay.classList.remove('hidden');
+
+            let progress = 0;
+            if (loaderInterval) clearInterval(loaderInterval);
+            loaderInterval = setInterval(() => {
+                progress += 2 + Math.floor(Math.random() * 5);
+                if (progress > 90) progress = 90;
+                progressFill.style.width = progress + '%';
+                progressPercent.textContent = progress + '%';
+            }, 180);
+        }
+
+        function ocultarLoader() {
+            if (loaderInterval) {
+                clearInterval(loaderInterval);
+                loaderInterval = null;
+            }
+            progressFill.style.width = '100%';
+            progressPercent.textContent = '100%';
+            setTimeout(() => {
+                loaderOverlay.classList.add('hidden');
+            }, 400);
+        }
+
         // ================================================================
-        //  COMPARTIR NATIVO (Web Share API)
+        //  COMPARTIR NATIVO
         // ================================================================
         function compartirNativo() {
             const url = window.location.href;
@@ -1837,19 +1903,705 @@
         const API_URL =
             'https://script.google.com/macros/s/AKfycbxR0NRFznrBqL95TmFS71LsWa18nUhdMM4njbXwVbDnAaGeyDJHuRf862fNeggDLDtq/exec';
         const NEQUI_NUM = "3107926421";
+        const ZELLE_NUM = "2408390816";
         const WHATSAPP_NUM = "3138596350";
         const META_DONACION = 500;
 
-        const NOMBRES_FICTICIOS = [
-            'Jorge Ramírez', 'Claudia Suárez', 'Miguel Torres', 'Patricia Díaz',
-            'Fernando Gómez', 'Rosa Jiménez', 'Ricardo Castro', 'Elena Vargas',
-            'Ángel Ortega', 'Carolina Pérez', 'José Luis Herrera', 'Marta Rojas',
-            'Andrés Sosa', 'Lucía Fuentes', 'Roberto Muñoz', 'Diana Reyes',
-            'Hugo Gutiérrez', 'Laura Salazar', 'Raúl Espinoza', 'Cecilia Romero'
-        ];
+        // ================================================================
+        //  🌍 DETECCIÓN DE PAÍS, IDIOMA Y MONEDA
+        // ================================================================
+        const CURRENCY_RATES = {
+            'COP': 1,
+            'USD': 4000,
+            'EUR': 4300,
+            'MXN': 200,
+            'ARS': 4,
+            'GBP': 5000,
+            'BRL': 750,
+            'CLP': 4.2,
+            'PEN': 1050,
+            'JPY': 28,
+            'CNY': 550,
+            'CAD': 3000,
+            'AUD': 2700,
+            'CHF': 4500,
+        };
+
+        const CURRENCY_SYMBOLS = {
+            'COP': '$',
+            'USD': '$',
+            'EUR': '€',
+            'MXN': '$',
+            'ARS': '$',
+            'GBP': '£',
+            'BRL': 'R$',
+            'CLP': '$',
+            'PEN': 'S/',
+            'JPY': '¥',
+            'CNY': '¥',
+            'CAD': '$',
+            'AUD': '$',
+            'CHF': 'CHF'
+        };
+
+        const LANGUAGE_MAP = {
+            'CO': 'es',
+            'ES': 'es',
+            'MX': 'es',
+            'AR': 'es',
+            'CL': 'es',
+            'PE': 'es',
+            'US': 'en',
+            'GB': 'en',
+            'CA': 'en',
+            'AU': 'en',
+            'BR': 'pt',
+            'FR': 'fr',
+            'DE': 'de',
+            'IT': 'it',
+            'CN': 'zh',
+            'JP': 'ja',
+        };
+
+        const TRANSLATIONS = {
+            'es': {
+                'app_title': '🐾 Ayuda a los Peluditos',
+                'register_tab': '📝 Registrarse',
+                'login_tab': '🔑 Iniciar sesión',
+                'form_title_register': '📝 Crear cuenta',
+                'form_title_login': '🔑 Iniciar sesión',
+                'btn_register': '📝 Registrarse',
+                'btn_login': '🔑 Iniciar sesión',
+                'auth_status_register': '🔒 Ingresa tus datos para registrarte',
+                'auth_status_login': '🔒 Ingresa tus credenciales',
+                'auth_status_default': '🔒 Ingresa tu nombre y correo',
+                'buy_btn': '➕ Comprar',
+                'refresh_btn': '🔄 Actualizar',
+                'logout_btn': 'Cerrar',
+                'saldo_extra': 'tus créditos para donar',
+                'nequi_label': 'Nequi Colombia',
+                'zelle_label': 'Zelle (USA)',
+                'cats': '🐈 Gatos',
+                'dogs': '🐕 Perros',
+                'all': '🐾 Todos',
+                'donations_label': '❤️ Donaciones totales',
+                'bones_label': '🦴 Huesitos donados',
+                'top_label': '🏆 Donador destacado',
+                'donations_title': '❤️ Donaciones recientes',
+                'footer_text': '💙 100% a alimentación, veterinaria y refugio',
+                'visits_label': 'Visitas',
+                'share_title': '¡Comparte esta causa!',
+                'share_sub': 'Usa el menú de tu dispositivo 💛',
+                'buy_modal_title': '🦴 ¿Cuántos huesitos quieres?',
+                'buy_confirm': '✨ Comprar',
+                'buy_cancel': 'Cancelar',
+                'pay_title': '💳 Elige tu método de pago',
+                'pay_send_whatsapp': '📱 Enviar comprobante',
+                'pay_now': 'Ahora no',
+                'pay_success': '🎉 ¡Listo!',
+                'pay_success_text': 'Cuando verifiquemos tu pago, tus huesitos aparecerán.',
+                'nequi_copied': '📋 ¡Número Nequi copiado!',
+                'zelle_copied': '📋 ¡Número Zelle copiado!',
+                'nequi_copied_text': 'Envía tu pago a este número Nequi',
+                'zelle_copied_text': 'Envía tu pago a este número Zelle',
+                'refresh_confirm': '✨ ¡Saldo actualizado!',
+                'refresh_available': '🦴 huesitos disponibles para donar',
+                'refresh_thanks': '¡Gracias por seguir ayudando a los peluditos! 💛',
+                'refresh_error': '😿 Error al actualizar',
+                'donate_title': '🦴 Donar a {name}',
+                'donate_balance': 'Tienes <strong>{balance}</strong> huesitos',
+                'donate_btn': '💛 Donar',
+                'donate_error': '😅 ¡Ups!',
+                'donate_error_text': 'No tienes suficientes huesitos.',
+                'donate_success': '🎉 ¡Donación exitosa!',
+                'donate_success_text': 'Donaste <strong>{qty}</strong> 🦴 a <strong>{name}</strong>',
+                'donate_remaining': 'Saldo restante: {balance} 🦴',
+                'donate_error_api': 'Error',
+                'login_first': '¡Un momentito!',
+                'login_first_text': 'Para donar, primero inicia sesión 💛',
+                'register_success_title': '🎉 ¡Bienvenido/a!',
+                'register_success_text': 'Ahora inicia sesión con tus credenciales, <strong>{name}</strong>.',
+                'register_success_badge': '💛 ¡Gracias por unirte a la causa!',
+                'register_error_email': '📧 Correo ya registrado',
+                'register_error_email_text': 'El correo <strong>{email}</strong> ya está en uso. Por favor, usa otro o inicia sesión.',
+                'register_error_name': '👤 Nombre ya existe',
+                'register_error_name_text': 'El nombre <strong>{name}</strong> ya está en uso.<br>¿Quieres registrarte como <strong>{suggested}</strong>?',
+                'register_error_general': '❌ Error al registrar: ',
+                'login_error_title': '😅 ¡Ups!',
+                'login_error_email': '📧 Correo no registrado',
+                'login_error_name': '👤 Nombre incorrecto',
+                'welcome_back': '¡Bienvenido de nuevo, {name}! 🐾',
+            },
+            'en': {
+                'app_title': '🐾 Help the Furry Ones',
+                'register_tab': '📝 Register',
+                'login_tab': '🔑 Login',
+                'form_title_register': '📝 Create account',
+                'form_title_login': '🔑 Login',
+                'btn_register': '📝 Register',
+                'btn_login': '🔑 Login',
+                'auth_status_register': '🔒 Enter your details to register',
+                'auth_status_login': '🔒 Enter your credentials',
+                'auth_status_default': '🔒 Enter your name and email',
+                'buy_btn': '➕ Buy',
+                'refresh_btn': '🔄 Refresh',
+                'logout_btn': 'Logout',
+                'saldo_extra': 'your credits to donate',
+                'nequi_label': 'Nequi Colombia',
+                'zelle_label': 'Zelle (USA)',
+                'cats': '🐈 Cats',
+                'dogs': '🐕 Dogs',
+                'all': '🐾 All',
+                'donations_label': '❤️ Total donations',
+                'bones_label': '🦴 Bones donated',
+                'top_label': '🏆 Top donor',
+                'donations_title': '❤️ Recent donations',
+                'footer_text': '💙 100% to food, vet care and shelter',
+                'visits_label': 'Visits',
+                'share_title': 'Share this cause!',
+                'share_sub': 'Use your device menu 💛',
+                'buy_modal_title': '🦴 How many bones do you want?',
+                'buy_confirm': '✨ Buy',
+                'buy_cancel': 'Cancel',
+                'pay_title': '💳 Choose your payment method',
+                'pay_send_whatsapp': '📱 Send receipt',
+                'pay_now': 'Not now',
+                'pay_success': '🎉 Done!',
+                'pay_success_text': 'Once we verify your payment, your bones will appear.',
+                'nequi_copied': '📋 Nequi number copied!',
+                'zelle_copied': '📋 Zelle number copied!',
+                'nequi_copied_text': 'Send your payment to this Nequi number',
+                'zelle_copied_text': 'Send your payment to this Zelle number',
+                'refresh_confirm': '✨ Balance updated!',
+                'refresh_available': '🦴 bones available to donate',
+                'refresh_thanks': 'Thank you for helping the furry ones! 💛',
+                'refresh_error': '😿 Error updating',
+                'donate_title': '🦴 Donate to {name}',
+                'donate_balance': 'You have <strong>{balance}</strong> bones',
+                'donate_btn': '💛 Donate',
+                'donate_error': '😅 Oops!',
+                'donate_error_text': 'You don\'t have enough bones.',
+                'donate_success': '🎉 Donation successful!',
+                'donate_success_text': 'You donated <strong>{qty}</strong> 🦴 to <strong>{name}</strong>',
+                'donate_remaining': 'Remaining balance: {balance} 🦴',
+                'donate_error_api': 'Error',
+                'login_first': 'Hold on!',
+                'login_first_text': 'To donate, please log in first 💛',
+                'register_success_title': '🎉 Welcome!',
+                'register_success_text': 'Now log in with your credentials, <strong>{name}</strong>.',
+                'register_success_badge': '💛 Thank you for joining the cause!',
+                'register_error_email': '📧 Email already registered',
+                'register_error_email_text': 'The email <strong>{email}</strong> is already in use. Please use another one or log in.',
+                'register_error_name': '👤 Name already exists',
+                'register_error_name_text': 'The name <strong>{name}</strong> is already taken.<br>Would you like to register as <strong>{suggested}</strong>?',
+                'register_error_general': '❌ Registration error: ',
+                'login_error_title': '😅 Oops!',
+                'login_error_email': '📧 Email not registered',
+                'login_error_name': '👤 Incorrect name',
+                'welcome_back': 'Welcome back, {name}! 🐾',
+            },
+            'pt': {
+                'app_title': '🐾 Ajude os Peluditos',
+                'register_tab': '📝 Registrar',
+                'login_tab': '🔑 Entrar',
+                'form_title_register': '📝 Criar conta',
+                'form_title_login': '🔑 Entrar',
+                'btn_register': '📝 Registrar',
+                'btn_login': '🔑 Entrar',
+                'auth_status_register': '🔒 Insira seus dados para se registrar',
+                'auth_status_login': '🔒 Insira suas credenciais',
+                'auth_status_default': '🔒 Insira seu nome e email',
+                'buy_btn': '➕ Comprar',
+                'refresh_btn': '🔄 Atualizar',
+                'logout_btn': 'Sair',
+                'saldo_extra': 'seus créditos para doar',
+                'nequi_label': 'Nequi Colômbia',
+                'zelle_label': 'Zelle (EUA)',
+                'cats': '🐈 Gatos',
+                'dogs': '🐕 Cães',
+                'all': '🐾 Todos',
+                'donations_label': '❤️ Doações totais',
+                'bones_label': '🦴 Ossinhos doados',
+                'top_label': '🏆 Maior doador',
+                'donations_title': '❤️ Doações recentes',
+                'footer_text': '💙 100% para alimentação, veterinário e abrigo',
+                'visits_label': 'Visitas',
+                'share_title': 'Compartilhe esta causa!',
+                'share_sub': 'Use o menu do seu dispositivo 💛',
+                'buy_modal_title': '🦴 Quantos ossinhos você quer?',
+                'buy_confirm': '✨ Comprar',
+                'buy_cancel': 'Cancelar',
+                'pay_title': '💳 Escolha seu método de pagamento',
+                'pay_send_whatsapp': '📱 Enviar comprovante',
+                'pay_now': 'Agora não',
+                'pay_success': '🎉 Pronto!',
+                'pay_success_text': 'Quando verificarmos seu pagamento, seus ossinhos aparecerão.',
+                'nequi_copied': '📋 Número Nequi copiado!',
+                'zelle_copied': '📋 Número Zelle copiado!',
+                'nequi_copied_text': 'Envie seu pagamento para este número Nequi',
+                'zelle_copied_text': 'Envie seu pagamento para este número Zelle',
+                'refresh_confirm': '✨ Saldo atualizado!',
+                'refresh_available': '🦴 ossinhos disponíveis para doar',
+                'refresh_thanks': 'Obrigado por ajudar os peluditos! 💛',
+                'refresh_error': '😿 Erro ao atualizar',
+                'donate_title': '🦴 Doar para {name}',
+                'donate_balance': 'Você tem <strong>{balance}</strong> ossinhos',
+                'donate_btn': '💛 Doar',
+                'donate_error': '😅 Ops!',
+                'donate_error_text': 'Você não tem ossinhos suficientes.',
+                'donate_success': '🎉 Doação bem-sucedida!',
+                'donate_success_text': 'Você doou <strong>{qty}</strong> 🦴 para <strong>{name}</strong>',
+                'donate_remaining': 'Saldo restante: {balance} 🦴',
+                'donate_error_api': 'Erro',
+                'login_first': 'Espere aí!',
+                'login_first_text': 'Para doar, faça login primeiro 💛',
+                'register_success_title': '🎉 Bem-vindo!',
+                'register_success_text': 'Agora faça login com suas credenciais, <strong>{name}</strong>.',
+                'register_success_badge': '💛 Obrigado por se juntar à causa!',
+                'register_error_email': '📧 Email já registrado',
+                'register_error_email_text': 'O email <strong>{email}</strong> já está em uso. Por favor, use outro ou faça login.',
+                'register_error_name': '👤 Nome já existe',
+                'register_error_name_text': 'O nome <strong>{name}</strong> já está em uso.<br>Gostaria de se registrar como <strong>{suggested}</strong>?',
+                'register_error_general': '❌ Erro ao registrar: ',
+                'login_error_title': '😅 Ops!',
+                'login_error_email': '📧 Email não registrado',
+                'login_error_name': '👤 Nome incorreto',
+                'welcome_back': 'Bem-vindo de volta, {name}! 🐾',
+            },
+            'fr': {
+                'app_title': '🐾 Aidez les Peluditos',
+                'register_tab': '📝 S\'inscrire',
+                'login_tab': '🔑 Se connecter',
+                'form_title_register': '📝 Créer un compte',
+                'form_title_login': '🔑 Se connecter',
+                'btn_register': '📝 S\'inscrire',
+                'btn_login': '🔑 Se connecter',
+                'auth_status_register': '🔒 Entrez vos données pour vous inscrire',
+                'auth_status_login': '🔒 Entrez vos identifiants',
+                'auth_status_default': '🔒 Entrez votre nom et email',
+                'buy_btn': '➕ Acheter',
+                'refresh_btn': '🔄 Actualiser',
+                'logout_btn': 'Déconnexion',
+                'saldo_extra': 'vos crédits à donner',
+                'nequi_label': 'Nequi Colombie',
+                'zelle_label': 'Zelle (USA)',
+                'cats': '🐈 Chats',
+                'dogs': '🐕 Chiens',
+                'all': '🐾 Tous',
+                'donations_label': '❤️ Dons totaux',
+                'bones_label': '🦴 Os donnés',
+                'top_label': '🏆 Meilleur donateur',
+                'donations_title': '❤️ Dons récents',
+                'footer_text': '💙 100% pour l\'alimentation, les soins vétérinaires et l\'hébergement',
+                'visits_label': 'Visites',
+                'share_title': 'Partagez cette cause!',
+                'share_sub': 'Utilisez le menu de votre appareil 💛',
+                'buy_modal_title': '🦴 Combien d\'os voulez-vous?',
+                'buy_confirm': '✨ Acheter',
+                'buy_cancel': 'Annuler',
+                'pay_title': '💳 Choisissez votre méthode de paiement',
+                'pay_send_whatsapp': '📱 Envoyer le reçu',
+                'pay_now': 'Pas maintenant',
+                'pay_success': '🎉 Fait!',
+                'pay_success_text': 'Une fois votre paiement vérifié, vos os apparaîtront.',
+                'nequi_copied': '📋 Numéro Nequi copié!',
+                'zelle_copied': '📋 Numéro Zelle copié!',
+                'nequi_copied_text': 'Envoyez votre paiement à ce numéro Nequi',
+                'zelle_copied_text': 'Envoyez votre paiement à ce numéro Zelle',
+                'refresh_confirm': '✨ Solde mis à jour!',
+                'refresh_available': '🦴 os disponibles pour donner',
+                'refresh_thanks': 'Merci d\'aider les peluditos! 💛',
+                'refresh_error': '😿 Erreur de mise à jour',
+                'donate_title': '🦴 Donner à {name}',
+                'donate_balance': 'Vous avez <strong>{balance}</strong> os',
+                'donate_btn': '💛 Donner',
+                'donate_error': '😅 Oups!',
+                'donate_error_text': 'Vous n\'avez pas assez d\'os.',
+                'donate_success': '🎉 Don réussi!',
+                'donate_success_text': 'Vous avez donné <strong>{qty}</strong> 🦴 à <strong>{name}</strong>',
+                'donate_remaining': 'Solde restant: {balance} 🦴',
+                'donate_error_api': 'Erreur',
+                'login_first': 'Attendez!',
+                'login_first_text': 'Pour donner, veuillez vous connecter d\'abord 💛',
+                'register_success_title': '🎉 Bienvenue!',
+                'register_success_text': 'Connectez-vous maintenant avec vos identifiants, <strong>{name}</strong>.',
+                'register_success_badge': '💛 Merci de rejoindre la cause!',
+                'register_error_email': '📧 Email déjà enregistré',
+                'register_error_email_text': 'L\'email <strong>{email}</strong> est déjà utilisé. Veuillez en utiliser un autre ou vous connecter.',
+                'register_error_name': '👤 Nom déjà existant',
+                'register_error_name_text': 'Le nom <strong>{name}</strong> est déjà pris.<br>Voulez-vous vous inscrire en tant que <strong>{suggested}</strong>?',
+                'register_error_general': '❌ Erreur d\'inscription: ',
+                'login_error_title': '😅 Oups!',
+                'login_error_email': '📧 Email non enregistré',
+                'login_error_name': '👤 Nom incorrect',
+                'welcome_back': 'Bon retour, {name}! 🐾',
+            },
+            'de': {
+                'app_title': '🐾 Helfen Sie den Peluditos',
+                'register_tab': '📝 Registrieren',
+                'login_tab': '🔑 Anmelden',
+                'form_title_register': '📝 Konto erstellen',
+                'form_title_login': '🔑 Anmelden',
+                'btn_register': '📝 Registrieren',
+                'btn_login': '🔑 Anmelden',
+                'auth_status_register': '🔒 Geben Sie Ihre Daten zur Registrierung ein',
+                'auth_status_login': '🔒 Geben Sie Ihre Anmeldedaten ein',
+                'auth_status_default': '🔒 Geben Sie Ihren Namen und Ihre E-Mail ein',
+                'buy_btn': '➕ Kaufen',
+                'refresh_btn': '🔄 Aktualisieren',
+                'logout_btn': 'Abmelden',
+                'saldo_extra': 'Ihre Credits zum Spenden',
+                'nequi_label': 'Nequi Kolumbien',
+                'zelle_label': 'Zelle (USA)',
+                'cats': '🐈 Katzen',
+                'dogs': '🐕 Hunde',
+                'all': '🐾 Alle',
+                'donations_label': '❤️ Spenden insgesamt',
+                'bones_label': '🦴 Gespendete Knochen',
+                'top_label': '🏆 Top-Spender',
+                'donations_title': '❤️ Letzte Spenden',
+                'footer_text': '💙 100% für Futter, Tierarzt und Unterkunft',
+                'visits_label': 'Besuche',
+                'share_title': 'Teilen Sie diese Sache!',
+                'share_sub': 'Verwenden Sie das Menü Ihres Geräts 💛',
+                'buy_modal_title': '🦴 Wie viele Knochen möchten Sie?',
+                'buy_confirm': '✨ Kaufen',
+                'buy_cancel': 'Abbrechen',
+                'pay_title': '💳 Wählen Sie Ihre Zahlungsmethode',
+                'pay_send_whatsapp': '📱 Beleg senden',
+                'pay_now': 'Jetzt nicht',
+                'pay_success': '🎉 Fertig!',
+                'pay_success_text': 'Sobald wir Ihre Zahlung bestätigt haben, werden Ihre Knochen angezeigt.',
+                'nequi_copied': '📋 Nequi-Nummer kopiert!',
+                'zelle_copied': '📋 Zelle-Nummer kopiert!',
+                'nequi_copied_text': 'Senden Sie Ihre Zahlung an diese Nequi-Nummer',
+                'zelle_copied_text': 'Senden Sie Ihre Zahlung an diese Zelle-Nummer',
+                'refresh_confirm': '✨ Guthaben aktualisiert!',
+                'refresh_available': '🦴 Knochen zum Spenden verfügbar',
+                'refresh_thanks': 'Danke, dass Sie den Peluditos helfen! 💛',
+                'refresh_error': '😿 Fehler beim Aktualisieren',
+                'donate_title': '🦴 An {name} spenden',
+                'donate_balance': 'Sie haben <strong>{balance}</strong> Knochen',
+                'donate_btn': '💛 Spenden',
+                'donate_error': '😅 Hoppla!',
+                'donate_error_text': 'Sie haben nicht genug Knochen.',
+                'donate_success': '🎉 Spende erfolgreich!',
+                'donate_success_text': 'Sie haben <strong>{qty}</strong> 🦴 an <strong>{name}</strong> gespendet',
+                'donate_remaining': 'Verbleibendes Guthaben: {balance} 🦴',
+                'donate_error_api': 'Fehler',
+                'login_first': 'Moment mal!',
+                'login_first_text': 'Um zu spenden, melden Sie sich bitte zuerst an 💛',
+                'register_success_title': '🎉 Willkommen!',
+                'register_success_text': 'Melden Sie sich jetzt mit Ihren Anmeldedaten an, <strong>{name}</strong>.',
+                'register_success_badge': '💛 Danke, dass Sie sich der Sache angeschlossen haben!',
+                'register_error_email': '📧 E-Mail bereits registriert',
+                'register_error_email_text': 'Die E-Mail <strong>{email}</strong> wird bereits verwendet. Bitte verwenden Sie eine andere oder melden Sie sich an.',
+                'register_error_name': '👤 Name existiert bereits',
+                'register_error_name_text': 'Der Name <strong>{name}</strong> ist bereits vergeben.<br>Möchten Sie sich als <strong>{suggested}</strong> registrieren?',
+                'register_error_general': '❌ Registrierungsfehler: ',
+                'login_error_title': '😅 Hoppla!',
+                'login_error_email': '📧 E-Mail nicht registriert',
+                'login_error_name': '👤 Falscher Name',
+                'welcome_back': 'Willkommen zurück, {name}! 🐾',
+            },
+            'it': {
+                'app_title': '🐾 Aiuta i Peluditos',
+                'register_tab': '📝 Registrati',
+                'login_tab': '🔑 Accedi',
+                'form_title_register': '📝 Crea account',
+                'form_title_login': '🔑 Accedi',
+                'btn_register': '📝 Registrati',
+                'btn_login': '🔑 Accedi',
+                'auth_status_register': '🔒 Inserisci i tuoi dati per registrarti',
+                'auth_status_login': '🔒 Inserisci le tue credenziali',
+                'auth_status_default': '🔒 Inserisci nome ed email',
+                'buy_btn': '➕ Acquista',
+                'refresh_btn': '🔄 Aggiorna',
+                'logout_btn': 'Esci',
+                'saldo_extra': 'i tuoi crediti da donare',
+                'nequi_label': 'Nequi Colombia',
+                'zelle_label': 'Zelle (USA)',
+                'cats': '🐈 Gatti',
+                'dogs': '🐕 Cani',
+                'all': '🐾 Tutti',
+                'donations_label': '❤️ Donazioni totali',
+                'bones_label': '🦴 Ossa donate',
+                'top_label': '🏆 Miglior donatore',
+                'donations_title': '❤️ Donazioni recenti',
+                'footer_text': '💙 100% per cibo, veterinario e rifugio',
+                'visits_label': 'Visite',
+                'share_title': 'Condividi questa causa!',
+                'share_sub': 'Usa il menu del tuo dispositivo 💛',
+                'buy_modal_title': '🦴 Quanti ossi vuoi?',
+                'buy_confirm': '✨ Acquista',
+                'buy_cancel': 'Annulla',
+                'pay_title': '💳 Scegli il metodo di pagamento',
+                'pay_send_whatsapp': '📱 Invia ricevuta',
+                'pay_now': 'Non ora',
+                'pay_success': '🎉 Fatto!',
+                'pay_success_text': 'Quando verificheremo il tuo pagamento, i tuoi ossi appariranno.',
+                'nequi_copied': '📋 Numero Nequi copiato!',
+                'zelle_copied': '📋 Numero Zelle copiato!',
+                'nequi_copied_text': 'Invia il pagamento a questo numero Nequi',
+                'zelle_copied_text': 'Invia il pagamento a questo numero Zelle',
+                'refresh_confirm': '✨ Saldo aggiornato!',
+                'refresh_available': '🦴 ossi disponibili per donare',
+                'refresh_thanks': 'Grazie per aiutare i peluditos! 💛',
+                'refresh_error': '😿 Errore durante l\'aggiornamento',
+                'donate_title': '🦴 Dona a {name}',
+                'donate_balance': 'Hai <strong>{balance}</strong> ossi',
+                'donate_btn': '💛 Dona',
+                'donate_error': '😅 Oops!',
+                'donate_error_text': 'Non hai abbastanza ossi.',
+                'donate_success': '🎉 Donazione riuscita!',
+                'donate_success_text': 'Hai donato <strong>{qty}</strong> 🦴 a <strong>{name}</strong>',
+                'donate_remaining': 'Saldo rimanente: {balance} 🦴',
+                'donate_error_api': 'Errore',
+                'login_first': 'Aspetta!',
+                'login_first_text': 'Per donare, effettua prima il login 💛',
+                'register_success_title': '🎉 Benvenuto!',
+                'register_success_text': 'Ora accedi con le tue credenziali, <strong>{name}</strong>.',
+                'register_success_badge': '💛 Grazie per esserti unito alla causa!',
+                'register_error_email': '📧 Email già registrata',
+                'register_error_email_text': 'L\'email <strong>{email}</strong> è già in uso. Per favore usane un\'altra o accedi.',
+                'register_error_name': '👤 Nome già esistente',
+                'register_error_name_text': 'Il nome <strong>{name}</strong> è già stato preso.<br>Vuoi registrarti come <strong>{suggested}</strong>?',
+                'register_error_general': '❌ Errore di registrazione: ',
+                'login_error_title': '😅 Oops!',
+                'login_error_email': '📧 Email non registrata',
+                'login_error_name': '👤 Nome errato',
+                'welcome_back': 'Bentornato, {name}! 🐾',
+            },
+            'zh': {
+                'app_title': '🐾 帮助毛孩子们',
+                'register_tab': '📝 注册',
+                'login_tab': '🔑 登录',
+                'form_title_register': '📝 创建账户',
+                'form_title_login': '🔑 登录',
+                'btn_register': '📝 注册',
+                'btn_login': '🔑 登录',
+                'auth_status_register': '🔒 输入您的信息进行注册',
+                'auth_status_login': '🔒 输入您的凭证',
+                'auth_status_default': '🔒 输入您的姓名和电子邮件',
+                'buy_btn': '➕ 购买',
+                'refresh_btn': '🔄 刷新',
+                'logout_btn': '退出',
+                'saldo_extra': '您的捐赠积分',
+                'nequi_label': 'Nequi 哥伦比亚',
+                'zelle_label': 'Zelle (美国)',
+                'cats': '🐈 猫',
+                'dogs': '🐕 狗',
+                'all': '🐾 全部',
+                'donations_label': '❤️ 总捐款',
+                'bones_label': '🦴 已捐骨头',
+                'top_label': '🏆 最佳捐赠者',
+                'donations_title': '❤️ 最近捐赠',
+                'footer_text': '💙 100% 用于食物、兽医和庇护所',
+                'visits_label': '访问量',
+                'share_title': '分享这个事业！',
+                'share_sub': '使用您的设备菜单 💛',
+                'buy_modal_title': '🦴 您想要多少根骨头？',
+                'buy_confirm': '✨ 购买',
+                'buy_cancel': '取消',
+                'pay_title': '💳 选择您的支付方式',
+                'pay_send_whatsapp': '📱 发送收据',
+                'pay_now': '现在不要',
+                'pay_success': '🎉 完成！',
+                'pay_success_text': '我们验证您的付款后，您的骨头将显示出来。',
+                'nequi_copied': '📋 Nequi 号码已复制！',
+                'zelle_copied': '📋 Zelle 号码已复制！',
+                'nequi_copied_text': '将您的付款发送到此 Nequi 号码',
+                'zelle_copied_text': '将您的付款发送到此 Zelle 号码',
+                'refresh_confirm': '✨ 余额已更新！',
+                'refresh_available': '🦴 可用于捐赠的骨头',
+                'refresh_thanks': '感谢您帮助毛孩子们！ 💛',
+                'refresh_error': '😿 更新错误',
+                'donate_title': '🦴 捐赠给 {name}',
+                'donate_balance': '您有 <strong>{balance}</strong> 根骨头',
+                'donate_btn': '💛 捐赠',
+                'donate_error': '😅 哎呀！',
+                'donate_error_text': '您没有足够的骨头。',
+                'donate_success': '🎉 捐赠成功！',
+                'donate_success_text': '您捐赠了 <strong>{qty}</strong> 🦴 给 <strong>{name}</strong>',
+                'donate_remaining': '剩余余额：{balance} 🦴',
+                'donate_error_api': '错误',
+                'login_first': '等一下！',
+                'login_first_text': '要捐赠，请先登录 💛',
+                'register_success_title': '🎉 欢迎！',
+                'register_success_text': '现在用您的凭证登录，<strong>{name}</strong>。',
+                'register_success_badge': '💛 感谢您加入这项事业！',
+                'register_error_email': '📧 电子邮件已注册',
+                'register_error_email_text': '电子邮件 <strong>{email}</strong> 已被使用。请使用另一个或登录。',
+                'register_error_name': '👤 名称已存在',
+                'register_error_name_text': '名称 <strong>{name}</strong> 已被占用。<br>您想注册为 <strong>{suggested}</strong> 吗？',
+                'register_error_general': '❌ 注册错误：',
+                'login_error_title': '😅 哎呀！',
+                'login_error_email': '📧 电子邮件未注册',
+                'login_error_name': '👤 名称不正确',
+                'welcome_back': '欢迎回来，{name}！ 🐾',
+            },
+            'ja': {
+                'app_title': '🐾 毛皮ちゃんを助けよう',
+                'register_tab': '📝 登録',
+                'login_tab': '🔑 ログイン',
+                'form_title_register': '📝 アカウント作成',
+                'form_title_login': '🔑 ログイン',
+                'btn_register': '📝 登録',
+                'btn_login': '🔑 ログイン',
+                'auth_status_register': '🔒 登録するためにデータを入力してください',
+                'auth_status_login': '🔒 認証情報を入力してください',
+                'auth_status_default': '🔒 名前とメールを入力してください',
+                'buy_btn': '➕ 購入',
+                'refresh_btn': '🔄 更新',
+                'logout_btn': 'ログアウト',
+                'saldo_extra': '寄付するためのクレジット',
+                'nequi_label': 'Nequi コロンビア',
+                'zelle_label': 'Zelle (米国)',
+                'cats': '🐈 猫',
+                'dogs': '🐕 犬',
+                'all': '🐾 すべて',
+                'donations_label': '❤️ 総寄付額',
+                'bones_label': '🦴 寄付された骨',
+                'top_label': '🏆 トップドナー',
+                'donations_title': '❤️ 最近の寄付',
+                'footer_text': '💙 100% 食料、獣医、シェルターへ',
+                'visits_label': '訪問',
+                'share_title': 'この活動を共有！',
+                'share_sub': 'デバイスのメニューを使用してください 💛',
+                'buy_modal_title': '🦴 骨は何本欲しいですか？',
+                'buy_confirm': '✨ 購入',
+                'buy_cancel': 'キャンセル',
+                'pay_title': '💳 支払い方法を選択してください',
+                'pay_send_whatsapp': '📱 領収書を送信',
+                'pay_now': '今はしない',
+                'pay_success': '🎉 完了！',
+                'pay_success_text': 'お支払いを確認次第、骨が表示されます。',
+                'nequi_copied': '📋 Nequi 番号をコピーしました！',
+                'zelle_copied': '📋 Zelle 番号をコピーしました！',
+                'nequi_copied_text': 'この Nequi 番号に支払いを送信してください',
+                'zelle_copied_text': 'この Zelle 番号に支払いを送信してください',
+                'refresh_confirm': '✨ 残高が更新されました！',
+                'refresh_available': '🦴 寄付可能な骨',
+                'refresh_thanks': '毛皮ちゃんを助けてくれてありがとう！ 💛',
+                'refresh_error': '😿 更新エラー',
+                'donate_title': '🦴 {name} に寄付',
+                'donate_balance': 'あなたは <strong>{balance}</strong> 本の骨を持っています',
+                'donate_btn': '💛 寄付',
+                'donate_error': '😅 おっと！',
+                'donate_error_text': '骨が足りません。',
+                'donate_success': '🎉 寄付が成功しました！',
+                'donate_success_text': '<strong>{qty}</strong> 🦴 を <strong>{name}</strong> に寄付しました',
+                'donate_remaining': '残高: {balance} 🦴',
+                'donate_error_api': 'エラー',
+                'login_first': 'ちょっと待って！',
+                'login_first_text': '寄付するには、まずログインしてください 💛',
+                'register_success_title': '🎉 ようこそ！',
+                'register_success_text': '認証情報でログインしてください、<strong>{name}</strong>。',
+                'register_success_badge': '💛 活動に参加してくれてありがとう！',
+                'register_error_email': '📧 メールアドレスは既に登録されています',
+                'register_error_email_text': 'メールアドレス <strong>{email}</strong> は既に使用されています。別のものを使用するか、ログインしてください。',
+                'register_error_name': '👤 名前は既に存在します',
+                'register_error_name_text': '名前 <strong>{name}</strong> は既に使用されています。<br><strong>{suggested}</strong> として登録しますか？',
+                'register_error_general': '❌ 登録エラー: ',
+                'login_error_title': '😅 おっと！',
+                'login_error_email': '📧 メールアドレスが登録されていません',
+                'login_error_name': '👤 名前が間違っています',
+                'welcome_back': 'おかえりなさい、{name}！ 🐾',
+            }
+        };
+
+        // Variables globales para localización
+        let userLang = 'es';
+        let userCurrency = 'COP';
+        let userCountry = 'CO';
+        let isColombia = true;
+        let basePriceCOP = 1000;
 
         // ================================================================
-        //  🔽 TODAS LAS IMÁGENES DE ANIMALES ACTUALIZADAS
+        //  DETECTAR PAÍS (sin bloquear, con timeout)
+        // ================================================================
+        async function detectarPais() {
+            try {
+                const controller = new AbortController();
+                const timeoutId = setTimeout(() => controller.abort(), 2000);
+                const resp = await fetch('https://ipapi.co/json/', { signal: controller.signal });
+                clearTimeout(timeoutId);
+                if (!resp.ok) throw new Error('Error al detectar país');
+                const data = await resp.json();
+                userCountry = data.country_code || 'CO';
+                userCurrency = data.currency || 'COP';
+                const lang = LANGUAGE_MAP[userCountry] || 'en';
+                userLang = lang;
+                if (!TRANSLATIONS[userLang]) userLang = 'en';
+                console.log(`🌍 Detectado: ${userCountry}, Moneda: ${userCurrency}, Idioma: ${userLang}`);
+            } catch (error) {
+                console.warn('No se pudo detectar país, usando CO/COP/es por defecto', error);
+                userCountry = 'CO';
+                userCurrency = 'COP';
+                userLang = 'es';
+            }
+            aplicarLocalizacion();
+        }
+
+        // ================================================================
+        //  APLICAR LOCALIZACIÓN (incluye precios claros)
+        // ================================================================
+        function aplicarLocalizacion() {
+            const t = TRANSLATIONS[userLang] || TRANSLATIONS['en'];
+            const rate = CURRENCY_RATES[userCurrency] || 1;
+            const symbol = CURRENCY_SYMBOLS[userCurrency] || '$';
+
+            isColombia = (userCountry === 'CO');
+            basePriceCOP = isColombia ? 1000 : (CURRENCY_RATES['USD'] || 4000);
+            window.__basePriceCOP = basePriceCOP;
+            window.__isColombia = isColombia;
+
+            document.querySelector('title').textContent = t.app_title;
+            document.getElementById('tabRegister').textContent = t.register_tab;
+            document.getElementById('tabLogin').textContent = t.login_tab;
+            document.getElementById('formTitle').textContent = (modoActual === 'register' ? t.form_title_register : t
+                .form_title_login);
+            document.getElementById('btnAuthAction').textContent = modoActual === 'register' ? t.btn_register : t.btn_login;
+            document.getElementById('authStatus').textContent = modoActual === 'register' ? t.auth_status_register : t
+                .auth_status_login;
+
+            // Precio claro según país
+            const priceDisplay = document.getElementById('priceDisplay');
+            if (isColombia) {
+                priceDisplay.textContent = `1 huesito = $1.000 COP`;
+            } else {
+                priceDisplay.textContent = `1 huesito = $1.00 USD`;
+            }
+
+            document.getElementById('btnComprar').textContent = t.buy_btn;
+            document.getElementById('btnRefresh').textContent = t.refresh_btn;
+            document.getElementById('btnLogout').textContent = t.logout_btn;
+            document.getElementById('saldoExtraLabel').textContent = t.saldo_extra;
+            document.getElementById('nequiLabel').textContent = t.nequi_label;
+            document.getElementById('zelleLabel').textContent = t.zelle_label;
+
+            document.getElementById('catPerros').textContent = t.dogs;
+            document.getElementById('catGatos').textContent = t.cats;
+            document.getElementById('catTodos').textContent = t.all;
+
+            document.getElementById('statDonacionesLabel').textContent = t.donations_label;
+            document.getElementById('statHuesitosLabel').textContent = t.bones_label;
+            document.getElementById('statTopLabel').textContent = t.top_label;
+
+            document.getElementById('donacionesTitle').innerHTML = t.donations_title + ' <span id="donacionesCount"></span>';
+
+            document.getElementById('footerText').textContent = t.footer_text;
+            document.getElementById('visitasLabel').textContent = t.visitas_label;
+
+            document.querySelector('.btn-compartir-login .compartir-texto .titulo').textContent = t.share_title;
+            document.querySelector('.btn-compartir-login .compartir-texto .subtitulo').textContent = t.share_sub;
+
+            window.__t = t;
+            window.__symbol = symbol;
+        }
+
+        // ================================================================
+        //  IMÁGENES Y HISTORIAS (completas)
         // ================================================================
         const IMAGENES_PERSONALIZADAS = {
             "perro-0": "https://i.ibb.co/tGf7zxM/images-q-tbn-ANd9-Gc-RTm5b-QEu-Z9hua-Pu-YPHu8i-LWrz-MB3m2c-Fterx0-Ph7-Jy0-A-s-10.jpg",
@@ -1898,58 +2650,55 @@
             "gato-12": "https://i.ibb.co/mVDhC0jX/images-q-tbn-ANd9-Gc-RNMFvypu40-Kjl-Jwk-UDm-NARx146-Sa-Ko8rclv-LP24r78zg-s-10.jpg"
         };
 
-        // ================================================================
-        //  📖 HISTORIAS ÚNICAS Y TRISTES PARA CADA ANIMAL
-        // ================================================================
         const HISTORIAS = {
-            "perro-0": "Max fue abandonado por su familia cuando se mudaron. Pasó meses buscándolos en el parque donde solían jugar, comiendo de la basura y durmiendo bajo los carros. Ahora espera que alguien le devuelva la esperanza.",
-            "perro-1": "Luna fue encontrada atada a un poste en una noche de lluvia. Su dueño la dejó allí sin comida ni agua. Llevaba una carta que decía 'ya no la quiero'. Desde entonces no confía en los humanos, pero sueña con un hogar de verdad.",
-            "perro-2": "Rocky vivía en una fábrica abandonada junto a sus hermanos. Todos murieron de hambre y frío, excepto él. Sobrevivió comiendo ratas y bebiendo agua de charcos. Cuando lo rescataron, apenas podía mantenerse en pie.",
-            "perro-3": "Bella era la mascota de una familia que la maltrataba. La golpeaban y la dejaban encerrada todo el día. Logró escapar y ahora vive en la calle, con miedo de todo. Aún así, mueve la cola cuando ve a alguien amable.",
-            "perro-4": "Toby fue atropellado y su dueño no lo llevó al veterinario. Lo abandonó en una carretera con una pata fracturada. Logró arrastrarse hasta un pueblo, donde lo encontraron deshidratado y lleno de heridas.",
-            "perro-5": "Coco era el perro de un anciano que falleció. Los familiares lo botaron a la calle. No entiende por qué su dueño no volvió. Todas las noches se sienta en la acera de la casa que fue su hogar, esperando que alguien abra la puerta.",
-            "perro-6": "Nala fue usada para criar cachorros en un criadero clandestino. La tenían en una jaula pequeña y la golpeaban para que pariera más. Cuando la rescataron, estaba desnutrida y con múltiples infecciones. Nunca había sentido el sol en su piel.",
-            "perro-7": "Simba fue abandonado en un basurero junto a su camada. Todos sus hermanos murieron intoxicados. Él sobrevivió milagrosamente, pero desarrolló una enfermedad en la piel que le causa picazón constante. Busca a alguien que lo acaricie sin miedo.",
-            "perro-8": "Bruno era un perro guardián en una ferretería. Lo encadenaban todo el día sin agua ni sombra. Cuando la tienda cerró, lo dejaron amarrado. Pasó dos semanas así hasta que un vecino lo liberó. Tiene cicatrices en el cuello por la cadena.",
-            "perro-9": "Daisy fue encontrada en una zona rural, con una herida de bala en la pata trasera. Probablemente la usaron para prácticas de tiro. A pesar del dolor, es increíblemente cariñosa y busca consuelo en cada persona que ve.",
-            "perro-10": "Charlie vivía en la calle con un grupo de perros callejeros. Siempre era el último en comer y el primero en recibir golpes de otros animales. Es tímido y asustadizo, pero tiene una mirada que pide una oportunidad.",
-            "perro-11": "Lola fue separada de su madre cuando era un cachorro. La vendieron en una caja en la calle. El comprador la abandonó al poco tiempo porque 'ladraba mucho'. Ahora deambula en busca de cariño, sin entender por qué nadie la quiere.",
-            "perro-12": "Thor fue atacado por perros callejeros en un parque. Su dueño lo vio y huyó para no pagar el veterinario. Quedó con heridas profundas y una infección. Cuando lo rescataron, ya no podía mover una de sus patas.",
-            "perro-13": "Molly fue encontrada en una zanja, con una cuerda tan apretada alrededor del cuello que casi le corta la respiración. La usaron para experimentos. Es miedosa pero agradece con lamidas cada muestra de cariño.",
-            "perro-14": "Leo fue abandonado en un centro comercial porque su dueño se iba del país. Esperó dos días sentado en la misma puerta por donde entró. Lo recogió la policía y lo llevaron a un refugio. Todavía busca a su dueño en cada visitante.",
-            "perro-15": "Kira fue rescatada de un pozo donde cayó y no podía salir. Estuvo tres días sin comida ni agua. Cuando la encontraron, estaba al borde de la muerte. Ahora vive en el refugio, pero llora cuando ve oscuridad.",
-            "perro-16": "Rex trabajó como perro de trineo en una zona turística, pero cuando envejeció, lo dejaron morir en una jaula. Un voluntario lo encontró en el último momento. Sus patas están deformadas por el exceso de trabajo.",
-            "perro-17": "Milo fue abandonado en una autopista. Durante meses, corrió detrás de los carros que pasaban, esperando que uno de ellos se detuviera. Nunca lo hicieron. Lo recogieron deshidratado y con quemaduras por el asfalto.",
-            "perro-18": "Lily fue utilizada como perro de pelea en peleas clandestinas. La entrenaban con violencia y la drogaban. Tiene marcas de mordidas en todo el cuerpo. A pesar de todo, es dócil y busca protección.",
-            "perro-19": "Oscar fue abandonado en un refugio con una nota que decía 'es muy rebelde'. En realidad, solo tenía miedo. Estaba deshidratado y sucio. Hoy es uno de los perros más cariñosos del refugio, aunque aún tiembla cuando ve una mano levantada.",
-            "perro-20": "Zeus fue encontrado en un camión de basura, dentro de una bolsa cerrada. Lo tiraron vivo. El conductor lo oyó llorar y lo rescató. Estaba a punto de morir aplastado. Ahora no soporta los ruidos fuertes.",
-            "perro-21": "Maya fue abandonada por su familia después de que su dueño murió. Los hijos no querían tenerla. La dejaron en la calle y ella pasó semanas esperando frente a la casa. Es una perra vieja, con artritis y cansancio en los ojos.",
-            "perro-22": "Jack fue rescatado de una obra en construcción. Lo usaban para cuidar materiales y lo tenían encerrado sin luz ni ventilación. Su piel está dañada por la humedad y el frío. Apenas había visto el sol.",
-            "perro-23": "Sasha fue abandonada en una montaña durante un viaje familiar. La dejaron atada a un árbol. Sobrevivió comiendo raíces y bebiendo agua de lluvia. Un montañista la encontró y la bajó en sus brazos.",
-            "perro-24": "Tango era el perro de una familia que se quedó sin dinero y lo abandonó en la calle. Lo echaron de su casa y él no entendía por qué. Durante semanas se paró en la esquina viendo pasar a su familia sin mirarlo.",
-            "perro-25": "Roko fue utilizado como perro de laboratorio. Lo pinchaban y le daban sustancias para pruebas. Sus ojos tienen una mirada triste y profunda, llena de recuerdos de dolor. Ahora busca caricias que le hagan olvidar.",
-            "perro-26": "Lúa fue abandonada en un cementerio. La gente la veía entre las tumbas y pensaban que era un fantasma. Solo buscaba un lugar donde descansar sin que la echaran. Se alimentaba de las ofrendas que dejaban los visitantes.",
-            "perro-27": "Koda fue atropellado y su dueño no quiso pagar la operación. Lo abandonó en el veterinario. Tiene una cadera fracturada que no sanó bien y cojea al caminar. Pero su espíritu no está quebrado, busca a alguien que lo quiera así.",
-            "perro-28": "Akira fue encontrada en un bosque, con una herida de cuchillo en el costado. La usaron para prácticas de cacería. Sobrevivió milagrosamente. Ahora es desconfiada, pero cuando mira a los ojos, se ve un alma que busca paz.",
-            "perro-29": "Tita fue abandonada porque su dueño se cansó de ella cuando creció. La dejó en una carretera y se fue. Ella lo vio alejarse y no entendió. Hoy, cada vez que un carro se detiene, se acerca esperando que sea él.",
-            "perro-30": "Lucas era el perro de un indigente que falleció en la calle. Desde entonces, se sienta junto a la manta de su dueño todos los días. No se separa de ese lugar, esperando que su amigo despierte. Lo recogieron pero siempre quiere volver.",
-            "gato-0": "Mishi fue abandonada en una caja de cartón en la puerta de un refugio. Estaba con sus hermanos, todos muertos. Ella lloraba sin parar. Cuando la abrieron, tenía los ojos llenos de lágrimas y el cuerpo tembloroso.",
-            "gato-1": "Garfield vivía en una casa donde lo golpeaban. Logró escapar por una ventana, pero se lastimó la pata al caer. Ahora está en el refugio, es arisco pero cuando lo acarician, ronronea con fuerza. No recuerda lo que es sentirse seguro.",
-            "gato-2": "Salem fue abandonado en una estación de gasolina. La gente pasaba y lo ignoraba. Comía de la basura y dormía en los neumáticos. Un día, un camión casi lo atropella y un empleado lo rescató. Ahora tiene miedo de los ruidos fuertes.",
-            "gato-3": "Luna era una gata callejera que tuvo una camada. Dos de sus crías murieron de hambre. Ella las cuidó hasta el final. Ahora está sola, triste y apenas come. Su mirada dice que perdió la esperanza en el mundo.",
-            "gato-4": "Simba fue rescatado de un apartamento abandonado. Lo dejaron encerrado sin comida ni agua durante más de una semana. Cuando lo encontraron, estaba deshidratado y apenas podía moverse. Hoy es un sobreviviente.",
-            "gato-5": "Mia fue utilizada en un criadero ilegal. La obligaban a tener crías constantemente, sin descanso ni cuidados. Cuando ya no pudo parir más, la abandonaron en la calle. Está débil y enferma, pero busca caricias desesperadamente.",
-            "gato-6": "Tigre fue encontrado en un parque, con una herida profunda en la cabeza. Alguien le había lanzado una piedra. Tiene secuelas neurológicas y su cabeza tiembla a veces. Aun así, es un gato dulce y agradecido.",
-            "gato-7": "Pelusa era el gato de una señora mayor que falleció. Los hijos la echaron a la calle. Ahora vive en el refugio, siempre en un rincón, esperando a que alguien se siente a su lado. Extraña a su dueña.",
-            "gato-8": "Negro fue encontrado en un basurero con una bolsa atada al cuello. Lo tiraron vivo para morir aplastado. Un reciclador lo oyó maullar y lo salvó. Le costó volver a confiar en los humanos.",
-            "gato-9": "Canela fue abandonada por su familia cuando se mudaron. La dejaron en la puerta de la vieja casa y se fueron. Ella esperó días bajo la lluvia. Cuando la recogieron, tenía fiebre y neumonía.",
-            "gato-10": "Ginger vivía en una fábrica de alimentos, donde la alimentaban mal y la perseguían. Cuando la fábrica cerró, la dejaron allí. Ahora tiene miedo de los espacios grandes y se esconde en cualquier agujero.",
-            "gato-11": "Nube fue atacada por perros callejeros. Su dueño la abandonó porque 'costaba mucho curarla'. Quedó con una fractura en la columna. No puede saltar bien, pero se arrastra para recibir cariño.",
-            "gato-12": "Lucky fue encontrado dentro de una cajuela de un carro en el desguace. El mecánico lo oyó maullar y lo rescató. Estaba deshidratado y con quemaduras. Su nombre es irónico, porque no ha tenido suerte, pero busca una oportunidad."
+            "perro-0": "Max fue abandonado por su familia cuando se mudaron. Pasó meses buscándolos en el parque donde solían jugar, comiendo de la basura y durmiendo bajo los carros. Ahora espera que alguien le devuelva la esperanza. Cada vez que ve a una familia, mueve la cola con ilusión, pero siempre se van sin mirarlo. Sueña con un hogar donde pueda dormir en una cama caliente y recibir caricias cada mañana.",
+            "perro-1": "Luna fue encontrada atada a un poste en una noche de lluvia. Su dueño la dejó allí sin comida ni agua. Llevaba una carta que decía 'ya no la quiero'. Desde entonces no confía en los humanos, pero sueña con un hogar de verdad. Cuando llueve, tiembla y busca refugio, pero nadie la acoge. Su mirada triste pide una oportunidad para volver a amar.",
+            "perro-2": "Rocky vivía en una fábrica abandonada junto a sus hermanos. Todos murieron de hambre y frío, excepto él. Sobrevivió comiendo ratas y bebiendo agua de charcos. Cuando lo rescataron, apenas podía mantenerse en pie. Ahora, aunque está débil, su espíritu es fuerte y busca a alguien que le dé calor y comida sin condiciones.",
+            "perro-3": "Bella era la mascota de una familia que la maltrataba. La golpeaban y la dejaban encerrada todo el día. Logró escapar y ahora vive en la calle, con miedo de todo. Aún así, mueve la cola cuando ve a alguien amable, pero siempre está alerta, esperando el próximo golpe. Anhela sentir el amor sin violencia.",
+            "perro-4": "Toby fue atropellado y su dueño no lo llevó al veterinario. Lo abandonó en una carretera con una pata fracturada. Logró arrastrarse hasta un pueblo, donde lo encontraron deshidratado y lleno de heridas. Ahora cojea, pero su corazón late con fuerza. Sólo pide que alguien lo acepte tal como es.",
+            "perro-5": "Coco era el perro de un anciano que falleció. Los familiares lo botaron a la calle. No entiende por qué su dueño no volvió. Todas las noches se sienta en la acera de la casa que fue su hogar, esperando que alguien abra la puerta. Sus ojos brillan con lágrimas cuando ve a un anciano pasar.",
+            "perro-6": "Nala fue usada para criar cachorros en un criadero clandestino. La tenían en una jaula pequeña y la golpeaban para que pariera más. Cuando la rescataron, estaba desnutrida y con múltiples infecciones. Nunca había sentido el sol en su piel. Ahora, cada rayo de sol es un regalo, pero su alma aún está herida.",
+            "perro-7": "Simba fue abandonado en un basurero junto a su camada. Todos sus hermanos murieron intoxicados. Él sobrevivió milagrosamente, pero desarrolló una enfermedad en la piel que le causa picazón constante. Busca a alguien que lo acaricie sin miedo. Su cuerpo está lleno de cicatrices, pero su corazón es inmenso.",
+            "perro-8": "Bruno era un perro guardián en una ferretería. Lo encadenaban todo el día sin agua ni sombra. Cuando la tienda cerró, lo dejaron amarrado. Pasó dos semanas así hasta que un vecino lo liberó. Tiene cicatrices en el cuello por la cadena. Ahora, cuando ve una correa, se encoge de miedo.",
+            "perro-9": "Daisy fue encontrada en una zona rural, con una herida de bala en la pata trasera. Probablemente la usaron para prácticas de tiro. A pesar del dolor, es increíblemente cariñosa y busca consuelo en cada persona que ve. Su mirada perdona, pero su cuerpo recuerda el sufrimiento.",
+            "perro-10": "Charlie vivía en la calle con un grupo de perros callejeros. Siempre era el último en comer y el primero en recibir golpes de otros animales. Es tímido y asustadizo, pero tiene una mirada que pide una oportunidad. Cuando alguien se acerca, se esconde, pero si le hablas con dulzura, se acerca temblando.",
+            "perro-11": "Lola fue separada de su madre cuando era un cachorro. La vendieron en una caja en la calle. El comprador la abandonó al poco tiempo porque 'ladraba mucho'. Ahora deambula en busca de cariño, sin entender por qué nadie la quiere. Cada noche, aúlla a la luna, esperando que su madre la escuche.",
+            "perro-12": "Thor fue atacado por perros callejeros en un parque. Su dueño lo vio y huyó para no pagar el veterinario. Quedó con heridas profundas y una infección. Cuando lo rescataron, ya no podía mover una de sus patas. A pesar de todo, su cola se mueve cuando ve a un niño jugar.",
+            "perro-13": "Molly fue encontrada en una zanja, con una cuerda tan apretada alrededor del cuello que casi le corta la respiración. La usaron para experimentos. Es miedosa pero agradece con lamidas cada muestra de cariño. Su pesadilla terminó, pero el miedo a veces la paraliza.",
+            "perro-14": "Leo fue abandonado en un centro comercial porque su dueño se iba del país. Esperó dos días sentado en la misma puerta por donde entró. Lo recogió la policía y lo llevaron a un refugio. Todavía busca a su dueño en cada visitante, y su corazón se rompe un poco más cada vez.",
+            "perro-15": "Kira fue rescatada de un pozo donde cayó y no podía salir. Estuvo tres días sin comida ni agua. Cuando la encontraron, estaba al borde de la muerte. Ahora vive en el refugio, pero llora cuando ve oscuridad. Tiene miedo de los lugares cerrados y busca la luz del día.",
+            "perro-16": "Rex trabajó como perro de trineo en una zona turística, pero cuando envejeció, lo dejaron morir en una jaula. Un voluntario lo encontró en el último momento. Sus patas están deformadas por el exceso de trabajo. Ahora, cada paso le duele, pero su mirada sigue siendo noble y agradecida.",
+            "perro-17": "Milo fue abandonado en una autopista. Durante meses, corrió detrás de los carros que pasaban, esperando que uno de ellos se detuviera. Nunca lo hicieron. Lo recogieron deshidratado y con quemaduras por el asfalto. Aún así, mira los carros con esperanza, pensando que alguno será el de su dueño.",
+            "perro-18": "Lily fue utilizada como perro de pelea en peleas clandestinas. La entrenaban con violencia y la drogaban. Tiene marcas de mordidas en todo el cuerpo. A pesar de todo, es dócil y busca protección. Cuando ve a otro perro, se agacha y tiembla, esperando el ataque que ya no llegará.",
+            "perro-19": "Oscar fue abandonado en un refugio con una nota que decía 'es muy rebelde'. En realidad, solo tenía miedo. Estaba deshidratado y sucio. Hoy es uno de los perros más cariñosos del refugio, aunque aún tiembla cuando ve una mano levantada. Sólo pide que le hablen con suavidad.",
+            "perro-20": "Zeus fue encontrado en un camión de basura, dentro de una bolsa cerrada. Lo tiraron vivo. El conductor lo oyó llorar y lo rescató. Estaba a punto de morir aplastado. Ahora no soporta los ruidos fuertes y se esconde en rincones oscuros, recordando el momento en que todo era oscuridad.",
+            "perro-21": "Maya fue abandonada por su familia después de que su dueño murió. Los hijos no querían tenerla. La dejaron en la calle y ella pasó semanas esperando frente a la casa. Es una perra vieja, con artritis y cansancio en los ojos. Pero aún espera que alguien la llame por su nombre.",
+            "perro-22": "Jack fue rescatado de una obra en construcción. Lo usaban para cuidar materiales y lo tenían encerrado sin luz ni ventilación. Su piel está dañada por la humedad y el frío. Apenas había visto el sol. Ahora, cuando siente el viento en su cara, cierra los ojos y sonríe.",
+            "perro-23": "Sasha fue abandonada en una montaña durante un viaje familiar. La dejaron atada a un árbol. Sobrevivió comiendo raíces y bebiendo agua de lluvia. Un montañista la encontró y la bajó en sus brazos. Ahora, cuando ve una mochila, se emociona, creyendo que la llevarán a casa.",
+            "perro-24": "Tango era el perro de una familia que se quedó sin dinero y lo abandonó en la calle. Lo echaron de su casa y él no entendía por qué. Durante semanas se paró en la esquina viendo pasar a su familia sin mirarlo. Su corazón se rompió en pedazos, pero aún late con esperanza.",
+            "perro-25": "Roko fue utilizado como perro de laboratorio. Lo pinchaban y le daban sustancias para pruebas. Sus ojos tienen una mirada triste y profunda, llena de recuerdos de dolor. Ahora busca caricias que le hagan olvidar. Cada vez que alguien lo toca, se tensa, pero luego se relaja y ronronea.",
+            "perro-26": "Lúa fue abandonada en un cementerio. La gente la veía entre las tumbas y pensaban que era un fantasma. Solo buscaba un lugar donde descansar sin que la echaran. Se alimentaba de las ofrendas que dejaban los visitantes. Hoy, cuando ve flores, las huele y cierra los ojos, como si recordara a alguien.",
+            "perro-27": "Koda fue atropellado y su dueño no quiso pagar la operación. Lo abandonó en el veterinario. Tiene una cadera fracturada que no sanó bien y cojea al caminar. Pero su espíritu no está quebrado, busca a alguien que lo quiera así. Cada paso es un esfuerzo, pero nunca deja de avanzar.",
+            "perro-28": "Akira fue encontrada en un bosque, con una herida de cuchillo en el costado. La usaron para prácticas de cacería. Sobrevivió milagrosamente. Ahora es desconfiada, pero cuando mira a los ojos, se ve un alma que busca paz. Se esconde en los arbustos, pero si la llamas con ternura, sale lentamente.",
+            "perro-29": "Tita fue abandonada porque su dueño se cansó de ella cuando creció. La dejó en una carretera y se fue. Ella lo vio alejarse y no entendió. Hoy, cada vez que un carro se detiene, se acerca esperando que sea él. Su cola se mueve con ilusión, pero siempre se va con el corazón roto.",
+            "perro-30": "Lucas era el perro de un indigente que falleció en la calle. Desde entonces, se sienta junto a la manta de su dueño todos los días. No se separa de ese lugar, esperando que su amigo despierte. Lo recogieron pero siempre quiere volver. Su lealtad es tan grande que duele verlo.",
+            "gato-0": "Mishi fue abandonada en una caja de cartón en la puerta de un refugio. Estaba con sus hermanos, todos muertos. Ella lloraba sin parar. Cuando la abrieron, tenía los ojos llenos de lágrimas y el cuerpo tembloroso. Ahora busca el calor de un regazo, pero siempre está alerta, como si esperara otro abandono.",
+            "gato-1": "Garfield vivía en una casa donde lo golpeaban. Logró escapar por una ventana, pero se lastimó la pata al caer. Ahora está en el refugio, es arisco pero cuando lo acarician, ronronea con fuerza. No recuerda lo que es sentirse seguro, pero cuando duerme, a veces sueña con un hogar sin miedo.",
+            "gato-2": "Salem fue abandonado en una estación de gasolina. La gente pasaba y lo ignoraba. Comía de la basura y dormía en los neumáticos. Un día, un camión casi lo atropella y un empleado lo rescató. Ahora tiene miedo de los ruidos fuertes, pero cuando ve una mano extendida, se acerca con cautela.",
+            "gato-3": "Luna era una gata callejera que tuvo una camada. Dos de sus crías murieron de hambre. Ella las cuidó hasta el final. Ahora está sola, triste y apenas come. Su mirada dice que perdió la esperanza en el mundo. A veces, cuando la luna está llena, maúlla suavemente, como si hablara con sus bebés.",
+            "gato-4": "Simba fue rescatado de un apartamento abandonado. Lo dejaron encerrado sin comida ni agua durante más de una semana. Cuando lo encontraron, estaba deshidratado y apenas podía moverse. Hoy es un sobreviviente, pero cuando ve una puerta cerrarse, su corazón se acelera y busca desesperadamente una salida.",
+            "gato-5": "Mia fue utilizada en un criadero ilegal. La obligaban a tener crías constantemente, sin descanso ni cuidados. Cuando ya no pudo parir más, la abandonaron en la calle. Está débil y enferma, pero busca caricias desesperadamente. Su cuerpo está agotado, pero su alma aún anhela ser amada.",
+            "gato-6": "Tigre fue encontrado en un parque, con una herida profunda en la cabeza. Alguien le había lanzado una piedra. Tiene secuelas neurológicas y su cabeza tiembla a veces. Aun así, es un gato dulce y agradecido. Cuando alguien se acerca, se frota contra sus piernas, como diciendo 'no me hagas daño, solo quiero cariño'.",
+            "gato-7": "Pelusa era el gato de una señora mayor que falleció. Los hijos la echaron a la calle. Ahora vive en el refugio, siempre en un rincón, esperando a que alguien se siente a su lado. Extraña a su dueña y a veces, cuando ve a una señora mayor, corre hacia ella, pero siempre se va decepcionado.",
+            "gato-8": "Negro fue encontrado en un basurero con una bolsa atada al cuello. Lo tiraron vivo para morir aplastado. Un reciclador lo oyó maullar y lo salvó. Le costó volver a confiar en los humanos. Ahora, cuando ve una bolsa, huye despavorido. Pero si le hablas con calma, se acerca y ronronea.",
+            "gato-9": "Canela fue abandonada por su familia cuando se mudaron. La dejaron en la puerta de la vieja casa y se fueron. Ella esperó días bajo la lluvia. Cuando la recogieron, tenía fiebre y neumonía. Ahora está recuperada, pero siempre que llueve, se sienta en la ventana y mira hacia la calle, como si aún esperara.",
+            "gato-10": "Ginger vivía en una fábrica de alimentos, donde la alimentaban mal y la perseguían. Cuando la fábrica cerró, la dejaron allí. Ahora tiene miedo de los espacios grandes y se esconde en cualquier agujero. Su mundo es pequeño y oscuro, pero sueña con un lugar abierto donde pueda correr sin miedo.",
+            "gato-11": "Nube fue atacada por perros callejeros. Su dueño la abandonó porque 'costaba mucho curarla'. Quedó con una fractura en la columna. No puede saltar bien, pero se arrastra para recibir cariño. Cada movimiento es un esfuerzo, pero su determinación por encontrar amor es más fuerte que el dolor.",
+            "gato-12": "Lucky fue encontrado dentro de una cajuela de un carro en el desguace. El mecánico lo oyó maullar y lo rescató. Estaba deshidratado y con quemaduras. Su nombre es irónico, porque no ha tenido suerte, pero busca una oportunidad. Cuando el mecánico lo abrazó, por primera vez sintió que alguien lo quería."
         };
 
         // ================================================================
-        //  GENERAR HUELLAS EN EL FONDO
+        //  GENERAR HUELLAS
         // ================================================================
         function generarHuellas() {
             const bg = document.getElementById('pawBg');
@@ -2019,7 +2768,7 @@
         const ANIMALES = generarAnimales();
 
         // ================================================================
-        //  MARCA DE AGUA CON LOGO
+        //  MARCA DE AGUA
         // ================================================================
         const logoMarca = new Image();
         logoMarca.crossOrigin = "anonymous";
@@ -2091,6 +2840,7 @@
         const btnLogout = document.getElementById('btnLogout');
         const btnComprar = document.getElementById('btnComprar');
         const btnNequiCopy = document.getElementById('btnNequiCopy');
+        const btnZelleCopy = document.getElementById('btnZelleCopy');
         const btnRefresh = document.getElementById('btnRefresh');
         const btnCompartirLogin = document.getElementById('btnCompartirLogin');
         const authStatus = document.getElementById('authStatus');
@@ -2105,8 +2855,6 @@
         const totalDonacionesEl = document.getElementById('totalDonaciones');
         const totalHuesitosEl = document.getElementById('totalHuesitos');
         const topDonadorEl = document.getElementById('topDonador');
-        const modalImg = document.getElementById('modalImg');
-        const modalImgSrc = document.getElementById('modalImgSrc');
 
         let usuarioActual = '';
         let nombreActual = '';
@@ -2136,7 +2884,7 @@
         function actualizarSaldoUI() { saldoUsuario.textContent = saldoActual; }
 
         // ================================================================
-        //  🔽 NUEVO: GUARDAR Y CARGAR CREDENCIALES EN LOCALSTORAGE
+        //  CREDENCIALES EN LOCALSTORAGE
         // ================================================================
         function guardarCredencialesLocal(email, nombre) {
             localStorage.setItem('peluditos_creds', JSON.stringify({ email, nombre }));
@@ -2159,7 +2907,7 @@
         }
 
         // ================================================================
-        //  CONVERSIÓN A MINÚSCULAS EN TIEMPO REAL
+        //  CONVERSIÓN A MINÚSCULAS
         // ================================================================
         authNombre.addEventListener('input', function() {
             this.value = this.value.toLowerCase();
@@ -2209,7 +2957,7 @@
         }
 
         // ================================================================
-        //  AUTENTICACIÓN (TODO CONTRA GOOGLE SHEETS, SIN LOCALSTORAGE)
+        //  AUTENTICACIÓN
         // ================================================================
         function normalizarDatos(nombre, email) {
             nombre = nombre.trim().toLowerCase();
@@ -2227,87 +2975,63 @@
 
         function cambiarModo(modo) {
             modoActual = modo;
+            const t = window.__t || TRANSLATIONS['es'];
             if (modo === 'register') {
                 tabRegister.classList.add('active');
                 tabLogin.classList.remove('active');
-                formTitle.textContent = '📝 Crear cuenta';
-                btnAuthAction.textContent = '📝 Registrarse';
+                formTitle.textContent = t.form_title_register;
+                btnAuthAction.textContent = t.btn_register;
                 btnAuthAction.className = 'btn-auth-action register';
-                authStatus.textContent = '🔒 Ingresa tus datos para registrarte';
+                authStatus.textContent = t.auth_status_register;
                 authStatus.style.color = '#bbb';
             } else {
                 tabLogin.classList.add('active');
                 tabRegister.classList.remove('active');
-                formTitle.textContent = '🔑 Iniciar sesión';
-                btnAuthAction.textContent = '🔑 Iniciar sesión';
+                formTitle.textContent = t.form_title_login;
+                btnAuthAction.textContent = t.btn_login;
                 btnAuthAction.className = 'btn-auth-action login';
-                authStatus.textContent = '🔒 Ingresa tus credenciales';
+                authStatus.textContent = t.auth_status_login;
                 authStatus.style.color = '#bbb';
             }
             ocultarDiagnostico();
         }
 
         function mostrarAlertaRegistroExitoso(nombre) {
+            const t = window.__t || TRANSLATIONS['es'];
             Swal.fire({
-                title: '🎉 ¡Bienvenido/a!',
+                title: t.register_success_title,
                 html: `
                     <div style="display:flex;flex-direction:column;align-items:center;gap:8px;padding:8px 0;">
                         <div style="font-size:4rem;animation: bounceIcon 1.2s ease-in-out infinite;">🐾</div>
-                        <h2 style="color:#f9d976;margin:0;">¡Registro exitoso!</h2>
-                        <p style="color:#ddd;font-size:1.1rem;">Ahora inicia sesión con tus credenciales, <strong>${nombre}</strong>.</p>
+                        <h2 style="color:#f9d976;margin:0;">${t.register_success_title}</h2>
+                        <p style="color:#ddd;font-size:1.1rem;">${t.register_success_text.replace('{name}', nombre)}</p>
                         <div style="background:rgba(249,217,118,0.1);border-radius:40px;padding:8px 20px;border:1px solid rgba(249,217,118,0.2);">
-                            <span style="color:#f9d976;">💛 ¡Gracias por unirte a la causa!</span>
+                            <span style="color:#f9d976;">${t.register_success_badge}</span>
                         </div>
                     </div>
                 `,
                 icon: 'success',
                 confirmButtonColor: '#f9d976',
-                confirmButtonText: '❤️ ¡Entendido!',
+                confirmButtonText: '❤️ Entendido',
                 background: '#1a1f2a',
                 color: '#fff',
                 showClass: { popup: 'animate__animated animate__fadeInUp animate__faster' },
                 hideClass: { popup: 'animate__animated animate__fadeOutDown animate__faster' },
                 timer: 4000,
                 timerProgressBar: true,
-                didOpen: () => {
-                    const emojis = ['🎉', '🎊', '💛', '🐾', '🦴', '✨', '🌟'];
-                    for (let i = 0; i < 20; i++) {
-                        setTimeout(() => {
-                            const el = document.createElement('span');
-                            el.textContent = emojis[Math.floor(Math.random() * emojis.length)];
-                            el.style.position = 'fixed';
-                            el.style.left = (5 + Math.random() * 90) + '%';
-                            el.style.top = '-5%';
-                            el.style.fontSize = (1.2 + Math.random() * 2) + 'rem';
-                            el.style.zIndex = '99999';
-                            el.style.pointerEvents = 'none';
-                            el.style.transition = 'all 1.8s cubic-bezier(0.34, 1.56, 0.64, 1)';
-                            el.style.opacity = '1';
-                            document.body.appendChild(el);
-                            setTimeout(() => {
-                                el.style.top = (80 + Math.random() * 20) + '%';
-                                el.style.transform =
-                                    `rotate(${Math.random() * 720 - 360}deg) scale(0.5)`;
-                                el.style.opacity = '0';
-                            }, 50);
-                            setTimeout(() => {
-                                document.body.removeChild(el);
-                            }, 2000);
-                        }, i * 80);
-                    }
-                }
             });
         }
 
         function mostrarAlertaErrorLogin(mensaje) {
-            let titulo = '😅 ¡Ups!';
+            const t = window.__t || TRANSLATIONS['es'];
+            let titulo = t.login_error_title;
             let icono = 'error';
 
             if (mensaje.includes('correo no está registrado') || mensaje.includes('Email no encontrado')) {
-                titulo = '📧 Correo no registrado';
+                titulo = t.login_error_email;
                 icono = 'question';
             } else if (mensaje.includes('nombre no coincide') || mensaje.includes('Nombre incorrecto')) {
-                titulo = '👤 Nombre incorrecto';
+                titulo = t.login_error_name;
             }
 
             Swal.fire({
@@ -2321,17 +3045,13 @@
             });
         }
 
-        // ========== INICIAR SESIÓN (VERIFICA CONTRA GOOGLE SHEETS) ==========
+        // === INICIAR SESIÓN ===
         async function iniciarSesion(email, nombre) {
             const datos = normalizarDatos(nombre, email);
             if (!validarCampos(datos.nombre, datos.email)) return;
-            mostrarLoader();
+            mostrarLoaderConBarra();
             try {
-                // Verificar credenciales contra Google Sheets
-                const verificacion = await verificarLogin(datos.email, datos.nombre);
-                console.log('Verificación login:', verificacion);
-
-                // Si la API devuelve ok, las credenciales son correctas
+                await verificarLogin(datos.email, datos.nombre);
                 const saldo = await getSaldo(datos.email);
 
                 let donacionesNube = [];
@@ -2355,10 +3075,10 @@
                 authStatus.style.color = '#2ecc71';
                 ocultarDiagnostico();
                 guardarEstadoLocal();
-                // 🔽 NUEVO: guardar credenciales en localStorage al iniciar sesión exitosamente
                 guardarCredencialesLocal(datos.email, datos.nombre);
                 iniciarDonadoresFicticios();
-                mostrarNotificacion(`¡Bienvenido de nuevo, ${datos.nombre}! 🐾`, '👋');
+                const t = window.__t || TRANSLATIONS['es'];
+                mostrarNotificacion(t.welcome_back.replace('{name}', datos.nombre), '👋');
             } catch (error) {
                 console.error('Error en inicio de sesión:', error);
                 mostrarAlertaErrorLogin(error.message);
@@ -2367,32 +3087,29 @@
             }
         }
 
-        // ========== REGISTRAR NUEVO USUARIO (VERIFICA CONTRA GOOGLE SHEETS) ==========
+        // === REGISTRAR NUEVO USUARIO ===
         async function registrarNuevoUsuario(email, nombre) {
             const datos = normalizarDatos(nombre, email);
             if (!validarCampos(datos.nombre, datos.email)) return;
-            mostrarLoader();
+            mostrarLoaderConBarra();
             try {
                 await registrarUsuario(datos.email, datos.nombre);
-                // 🔽 NUEVO: guardar credenciales en localStorage tras registro exitoso
                 guardarCredencialesLocal(datos.email, datos.nombre);
                 mostrarAlertaRegistroExitoso(datos.nombre);
                 authNombre.value = '';
                 authEmail.value = '';
                 cambiarModo('login');
-                // Recargar las credenciales guardadas para rellenar los campos
                 cargarCredencialesGuardadas();
                 authEmail.focus();
                 mostrarDiagnostico('✅ Registro exitoso. Inicia sesión.', 'success');
             } catch (error) {
                 ocultarLoader();
                 const msg = error.message.toLowerCase();
-                console.log('Error capturado:', msg);
-
+                const t = window.__t || TRANSLATIONS['es'];
                 if (msg.includes('email') || msg.includes('correo')) {
                     Swal.fire({
-                        title: '📧 Correo ya registrado',
-                        html: `<p style="color:#ddd;">El correo <strong>${datos.email}</strong> ya está en uso. Por favor, usa otro o inicia sesión.</p>`,
+                        title: t.register_error_email,
+                        html: t.register_error_email_text.replace('{email}', datos.email),
                         icon: 'warning',
                         confirmButtonColor: '#f9d976',
                         confirmButtonText: 'Entendido',
@@ -2402,7 +3119,7 @@
                 } else if (msg.includes('nombre') && msg.includes('existe')) {
                     const nuevoNombre = await sugerirNombreConNumero(datos.nombre);
                     if (nuevoNombre) {
-                        mostrarLoader();
+                        mostrarLoaderConBarra();
                         try {
                             await registrarUsuario(datos.email, nuevoNombre);
                             guardarCredencialesLocal(datos.email, nuevoNombre);
@@ -2416,6 +3133,8 @@
                         } catch (err2) {
                             ocultarLoader();
                             mostrarDiagnostico('❌ Error al registrar con el nuevo nombre: ' + err2.message, 'error');
+                        } finally {
+                            ocultarLoader();
                         }
                     } else {
                         mostrarDiagnostico('❌ Registro cancelado. Puedes intentar con otro nombre.', 'error');
@@ -2429,11 +3148,14 @@
         }
 
         async function sugerirNombreConNumero(nombreBase) {
+            const t = window.__t || TRANSLATIONS['es'];
             const numero = Math.floor(Math.random() * 90) + 10;
             const sugerido = `${nombreBase}${numero}`;
             const result = await Swal.fire({
-                title: '👤 Nombre ya existe',
-                html: `El nombre <strong>${nombreBase}</strong> ya está en uso.<br>¿Quieres registrarte como <strong>${sugerido}</strong>?`,
+                title: t.register_error_name,
+                html: t.register_error_name_text
+                    .replace('{name}', nombreBase)
+                    .replace('{suggested}', sugerido),
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonText: `Sí, usar ${sugerido}`,
@@ -2458,15 +3180,17 @@
             nombreActual = '';
             authSection.classList.remove('hidden');
             mainSection.classList.add('hidden');
-            authStatus.textContent = '🔒 Ingresa tu nombre y correo';
+            const t = window.__t || TRANSLATIONS['es'];
+            authStatus.textContent = t.auth_status_default;
             authStatus.style.color = '#bbb';
             saldoActual = 0;
             saldoUsuario.textContent = '0';
             animalesGrid.innerHTML = '';
             ocultarDiagnostico();
-            // 🔽 NUEVO: en lugar de ir a registro, cargar credenciales guardadas y cambiar a login
             cargarCredencialesGuardadas();
-            // Si no hay credenciales guardadas, se mantiene en register por defecto
+            if (!authNombre.value && !authEmail.value) {
+                cambiarModo('register');
+            }
         }
 
         // ================================================================
@@ -2493,38 +3217,37 @@
         btnLogout.addEventListener('click', logoutUsuario);
         btnCompartirLogin.addEventListener('click', compartirNativo);
 
-        // 🔽 NUEVO: cargar credenciales al iniciar la página
-        cargarCredencialesGuardadas();
-        // Si no se cargaron credenciales, iniciar en modo registro
-        if (!authNombre.value && !authEmail.value) {
-            cambiarModo('register');
-        }
-
         // ================================================================
-        //  COMPRA Y NEQUI COLOMBIA
+        //  COMPRA Y MÉTODOS DE PAGO
         // ================================================================
         async function comprarHuesitos() {
+            const t = window.__t || TRANSLATIONS['es'];
+            const isCol = window.__isColombia || (userCountry === 'CO');
+
             if (!usuarioActual) {
                 Swal.fire({
                     icon: 'warning',
-                    title: '¡Un momentito!',
-                    text: 'Para comprar huesitos, primero inicia sesión 💛',
+                    title: t.login_first,
+                    text: t.login_first_text,
                     confirmButtonColor: '#6dd5ed',
                     background: '#1a1f2a',
                     color: '#fff'
                 });
                 return;
             }
+
+            let pricePerBoneStr = isCol ? `$1.000 COP` : `$1.00 USD`;
+
             const { value: cantidad } = await Swal.fire({
-                title: '🦴 ¿Cuántos huesitos quieres?',
-                html: `<p>Cada huesito vale <strong>$1.000 COP</strong></p>`,
+                title: t.buy_modal_title,
+                html: `<p>Cada huesito vale <strong>${pricePerBoneStr}</strong></p>`,
                 input: 'number',
                 inputLabel: 'Cantidad',
                 inputPlaceholder: 'Ej: 5',
                 inputAttributes: { min: 1, step: 1 },
                 showCancelButton: true,
-                confirmButtonText: '✨ Comprar',
-                cancelButtonText: 'Cancelar',
+                confirmButtonText: t.buy_confirm,
+                cancelButtonText: t.buy_cancel,
                 confirmButtonColor: '#2ecc71',
                 cancelButtonColor: '#e74c3c',
                 background: '#1a1f2a',
@@ -2533,42 +3256,60 @@
             });
             if (!cantidad || parseInt(cantidad) < 1) return;
             const num = parseInt(cantidad);
-            const total = num * 1000;
-            const mensaje =
-                `Hola, quiero comprar ${num} huesitos para mi correo ${usuarioActual}. Total $${total.toLocaleString()} COP. Adjunto comprobante Nequi Colombia al ${NEQUI_NUM}.`;
+            const totalCOP = num * basePriceCOP;
+            const totalUSD = totalCOP / CURRENCY_RATES['USD'];
+
+            let totalStr = isCol ?
+                `$${totalCOP.toLocaleString()} COP` :
+                `$${totalUSD.toFixed(2)} USD (≈ $${totalCOP.toLocaleString()} COP)`;
 
             const result = await Swal.fire({
-                title: '💳 ¡Pago seguro por Nequi Colombia!',
+                title: t.pay_title,
                 html: `
-                    <div style="display:flex;flex-direction:column;align-items:center;gap:12px;">
-                        <div style="display:flex;align-items:center;gap:10px;background:rgba(91,45,142,0.15);padding:10px 20px;border-radius:50px;">
-                            <span style="display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;background:white;border-radius:50%;font-weight:900;font-size:20px;color:#5B2D8E;">N</span>
-                            <span style="font-weight:700;color:#5B2D8E;font-size:1.1rem;">Cuenta de pago</span>
+                    <div style="display:flex;flex-direction:column;align-items:center;gap:12px;width:100%;">
+                        <div style="display:flex;flex-direction:column;gap:8px;width:100%;">
+                            <div style="display:flex;align-items:center;gap:10px;background:rgba(91,45,142,0.15);padding:10px 12px;border-radius:50px;justify-content:center;flex-wrap:wrap;">
+                                <span style="display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;background:white;border-radius:50%;font-weight:900;font-size:20px;color:#5B2D8E;">N</span>
+                                <span style="font-weight:700;color:#5B2D8E;">Nequi Colombia</span>
+                                <span style="font-weight:600;color:white;font-size:0.9rem;">${NEQUI_NUM}</span>
+                                <span style="font-size:0.7rem;color:#c4a7e8;">🇨🇴</span>
+                                <span style="font-weight:600;color:#f9d976;">${isCol ? totalStr : `≈ $${totalCOP.toLocaleString()} COP`}</span>
+                            </div>
+                            <div style="display:flex;align-items:center;gap:10px;background:rgba(0,102,204,0.15);padding:10px 12px;border-radius:50px;justify-content:center;flex-wrap:wrap;">
+                                <span style="display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;background:white;border-radius:50%;font-weight:900;font-size:20px;color:#0066CC;">Z</span>
+                                <span style="font-weight:700;color:#0066CC;">Zelle (USA)</span>
+                                <span style="font-weight:600;color:white;font-size:0.9rem;">${ZELLE_NUM}</span>
+                                <span style="font-size:0.7rem;color:#99caff;">🇺🇸</span>
+                                <span style="font-weight:600;color:#f9d976;">${isCol ? `≈ $${(totalCOP/CURRENCY_RATES['USD']).toFixed(2)} USD` : totalStr}</span>
+                            </div>
                         </div>
-                        <p style="font-size:1.2rem;color:#f9d976;">$${total.toLocaleString()} COP</p>
-                        <p style="color:#aaa;">Envía el comprobante por WhatsApp a:</p>
-                        <p style="font-size:1.3rem;font-weight:700;color:#25D366;">📱 ${WHATSAPP_NUM}</p>
+                        <p style="color:#aaa;font-size:0.9rem;">💬 Envía el comprobante por WhatsApp e indica qué método usaste.</p>
+                        <p style="font-size:1.1rem;font-weight:700;color:#25D366;">📱 ${WHATSAPP_NUM}</p>
                     </div>
                 `,
                 icon: '💜',
                 showCancelButton: true,
-                confirmButtonText: '📱 Enviar comprobante',
-                cancelButtonText: 'Ahora no',
+                confirmButtonText: t.pay_send_whatsapp,
+                cancelButtonText: t.pay_now,
                 confirmButtonColor: '#25D366',
                 cancelButtonColor: '#e74c3c',
                 background: '#1a1f2a',
                 color: '#fff',
-                reverseButtons: true
+                reverseButtons: true,
+                width: 550,
+                padding: '1.5rem'
             });
 
             if (result.isConfirmed) {
+                const mensaje =
+                    `Hola, quiero comprar ${num} huesitos para mi correo ${usuarioActual}. Total $${totalCOP.toLocaleString()} COP. Adjunto comprobante de pago (Nequi/Zelle).`;
                 window.open(
                     `https://api.whatsapp.com/send?phone=57${WHATSAPP_NUM}&text=${encodeURIComponent(mensaje)}`,
                     '_blank');
                 await Swal.fire({
                     icon: 'success',
-                    title: '🎉 ¡Listo!',
-                    text: 'Cuando verifiquemos tu pago, tus huesitos aparecerán.',
+                    title: t.pay_success,
+                    text: t.pay_success_text,
                     confirmButtonColor: '#2ecc71',
                     background: '#1a1f2a',
                     color: '#fff',
@@ -2578,13 +3319,15 @@
         }
         btnComprar.addEventListener('click', comprarHuesitos);
 
+        // Copiar Nequi
         btnNequiCopy.addEventListener('click', async () => {
+            const t = window.__t || TRANSLATIONS['es'];
             try {
                 await navigator.clipboard.writeText(NEQUI_NUM);
                 Swal.fire({
                     icon: 'success',
-                    title: '📋 ¡Número copiado!',
-                    html: `<p>Cuenta de pago <strong>Nequi Colombia</strong></p><p style="font-size:1.2rem;color:#c4a7e8;">Envía tu pago a este número</p><p style="font-size:1.8rem;color:#5B2D8E;">${NEQUI_NUM}</p>`,
+                    title: t.nequi_copied,
+                    html: `<p>${t.nequi_label}</p><p style="font-size:1.2rem;color:#c4a7e8;">${t.nequi_copied_text}</p><p style="font-size:1.8rem;color:#5B2D8E;">${NEQUI_NUM}</p>`,
                     confirmButtonColor: '#5B2D8E',
                     background: '#1a1f2a',
                     color: '#fff',
@@ -2599,8 +3342,8 @@
                 document.body.removeChild(ta);
                 Swal.fire({
                     icon: 'success',
-                    title: '📋 ¡Número copiado!',
-                    html: `<p>Cuenta de pago <strong>Nequi Colombia</strong></p><p style="font-size:1.2rem;color:#c4a7e8;">Envía tu pago a este número</p><p style="font-size:1.8rem;color:#5B2D8E;">${NEQUI_NUM}</p>`,
+                    title: t.nequi_copied,
+                    html: `<p>${t.nequi_label}</p><p style="font-size:1.2rem;color:#c4a7e8;">${t.nequi_copied_text}</p><p style="font-size:1.8rem;color:#5B2D8E;">${NEQUI_NUM}</p>`,
                     confirmButtonColor: '#5B2D8E',
                     background: '#1a1f2a',
                     color: '#fff',
@@ -2609,7 +3352,41 @@
             }
         });
 
+        // Copiar Zelle
+        btnZelleCopy.addEventListener('click', async () => {
+            const t = window.__t || TRANSLATIONS['es'];
+            try {
+                await navigator.clipboard.writeText(ZELLE_NUM);
+                Swal.fire({
+                    icon: 'success',
+                    title: t.zelle_copied,
+                    html: `<p>${t.zelle_label}</p><p style="font-size:1.2rem;color:#99caff;">${t.zelle_copied_text}</p><p style="font-size:1.8rem;color:#0066CC;">${ZELLE_NUM}</p>`,
+                    confirmButtonColor: '#0066CC',
+                    background: '#1a1f2a',
+                    color: '#fff',
+                    timer: 3500
+                });
+            } catch {
+                const ta = document.createElement('textarea');
+                ta.value = ZELLE_NUM;
+                document.body.appendChild(ta);
+                ta.select();
+                document.execCommand('copy');
+                document.body.removeChild(ta);
+                Swal.fire({
+                    icon: 'success',
+                    title: t.zelle_copied,
+                    html: `<p>${t.zelle_label}</p><p style="font-size:1.2rem;color:#99caff;">${t.zelle_copied_text}</p><p style="font-size:1.8rem;color:#0066CC;">${ZELLE_NUM}</p>`,
+                    confirmButtonColor: '#0066CC',
+                    background: '#1a1f2a',
+                    color: '#fff',
+                    timer: 3500
+                });
+            }
+        });
+
         btnRefresh.addEventListener('click', async () => {
+            const t = window.__t || TRANSLATIONS['es'];
             if (!usuarioActual) return;
             Swal.fire({
                 title: '🔄 Consultando saldo...',
@@ -2620,11 +3397,6 @@
                 color: '#fff',
                 timer: 1500,
                 timerProgressBar: true,
-                didOpen: () => {
-                    const style = document.createElement('style');
-                    style.textContent = '@keyframes spin { to { transform: rotate(360deg); } }';
-                    document.head.appendChild(style);
-                }
             });
             try {
                 const nuevoSaldo = await getSaldo(usuarioActual);
@@ -2632,7 +3404,7 @@
                 actualizarSaldoUI();
                 Swal.fire({
                     icon: 'success',
-                    title: '✨ ¡Saldo actualizado!',
+                    title: t.refresh_confirm,
                     html: `
                         <div style="display:flex;flex-direction:column;align-items:center;gap:12px;padding:8px 0;">
                             <div style="font-size:4rem;animation: bounceIcon 1s ease-in-out infinite;">🦴</div>
@@ -2640,10 +3412,10 @@
                                 ${saldoActual}
                             </div>
                             <div style="font-size:1.1rem;color:#ddd;background:rgba(249,217,118,0.08);padding:8px 24px;border-radius:40px;border:1px solid rgba(249,217,118,0.15);">
-                                🦴 huesitos disponibles para donar
+                                ${t.refresh_available}
                             </div>
                             <p style="color:#888;font-size:0.9rem;margin-top:6px;">
-                                ¡Gracias por seguir ayudando a los peluditos! 💛
+                                ${t.refresh_thanks}
                             </p>
                         </div>
                     `,
@@ -2654,72 +3426,51 @@
                     color: '#fff',
                     timer: 3000,
                     timerProgressBar: true,
-                    showClass: { popup: 'animate__animated animate__fadeInUp animate__faster' },
-                    hideClass: { popup: 'animate__animated animate__fadeOutDown animate__faster' },
-                    didOpen: () => {
-                        const style = document.createElement('style');
-                        style.textContent = `
-                            @keyframes pulseSaldo {
-                                0%, 100% { transform: scale(1); }
-                                50% { transform: scale(1.05); }
-                            }
-                            @keyframes bounceIcon {
-                                0%, 100% { transform: translateY(0); }
-                                50% { transform: translateY(-10px); }
-                            }
-                        `;
-                        document.head.appendChild(style);
-                        for (let i = 0; i < 12; i++) {
-                            setTimeout(() => {
-                                const emojis = ['🦴', '✨', '🐾', '💛', '🎉'];
-                                const el = document.createElement('span');
-                                el.textContent = emojis[Math.floor(Math.random() * emojis
-                                    .length)];
-                                el.style.position = 'fixed';
-                                el.style.left = (10 + Math.random() * 80) + '%';
-                                el.style.top = (30 + Math.random() * 40) + '%';
-                                el.style.fontSize = (1.5 + Math.random() * 2) + 'rem';
-                                el.style.zIndex = '99999';
-                                el.style.pointerEvents = 'none';
-                                el.style.transition =
-                                    'all 1.5s cubic-bezier(0.34,1.56,0.64,1)';
-                                el.style.opacity = '1';
-                                document.body.appendChild(el);
-                                setTimeout(() => {
-                                    el.style.top = (80 + Math.random() * 20) + '%';
-                                    el.style.opacity = '0';
-                                    el.style.transform =
-                                        `rotate(${Math.random() * 360}deg) scale(0.5)`;
-                                }, 50);
-                                setTimeout(() => {
-                                    document.body.removeChild(el);
-                                }, 2000);
-                            }, i * 80);
-                        }
-                    }
                 });
             } catch (error) {
                 Swal.fire({
                     icon: 'error',
-                    title: '😿 Error al actualizar',
+                    title: t.refresh_error,
                     text: 'No se pudo obtener tu saldo: ' + error.message,
                     confirmButtonColor: '#e74c3c',
                     background: '#1a1f2a',
                     color: '#fff',
-                    showClass: { popup: 'animate__animated animate__shakeX' }
                 });
             }
         });
 
         // ================================================================
+        //  MOSTRAR HISTORIA COMPLETA
+        // ================================================================
+        function mostrarHistoria(animal, imagenSrc) {
+            Swal.fire({
+                title: `📖 Historia de ${animal.nombre}`,
+                html: `<div style="text-align:left;max-height:350px;overflow-y:auto;padding:10px;font-size:1rem;line-height:1.6;color:#ddd;">${animal.historia}</div>`,
+                imageUrl: imagenSrc,
+                imageWidth: '100%',
+                imageHeight: 'auto',
+                imageAlt: animal.nombre,
+                confirmButtonText: '💛 Cerrar',
+                confirmButtonColor: '#f9d976',
+                background: '#1a1f2a',
+                color: '#fff',
+                showClass: { popup: 'animate__animated animate__fadeInUp' },
+                hideClass: { popup: 'animate__animated animate__fadeOutDown' },
+                width: 500,
+                padding: '1.5rem'
+            });
+        }
+
+        // ================================================================
         //  DONAR CRÉDITOS
         // ================================================================
         async function donarCredito(animalId, animalNombre) {
+            const t = window.__t || TRANSLATIONS['es'];
             if (!usuarioActual) {
                 Swal.fire({
                     icon: 'warning',
-                    title: '¡Un momentito!',
-                    text: 'Para donar, primero inicia sesión 💛',
+                    title: t.login_first,
+                    text: t.login_first_text,
                     confirmButtonColor: '#6dd5ed',
                     background: '#1a1f2a',
                     color: '#fff'
@@ -2727,15 +3478,15 @@
                 return;
             }
             const { value: cantidad } = await Swal.fire({
-                title: `🦴 Donar a ${animalNombre}`,
-                html: `<p>Tienes <strong>${saldoActual}</strong> huesitos</p>`,
+                title: t.donate_title.replace('{name}', animalNombre),
+                html: t.donate_balance.replace('{balance}', saldoActual),
                 input: 'number',
                 inputLabel: 'Cantidad',
                 inputPlaceholder: 'Ej: 2',
                 inputAttributes: { min: 1, max: saldoActual, step: 1 },
                 showCancelButton: true,
-                confirmButtonText: '💛 Donar',
-                cancelButtonText: 'Cancelar',
+                confirmButtonText: t.donate_btn,
+                cancelButtonText: t.buy_cancel,
                 confirmButtonColor: '#f9d976',
                 cancelButtonColor: '#e74c3c',
                 background: '#1a1f2a',
@@ -2747,8 +3498,8 @@
             if (num > saldoActual) {
                 Swal.fire({
                     icon: 'error',
-                    title: '😅 ¡Ups!',
-                    text: 'No tienes suficientes huesitos.',
+                    title: t.donate_error,
+                    text: t.donate_error_text,
                     confirmButtonColor: '#e74c3c',
                     background: '#1a1f2a',
                     color: '#fff'
@@ -2780,40 +3531,17 @@
                     `<strong>${nombreActual}</strong> donó ${num} 🦴 a <strong>${animalNombre}</strong>`, '❤️');
                 Swal.fire({
                     icon: 'success',
-                    title: '🎉 ¡Donación exitosa!',
-                    html: `<div>Donaste <strong>${num}</strong> 🦴 a <strong>${animalNombre}</strong></div><p style="color:#f9d976;">Saldo restante: ${saldoActual} 🦴</p>`,
+                    title: t.donate_success,
+                    html: `<div>${t.donate_success_text.replace('{qty}', num).replace('{name}', animalNombre)}</div><p style="color:#f9d976;">${t.donate_remaining.replace('{balance}', saldoActual)}</p>`,
                     confirmButtonColor: '#f9d976',
                     background: '#1a1f2a',
                     color: '#fff',
                     timer: 4000
                 });
-                for (let i = 0; i < 20; i++) {
-                    setTimeout(() => {
-                        const emoji = ['🎉', '🎊', '💛', '🐾', '🦴', '✨'][Math.floor(Math.random() * 6)];
-                        const el = document.createElement('span');
-                        el.textContent = emoji;
-                        el.style.position = 'fixed';
-                        el.style.left = (10 + Math.random() * 80) + '%';
-                        el.style.top = '-5%';
-                        el.style.fontSize = (1.5 + Math.random() * 2) + 'rem';
-                        el.style.zIndex = '10000';
-                        el.style.pointerEvents = 'none';
-                        el.style.transition = 'all 1.5s cubic-bezier(0.34,1.56,0.64,1)';
-                        document.body.appendChild(el);
-                        setTimeout(() => {
-                            el.style.top = (85 + Math.random() * 15) + '%';
-                            el.style.transform = `rotate(${Math.random() * 720 - 360}deg)`;
-                            el.style.opacity = '0';
-                        }, 50);
-                        setTimeout(() => {
-                            document.body.removeChild(el);
-                        }, 2000);
-                    }, i * 80);
-                }
             } catch (error) {
                 Swal.fire({
                     icon: 'error',
-                    title: 'Error',
+                    title: t.donate_error_api,
                     text: 'No se pudo donar: ' + error.message,
                     confirmButtonColor: '#e74c3c',
                     background: '#1a1f2a',
@@ -2826,6 +3554,14 @@
         // ================================================================
         //  DONADORES FICTICIOS
         // ================================================================
+        const NOMBRES_FICTICIOS = [
+            'Jorge Ramírez', 'Claudia Suárez', 'Miguel Torres', 'Patricia Díaz',
+            'Fernando Gómez', 'Rosa Jiménez', 'Ricardo Castro', 'Elena Vargas',
+            'Ángel Ortega', 'Carolina Pérez', 'José Luis Herrera', 'Marta Rojas',
+            'Andrés Sosa', 'Lucía Fuentes', 'Roberto Muñoz', 'Diana Reyes',
+            'Hugo Gutiérrez', 'Laura Salazar', 'Raúl Espinoza', 'Cecilia Romero'
+        ];
+
         function generarDonacionFicticia() {
             const animal = ANIMALES[Math.floor(Math.random() * ANIMALES.length)];
             const cantidad = Math.floor(Math.random() * 6) + 5;
@@ -2839,8 +3575,7 @@
                 nombreAnimal: animal.nombre,
                 cantidad,
                 fecha,
-                email: nombre.toLowerCase().replace(/ /g, '') +
-                    '@ficticio.com',
+                email: nombre.toLowerCase().replace(/ /g, '') + '@ficticio.com',
                 esFicticio: true
             };
             donacionesCache.unshift(donacion);
@@ -2901,6 +3636,7 @@
                 const isComplete = porcentaje >= 100;
                 const div = document.createElement('div');
                 div.className = 'animal-card';
+                const t = window.__t || TRANSLATIONS['es'];
                 div.innerHTML = `
                     <img src="" alt="${animal.nombre}" loading="lazy" style="width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:18px;background:#1a1f2a;margin-bottom:8px;cursor:pointer;box-shadow:0 4px 12px rgba(0,0,0,0.2);-webkit-user-drag:none;user-drag:none;user-select:none;-webkit-user-select:none;" />
                     <div class="animal-info">
@@ -2911,8 +3647,8 @@
                             <div class="progress-bar-bg"><div class="progress-bar-fill ${isComplete?'complete':''}" style="width:${porcentaje}%;"></div></div>
                             <div class="progress-label"><span>${porcentaje}%</span><span class="meta-text">${isComplete?'🎉 Meta alcanzada':`${creditos}/${meta}`}</span></div>
                         </div>
-                        <div class="desc">${animal.historia}</div>
-                        <button class="btn-donar" onclick="window.donarCredito('${animal.id}','${animal.nombre}')">Donar 🥫</button>
+                        <div class="desc">${animal.historia.substring(0, 80)}...</div>
+                        <button class="btn-donar" onclick="window.donarCredito('${animal.id}','${animal.nombre}')">${t.donate_btn} 🥫</button>
                     </div>`;
 
                 const imgElement = div.querySelector('img');
@@ -2922,14 +3658,8 @@
 
                 imgElement.addEventListener('click', (e) => {
                     e.stopPropagation();
-                    if (cacheMarca.has(animal.imagen)) {
-                        modalImgSrc.src = cacheMarca.get(animal.imagen);
-                    } else {
-                        aplicarMarcaAgua(animal.imagen, (dataUrl) => {
-                            modalImgSrc.src = dataUrl;
-                        });
-                    }
-                    modalImg.classList.add('active');
+                    const imagenSrc = imgElement.src;
+                    mostrarHistoria(animal, imagenSrc);
                 });
 
                 animalesGrid.appendChild(div);
@@ -2968,9 +3698,29 @@
             }, 1500);
         }
 
-        console.log('🐾 Sistema funcionando 100% con Google Sheets.');
-        console.log('💜 Cuenta de pago Nequi Colombia configurada.');
-        console.log('💾 Credenciales guardadas automáticamente en localStorage.');
+        // ================================================================
+        //  INICIALIZACIÓN
+        // ================================================================
+        (async function init() {
+            detectarPais().then(() => {
+                if (!window.__t) aplicarLocalizacion();
+            });
+
+            cargarCredencialesGuardadas();
+            if (!authNombre.value && !authEmail.value) {
+                cambiarModo('register');
+            }
+
+            setTimeout(() => {
+                if (!window.__t) {
+                    aplicarLocalizacion();
+                }
+            }, 2500);
+
+            console.log('🐾 Sistema completo: registro/login, precios por país, Nequi y Zelle.');
+            console.log('💜 Nequi: 3107926421');
+            console.log('💙 Zelle: 2408390816');
+        })();
     </script>
 </body>
 </html>
